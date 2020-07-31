@@ -119,6 +119,15 @@
     <Compile Include="Frms\FrmSetting.Designer.cs">
       <DependentUpon>FrmSetting.cs</DependentUpon>
     </Compile>
+    <Compile Include="Frms\Print\FrmPrintWeb.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frms\Print\FrmPrintWeb.designer.cs">
+      <DependentUpon>FrmPrintWeb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frms\Print\WagonPrinter.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Frms\Sys\FrmDebugConsole.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -143,6 +152,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Frms\FrmSetting.resx">
       <DependentUpon>FrmSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frms\Print\FrmPrintWeb.resx">
+      <DependentUpon>FrmPrintWeb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frms\Print\WagonPrinter.resx">
+      <DependentUpon>WagonPrinter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Frms\Sys\FrmDebugConsole.resx">
       <DependentUpon>FrmDebugConsole.cs</DependentUpon>

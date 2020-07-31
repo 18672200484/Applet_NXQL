@@ -35,16 +35,32 @@ namespace CMCS.CarTransport.Weighter.Frms
 			this.btnCancel = new DevComponents.DotNetBar.ButtonX();
 			this.panelEx2 = new DevComponents.DotNetBar.PanelEx();
 			this.tabControl1 = new DevComponents.DotNetBar.TabControl();
-			this.tabControlPanel1 = new DevComponents.DotNetBar.TabControlPanel();
-			this.cmb_Direction = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-			this.labelX34 = new DevComponents.DotNetBar.LabelX();
-			this.chkAutoPrint = new DevComponents.DotNetBar.Controls.CheckBoxX();
-			this.txtSelfConnStr = new DevComponents.DotNetBar.Controls.TextBoxX();
-			this.labelX20 = new DevComponents.DotNetBar.LabelX();
-			this.chbStartup = new DevComponents.DotNetBar.Controls.CheckBoxX();
-			this.txtAppIdentifier = new DevComponents.DotNetBar.Controls.TextBoxX();
-			this.labelX4 = new DevComponents.DotNetBar.LabelX();
-			this.tabItem1 = new DevComponents.DotNetBar.TabItem(this.components);
+			this.tabControlPanel4 = new DevComponents.DotNetBar.TabControlPanel();
+			this.labelX36 = new DevComponents.DotNetBar.LabelX();
+			this.cmbip_Rwer2Port = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+			this.labelX35 = new DevComponents.DotNetBar.LabelX();
+			this.cmbip_Rwer1Port = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+			this.ip_Rwer2 = new DevComponents.Editors.IpAddressInput();
+			this.ip_Rwer1 = new DevComponents.Editors.IpAddressInput();
+			this.txtRwerTagStartWith = new DevComponents.DotNetBar.Controls.TextBoxX();
+			this.labelX21 = new DevComponents.DotNetBar.LabelX();
+			this.labelX22 = new DevComponents.DotNetBar.LabelX();
+			this.labelX28 = new DevComponents.DotNetBar.LabelX();
+			this.tabItem4 = new DevComponents.DotNetBar.TabItem(this.components);
+			this.tabControlPanel3 = new DevComponents.DotNetBar.TabControlPanel();
+			this.cmbWberParity = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+			this.labelX3 = new DevComponents.DotNetBar.LabelX();
+			this.dbtxtMinWeight = new DevComponents.Editors.DoubleInput();
+			this.labelX23 = new DevComponents.DotNetBar.LabelX();
+			this.cmbWberStopBits = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+			this.labelX24 = new DevComponents.DotNetBar.LabelX();
+			this.cmbWberDataBits = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+			this.labelX25 = new DevComponents.DotNetBar.LabelX();
+			this.cmbWberBandrate = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+			this.labelX26 = new DevComponents.DotNetBar.LabelX();
+			this.cmbWberCom = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+			this.labelX27 = new DevComponents.DotNetBar.LabelX();
+			this.tabItem3 = new DevComponents.DotNetBar.TabItem(this.components);
 			this.tabControlPanel2 = new DevComponents.DotNetBar.TabControlPanel();
 			this.cmbInfraredSensor3Port = new DevComponents.DotNetBar.Controls.ComboBoxEx();
 			this.labelX33 = new DevComponents.DotNetBar.LabelX();
@@ -83,6 +99,16 @@ namespace CMCS.CarTransport.Weighter.Frms
 			this.cmbIocerCom = new DevComponents.DotNetBar.Controls.ComboBoxEx();
 			this.labelX2 = new DevComponents.DotNetBar.LabelX();
 			this.tabItem2 = new DevComponents.DotNetBar.TabItem(this.components);
+			this.tabControlPanel1 = new DevComponents.DotNetBar.TabControlPanel();
+			this.cmb_Direction = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+			this.labelX34 = new DevComponents.DotNetBar.LabelX();
+			this.chkAutoPrint = new DevComponents.DotNetBar.Controls.CheckBoxX();
+			this.txtSelfConnStr = new DevComponents.DotNetBar.Controls.TextBoxX();
+			this.labelX20 = new DevComponents.DotNetBar.LabelX();
+			this.chbStartup = new DevComponents.DotNetBar.Controls.CheckBoxX();
+			this.txtAppIdentifier = new DevComponents.DotNetBar.Controls.TextBoxX();
+			this.labelX4 = new DevComponents.DotNetBar.LabelX();
+			this.tabItem1 = new DevComponents.DotNetBar.TabItem(this.components);
 			this.tabControlPanel6 = new DevComponents.DotNetBar.TabControlPanel();
 			this.lblVoiceVolume = new DevComponents.DotNetBar.LabelX();
 			this.lblVoiceRate = new DevComponents.DotNetBar.LabelX();
@@ -100,48 +126,24 @@ namespace CMCS.CarTransport.Weighter.Frms
 			this.labelX30 = new DevComponents.DotNetBar.LabelX();
 			this.labelX32 = new DevComponents.DotNetBar.LabelX();
 			this.tabItem5 = new DevComponents.DotNetBar.TabItem(this.components);
-			this.tabControlPanel4 = new DevComponents.DotNetBar.TabControlPanel();
-			this.ip_Rwer2 = new DevComponents.Editors.IpAddressInput();
-			this.ip_Rwer1 = new DevComponents.Editors.IpAddressInput();
-			this.txtRwerTagStartWith = new DevComponents.DotNetBar.Controls.TextBoxX();
-			this.labelX21 = new DevComponents.DotNetBar.LabelX();
-			this.labelX22 = new DevComponents.DotNetBar.LabelX();
-			this.labelX28 = new DevComponents.DotNetBar.LabelX();
-			this.tabItem4 = new DevComponents.DotNetBar.TabItem(this.components);
-			this.tabControlPanel3 = new DevComponents.DotNetBar.TabControlPanel();
-			this.cmbWberParity = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-			this.labelX3 = new DevComponents.DotNetBar.LabelX();
-			this.dbtxtMinWeight = new DevComponents.Editors.DoubleInput();
-			this.labelX23 = new DevComponents.DotNetBar.LabelX();
-			this.cmbWberStopBits = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-			this.labelX24 = new DevComponents.DotNetBar.LabelX();
-			this.cmbWberDataBits = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-			this.labelX25 = new DevComponents.DotNetBar.LabelX();
-			this.cmbWberBandrate = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-			this.labelX26 = new DevComponents.DotNetBar.LabelX();
-			this.cmbWberCom = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-			this.labelX27 = new DevComponents.DotNetBar.LabelX();
-			this.tabItem3 = new DevComponents.DotNetBar.TabItem(this.components);
-			this.cmbip_Rwer1Port = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-			this.labelX35 = new DevComponents.DotNetBar.LabelX();
-			this.labelX36 = new DevComponents.DotNetBar.LabelX();
-			this.cmbip_Rwer2Port = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+			this.chkUseCamera = new DevComponents.DotNetBar.Controls.CheckBoxX();
+			this.chkUseRwer = new DevComponents.DotNetBar.Controls.CheckBoxX();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.panelEx1.SuspendLayout();
 			this.panelEx2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
 			this.tabControl1.SuspendLayout();
-			this.tabControlPanel1.SuspendLayout();
-			this.tabControlPanel2.SuspendLayout();
-			this.tabControlPanel6.SuspendLayout();
-			this.tabControlPanel5.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.iptxtLED2IP)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.iptxtLED1IP)).BeginInit();
 			this.tabControlPanel4.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.ip_Rwer2)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.ip_Rwer1)).BeginInit();
 			this.tabControlPanel3.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dbtxtMinWeight)).BeginInit();
+			this.tabControlPanel2.SuspendLayout();
+			this.tabControlPanel1.SuspendLayout();
+			this.tabControlPanel6.SuspendLayout();
+			this.tabControlPanel5.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.iptxtLED2IP)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.iptxtLED1IP)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// tableLayoutPanel1
@@ -247,10 +249,10 @@ namespace CMCS.CarTransport.Weighter.Frms
 			this.tabControl1.ColorScheme.TabItemSelectedBorderDark = System.Drawing.Color.FromArgb(((int)(((byte)(172)))), ((int)(((byte)(188)))), ((int)(((byte)(204)))));
 			this.tabControl1.ColorScheme.TabItemSelectedBorderLight = System.Drawing.Color.FromArgb(((int)(((byte)(172)))), ((int)(((byte)(188)))), ((int)(((byte)(204)))));
 			this.tabControl1.ColorScheme.TabPanelBorder = System.Drawing.Color.Empty;
+			this.tabControl1.Controls.Add(this.tabControlPanel1);
 			this.tabControl1.Controls.Add(this.tabControlPanel4);
 			this.tabControl1.Controls.Add(this.tabControlPanel3);
 			this.tabControl1.Controls.Add(this.tabControlPanel2);
-			this.tabControl1.Controls.Add(this.tabControlPanel1);
 			this.tabControl1.Controls.Add(this.tabControlPanel6);
 			this.tabControl1.Controls.Add(this.tabControlPanel5);
 			this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -272,161 +274,420 @@ namespace CMCS.CarTransport.Weighter.Frms
 			this.tabControl1.Tabs.Add(this.tabItem6);
 			this.tabControl1.TabStop = false;
 			// 
-			// tabControlPanel1
+			// tabControlPanel4
 			// 
-			this.tabControlPanel1.Controls.Add(this.cmb_Direction);
-			this.tabControlPanel1.Controls.Add(this.labelX34);
-			this.tabControlPanel1.Controls.Add(this.chkAutoPrint);
-			this.tabControlPanel1.Controls.Add(this.txtSelfConnStr);
-			this.tabControlPanel1.Controls.Add(this.labelX20);
-			this.tabControlPanel1.Controls.Add(this.chbStartup);
-			this.tabControlPanel1.Controls.Add(this.txtAppIdentifier);
-			this.tabControlPanel1.Controls.Add(this.labelX4);
-			this.tabControlPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tabControlPanel1.Location = new System.Drawing.Point(0, 31);
-			this.tabControlPanel1.Name = "tabControlPanel1";
-			this.tabControlPanel1.Padding = new System.Windows.Forms.Padding(1);
-			this.tabControlPanel1.Size = new System.Drawing.Size(703, 432);
-			this.tabControlPanel1.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
-			this.tabControlPanel1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-			this.tabControlPanel1.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
+			this.tabControlPanel4.Controls.Add(this.labelX36);
+			this.tabControlPanel4.Controls.Add(this.cmbip_Rwer2Port);
+			this.tabControlPanel4.Controls.Add(this.labelX35);
+			this.tabControlPanel4.Controls.Add(this.cmbip_Rwer1Port);
+			this.tabControlPanel4.Controls.Add(this.ip_Rwer2);
+			this.tabControlPanel4.Controls.Add(this.ip_Rwer1);
+			this.tabControlPanel4.Controls.Add(this.txtRwerTagStartWith);
+			this.tabControlPanel4.Controls.Add(this.labelX21);
+			this.tabControlPanel4.Controls.Add(this.labelX22);
+			this.tabControlPanel4.Controls.Add(this.labelX28);
+			this.tabControlPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tabControlPanel4.Location = new System.Drawing.Point(0, 31);
+			this.tabControlPanel4.Name = "tabControlPanel4";
+			this.tabControlPanel4.Padding = new System.Windows.Forms.Padding(1);
+			this.tabControlPanel4.Size = new System.Drawing.Size(703, 432);
+			this.tabControlPanel4.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
+			this.tabControlPanel4.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+			this.tabControlPanel4.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
             | DevComponents.DotNetBar.eBorderSide.Bottom)));
-			this.tabControlPanel1.Style.GradientAngle = 90;
-			this.tabControlPanel1.TabIndex = 1;
-			this.tabControlPanel1.TabItem = this.tabItem1;
+			this.tabControlPanel4.Style.GradientAngle = 90;
+			this.tabControlPanel4.TabIndex = 4;
+			this.tabControlPanel4.TabItem = this.tabItem4;
 			// 
-			// cmb_Direction
+			// labelX36
 			// 
-			this.cmb_Direction.DisplayMember = "Text";
-			this.cmb_Direction.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-			this.cmb_Direction.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.cmb_Direction.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.cmb_Direction.ForeColor = System.Drawing.Color.White;
-			this.cmb_Direction.FormattingEnabled = true;
-			this.cmb_Direction.ItemHeight = 21;
-			this.cmb_Direction.Location = new System.Drawing.Point(167, 110);
-			this.cmb_Direction.Name = "cmb_Direction";
-			this.cmb_Direction.Size = new System.Drawing.Size(92, 27);
-			this.cmb_Direction.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.cmb_Direction.TabIndex = 172;
-			// 
-			// labelX34
-			// 
-			this.labelX34.AutoSize = true;
-			this.labelX34.BackColor = System.Drawing.Color.Transparent;
+			this.labelX36.AutoSize = true;
+			this.labelX36.BackColor = System.Drawing.Color.Transparent;
 			// 
 			// 
 			// 
-			this.labelX34.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.labelX34.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.labelX34.ForeColor = System.Drawing.Color.White;
-			this.labelX34.Location = new System.Drawing.Point(94, 113);
-			this.labelX34.Name = "labelX34";
-			this.labelX34.Size = new System.Drawing.Size(72, 24);
-			this.labelX34.TabIndex = 171;
-			this.labelX34.Text = "上磅方向";
+			this.labelX36.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.labelX36.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelX36.ForeColor = System.Drawing.Color.White;
+			this.labelX36.Location = new System.Drawing.Point(398, 75);
+			this.labelX36.Name = "labelX36";
+			this.labelX36.Size = new System.Drawing.Size(97, 24);
+			this.labelX36.TabIndex = 41;
+			this.labelX36.Text = "读卡器2功率";
 			// 
-			// chkAutoPrint
+			// cmbip_Rwer2Port
 			// 
-			this.chkAutoPrint.AutoSize = true;
-			this.chkAutoPrint.BackColor = System.Drawing.Color.Transparent;
+			this.cmbip_Rwer2Port.DisplayMember = "Text";
+			this.cmbip_Rwer2Port.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+			this.cmbip_Rwer2Port.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cmbip_Rwer2Port.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.cmbip_Rwer2Port.ForeColor = System.Drawing.Color.White;
+			this.cmbip_Rwer2Port.FormattingEnabled = true;
+			this.cmbip_Rwer2Port.ItemHeight = 21;
+			this.cmbip_Rwer2Port.Location = new System.Drawing.Point(501, 72);
+			this.cmbip_Rwer2Port.Name = "cmbip_Rwer2Port";
+			this.cmbip_Rwer2Port.Size = new System.Drawing.Size(71, 27);
+			this.cmbip_Rwer2Port.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.cmbip_Rwer2Port.TabIndex = 40;
 			// 
+			// labelX35
 			// 
-			// 
-			this.chkAutoPrint.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.chkAutoPrint.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.chkAutoPrint.ForeColor = System.Drawing.Color.White;
-			this.chkAutoPrint.Location = new System.Drawing.Point(167, 185);
-			this.chkAutoPrint.Name = "chkAutoPrint";
-			this.chkAutoPrint.Size = new System.Drawing.Size(125, 24);
-			this.chkAutoPrint.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.chkAutoPrint.TabIndex = 170;
-			this.chkAutoPrint.Text = "自动打印磅单";
-			// 
-			// txtSelfConnStr
-			// 
-			this.txtSelfConnStr.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
-			// 
-			// 
-			// 
-			this.txtSelfConnStr.Border.Class = "TextBoxBorder";
-			this.txtSelfConnStr.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.txtSelfConnStr.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.txtSelfConnStr.ForeColor = System.Drawing.Color.White;
-			this.txtSelfConnStr.Location = new System.Drawing.Point(167, 67);
-			this.txtSelfConnStr.Name = "txtSelfConnStr";
-			this.txtSelfConnStr.Size = new System.Drawing.Size(446, 27);
-			this.txtSelfConnStr.TabIndex = 20;
-			// 
-			// labelX20
-			// 
-			this.labelX20.AutoSize = true;
-			this.labelX20.BackColor = System.Drawing.Color.Transparent;
+			this.labelX35.AutoSize = true;
+			this.labelX35.BackColor = System.Drawing.Color.Transparent;
 			// 
 			// 
 			// 
-			this.labelX20.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.labelX20.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.labelX20.ForeColor = System.Drawing.Color.White;
-			this.labelX20.Location = new System.Drawing.Point(30, 69);
-			this.labelX20.Name = "labelX20";
-			this.labelX20.Size = new System.Drawing.Size(137, 24);
-			this.labelX20.TabIndex = 19;
-			this.labelX20.Text = "数据库连接字符串";
+			this.labelX35.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.labelX35.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelX35.ForeColor = System.Drawing.Color.White;
+			this.labelX35.Location = new System.Drawing.Point(398, 34);
+			this.labelX35.Name = "labelX35";
+			this.labelX35.Size = new System.Drawing.Size(97, 24);
+			this.labelX35.TabIndex = 39;
+			this.labelX35.Text = "读卡器1功率";
 			// 
-			// chbStartup
+			// cmbip_Rwer1Port
 			// 
-			this.chbStartup.AutoSize = true;
-			this.chbStartup.BackColor = System.Drawing.Color.Transparent;
+			this.cmbip_Rwer1Port.DisplayMember = "Text";
+			this.cmbip_Rwer1Port.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+			this.cmbip_Rwer1Port.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cmbip_Rwer1Port.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.cmbip_Rwer1Port.ForeColor = System.Drawing.Color.White;
+			this.cmbip_Rwer1Port.FormattingEnabled = true;
+			this.cmbip_Rwer1Port.ItemHeight = 21;
+			this.cmbip_Rwer1Port.Location = new System.Drawing.Point(501, 31);
+			this.cmbip_Rwer1Port.Name = "cmbip_Rwer1Port";
+			this.cmbip_Rwer1Port.Size = new System.Drawing.Size(71, 27);
+			this.cmbip_Rwer1Port.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.cmbip_Rwer1Port.TabIndex = 38;
 			// 
+			// ip_Rwer2
 			// 
-			// 
-			this.chbStartup.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.chbStartup.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.chbStartup.ForeColor = System.Drawing.Color.White;
-			this.chbStartup.Location = new System.Drawing.Point(167, 152);
-			this.chbStartup.Name = "chbStartup";
-			this.chbStartup.Size = new System.Drawing.Size(92, 24);
-			this.chbStartup.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.chbStartup.TabIndex = 18;
-			this.chbStartup.Text = "开机启动";
-			// 
-			// txtAppIdentifier
-			// 
-			this.txtAppIdentifier.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
-			// 
-			// 
-			// 
-			this.txtAppIdentifier.Border.Class = "TextBoxBorder";
-			this.txtAppIdentifier.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.txtAppIdentifier.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.txtAppIdentifier.ForeColor = System.Drawing.Color.White;
-			this.txtAppIdentifier.Location = new System.Drawing.Point(167, 29);
-			this.txtAppIdentifier.Name = "txtAppIdentifier";
-			this.txtAppIdentifier.Size = new System.Drawing.Size(180, 27);
-			this.txtAppIdentifier.TabIndex = 17;
-			// 
-			// labelX4
-			// 
-			this.labelX4.AutoSize = true;
-			this.labelX4.BackColor = System.Drawing.Color.Transparent;
+			this.ip_Rwer2.AutoOverwrite = true;
+			this.ip_Rwer2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
 			// 
 			// 
 			// 
-			this.labelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.labelX4.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.labelX4.ForeColor = System.Drawing.Color.White;
-			this.labelX4.Location = new System.Drawing.Point(61, 31);
-			this.labelX4.Name = "labelX4";
-			this.labelX4.Size = new System.Drawing.Size(105, 24);
-			this.labelX4.TabIndex = 16;
-			this.labelX4.Text = "程序唯一标识";
+			this.ip_Rwer2.BackgroundStyle.Class = "DateTimeInputBackground";
+			this.ip_Rwer2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.ip_Rwer2.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+			this.ip_Rwer2.ButtonFreeText.Visible = true;
+			this.ip_Rwer2.ForeColor = System.Drawing.Color.White;
+			this.ip_Rwer2.Location = new System.Drawing.Point(179, 72);
+			this.ip_Rwer2.Name = "ip_Rwer2";
+			this.ip_Rwer2.Size = new System.Drawing.Size(173, 27);
+			this.ip_Rwer2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.ip_Rwer2.TabIndex = 37;
 			// 
-			// tabItem1
+			// ip_Rwer1
 			// 
-			this.tabItem1.AttachedControl = this.tabControlPanel1;
-			this.tabItem1.Name = "tabItem1";
-			this.tabItem1.Text = "基础设置";
+			this.ip_Rwer1.AutoOverwrite = true;
+			this.ip_Rwer1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
+			// 
+			// 
+			// 
+			this.ip_Rwer1.BackgroundStyle.Class = "DateTimeInputBackground";
+			this.ip_Rwer1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.ip_Rwer1.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+			this.ip_Rwer1.ButtonFreeText.Visible = true;
+			this.ip_Rwer1.ForeColor = System.Drawing.Color.White;
+			this.ip_Rwer1.Location = new System.Drawing.Point(179, 31);
+			this.ip_Rwer1.Name = "ip_Rwer1";
+			this.ip_Rwer1.Size = new System.Drawing.Size(173, 27);
+			this.ip_Rwer1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.ip_Rwer1.TabIndex = 36;
+			// 
+			// txtRwerTagStartWith
+			// 
+			this.txtRwerTagStartWith.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
+			// 
+			// 
+			// 
+			this.txtRwerTagStartWith.Border.Class = "TextBoxBorder";
+			this.txtRwerTagStartWith.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.txtRwerTagStartWith.ForeColor = System.Drawing.Color.White;
+			this.txtRwerTagStartWith.Location = new System.Drawing.Point(179, 110);
+			this.txtRwerTagStartWith.Name = "txtRwerTagStartWith";
+			this.txtRwerTagStartWith.Size = new System.Drawing.Size(92, 27);
+			this.txtRwerTagStartWith.TabIndex = 35;
+			// 
+			// labelX21
+			// 
+			this.labelX21.AutoSize = true;
+			this.labelX21.BackColor = System.Drawing.Color.Transparent;
+			// 
+			// 
+			// 
+			this.labelX21.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.labelX21.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelX21.ForeColor = System.Drawing.Color.White;
+			this.labelX21.Location = new System.Drawing.Point(87, 77);
+			this.labelX21.Name = "labelX21";
+			this.labelX21.Size = new System.Drawing.Size(77, 24);
+			this.labelX21.TabIndex = 31;
+			this.labelX21.Text = "读卡器2IP";
+			// 
+			// labelX22
+			// 
+			this.labelX22.AutoSize = true;
+			this.labelX22.BackColor = System.Drawing.Color.Transparent;
+			// 
+			// 
+			// 
+			this.labelX22.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.labelX22.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelX22.ForeColor = System.Drawing.Color.White;
+			this.labelX22.Location = new System.Drawing.Point(76, 113);
+			this.labelX22.Name = "labelX22";
+			this.labelX22.Size = new System.Drawing.Size(88, 24);
+			this.labelX22.TabIndex = 29;
+			this.labelX22.Text = "标签卡过滤";
+			// 
+			// labelX28
+			// 
+			this.labelX28.AutoSize = true;
+			this.labelX28.BackColor = System.Drawing.Color.Transparent;
+			// 
+			// 
+			// 
+			this.labelX28.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.labelX28.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelX28.ForeColor = System.Drawing.Color.White;
+			this.labelX28.Location = new System.Drawing.Point(87, 31);
+			this.labelX28.Name = "labelX28";
+			this.labelX28.Size = new System.Drawing.Size(77, 24);
+			this.labelX28.TabIndex = 27;
+			this.labelX28.Text = "读卡器1IP";
+			// 
+			// tabItem4
+			// 
+			this.tabItem4.AttachedControl = this.tabControlPanel4;
+			this.tabItem4.Name = "tabItem4";
+			this.tabItem4.Text = "读卡器";
+			// 
+			// tabControlPanel3
+			// 
+			this.tabControlPanel3.Controls.Add(this.cmbWberParity);
+			this.tabControlPanel3.Controls.Add(this.labelX3);
+			this.tabControlPanel3.Controls.Add(this.dbtxtMinWeight);
+			this.tabControlPanel3.Controls.Add(this.labelX23);
+			this.tabControlPanel3.Controls.Add(this.cmbWberStopBits);
+			this.tabControlPanel3.Controls.Add(this.labelX24);
+			this.tabControlPanel3.Controls.Add(this.cmbWberDataBits);
+			this.tabControlPanel3.Controls.Add(this.labelX25);
+			this.tabControlPanel3.Controls.Add(this.cmbWberBandrate);
+			this.tabControlPanel3.Controls.Add(this.labelX26);
+			this.tabControlPanel3.Controls.Add(this.cmbWberCom);
+			this.tabControlPanel3.Controls.Add(this.labelX27);
+			this.tabControlPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tabControlPanel3.Location = new System.Drawing.Point(0, 31);
+			this.tabControlPanel3.Name = "tabControlPanel3";
+			this.tabControlPanel3.Padding = new System.Windows.Forms.Padding(1);
+			this.tabControlPanel3.Size = new System.Drawing.Size(703, 432);
+			this.tabControlPanel3.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
+			this.tabControlPanel3.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+			this.tabControlPanel3.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
+            | DevComponents.DotNetBar.eBorderSide.Bottom)));
+			this.tabControlPanel3.Style.GradientAngle = 90;
+			this.tabControlPanel3.TabIndex = 3;
+			this.tabControlPanel3.TabItem = this.tabItem3;
+			// 
+			// cmbWberParity
+			// 
+			this.cmbWberParity.DisplayMember = "Text";
+			this.cmbWberParity.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+			this.cmbWberParity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cmbWberParity.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.cmbWberParity.ForeColor = System.Drawing.Color.White;
+			this.cmbWberParity.FormattingEnabled = true;
+			this.cmbWberParity.ItemHeight = 21;
+			this.cmbWberParity.Location = new System.Drawing.Point(167, 105);
+			this.cmbWberParity.Name = "cmbWberParity";
+			this.cmbWberParity.Size = new System.Drawing.Size(92, 27);
+			this.cmbWberParity.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.cmbWberParity.TabIndex = 54;
+			// 
+			// labelX3
+			// 
+			this.labelX3.AutoSize = true;
+			this.labelX3.BackColor = System.Drawing.Color.Transparent;
+			// 
+			// 
+			// 
+			this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.labelX3.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelX3.ForeColor = System.Drawing.Color.White;
+			this.labelX3.Location = new System.Drawing.Point(107, 107);
+			this.labelX3.Name = "labelX3";
+			this.labelX3.Size = new System.Drawing.Size(56, 24);
+			this.labelX3.TabIndex = 53;
+			this.labelX3.Text = "校验位";
+			// 
+			// dbtxtMinWeight
+			// 
+			this.dbtxtMinWeight.AllowEmptyState = false;
+			this.dbtxtMinWeight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
+			// 
+			// 
+			// 
+			this.dbtxtMinWeight.BackgroundStyle.Class = "DateTimeInputBackground";
+			this.dbtxtMinWeight.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.dbtxtMinWeight.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+			this.dbtxtMinWeight.ForeColor = System.Drawing.Color.White;
+			this.dbtxtMinWeight.Increment = 1D;
+			this.dbtxtMinWeight.Location = new System.Drawing.Point(464, 105);
+			this.dbtxtMinWeight.MaxValue = 10D;
+			this.dbtxtMinWeight.MinValue = 0.01D;
+			this.dbtxtMinWeight.Name = "dbtxtMinWeight";
+			this.dbtxtMinWeight.Size = new System.Drawing.Size(92, 27);
+			this.dbtxtMinWeight.TabIndex = 45;
+			this.dbtxtMinWeight.Value = 0.01D;
+			// 
+			// labelX23
+			// 
+			this.labelX23.AutoSize = true;
+			this.labelX23.BackColor = System.Drawing.Color.Transparent;
+			// 
+			// 
+			// 
+			this.labelX23.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.labelX23.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelX23.ForeColor = System.Drawing.Color.White;
+			this.labelX23.Location = new System.Drawing.Point(388, 107);
+			this.labelX23.Name = "labelX23";
+			this.labelX23.Size = new System.Drawing.Size(72, 24);
+			this.labelX23.TabIndex = 43;
+			this.labelX23.Text = "最小称重";
+			// 
+			// cmbWberStopBits
+			// 
+			this.cmbWberStopBits.DisplayMember = "Text";
+			this.cmbWberStopBits.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+			this.cmbWberStopBits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cmbWberStopBits.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.cmbWberStopBits.ForeColor = System.Drawing.Color.White;
+			this.cmbWberStopBits.FormattingEnabled = true;
+			this.cmbWberStopBits.ItemHeight = 21;
+			this.cmbWberStopBits.Location = new System.Drawing.Point(464, 67);
+			this.cmbWberStopBits.Name = "cmbWberStopBits";
+			this.cmbWberStopBits.Size = new System.Drawing.Size(92, 27);
+			this.cmbWberStopBits.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.cmbWberStopBits.TabIndex = 42;
+			// 
+			// labelX24
+			// 
+			this.labelX24.AutoSize = true;
+			this.labelX24.BackColor = System.Drawing.Color.Transparent;
+			// 
+			// 
+			// 
+			this.labelX24.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.labelX24.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelX24.ForeColor = System.Drawing.Color.White;
+			this.labelX24.Location = new System.Drawing.Point(404, 69);
+			this.labelX24.Name = "labelX24";
+			this.labelX24.Size = new System.Drawing.Size(56, 24);
+			this.labelX24.TabIndex = 41;
+			this.labelX24.Text = "停止位";
+			// 
+			// cmbWberDataBits
+			// 
+			this.cmbWberDataBits.DisplayMember = "Text";
+			this.cmbWberDataBits.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+			this.cmbWberDataBits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cmbWberDataBits.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.cmbWberDataBits.ForeColor = System.Drawing.Color.White;
+			this.cmbWberDataBits.FormattingEnabled = true;
+			this.cmbWberDataBits.ItemHeight = 21;
+			this.cmbWberDataBits.Location = new System.Drawing.Point(167, 67);
+			this.cmbWberDataBits.Name = "cmbWberDataBits";
+			this.cmbWberDataBits.Size = new System.Drawing.Size(92, 27);
+			this.cmbWberDataBits.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.cmbWberDataBits.TabIndex = 40;
+			// 
+			// labelX25
+			// 
+			this.labelX25.AutoSize = true;
+			this.labelX25.BackColor = System.Drawing.Color.Transparent;
+			// 
+			// 
+			// 
+			this.labelX25.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.labelX25.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelX25.ForeColor = System.Drawing.Color.White;
+			this.labelX25.Location = new System.Drawing.Point(107, 69);
+			this.labelX25.Name = "labelX25";
+			this.labelX25.Size = new System.Drawing.Size(56, 24);
+			this.labelX25.TabIndex = 39;
+			this.labelX25.Text = "数据位";
+			// 
+			// cmbWberBandrate
+			// 
+			this.cmbWberBandrate.DisplayMember = "Text";
+			this.cmbWberBandrate.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+			this.cmbWberBandrate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cmbWberBandrate.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.cmbWberBandrate.ForeColor = System.Drawing.Color.White;
+			this.cmbWberBandrate.FormattingEnabled = true;
+			this.cmbWberBandrate.ItemHeight = 21;
+			this.cmbWberBandrate.Location = new System.Drawing.Point(464, 29);
+			this.cmbWberBandrate.Name = "cmbWberBandrate";
+			this.cmbWberBandrate.Size = new System.Drawing.Size(92, 27);
+			this.cmbWberBandrate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.cmbWberBandrate.TabIndex = 38;
+			// 
+			// labelX26
+			// 
+			this.labelX26.AutoSize = true;
+			this.labelX26.BackColor = System.Drawing.Color.Transparent;
+			// 
+			// 
+			// 
+			this.labelX26.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.labelX26.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelX26.ForeColor = System.Drawing.Color.White;
+			this.labelX26.Location = new System.Drawing.Point(404, 31);
+			this.labelX26.Name = "labelX26";
+			this.labelX26.Size = new System.Drawing.Size(56, 24);
+			this.labelX26.TabIndex = 37;
+			this.labelX26.Text = "波特率";
+			// 
+			// cmbWberCom
+			// 
+			this.cmbWberCom.DisplayMember = "Text";
+			this.cmbWberCom.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+			this.cmbWberCom.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cmbWberCom.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.cmbWberCom.ForeColor = System.Drawing.Color.White;
+			this.cmbWberCom.FormattingEnabled = true;
+			this.cmbWberCom.ItemHeight = 21;
+			this.cmbWberCom.Location = new System.Drawing.Point(167, 29);
+			this.cmbWberCom.Name = "cmbWberCom";
+			this.cmbWberCom.Size = new System.Drawing.Size(92, 27);
+			this.cmbWberCom.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.cmbWberCom.TabIndex = 36;
+			// 
+			// labelX27
+			// 
+			this.labelX27.AutoSize = true;
+			this.labelX27.BackColor = System.Drawing.Color.Transparent;
+			// 
+			// 
+			// 
+			this.labelX27.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.labelX27.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelX27.ForeColor = System.Drawing.Color.White;
+			this.labelX27.Location = new System.Drawing.Point(122, 31);
+			this.labelX27.Name = "labelX27";
+			this.labelX27.Size = new System.Drawing.Size(40, 24);
+			this.labelX27.TabIndex = 35;
+			this.labelX27.Text = "串口";
+			// 
+			// tabItem3
+			// 
+			this.tabItem3.AttachedControl = this.tabControlPanel3;
+			this.tabItem3.Name = "tabItem3";
+			this.tabItem3.Text = "地磅仪表";
 			// 
 			// tabControlPanel2
 			// 
@@ -1043,6 +1304,164 @@ namespace CMCS.CarTransport.Weighter.Frms
 			this.tabItem2.Name = "tabItem2";
 			this.tabItem2.Text = "IO控制器";
 			// 
+			// tabControlPanel1
+			// 
+			this.tabControlPanel1.Controls.Add(this.chkUseCamera);
+			this.tabControlPanel1.Controls.Add(this.chkUseRwer);
+			this.tabControlPanel1.Controls.Add(this.cmb_Direction);
+			this.tabControlPanel1.Controls.Add(this.labelX34);
+			this.tabControlPanel1.Controls.Add(this.chkAutoPrint);
+			this.tabControlPanel1.Controls.Add(this.txtSelfConnStr);
+			this.tabControlPanel1.Controls.Add(this.labelX20);
+			this.tabControlPanel1.Controls.Add(this.chbStartup);
+			this.tabControlPanel1.Controls.Add(this.txtAppIdentifier);
+			this.tabControlPanel1.Controls.Add(this.labelX4);
+			this.tabControlPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tabControlPanel1.Location = new System.Drawing.Point(0, 31);
+			this.tabControlPanel1.Name = "tabControlPanel1";
+			this.tabControlPanel1.Padding = new System.Windows.Forms.Padding(1);
+			this.tabControlPanel1.Size = new System.Drawing.Size(703, 432);
+			this.tabControlPanel1.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
+			this.tabControlPanel1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+			this.tabControlPanel1.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
+            | DevComponents.DotNetBar.eBorderSide.Bottom)));
+			this.tabControlPanel1.Style.GradientAngle = 90;
+			this.tabControlPanel1.TabIndex = 1;
+			this.tabControlPanel1.TabItem = this.tabItem1;
+			// 
+			// cmb_Direction
+			// 
+			this.cmb_Direction.DisplayMember = "Text";
+			this.cmb_Direction.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+			this.cmb_Direction.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cmb_Direction.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.cmb_Direction.ForeColor = System.Drawing.Color.White;
+			this.cmb_Direction.FormattingEnabled = true;
+			this.cmb_Direction.ItemHeight = 21;
+			this.cmb_Direction.Location = new System.Drawing.Point(167, 110);
+			this.cmb_Direction.Name = "cmb_Direction";
+			this.cmb_Direction.Size = new System.Drawing.Size(92, 27);
+			this.cmb_Direction.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.cmb_Direction.TabIndex = 172;
+			// 
+			// labelX34
+			// 
+			this.labelX34.AutoSize = true;
+			this.labelX34.BackColor = System.Drawing.Color.Transparent;
+			// 
+			// 
+			// 
+			this.labelX34.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.labelX34.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelX34.ForeColor = System.Drawing.Color.White;
+			this.labelX34.Location = new System.Drawing.Point(94, 113);
+			this.labelX34.Name = "labelX34";
+			this.labelX34.Size = new System.Drawing.Size(72, 24);
+			this.labelX34.TabIndex = 171;
+			this.labelX34.Text = "上磅方向";
+			// 
+			// chkAutoPrint
+			// 
+			this.chkAutoPrint.AutoSize = true;
+			this.chkAutoPrint.BackColor = System.Drawing.Color.Transparent;
+			// 
+			// 
+			// 
+			this.chkAutoPrint.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.chkAutoPrint.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.chkAutoPrint.ForeColor = System.Drawing.Color.White;
+			this.chkAutoPrint.Location = new System.Drawing.Point(167, 185);
+			this.chkAutoPrint.Name = "chkAutoPrint";
+			this.chkAutoPrint.Size = new System.Drawing.Size(125, 24);
+			this.chkAutoPrint.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.chkAutoPrint.TabIndex = 170;
+			this.chkAutoPrint.Text = "自动打印磅单";
+			// 
+			// txtSelfConnStr
+			// 
+			this.txtSelfConnStr.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
+			// 
+			// 
+			// 
+			this.txtSelfConnStr.Border.Class = "TextBoxBorder";
+			this.txtSelfConnStr.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.txtSelfConnStr.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.txtSelfConnStr.ForeColor = System.Drawing.Color.White;
+			this.txtSelfConnStr.Location = new System.Drawing.Point(167, 67);
+			this.txtSelfConnStr.Name = "txtSelfConnStr";
+			this.txtSelfConnStr.Size = new System.Drawing.Size(446, 27);
+			this.txtSelfConnStr.TabIndex = 20;
+			// 
+			// labelX20
+			// 
+			this.labelX20.AutoSize = true;
+			this.labelX20.BackColor = System.Drawing.Color.Transparent;
+			// 
+			// 
+			// 
+			this.labelX20.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.labelX20.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelX20.ForeColor = System.Drawing.Color.White;
+			this.labelX20.Location = new System.Drawing.Point(30, 69);
+			this.labelX20.Name = "labelX20";
+			this.labelX20.Size = new System.Drawing.Size(137, 24);
+			this.labelX20.TabIndex = 19;
+			this.labelX20.Text = "数据库连接字符串";
+			// 
+			// chbStartup
+			// 
+			this.chbStartup.AutoSize = true;
+			this.chbStartup.BackColor = System.Drawing.Color.Transparent;
+			// 
+			// 
+			// 
+			this.chbStartup.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.chbStartup.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.chbStartup.ForeColor = System.Drawing.Color.White;
+			this.chbStartup.Location = new System.Drawing.Point(167, 152);
+			this.chbStartup.Name = "chbStartup";
+			this.chbStartup.Size = new System.Drawing.Size(92, 24);
+			this.chbStartup.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.chbStartup.TabIndex = 18;
+			this.chbStartup.Text = "开机启动";
+			// 
+			// txtAppIdentifier
+			// 
+			this.txtAppIdentifier.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
+			// 
+			// 
+			// 
+			this.txtAppIdentifier.Border.Class = "TextBoxBorder";
+			this.txtAppIdentifier.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.txtAppIdentifier.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.txtAppIdentifier.ForeColor = System.Drawing.Color.White;
+			this.txtAppIdentifier.Location = new System.Drawing.Point(167, 29);
+			this.txtAppIdentifier.Name = "txtAppIdentifier";
+			this.txtAppIdentifier.Size = new System.Drawing.Size(180, 27);
+			this.txtAppIdentifier.TabIndex = 17;
+			// 
+			// labelX4
+			// 
+			this.labelX4.AutoSize = true;
+			this.labelX4.BackColor = System.Drawing.Color.Transparent;
+			// 
+			// 
+			// 
+			this.labelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.labelX4.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelX4.ForeColor = System.Drawing.Color.White;
+			this.labelX4.Location = new System.Drawing.Point(61, 31);
+			this.labelX4.Name = "labelX4";
+			this.labelX4.Size = new System.Drawing.Size(105, 24);
+			this.labelX4.TabIndex = 16;
+			this.labelX4.Text = "程序唯一标识";
+			// 
+			// tabItem1
+			// 
+			this.tabItem1.AttachedControl = this.tabControlPanel1;
+			this.tabItem1.Name = "tabItem1";
+			this.tabItem1.Text = "基础设置";
+			// 
 			// tabControlPanel6
 			// 
 			this.tabControlPanel6.Controls.Add(this.lblVoiceVolume);
@@ -1309,420 +1728,42 @@ namespace CMCS.CarTransport.Weighter.Frms
 			this.tabItem5.Name = "tabItem5";
 			this.tabItem5.Text = "LED显示屏";
 			// 
-			// tabControlPanel4
+			// chkUseCamera
 			// 
-			this.tabControlPanel4.Controls.Add(this.labelX36);
-			this.tabControlPanel4.Controls.Add(this.cmbip_Rwer2Port);
-			this.tabControlPanel4.Controls.Add(this.labelX35);
-			this.tabControlPanel4.Controls.Add(this.cmbip_Rwer1Port);
-			this.tabControlPanel4.Controls.Add(this.ip_Rwer2);
-			this.tabControlPanel4.Controls.Add(this.ip_Rwer1);
-			this.tabControlPanel4.Controls.Add(this.txtRwerTagStartWith);
-			this.tabControlPanel4.Controls.Add(this.labelX21);
-			this.tabControlPanel4.Controls.Add(this.labelX22);
-			this.tabControlPanel4.Controls.Add(this.labelX28);
-			this.tabControlPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tabControlPanel4.Location = new System.Drawing.Point(0, 31);
-			this.tabControlPanel4.Name = "tabControlPanel4";
-			this.tabControlPanel4.Padding = new System.Windows.Forms.Padding(1);
-			this.tabControlPanel4.Size = new System.Drawing.Size(703, 432);
-			this.tabControlPanel4.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
-			this.tabControlPanel4.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-			this.tabControlPanel4.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
-            | DevComponents.DotNetBar.eBorderSide.Bottom)));
-			this.tabControlPanel4.Style.GradientAngle = 90;
-			this.tabControlPanel4.TabIndex = 4;
-			this.tabControlPanel4.TabItem = this.tabItem4;
+			this.chkUseCamera.AutoSize = true;
+			this.chkUseCamera.BackColor = System.Drawing.Color.Transparent;
 			// 
-			// ip_Rwer2
 			// 
-			this.ip_Rwer2.AutoOverwrite = true;
-			this.ip_Rwer2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
 			// 
+			this.chkUseCamera.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.chkUseCamera.Checked = true;
+			this.chkUseCamera.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.chkUseCamera.CheckValue = "Y";
+			this.chkUseCamera.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.chkUseCamera.ForeColor = System.Drawing.Color.White;
+			this.chkUseCamera.Location = new System.Drawing.Point(166, 253);
+			this.chkUseCamera.Name = "chkUseCamera";
+			this.chkUseCamera.Size = new System.Drawing.Size(125, 24);
+			this.chkUseCamera.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.chkUseCamera.TabIndex = 174;
+			this.chkUseCamera.Text = "启用识别相机";
 			// 
+			// chkUseRwer
 			// 
-			this.ip_Rwer2.BackgroundStyle.Class = "DateTimeInputBackground";
-			this.ip_Rwer2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.ip_Rwer2.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
-			this.ip_Rwer2.ButtonFreeText.Visible = true;
-			this.ip_Rwer2.ForeColor = System.Drawing.Color.White;
-			this.ip_Rwer2.Location = new System.Drawing.Point(179, 72);
-			this.ip_Rwer2.Name = "ip_Rwer2";
-			this.ip_Rwer2.Size = new System.Drawing.Size(173, 27);
-			this.ip_Rwer2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.ip_Rwer2.TabIndex = 37;
+			this.chkUseRwer.AutoSize = true;
+			this.chkUseRwer.BackColor = System.Drawing.Color.Transparent;
 			// 
-			// ip_Rwer1
 			// 
-			this.ip_Rwer1.AutoOverwrite = true;
-			this.ip_Rwer1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
 			// 
-			// 
-			// 
-			this.ip_Rwer1.BackgroundStyle.Class = "DateTimeInputBackground";
-			this.ip_Rwer1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.ip_Rwer1.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
-			this.ip_Rwer1.ButtonFreeText.Visible = true;
-			this.ip_Rwer1.ForeColor = System.Drawing.Color.White;
-			this.ip_Rwer1.Location = new System.Drawing.Point(179, 31);
-			this.ip_Rwer1.Name = "ip_Rwer1";
-			this.ip_Rwer1.Size = new System.Drawing.Size(173, 27);
-			this.ip_Rwer1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.ip_Rwer1.TabIndex = 36;
-			// 
-			// txtRwerTagStartWith
-			// 
-			this.txtRwerTagStartWith.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
-			// 
-			// 
-			// 
-			this.txtRwerTagStartWith.Border.Class = "TextBoxBorder";
-			this.txtRwerTagStartWith.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.txtRwerTagStartWith.ForeColor = System.Drawing.Color.White;
-			this.txtRwerTagStartWith.Location = new System.Drawing.Point(179, 110);
-			this.txtRwerTagStartWith.Name = "txtRwerTagStartWith";
-			this.txtRwerTagStartWith.Size = new System.Drawing.Size(92, 27);
-			this.txtRwerTagStartWith.TabIndex = 35;
-			// 
-			// labelX21
-			// 
-			this.labelX21.AutoSize = true;
-			this.labelX21.BackColor = System.Drawing.Color.Transparent;
-			// 
-			// 
-			// 
-			this.labelX21.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.labelX21.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.labelX21.ForeColor = System.Drawing.Color.White;
-			this.labelX21.Location = new System.Drawing.Point(87, 77);
-			this.labelX21.Name = "labelX21";
-			this.labelX21.Size = new System.Drawing.Size(77, 24);
-			this.labelX21.TabIndex = 31;
-			this.labelX21.Text = "读卡器2IP";
-			// 
-			// labelX22
-			// 
-			this.labelX22.AutoSize = true;
-			this.labelX22.BackColor = System.Drawing.Color.Transparent;
-			// 
-			// 
-			// 
-			this.labelX22.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.labelX22.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.labelX22.ForeColor = System.Drawing.Color.White;
-			this.labelX22.Location = new System.Drawing.Point(76, 113);
-			this.labelX22.Name = "labelX22";
-			this.labelX22.Size = new System.Drawing.Size(88, 24);
-			this.labelX22.TabIndex = 29;
-			this.labelX22.Text = "标签卡过滤";
-			// 
-			// labelX28
-			// 
-			this.labelX28.AutoSize = true;
-			this.labelX28.BackColor = System.Drawing.Color.Transparent;
-			// 
-			// 
-			// 
-			this.labelX28.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.labelX28.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.labelX28.ForeColor = System.Drawing.Color.White;
-			this.labelX28.Location = new System.Drawing.Point(87, 31);
-			this.labelX28.Name = "labelX28";
-			this.labelX28.Size = new System.Drawing.Size(77, 24);
-			this.labelX28.TabIndex = 27;
-			this.labelX28.Text = "读卡器1IP";
-			// 
-			// tabItem4
-			// 
-			this.tabItem4.AttachedControl = this.tabControlPanel4;
-			this.tabItem4.Name = "tabItem4";
-			this.tabItem4.Text = "读卡器";
-			// 
-			// tabControlPanel3
-			// 
-			this.tabControlPanel3.Controls.Add(this.cmbWberParity);
-			this.tabControlPanel3.Controls.Add(this.labelX3);
-			this.tabControlPanel3.Controls.Add(this.dbtxtMinWeight);
-			this.tabControlPanel3.Controls.Add(this.labelX23);
-			this.tabControlPanel3.Controls.Add(this.cmbWberStopBits);
-			this.tabControlPanel3.Controls.Add(this.labelX24);
-			this.tabControlPanel3.Controls.Add(this.cmbWberDataBits);
-			this.tabControlPanel3.Controls.Add(this.labelX25);
-			this.tabControlPanel3.Controls.Add(this.cmbWberBandrate);
-			this.tabControlPanel3.Controls.Add(this.labelX26);
-			this.tabControlPanel3.Controls.Add(this.cmbWberCom);
-			this.tabControlPanel3.Controls.Add(this.labelX27);
-			this.tabControlPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tabControlPanel3.Location = new System.Drawing.Point(0, 31);
-			this.tabControlPanel3.Name = "tabControlPanel3";
-			this.tabControlPanel3.Padding = new System.Windows.Forms.Padding(1);
-			this.tabControlPanel3.Size = new System.Drawing.Size(703, 432);
-			this.tabControlPanel3.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
-			this.tabControlPanel3.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-			this.tabControlPanel3.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
-            | DevComponents.DotNetBar.eBorderSide.Bottom)));
-			this.tabControlPanel3.Style.GradientAngle = 90;
-			this.tabControlPanel3.TabIndex = 3;
-			this.tabControlPanel3.TabItem = this.tabItem3;
-			// 
-			// cmbWberParity
-			// 
-			this.cmbWberParity.DisplayMember = "Text";
-			this.cmbWberParity.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-			this.cmbWberParity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.cmbWberParity.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.cmbWberParity.ForeColor = System.Drawing.Color.White;
-			this.cmbWberParity.FormattingEnabled = true;
-			this.cmbWberParity.ItemHeight = 21;
-			this.cmbWberParity.Location = new System.Drawing.Point(167, 105);
-			this.cmbWberParity.Name = "cmbWberParity";
-			this.cmbWberParity.Size = new System.Drawing.Size(92, 27);
-			this.cmbWberParity.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.cmbWberParity.TabIndex = 54;
-			// 
-			// labelX3
-			// 
-			this.labelX3.AutoSize = true;
-			this.labelX3.BackColor = System.Drawing.Color.Transparent;
-			// 
-			// 
-			// 
-			this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.labelX3.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.labelX3.ForeColor = System.Drawing.Color.White;
-			this.labelX3.Location = new System.Drawing.Point(107, 107);
-			this.labelX3.Name = "labelX3";
-			this.labelX3.Size = new System.Drawing.Size(56, 24);
-			this.labelX3.TabIndex = 53;
-			this.labelX3.Text = "校验位";
-			// 
-			// dbtxtMinWeight
-			// 
-			this.dbtxtMinWeight.AllowEmptyState = false;
-			this.dbtxtMinWeight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
-			// 
-			// 
-			// 
-			this.dbtxtMinWeight.BackgroundStyle.Class = "DateTimeInputBackground";
-			this.dbtxtMinWeight.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.dbtxtMinWeight.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
-			this.dbtxtMinWeight.ForeColor = System.Drawing.Color.White;
-			this.dbtxtMinWeight.Increment = 1D;
-			this.dbtxtMinWeight.Location = new System.Drawing.Point(464, 105);
-			this.dbtxtMinWeight.MaxValue = 10D;
-			this.dbtxtMinWeight.MinValue = 0.01D;
-			this.dbtxtMinWeight.Name = "dbtxtMinWeight";
-			this.dbtxtMinWeight.Size = new System.Drawing.Size(92, 27);
-			this.dbtxtMinWeight.TabIndex = 45;
-			this.dbtxtMinWeight.Value = 0.01D;
-			// 
-			// labelX23
-			// 
-			this.labelX23.AutoSize = true;
-			this.labelX23.BackColor = System.Drawing.Color.Transparent;
-			// 
-			// 
-			// 
-			this.labelX23.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.labelX23.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.labelX23.ForeColor = System.Drawing.Color.White;
-			this.labelX23.Location = new System.Drawing.Point(388, 107);
-			this.labelX23.Name = "labelX23";
-			this.labelX23.Size = new System.Drawing.Size(72, 24);
-			this.labelX23.TabIndex = 43;
-			this.labelX23.Text = "最小称重";
-			// 
-			// cmbWberStopBits
-			// 
-			this.cmbWberStopBits.DisplayMember = "Text";
-			this.cmbWberStopBits.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-			this.cmbWberStopBits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.cmbWberStopBits.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.cmbWberStopBits.ForeColor = System.Drawing.Color.White;
-			this.cmbWberStopBits.FormattingEnabled = true;
-			this.cmbWberStopBits.ItemHeight = 21;
-			this.cmbWberStopBits.Location = new System.Drawing.Point(464, 67);
-			this.cmbWberStopBits.Name = "cmbWberStopBits";
-			this.cmbWberStopBits.Size = new System.Drawing.Size(92, 27);
-			this.cmbWberStopBits.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.cmbWberStopBits.TabIndex = 42;
-			// 
-			// labelX24
-			// 
-			this.labelX24.AutoSize = true;
-			this.labelX24.BackColor = System.Drawing.Color.Transparent;
-			// 
-			// 
-			// 
-			this.labelX24.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.labelX24.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.labelX24.ForeColor = System.Drawing.Color.White;
-			this.labelX24.Location = new System.Drawing.Point(404, 69);
-			this.labelX24.Name = "labelX24";
-			this.labelX24.Size = new System.Drawing.Size(56, 24);
-			this.labelX24.TabIndex = 41;
-			this.labelX24.Text = "停止位";
-			// 
-			// cmbWberDataBits
-			// 
-			this.cmbWberDataBits.DisplayMember = "Text";
-			this.cmbWberDataBits.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-			this.cmbWberDataBits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.cmbWberDataBits.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.cmbWberDataBits.ForeColor = System.Drawing.Color.White;
-			this.cmbWberDataBits.FormattingEnabled = true;
-			this.cmbWberDataBits.ItemHeight = 21;
-			this.cmbWberDataBits.Location = new System.Drawing.Point(167, 67);
-			this.cmbWberDataBits.Name = "cmbWberDataBits";
-			this.cmbWberDataBits.Size = new System.Drawing.Size(92, 27);
-			this.cmbWberDataBits.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.cmbWberDataBits.TabIndex = 40;
-			// 
-			// labelX25
-			// 
-			this.labelX25.AutoSize = true;
-			this.labelX25.BackColor = System.Drawing.Color.Transparent;
-			// 
-			// 
-			// 
-			this.labelX25.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.labelX25.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.labelX25.ForeColor = System.Drawing.Color.White;
-			this.labelX25.Location = new System.Drawing.Point(107, 69);
-			this.labelX25.Name = "labelX25";
-			this.labelX25.Size = new System.Drawing.Size(56, 24);
-			this.labelX25.TabIndex = 39;
-			this.labelX25.Text = "数据位";
-			// 
-			// cmbWberBandrate
-			// 
-			this.cmbWberBandrate.DisplayMember = "Text";
-			this.cmbWberBandrate.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-			this.cmbWberBandrate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.cmbWberBandrate.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.cmbWberBandrate.ForeColor = System.Drawing.Color.White;
-			this.cmbWberBandrate.FormattingEnabled = true;
-			this.cmbWberBandrate.ItemHeight = 21;
-			this.cmbWberBandrate.Location = new System.Drawing.Point(464, 29);
-			this.cmbWberBandrate.Name = "cmbWberBandrate";
-			this.cmbWberBandrate.Size = new System.Drawing.Size(92, 27);
-			this.cmbWberBandrate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.cmbWberBandrate.TabIndex = 38;
-			// 
-			// labelX26
-			// 
-			this.labelX26.AutoSize = true;
-			this.labelX26.BackColor = System.Drawing.Color.Transparent;
-			// 
-			// 
-			// 
-			this.labelX26.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.labelX26.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.labelX26.ForeColor = System.Drawing.Color.White;
-			this.labelX26.Location = new System.Drawing.Point(404, 31);
-			this.labelX26.Name = "labelX26";
-			this.labelX26.Size = new System.Drawing.Size(56, 24);
-			this.labelX26.TabIndex = 37;
-			this.labelX26.Text = "波特率";
-			// 
-			// cmbWberCom
-			// 
-			this.cmbWberCom.DisplayMember = "Text";
-			this.cmbWberCom.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-			this.cmbWberCom.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.cmbWberCom.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.cmbWberCom.ForeColor = System.Drawing.Color.White;
-			this.cmbWberCom.FormattingEnabled = true;
-			this.cmbWberCom.ItemHeight = 21;
-			this.cmbWberCom.Location = new System.Drawing.Point(167, 29);
-			this.cmbWberCom.Name = "cmbWberCom";
-			this.cmbWberCom.Size = new System.Drawing.Size(92, 27);
-			this.cmbWberCom.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.cmbWberCom.TabIndex = 36;
-			// 
-			// labelX27
-			// 
-			this.labelX27.AutoSize = true;
-			this.labelX27.BackColor = System.Drawing.Color.Transparent;
-			// 
-			// 
-			// 
-			this.labelX27.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.labelX27.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.labelX27.ForeColor = System.Drawing.Color.White;
-			this.labelX27.Location = new System.Drawing.Point(122, 31);
-			this.labelX27.Name = "labelX27";
-			this.labelX27.Size = new System.Drawing.Size(40, 24);
-			this.labelX27.TabIndex = 35;
-			this.labelX27.Text = "串口";
-			// 
-			// tabItem3
-			// 
-			this.tabItem3.AttachedControl = this.tabControlPanel3;
-			this.tabItem3.Name = "tabItem3";
-			this.tabItem3.Text = "地磅仪表";
-			// 
-			// cmbip_Rwer1Port
-			// 
-			this.cmbip_Rwer1Port.DisplayMember = "Text";
-			this.cmbip_Rwer1Port.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-			this.cmbip_Rwer1Port.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.cmbip_Rwer1Port.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.cmbip_Rwer1Port.ForeColor = System.Drawing.Color.White;
-			this.cmbip_Rwer1Port.FormattingEnabled = true;
-			this.cmbip_Rwer1Port.ItemHeight = 21;
-			this.cmbip_Rwer1Port.Location = new System.Drawing.Point(501, 31);
-			this.cmbip_Rwer1Port.Name = "cmbip_Rwer1Port";
-			this.cmbip_Rwer1Port.Size = new System.Drawing.Size(71, 27);
-			this.cmbip_Rwer1Port.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.cmbip_Rwer1Port.TabIndex = 38;
-			// 
-			// labelX35
-			// 
-			this.labelX35.AutoSize = true;
-			this.labelX35.BackColor = System.Drawing.Color.Transparent;
-			// 
-			// 
-			// 
-			this.labelX35.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.labelX35.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.labelX35.ForeColor = System.Drawing.Color.White;
-			this.labelX35.Location = new System.Drawing.Point(398, 34);
-			this.labelX35.Name = "labelX35";
-			this.labelX35.Size = new System.Drawing.Size(97, 24);
-			this.labelX35.TabIndex = 39;
-			this.labelX35.Text = "读卡器1功率";
-			// 
-			// labelX36
-			// 
-			this.labelX36.AutoSize = true;
-			this.labelX36.BackColor = System.Drawing.Color.Transparent;
-			// 
-			// 
-			// 
-			this.labelX36.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.labelX36.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.labelX36.ForeColor = System.Drawing.Color.White;
-			this.labelX36.Location = new System.Drawing.Point(398, 75);
-			this.labelX36.Name = "labelX36";
-			this.labelX36.Size = new System.Drawing.Size(97, 24);
-			this.labelX36.TabIndex = 41;
-			this.labelX36.Text = "读卡器2功率";
-			// 
-			// cmbip_Rwer2Port
-			// 
-			this.cmbip_Rwer2Port.DisplayMember = "Text";
-			this.cmbip_Rwer2Port.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-			this.cmbip_Rwer2Port.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.cmbip_Rwer2Port.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.cmbip_Rwer2Port.ForeColor = System.Drawing.Color.White;
-			this.cmbip_Rwer2Port.FormattingEnabled = true;
-			this.cmbip_Rwer2Port.ItemHeight = 21;
-			this.cmbip_Rwer2Port.Location = new System.Drawing.Point(501, 72);
-			this.cmbip_Rwer2Port.Name = "cmbip_Rwer2Port";
-			this.cmbip_Rwer2Port.Size = new System.Drawing.Size(71, 27);
-			this.cmbip_Rwer2Port.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.cmbip_Rwer2Port.TabIndex = 40;
+			this.chkUseRwer.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.chkUseRwer.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.chkUseRwer.ForeColor = System.Drawing.Color.White;
+			this.chkUseRwer.Location = new System.Drawing.Point(166, 220);
+			this.chkUseRwer.Name = "chkUseRwer";
+			this.chkUseRwer.Size = new System.Drawing.Size(108, 24);
+			this.chkUseRwer.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.chkUseRwer.TabIndex = 173;
+			this.chkUseRwer.Text = "启用读卡器";
 			// 
 			// FrmSetting
 			// 
@@ -1734,7 +1775,6 @@ namespace CMCS.CarTransport.Weighter.Frms
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.ForeColor = System.Drawing.Color.White;
 			this.MaximizeBox = false;
 			this.Name = "FrmSetting";
 			this.ShowIcon = false;
@@ -1748,16 +1788,6 @@ namespace CMCS.CarTransport.Weighter.Frms
 			this.panelEx2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.tabControl1)).EndInit();
 			this.tabControl1.ResumeLayout(false);
-			this.tabControlPanel1.ResumeLayout(false);
-			this.tabControlPanel1.PerformLayout();
-			this.tabControlPanel2.ResumeLayout(false);
-			this.tabControlPanel2.PerformLayout();
-			this.tabControlPanel6.ResumeLayout(false);
-			this.tabControlPanel6.PerformLayout();
-			this.tabControlPanel5.ResumeLayout(false);
-			this.tabControlPanel5.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.iptxtLED2IP)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.iptxtLED1IP)).EndInit();
 			this.tabControlPanel4.ResumeLayout(false);
 			this.tabControlPanel4.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.ip_Rwer2)).EndInit();
@@ -1765,6 +1795,16 @@ namespace CMCS.CarTransport.Weighter.Frms
 			this.tabControlPanel3.ResumeLayout(false);
 			this.tabControlPanel3.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dbtxtMinWeight)).EndInit();
+			this.tabControlPanel2.ResumeLayout(false);
+			this.tabControlPanel2.PerformLayout();
+			this.tabControlPanel1.ResumeLayout(false);
+			this.tabControlPanel1.PerformLayout();
+			this.tabControlPanel6.ResumeLayout(false);
+			this.tabControlPanel6.PerformLayout();
+			this.tabControlPanel5.ResumeLayout(false);
+			this.tabControlPanel5.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.iptxtLED2IP)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.iptxtLED1IP)).EndInit();
 			this.ResumeLayout(false);
 
         }
@@ -1868,5 +1908,7 @@ namespace CMCS.CarTransport.Weighter.Frms
 		private DevComponents.DotNetBar.Controls.ComboBoxEx cmbip_Rwer1Port;
 		private DevComponents.DotNetBar.LabelX labelX36;
 		private DevComponents.DotNetBar.Controls.ComboBoxEx cmbip_Rwer2Port;
+		private DevComponents.DotNetBar.Controls.CheckBoxX chkUseCamera;
+		private DevComponents.DotNetBar.Controls.CheckBoxX chkUseRwer;
 	}
 }

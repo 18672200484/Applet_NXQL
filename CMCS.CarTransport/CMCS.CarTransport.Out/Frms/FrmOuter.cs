@@ -25,6 +25,7 @@ using DevComponents.DotNetBar;
 using DevComponents.DotNetBar.Controls;
 using DevComponents.DotNetBar.SuperGrid;
 using LED.YB_Bx5K1;
+using CMCS.CarTransport.Out.Frms.Transport.Print;
 
 namespace CMCS.CarTransport.Out.Frms
 {
@@ -71,6 +72,11 @@ namespace CMCS.CarTransport.Out.Frms
 				commonDAO.SetSignalDataValue(CommonAppConfig.GetInstance().AppIdentifier, eSignalDataName.地感1信号.ToString(), value ? "1" : "0");
 			}
 		}
+
+		/// <summary>
+		/// 地感1（道闸地感）状态
+		/// </summary>
+		public bool InductorCoil1State = false;
 
 		int inductorCoil1Port;
 		/// <summary>
@@ -404,98 +410,6 @@ namespace CMCS.CarTransport.Out.Frms
 				commonDAO.SetSignalDataValue(CommonAppConfig.GetInstance().AppIdentifier, eSignalDataName.读卡器1_连接状态.ToString(), status ? "1" : "0");
 			});
 		}
-
-		void Rwer2_OnScanError(Exception ex)
-		{
-			Log4Neter.Error("读卡器2", ex);
-		}
-
-		void Rwer2_OnStatusChange(bool status)
-		{
-			// 接收设备状态 
-			InvokeEx(() =>
-			{
-				slightRwer2.LightColor = (status ? Color.Green : Color.Red);
-
-				commonDAO.SetSignalDataValue(CommonAppConfig.GetInstance().AppIdentifier, eSignalDataName.读卡器2_连接状态.ToString(), status ? "1" : "0");
-			});
-		}
-
-		#endregion
-
-		#region LED显示屏
-
-		/// <summary>
-		/// 更新LED动态区域
-		/// </summary>
-		/// <param name="value1">第一行内容</param>
-		/// <param name="value2">第二行内容</param>
-		private void UpdateLedShow(string value1 = "", string value2 = "")
-		{
-			if (this.CurrentImperfectCar == null) return;
-
-			if (this.CurrentImperfectCar.PassWay == ePassWay.Way1)
-				UpdateLed1Show(value1, value2);
-		}
-
-		#region LED1控制卡
-		YB_Bx5K1 LED1 = new YB_Bx5K1();
-		/// <summary>
-		/// LED1更新标识
-		/// </summary>
-		bool LED1m_bSendBusy = false;
-
-		private bool _LED1ConnectStatus;
-		/// <summary>
-		/// LED1连接状态
-		/// </summary>
-		public bool LED1ConnectStatus
-		{
-			get
-			{
-				return _LED1ConnectStatus;
-			}
-
-			set
-			{
-				_LED1ConnectStatus = value;
-
-				slightLED1.LightColor = (value ? Color.Green : Color.Red);
-
-				commonDAO.SetSignalDataValue(CommonAppConfig.GetInstance().AppIdentifier, eSignalDataName.LED屏1_连接状态.ToString(), value ? "1" : "0");
-			}
-		}
-
-		/// <summary>
-		/// LED1上一次显示内容
-		/// </summary>
-		string LED1PrevLedFileContent = string.Empty;
-
-		/// <summary>
-		/// 更新LED1动态区域
-		/// </summary>
-		/// <param name="value1">第一行内容</param>
-		/// <param name="value2">第二行内容</param>
-		private void UpdateLed1Show(string value1 = "", string value2 = "")
-		{
-			if (this.LED1PrevLedFileContent == value1 + value2) return;
-
-			FrmDebugConsole.GetInstance().Output("更新LED1:|" + value1 + "|" + value2 + "|");
-
-			if (!this.LED1ConnectStatus) return;
-
-			if (LED1.UpdateArea(value1, value2))
-			{
-				LED1m_bSendBusy = true;
-			}
-			else
-				LED1m_bSendBusy = false;
-
-			this.LED1PrevLedFileContent = value1 + value2;
-		}
-
-		#endregion
-
 		#endregion
 
 		#region 设备初始化与卸载
@@ -528,36 +442,6 @@ namespace CMCS.CarTransport.Out.Frms
 				Hardwarer.Rwer1.OnScanError += new RW.LZR12.Net.Lzr12Rwer.ScanErrorEventHandler(Rwer1_OnScanError);
 				success = CommonUtil.PingReplyTest(commonDAO.GetAppletConfigString("读卡器1_IP地址")) && Hardwarer.Rwer1.OpenCom(commonDAO.GetAppletConfigString("读卡器1_IP地址"), 500, Convert.ToByte(commonDAO.GetAppletConfigInt32("读卡器1_功率")));
 				if (!success) MessageBoxEx.Show("读卡器1连接失败！", "操作提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-				#region LED控制卡1
-
-				string led1SocketIP = commonDAO.GetAppletConfigString("LED显示屏1_IP地址");
-				if (!string.IsNullOrEmpty(led1SocketIP))
-				{
-					if (CommonUtil.PingReplyTest(led1SocketIP))
-					{
-						if (LED1.CreateListent(led1SocketIP))
-						{
-							// 初始化成功
-							this.LED1ConnectStatus = true;
-							UpdateLed1Show("  等待车辆");
-						}
-						else
-						{
-							this.LED1ConnectStatus = false;
-							Log4Neter.Error("LED1控制卡连接失败", new Exception("连接失败"));
-							MessageBoxEx.Show("LED1控制卡连接失败", "操作提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-						}
-					}
-					else
-					{
-						this.LED1ConnectStatus = false;
-						Log4Neter.Error("初始化LED1控制卡，网络连接失败", new Exception("网络异常"));
-						MessageBoxEx.Show("LED1控制卡网络连接失败！", "操作提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-					}
-				}
-
-				#endregion
 
 				//语音设置
 				voiceSpeaker.SetVoice(commonDAO.GetAppletConfigInt32("语速"), commonDAO.GetAppletConfigInt32("音量"), commonDAO.GetAppletConfigString("语音包"));
@@ -595,12 +479,6 @@ namespace CMCS.CarTransport.Out.Frms
 			try
 			{
 				Hardwarer.Rwer1.CloseCom();
-			}
-			catch { }
-
-			try
-			{
-				LED1.CloseListent();
 			}
 			catch { }
 		}
@@ -663,7 +541,7 @@ namespace CMCS.CarTransport.Out.Frms
 		private void timer1_Tick(object sender, EventArgs e)
 		{
 			timer1.Stop();
-			timer1.Interval = 2000;
+			timer1.Interval = 500;
 
 			try
 			{
@@ -679,8 +557,11 @@ namespace CMCS.CarTransport.Out.Frms
 						timer1.Interval = 1000;
 
 						List<string> tags = Hardwarer.Rwer1.ScanTags();
-						if (tags.Count > 0) passCarQueuer.Enqueue(ePassWay.Way1, tags[0], true);
-
+						if (tags.Count > 0)
+						{
+							passCarQueuer.Enqueue(ePassWay.Way1, tags[0], true);
+							FrmDebugConsole.GetInstance().Output("识别到卡号:" + tags[0]);
+						}
 						if (passCarQueuer.Count > 0) this.CurrentFlowFlag = eFlowFlag.识别车辆;
 
 						#endregion
@@ -692,7 +573,6 @@ namespace CMCS.CarTransport.Out.Frms
 						// 队列中无车时，等待车辆
 						if (passCarQueuer.Count == 0)
 						{
-							UpdateLedShow("  等待车辆");
 							this.CurrentFlowFlag = eFlowFlag.等待车辆;
 							break;
 						}
@@ -723,21 +603,22 @@ namespace CMCS.CarTransport.Out.Frms
 							}
 							else
 							{
-								UpdateLedShow(this.CurrentAutotruck.CarNumber, "已停用");
 								this.voiceSpeaker.Speak("车牌号 " + this.CurrentAutotruck.CarNumber + " 已停用，禁止通过", 1, false);
-
+								this.CurrentFlowFlag = eFlowFlag.等待车辆;
+								this.CurrentAutotruck = null;
+								this.CurrentImperfectCar = null;
 								timer1.Interval = 20000;
 							}
 						}
 						else
 						{
-							UpdateLedShow(this.CurrentImperfectCar.Voucher, "未登记");
-
 							//// 方式一：车号识别
 							//this.voiceSpeaker.Speak("车牌号 " + this.CurrentImperfectCar.Voucher + " 未登记，禁止通过", 1, false);
 							// 方式二：刷卡方式
 							this.voiceSpeaker.Speak("卡号未登记，禁止通过", 1, false);
-
+							this.CurrentFlowFlag = eFlowFlag.等待车辆;
+							this.CurrentAutotruck = null;
+							this.CurrentImperfectCar = null;
 							timer1.Interval = 20000;
 						}
 
@@ -942,12 +823,15 @@ namespace CMCS.CarTransport.Out.Frms
 				if (outerDAO.SaveBuyFuelTransport(this.CurrentBuyFuelTransport.Id, DateTime.Now))
 				{
 					// 打印磅单
-					// TODO
-
+					if (chkAutoPrint.Checked)
+					{
+						WagonPrinter print = new WagonPrinter(this.printDocument1);
+						print.Print(this.CurrentBuyFuelTransport);
+					}
 					btnSaveTransport_BuyFuel.Enabled = false;
 					this.CurrentFlowFlag = eFlowFlag.等待离开;
 
-					UpdateLedShow("出厂成功", "请离开");
+					voiceSpeaker.Speak("出厂成功 请离开");
 
 					if (!this.AutoHandMode) MessageBoxEx.Show("出厂成功", "操作提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -992,11 +876,11 @@ namespace CMCS.CarTransport.Out.Frms
 			this.CurrentBuyFuelTransport = null;
 
 			txtTagId_BuyFuel.ResetText();
+			InductorCoil1State = false;
 
 			btnSaveTransport_BuyFuel.Enabled = false;
 
 			LetBlocking();
-			UpdateLedShow("  等待车辆");
 
 			// 最后重置
 			this.CurrentImperfectCar = null;
@@ -1036,7 +920,6 @@ namespace CMCS.CarTransport.Out.Frms
 									}
 									else
 									{
-										UpdateLedShow(this.CurrentAutotruck.CarNumber, "称重未完成");
 										this.voiceSpeaker.Speak("车牌号 " + this.CurrentAutotruck.CarNumber + " 称重未完成", 1, false);
 										this.CurrentFlowFlag = eFlowFlag.异常重置;
 
@@ -1045,7 +928,6 @@ namespace CMCS.CarTransport.Out.Frms
 								}
 								else
 								{
-									UpdateLedShow("路线错误", "禁止通过");
 									this.voiceSpeaker.Speak("路线错误 禁止通过 ", 1, false);
 									this.CurrentFlowFlag = eFlowFlag.异常重置;
 
@@ -1054,7 +936,6 @@ namespace CMCS.CarTransport.Out.Frms
 							}
 							else
 							{
-								UpdateLedShow(this.CurrentAutotruck.CarNumber, "请离开");
 								this.voiceSpeaker.Speak(this.CurrentAutotruck.CarNumber + "请离开", 1, false);
 								this.CurrentFlowFlag = eFlowFlag.等待离开;
 
@@ -1063,7 +944,6 @@ namespace CMCS.CarTransport.Out.Frms
 						}
 						else
 						{
-							UpdateLedShow(this.CurrentAutotruck.CarNumber, "未找到运输记录");
 							this.voiceSpeaker.Speak("车牌号 " + this.CurrentAutotruck.CarNumber + " 未找到运输记录", 1, false);
 							this.CurrentFlowFlag = eFlowFlag.异常重置;
 
@@ -1081,7 +961,6 @@ namespace CMCS.CarTransport.Out.Frms
 							// 自动模式
 							if (!SaveBuyFuelTransport())
 							{
-								UpdateLedShow(this.CurrentAutotruck.CarNumber, "保存失败");
 								this.voiceSpeaker.Speak("车牌号 " + this.CurrentAutotruck.CarNumber + " 保存失败，请联系管理员", 1, false);
 							}
 						}
@@ -1095,8 +974,9 @@ namespace CMCS.CarTransport.Out.Frms
 
 					case eFlowFlag.等待离开:
 						#region
-
-						ResetBuyFuel();
+						if (this.InductorCoil1) this.InductorCoil1State = true;
+						if (this.InductorCoil1State && !HasCarOnCurrentWay())
+							ResetBuyFuel();
 
 						// 降低灵敏度
 						timer_BuyFuel.Interval = 1000;
@@ -1221,7 +1101,6 @@ namespace CMCS.CarTransport.Out.Frms
 					btnSaveTransport_Goods.Enabled = false;
 					this.CurrentFlowFlag = eFlowFlag.等待离开;
 
-					UpdateLedShow("出厂成功", "请离开");
 					if (!this.AutoHandMode) MessageBoxEx.Show("出厂成功", "操作提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 					LoadTodayUnFinishGoodsTransport();
@@ -1269,7 +1148,6 @@ namespace CMCS.CarTransport.Out.Frms
 			btnSaveTransport_Goods.Enabled = false;
 
 			LetBlocking();
-			UpdateLedShow("  等待车辆");
 
 			// 最后重置
 			this.CurrentImperfectCar = null;
@@ -1308,12 +1186,9 @@ namespace CMCS.CarTransport.Out.Frms
 									if (this.CurrentGoodsTransport.SuttleWeight > 0)
 									{
 										this.CurrentFlowFlag = eFlowFlag.保存信息;
-
-										UpdateLedShow(this.CurrentAutotruck.CarNumber, "请离开");
 									}
 									else
 									{
-										UpdateLedShow(this.CurrentAutotruck.CarNumber, "称重未完成");
 										this.voiceSpeaker.Speak("车牌号 " + this.CurrentAutotruck.CarNumber + " 称重未完成", 1, false);
 
 										timer_Goods.Interval = 20000;
@@ -1321,7 +1196,6 @@ namespace CMCS.CarTransport.Out.Frms
 								}
 								else
 								{
-									UpdateLedShow("路线错误", "禁止通过");
 									this.voiceSpeaker.Speak("路线错误 禁止通过 " + (!string.IsNullOrEmpty(nextPlace) ? "请前往" + nextPlace : ""), 1, false);
 
 									timer_Goods.Interval = 20000;
@@ -1334,7 +1208,6 @@ namespace CMCS.CarTransport.Out.Frms
 						}
 						else
 						{
-							UpdateLedShow(this.CurrentAutotruck.CarNumber, "未排队");
 							this.voiceSpeaker.Speak("车牌号 " + this.CurrentAutotruck.CarNumber + " 未找到排队记录", 1, false);
 
 							timer_Goods.Interval = 20000;
@@ -1351,7 +1224,6 @@ namespace CMCS.CarTransport.Out.Frms
 							// 自动模式
 							if (!SaveGoodsTransport())
 							{
-								UpdateLedShow(this.CurrentAutotruck.CarNumber, "保存失败");
 								this.voiceSpeaker.Speak("车牌号 " + this.CurrentAutotruck.CarNumber + " 保存失败，请联系管理员", 1, false);
 							}
 						}
@@ -1423,9 +1295,10 @@ namespace CMCS.CarTransport.Out.Frms
 			try
 			{
 				PanelEx panel = sender as PanelEx;
-
+				int height = 12;
 				// 绘制地感1
-				e.Graphics.DrawLine(this.InductorCoil1 ? redPen3 : greenPen3, 15, 10, 15, 30);
+				e.Graphics.DrawLine(this.InductorCoil1 ? redPen3 : greenPen3, 15, 1, 15, height);
+				e.Graphics.DrawLine(this.InductorCoil1 ? redPen3 : greenPen3, 15, panel.Height - height, 15, panel.Height - 1);
 				//// 绘制地感2                                                               
 				//e.Graphics.DrawLine(this.InductorCoil2 ? redPen3 : greenPen3, 25, 10, 25, 30);
 				//// 绘制分割线
@@ -1469,6 +1342,20 @@ namespace CMCS.CarTransport.Out.Frms
 		}
 
 		#endregion
+
+		/// <summary>
+		/// 打印磅单
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void tsmiPrint_Click(object sender, EventArgs e)
+		{
+			GridRow grid = superGridControl2_BuyFuel.PrimaryGrid.ActiveRow as GridRow;
+			View_BuyFuelTransport entity = grid.DataItem as View_BuyFuelTransport;
+			CmcsBuyFuelTransport transport = commonDAO.SelfDber.Get<CmcsBuyFuelTransport>(entity.Id);
+			FrmPrintWeb frm = new FrmPrintWeb(transport);
+			frm.ShowDialog();
+		}
 
 	}
 }

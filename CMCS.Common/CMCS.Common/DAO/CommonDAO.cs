@@ -554,6 +554,28 @@ namespace CMCS.Common.DAO
                 return SelfDber.Insert(equInfSampleBarrel) > 0;
             else
             {
+                //if (oldEquInfSampleBarrel.SampleCount != 0 && equInfSampleBarrel.SampleCount == 0)//已进行清样
+                //{
+                //    CmcsRCSampling sampling = SelfDber.Entity<CmcsRCSampling>("where SampleCode=:SampleCode", new { SampleCode = oldEquInfSampleBarrel.SampleCode });
+                //    if (sampling != null)
+                //    {
+                //        // 生成采样桶记录
+                //        CmcsRCSampleBarrel rCSampleBarrel = new CmcsRCSampleBarrel()
+                //        {
+                //            BarrelCode = oldEquInfSampleBarrel.SampleCode,
+                //            BarrellingTime = oldEquInfSampleBarrel.UpdateTime,
+                //            BarrelNumber = oldEquInfSampleBarrel.BarrelNumber,
+                //            InFactoryBatchId = sampling.InFactoryBatchId,
+                //            SamplerName = oldEquInfSampleBarrel.MachineCode,
+                //            SampleType = eSamplingType.机械采样.ToString(),
+                //            SamplingId = sampling.Id,
+                //            SampleWeight = oldEquInfSampleBarrel.SampleWeight
+                //        };
+
+                //        SelfDber.Insert(rCSampleBarrel);
+                //    }
+                //}
+
                 oldEquInfSampleBarrel.BarrelNumber = equInfSampleBarrel.BarrelNumber;
                 oldEquInfSampleBarrel.BarrelStatus = equInfSampleBarrel.BarrelStatus;
                 oldEquInfSampleBarrel.InFactoryBatchId = equInfSampleBarrel.InFactoryBatchId;
@@ -833,9 +855,9 @@ namespace CMCS.Common.DAO
         {
             string strNewCode = fuelCode;
 
-            for (int i = 1; i < 100; i++)
+            for (int i = 1; i < 1000; i++)
             {
-                strNewCode = fuelCode + i.ToString().PadLeft(2, '0');
+                strNewCode = fuelCode + "." + i.ToString().PadLeft(3, '0');
                 //判断该编码是否已经存在
                 if (!IsExistFuelKindCode(strNewCode)) break;
             }
@@ -909,9 +931,9 @@ namespace CMCS.Common.DAO
         {
             string strNewCode = code;
 
-            for (int i = 1; i < 100; i++)
+            for (int i = 1; i < 1000; i++)
             {
-                strNewCode = code + i.ToString().PadLeft(2, '0');
+                strNewCode = code + "." + i.ToString().PadLeft(3, '0');
                 //判断该编码是否已经存在
                 if (!IsExistMineCode(strNewCode)) break;
             }

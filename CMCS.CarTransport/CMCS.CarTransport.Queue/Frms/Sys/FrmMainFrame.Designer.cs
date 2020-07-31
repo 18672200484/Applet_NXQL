@@ -53,7 +53,6 @@ namespace CMCS.CarTransport.Queue.Frms.Sys
             this.btnApplicationExit = new DevComponents.DotNetBar.ButtonX();
             this.btnOpenTransport = new DevComponents.DotNetBar.ButtonX();
             this.btnOpenBuyFuelTransportLoad = new DevComponents.DotNetBar.ButtonItem();
-            this.btnOpenSaleFuelTransport = new DevComponents.DotNetBar.ButtonItem();
             this.btnOpenGoodsTransportLoad = new DevComponents.DotNetBar.ButtonItem();
             this.btnOpenChangePassword = new DevComponents.DotNetBar.ButtonX();
             this.btnOpenSetting = new DevComponents.DotNetBar.ButtonX();
@@ -68,8 +67,8 @@ namespace CMCS.CarTransport.Queue.Frms.Sys
             this.btnOpenGoodsTypeLoad = new DevComponents.DotNetBar.ButtonItem();
             this.btnOpenAppletConfigLoad = new DevComponents.DotNetBar.ButtonItem();
             this.btnOpenCamareLoad = new DevComponents.DotNetBar.ButtonItem();
-            this.timer_CurrentTime = new System.Windows.Forms.Timer(this.components);
             this.btnOpenProvinceAbbreviationLoad = new DevComponents.DotNetBar.ButtonItem();
+            this.timer_CurrentTime = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.superTabControl1)).BeginInit();
             this.superTabControl1.SuspendLayout();
@@ -92,9 +91,9 @@ namespace CMCS.CarTransport.Queue.Frms.Sys
             this.lblVersion,
             this.labelItem2,
             this.lblLoginUserName});
-            this.metroStatusBar1.Location = new System.Drawing.Point(0, 790);
+            this.metroStatusBar1.Location = new System.Drawing.Point(0, 801);
             this.metroStatusBar1.Name = "metroStatusBar1";
-            this.metroStatusBar1.Size = new System.Drawing.Size(1424, 22);
+            this.metroStatusBar1.Size = new System.Drawing.Size(1432, 22);
             this.metroStatusBar1.TabIndex = 6;
             this.metroStatusBar1.Text = "metroStatusBar1";
             // 
@@ -140,7 +139,7 @@ namespace CMCS.CarTransport.Queue.Frms.Sys
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1424, 790);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1432, 801);
             this.tableLayoutPanel1.TabIndex = 7;
             // 
             // superTabControl1
@@ -172,7 +171,7 @@ namespace CMCS.CarTransport.Queue.Frms.Sys
             this.superTabControl1.ReorderTabsEnabled = true;
             this.superTabControl1.SelectedTabFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.superTabControl1.SelectedTabIndex = 0;
-            this.superTabControl1.Size = new System.Drawing.Size(1424, 740);
+            this.superTabControl1.Size = new System.Drawing.Size(1432, 751);
             this.superTabControl1.TabFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.superTabControl1.TabIndex = 10;
             this.superTabControl1.Tabs.AddRange(new DevComponents.DotNetBar.BaseItem[] {
@@ -185,7 +184,7 @@ namespace CMCS.CarTransport.Queue.Frms.Sys
             this.superTabControlPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.superTabControlPanel2.Location = new System.Drawing.Point(0, 36);
             this.superTabControlPanel2.Name = "superTabControlPanel2";
-            this.superTabControlPanel2.Size = new System.Drawing.Size(1424, 704);
+            this.superTabControlPanel2.Size = new System.Drawing.Size(1432, 715);
             this.superTabControlPanel2.TabIndex = 0;
             this.superTabControlPanel2.TabItem = this.superTabItem2;
             // 
@@ -214,7 +213,7 @@ namespace CMCS.CarTransport.Queue.Frms.Sys
             this.panelEx2.Location = new System.Drawing.Point(0, 0);
             this.panelEx2.Margin = new System.Windows.Forms.Padding(0);
             this.panelEx2.Name = "panelEx2";
-            this.panelEx2.Size = new System.Drawing.Size(1424, 50);
+            this.panelEx2.Size = new System.Drawing.Size(1432, 50);
             this.panelEx2.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelEx2.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelEx2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -292,7 +291,7 @@ namespace CMCS.CarTransport.Queue.Frms.Sys
             this.lblCurrentTime.AutoSize = true;
             this.lblCurrentTime.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCurrentTime.ForeColor = System.Drawing.Color.White;
-            this.lblCurrentTime.Location = new System.Drawing.Point(1177, 11);
+            this.lblCurrentTime.Location = new System.Drawing.Point(1185, 11);
             this.lblCurrentTime.Name = "lblCurrentTime";
             this.lblCurrentTime.Size = new System.Drawing.Size(239, 28);
             this.lblCurrentTime.TabIndex = 14;
@@ -324,7 +323,6 @@ namespace CMCS.CarTransport.Queue.Frms.Sys
             this.btnOpenTransport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnOpenTransport.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.btnOpenBuyFuelTransportLoad,
-            this.btnOpenSaleFuelTransport,
             this.btnOpenGoodsTransportLoad});
             this.btnOpenTransport.TabIndex = 12;
             this.btnOpenTransport.Text = "运 输 记 录";
@@ -336,15 +334,6 @@ namespace CMCS.CarTransport.Queue.Frms.Sys
             this.btnOpenBuyFuelTransportLoad.Tag = "CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport.FrmBuyFuelTransport_List";
             this.btnOpenBuyFuelTransportLoad.Text = "入厂煤运输记录";
             this.btnOpenBuyFuelTransportLoad.Click += new System.EventHandler(this.btnOpenBuyFuelTransportLoad_Click);
-            // 
-            // btnOpenSaleFuelTransport
-            // 
-            this.btnOpenSaleFuelTransport.GlobalItem = false;
-            this.btnOpenSaleFuelTransport.Name = "btnOpenSaleFuelTransport";
-            this.btnOpenSaleFuelTransport.Tag = "CMCS.CarTransport.Queue.Frms.Transport.SaleFuelTransport.FrmSaleFuelTransport_Lis" +
-                "t";
-            this.btnOpenSaleFuelTransport.Text = "销售煤运输记录";
-            this.btnOpenSaleFuelTransport.Click += new System.EventHandler(this.btnOpenSaleFuelTransport_Click);
             // 
             // btnOpenGoodsTransportLoad
             // 
@@ -487,12 +476,6 @@ namespace CMCS.CarTransport.Queue.Frms.Sys
             this.btnOpenCamareLoad.Text = "摄像头管理";
             this.btnOpenCamareLoad.Click += new System.EventHandler(this.btnOpenCamareLoad_Click);
             // 
-            // timer_CurrentTime
-            // 
-            this.timer_CurrentTime.Enabled = true;
-            this.timer_CurrentTime.Interval = 1000;
-            this.timer_CurrentTime.Tick += new System.EventHandler(this.timer_CurrentTime_Tick);
-            // 
             // btnOpenProvinceAbbreviationLoad
             // 
             this.btnOpenProvinceAbbreviationLoad.GlobalItem = false;
@@ -502,14 +485,20 @@ namespace CMCS.CarTransport.Queue.Frms.Sys
             this.btnOpenProvinceAbbreviationLoad.Text = "省份简称管理";
             this.btnOpenProvinceAbbreviationLoad.Click += new System.EventHandler(this.btnOpenProvinceAbbreviationLoad_Click);
             // 
+            // timer_CurrentTime
+            // 
+            this.timer_CurrentTime.Enabled = true;
+            this.timer_CurrentTime.Interval = 1000;
+            this.timer_CurrentTime.Tick += new System.EventHandler(this.timer_CurrentTime_Tick);
+            // 
             // FrmMainFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1424, 812);
+            this.ClientSize = new System.Drawing.Size(1432, 823);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.metroStatusBar1);
-            this.DoubleBuffered = true;
+            this.ForeColor = System.Drawing.Color.White;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(1440, 850);
             this.Name = "FrmMainFrame";
@@ -545,7 +534,6 @@ namespace CMCS.CarTransport.Queue.Frms.Sys
         private DevComponents.DotNetBar.SuperTabControl superTabControl1;
         private DevComponents.DotNetBar.ButtonX btnOpenSetting;
         private DevComponents.DotNetBar.ButtonItem btnOpenBuyFuelTransportLoad;
-        private DevComponents.DotNetBar.ButtonItem btnOpenSaleFuelTransport;
         private DevComponents.DotNetBar.ButtonItem btnOpenGoodsTransportLoad;
         private DevComponents.DotNetBar.ButtonItem btnOpenAutotruckLoad;
         private DevComponents.DotNetBar.ButtonItem btnOpenSupplierLoad;

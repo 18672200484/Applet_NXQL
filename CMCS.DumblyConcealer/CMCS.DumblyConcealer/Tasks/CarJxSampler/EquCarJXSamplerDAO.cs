@@ -61,14 +61,17 @@ namespace CMCS.DumblyConcealer.Tasks.CarJXSampler
         {
             int res = 0;
 
-            foreach (EquQCJXCYJSignal entity in this.EquDber.Entities<EquQCJXCYJSignal>())
+            foreach (EquQCJXCYJSignal entity in this.EquDber.Entities<EquQCJXCYJSignal>("where DataFlag=0"))
             {
                 if (entity.TagName == GlobalVars.EquHeartbeatName) continue;
 
+                if (entity.TagName == eSignalDataName.系统.ToString()) entity.TagName = eSignalDataName.设备状态.ToString();
                 // 当心跳检测为故障时，则不更新系统状态，保持 eSampleSystemStatus.发生故障
-                if (entity.TagName == eSignalDataName.系统.ToString() && IsHitch) continue;
+                if (entity.TagName == eSignalDataName.设备状态.ToString() && IsHitch) continue;
 
                 res += commonDAO.SetSignalDataValue(this.MachineCode, entity.TagName, entity.TagValue) ? 1 : 0;
+                entity.DataFlag = 1;
+                this.EquDber.Update(entity);
             }
             output(string.Format("同步实时信号 {0} 条", res), eOutputType.Normal);
 
@@ -96,7 +99,7 @@ namespace CMCS.DumblyConcealer.Tasks.CarJXSampler
         {
             IsHitch = isHitch;
 
-            if (IsHitch) commonDAO.SetSignalDataValue(this.MachineCode, eSignalDataName.系统.ToString(), eEquInfSamplerSystemStatus.发生故障.ToString());
+            if (IsHitch) commonDAO.SetSignalDataValue(this.MachineCode, eSignalDataName.设备状态.ToString(), eEquInfSamplerSystemStatus.发生故障.ToString());
         }
 
         /// <summary>
@@ -108,7 +111,7 @@ namespace CMCS.DumblyConcealer.Tasks.CarJXSampler
         {
             int res = 0;
 
-            List<EquQCJXCYJBarrel> infpdcybarrels = this.EquDber.Entities<EquQCJXCYJBarrel>();
+            List<EquQCJXCYJBarrel> infpdcybarrels = this.EquDber.Entities<EquQCJXCYJBarrel>("where DataFlag=0");
             foreach (EquQCJXCYJBarrel entity in infpdcybarrels)
             {
                 if (commonDAO.SaveEquInfSampleBarrel(new InfEquInfSampleBarrel
@@ -117,15 +120,39 @@ namespace CMCS.DumblyConcealer.Tasks.CarJXSampler
                     BarrelStatus = entity.BarrelStatus.ToString(),
                     MachineCode = this.MachineCode,
                     InFactoryBatchId = entity.InFactoryBatchId,
-                    InterfaceType = commonDAO.GetMachineInterfaceTypeByCode(this.MachineCode),
+                    InterfaceType = "西马智深汽车采样机接口",
                     IsCurrent = entity.IsCurrent,
                     SampleCode = entity.SampleCode,
                     SampleCount = entity.SampleCount,
                     UpdateTime = entity.UpdateTime,
-                    BarrelType = entity.BarrelType,
+                    BarrelType = "密码罐",
+                    SampleWeight = entity.SampleWeigh
                 }))
                 {
-
+                    //写入采样码记录
+                    CmcsRCSampling sampling = commonDAO.SelfDber.Entity<CmcsRCSampling>("where SampleCode=:SampleCode", new { SampleCode = entity.SampleCode });
+                    CmcsCYJCodeInfo codeInfo = commonDAO.SelfDber.Entity<CmcsCYJCodeInfo>("where SampleCode=:SampleCode and BarrelCode=:BarrelCode", new { SampleCode = entity.SampleCode, BarrelCode = entity.BarrelNumber });
+                    if (codeInfo == null)
+                    {
+                        codeInfo = new CmcsCYJCodeInfo();
+                        codeInfo.SampleCode = entity.SampleCode;
+                        codeInfo.BarrelCode = entity.BarrelNumber;
+                        codeInfo.SampleCount = entity.SampleCount;
+                        codeInfo.CarCount = entity.SampleCount;
+                        codeInfo.SampleWeight = entity.SampleWeigh;
+                        codeInfo.SamplerName = this.MachineCode;
+                        codeInfo.SamplingId = sampling != null ? sampling.Id : "";
+                        codeInfo.StartTime = entity.UpdateTime;
+                        commonDAO.SelfDber.Insert(codeInfo);
+                    }
+                    else
+                    {
+                        codeInfo.SampleCount = entity.SampleCount;
+                        codeInfo.CarCount = entity.SampleCount;
+                        codeInfo.SampleWeight = entity.SampleWeigh;
+                        codeInfo.EndTime = entity.UpdateTime;
+                        commonDAO.SelfDber.Update(codeInfo);
+                    }
                     entity.DataFlag = 1;
                     this.EquDber.Update(entity);
 
@@ -183,6 +210,7 @@ namespace CMCS.DumblyConcealer.Tasks.CarJXSampler
                         CarNumber = entity.CarNumber,
                         InFactoryBatchId = entity.InFactoryBatchId,
                         SampleCode = entity.SampleCode,
+                        RFID = entity.RFID,
                         //Mt = 0,
                         TicketWeight = entity.TicketWeight,
                         CarCount = entity.CarCount,
@@ -206,7 +234,7 @@ namespace CMCS.DumblyConcealer.Tasks.CarJXSampler
                         EndTime = entity.EndTime,
                         SampleUser = entity.SampleUser,
                         ResultCode = entity.ResultCode,
-                        DataFlag = 0
+                        DataFlag = 0,
                     }) > 0;
                 }
                 else
@@ -237,6 +265,7 @@ namespace CMCS.DumblyConcealer.Tasks.CarJXSampler
                     samplecmdEqu.EndTime = entity.EndTime;
                     samplecmdEqu.SampleUser = entity.SampleUser;
                     samplecmdEqu.ResultCode = entity.ResultCode;
+                    samplecmdEqu.SuoFen = entity.SuoFen;
                     samplecmdEqu.DataFlag = 0;
                     isSuccess = this.EquDber.Update(samplecmdEqu) > 0;
                 }
@@ -254,11 +283,16 @@ namespace CMCS.DumblyConcealer.Tasks.CarJXSampler
 
             res = 0;
             // 第三方 > 集中管控
-            foreach (EquQCJXCYJSampleCmd entity in this.EquDber.Entities<EquQCJXCYJSampleCmd>("where DataFlag=2 and datediff(dd,CreationTime,getdate())=0"))
+            //foreach (EquQCJXCYJSampleCmd entity in this.EquDber.Entities<EquQCJXCYJSampleCmd>("where DataFlag=2 and datediff(dd,CreateDate,getdate())=0"))
+            //{
+            foreach (EquQCJXCYJSampleCmd entity in this.EquDber.Entities<EquQCJXCYJSampleCmd>("where DataFlag=2 and datediff(dd,CreateDate,getdate())=0"))
             {
                 InfQCJXCYSampleCMD samplecmdInf = Dbers.GetInstance().SelfDber.Get<InfQCJXCYSampleCMD>(entity.Id);
                 if (samplecmdInf == null) continue;
-
+                if (entity.ResultCode == "1")
+                    entity.ResultCode = "成功";
+                else if (entity.ResultCode == "0")
+                    entity.ResultCode = "失败";
                 samplecmdInf.Point1 = entity.Point1;
                 samplecmdInf.Point2 = entity.Point2;
                 samplecmdInf.Point3 = entity.Point3;
@@ -304,7 +338,7 @@ namespace CMCS.DumblyConcealer.Tasks.CarJXSampler
                         // 保持相同的Id
                         Id = entity.Id,
                         DataFlag = 0,
-                        CreationTime = entity.CreationTime,
+                        CreateDate = entity.CreationTime,
                         SampleCode = entity.SampleCode,
                         ResultCode = eEquInfCmdResultCode.默认.ToString(),
                         UnLoadType = entity.UnLoadType.ToString(),
@@ -325,7 +359,7 @@ namespace CMCS.DumblyConcealer.Tasks.CarJXSampler
 
             res = 0;
             // 第三方 > 集中管控
-            foreach (EquQCJXCYJUnloadCmd entity in this.EquDber.Entities<EquQCJXCYJUnloadCmd>("where DataFlag=2 and datediff(dd,CreationTime,getdate())=0"))
+            foreach (EquQCJXCYJUnloadCmd entity in this.EquDber.Entities<EquQCJXCYJUnloadCmd>("where DataFlag=2 and datediff(dd,CreateDate,getdate())=0"))
             {
                 InfQCJXCYUnLoadCMD JXCYCmd = Dbers.GetInstance().SelfDber.Get<InfQCJXCYUnLoadCMD>(entity.Id);
                 if (JXCYCmd == null) continue;
@@ -365,17 +399,18 @@ namespace CMCS.DumblyConcealer.Tasks.CarJXSampler
                     EquQCJXCYJSampleCmd qCJXCYJSampleCmd = this.EquDber.Entity<EquQCJXCYJSampleCmd>("where SampleCode=@SampleCode", new { SampleCode = entity.SampleCode });
                     if (qCJXCYJSampleCmd != null)
                     {
-                        // 生成采样桶记录
+                        CmcsRCSampling sampling = commonDAO.SelfDber.Entity<CmcsRCSampling>("where SampleCode=:SampleCode", new { SampleCode = entity.SampleCode });
+                        //生成采样桶记录
                         CmcsRCSampleBarrel rCSampleBarrel = new CmcsRCSampleBarrel()
-                            {
-                                BarrelCode = entity.BarrelCode,
-                                BarrellingTime = entity.UnloadTime,
-                                BarrelNumber = entity.BarrelNumber,
-                                InFactoryBatchId = qCJXCYJSampleCmd.InFactoryBatchId,
-                                SamplerName = commonDAO.GetMachineNameByCode(this.MachineCode),
-                                SampleType = eSamplingType.机械采样.ToString(),
-                                SamplingId = entity.SamplingId
-                            };
+                        {
+                            BarrelCode = entity.SampleCode,
+                            BarrellingTime = entity.UnloadTime,
+                            BarrelNumber = entity.BarrelCode,
+                            InFactoryBatchId = qCJXCYJSampleCmd.InFactoryBatchId,
+                            SamplerName = commonDAO.GetMachineNameByCode(this.MachineCode),
+                            SampleType = eSamplingType.机械采样.ToString(),
+                            SamplingId = sampling != null ? sampling.Id : entity.SamplingId
+                        };
 
                         if (commonDAO.SelfDber.Insert(rCSampleBarrel) > 0)
                         {
@@ -387,6 +422,12 @@ namespace CMCS.DumblyConcealer.Tasks.CarJXSampler
                                 DataFlag = entity.DataFlag
                             }) > 0)
                             {
+                                CmcsCYJCodeInfo codeInfo = commonDAO.SelfDber.Entity<CmcsCYJCodeInfo>("where SampleCode=:SampleCode and BarrelCode=:BarrelCode", new { SampleCode = entity.SampleCode, BarrelCode = entity.BarrelCode });
+                                if (codeInfo != null)
+                                {
+                                    codeInfo.ClearTime = entity.UnloadTime;
+                                    commonDAO.SelfDber.Update(codeInfo);
+                                }
                                 entity.DataFlag = 1;
                                 this.EquDber.Update(entity);
 

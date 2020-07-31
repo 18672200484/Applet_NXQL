@@ -125,67 +125,6 @@ namespace CMCS.CarTransport.DAO
 
         #endregion
 
-        #region 销售煤业务
-
-        /// <summary>
-        /// 获取指定日期已完成的销售煤运输记录
-        /// </summary>
-        /// <param name="dtStart"></param>
-        /// <param name="dtEnd"></param>
-        /// <returns></returns>
-        public List<View_SaleFuelTransport> GetFinishedSaleFuelTransport(DateTime dtStart, DateTime dtEnd)
-        {
-            return SelfDber.Entities<View_SaleFuelTransport>("where SuttleWeight!=0 and InFactoryTime>=:dtStart and InFactoryTime<:dtEnd order by InFactoryTime desc", new { dtStart = dtStart, dtEnd = dtEnd });
-        }
-
-        /// <summary>
-        /// 获取未完成的销售煤运输记录
-        /// </summary>
-        /// <returns></returns>
-        public List<View_SaleFuelTransport> GetUnFinishSaleFuelTransport()
-        {
-            return SelfDber.Entities<View_SaleFuelTransport>("where SuttleWeight=0 and IsUse=1 and UnFinishTransportId is not null order by InFactoryTime desc");
-        }
-
-        /// <summary>
-        /// 保存销售煤运输记录
-        /// </summary>
-        /// <param name="transportId"></param>
-        /// <param name="weight">重量</param>
-        /// <param name="place"></param>
-        /// <returns></returns>
-        public bool SaveSaleFuelTransport(string transportId, decimal weight, DateTime dt, string place)
-        {
-            CmcsSaleFuelTransport transport = SelfDber.Get<CmcsSaleFuelTransport>(transportId);
-            if (transport == null) return false;
-
-            if (transport.TareWeight == 0)
-            {
-                transport.StepName = eTruckInFactoryStep.轻车.ToString();
-                transport.TareWeight = weight;
-                transport.TarePlace = place;
-                transport.TareTime = dt;
-            }
-            else if (transport.GrossWeight == 0)
-            {
-                transport.StepName = eTruckInFactoryStep.重车.ToString();
-                transport.GrossWeight = weight;
-                transport.GrossPlace = place;
-                transport.GrossTime = dt;
-                transport.SuttleWeight = transport.GrossWeight - transport.TareWeight;
-
-                // 回皮即完结
-                transport.IsFinish = 1;
-
-                //commonDAO.InsertWaitForHandleEvent("汽车智能化_同步销售煤运输记录到批次", transport.Id);
-            }
-            else
-                return false;
-
-            return SelfDber.Update(transport) > 0;
-        }
-        #endregion
-
         #region 其他物资业务
 
         /// <summary>

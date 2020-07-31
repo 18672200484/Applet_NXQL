@@ -10,13 +10,17 @@ namespace CMCS.Common.Entities.CarTransport
     /// </summary>
     [Serializable]
     [Description("外网运输记录")]
-    [CMCS.DapperDber.Attrs.DapperBind("CmcsTbInNetTransport")]
+    [CMCS.DapperDber.Attrs.DapperBind("CmcsTbOutNetTransport")]
     public class CmcsInNetTransport : EntityBase1
     {
         /// <summary>
         /// 车牌号
         /// </summary>
         public string CarNumber { get; set; }
+        /// <summary>
+        /// 身份证号
+        /// </summary>
+        public string IDCard { get; set; }
         /// <summary>
         /// 关联：车辆管理  
         /// </summary>
@@ -25,6 +29,10 @@ namespace CMCS.Common.Entities.CarTransport
         /// 进厂流水号  
         /// </summary>
         public string SerialNumber { get; set; }
+        /// <summary>
+        /// 封签号  
+        /// </summary>
+        public string SealNumber { get; set; }
         /// <summary>
         /// 矿发量（吨） 
         /// </summary>
@@ -78,9 +86,17 @@ namespace CMCS.Common.Entities.CarTransport
         /// </summary>
         public virtual string TransportCompanyId { get; set; }
         /// <summary>
-        /// 运输单位ID
+        /// 运输单位名称
+        /// </summary>
+        public virtual string TransportCompanyName { get; set; }
+        /// <summary>
+        /// 矿点ID
         /// </summary>
         public virtual string MineId { get; set; }
+        /// <summary>
+        /// 矿点名称
+        /// </summary>
+        public virtual string MineName { get; set; }
         /// <summary>
         /// 皮重地点
         /// </summary>
@@ -165,5 +181,9 @@ namespace CMCS.Common.Entities.CarTransport
         /// 数据同步标识 0未同步 1已同步
         /// </summary>
         public int SyncFlag { get; set; }
+        /// <summary>
+        /// 所属单位名称（简称）
+        /// </summary>
+        public string FactoryName { get; set; }
     }
 }

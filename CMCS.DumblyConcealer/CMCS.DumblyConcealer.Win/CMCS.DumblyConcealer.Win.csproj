@@ -126,6 +126,12 @@
     <Compile Include="DumblyTasks\FrmDataHandler.Designer.cs">
       <DependentUpon>FrmDataHandler.cs</DependentUpon>
     </Compile>
+    <Compile Include="DumblyTasks\FrmIntelogistics.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DumblyTasks\FrmIntelogistics.Designer.cs">
+      <DependentUpon>FrmIntelogistics.cs</DependentUpon>
+    </Compile>
     <Compile Include="DumblyTasks\FrmSyncNetData.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,6 +143,12 @@
     </Compile>
     <Compile Include="DumblyTasks\FrmTrainDiscriminator.Designer.cs">
       <DependentUpon>FrmTrainDiscriminator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DumblyTasks\FrmUploadData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DumblyTasks\FrmUploadData.Designer.cs">
+      <DependentUpon>FrmUploadData.cs</DependentUpon>
     </Compile>
     <Compile Include="DumblyTasks\FrmWeightBridger.cs">
       <SubType>Form</SubType>
@@ -233,6 +245,9 @@
     <Content Include="bin\BasisPlatform.XML" />
     <Content Include="bin\Common.AppConfig.xml" />
     <Content Include="bin\log4net.dll" />
+    <Content Include="bin\UploadData.AppConfig.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="icon.ico" />
   </ItemGroup>
   <ItemGroup>

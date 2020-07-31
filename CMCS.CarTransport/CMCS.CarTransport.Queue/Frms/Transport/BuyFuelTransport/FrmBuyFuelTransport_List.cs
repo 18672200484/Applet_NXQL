@@ -21,6 +21,7 @@ using DevComponents.DotNetBar;
 using DevComponents.DotNetBar.Metro;
 using DevComponents.DotNetBar.SuperGrid;
 using NPOI.HSSF.UserModel;
+using CMCS.CarTransport.Queue.Frms.Transport.Print;
 
 namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
 {
@@ -372,20 +373,14 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
                         BindData();
                     }
                     break;
-                case "clmPic":
-
-                    if (Dbers.GetInstance().SelfDber.Entities<CmcsTransportPicture>(String.Format(" where TransportId='{0}'", entity.Id)).Count > 0)
+                case "clmPrint":
+                    if (entity.SuttleWeight <= 0)
                     {
-                        FrmTransportPicture frmPic = new FrmTransportPicture(entity.Id, entity.CarNumber);
-                        if (frmPic.ShowDialog() == DialogResult.OK)
-                        {
-                            BindData();
-                        }
+                        MessageBoxEx.Show("净重异常禁止打印", "操作提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
                     }
-                    else
-                    {
-                        MessageBoxEx.Show("暂无抓拍图片！", "操作提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
+                    FrmPrintWeb frm = new FrmPrintWeb(entity);
+                    frm.ShowDialog();
                     break;
             }
         }

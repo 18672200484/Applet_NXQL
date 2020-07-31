@@ -85,6 +85,7 @@
     <Compile Include="Entities\BaseInfo\CmcsCamare.cs" />
     <Compile Include="Entities\CarTransport\CmcsDayMineFuelqty.cs" />
     <Compile Include="Entities\CarTransport\CmcsInNetTransport.cs" />
+    <Compile Include="Entities\CarTransport\CmcsCYJCodeInfo.cs" />
     <Compile Include="Entities\iEAA\CmcsUser.cs" />
     <Compile Include="Entities\Inf\InfBeltSamplerUnloadResult.cs" />
     <Compile Include="Entities\CarTransport\CmcsTruckInFactoryWay.cs" />

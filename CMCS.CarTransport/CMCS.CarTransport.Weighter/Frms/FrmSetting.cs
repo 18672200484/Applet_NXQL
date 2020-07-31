@@ -42,8 +42,8 @@ namespace CMCS.CarTransport.Weighter.Frms
 			InitStopBitsComboBoxs(cmbIocerStopBits, cmbWberStopBits);
 			InitParityComboBoxs(cmbIocerParity, cmbWberParity);
 			InitNumberAscComboBoxs(1, 30, cmbip_Rwer1Port, cmbip_Rwer2Port);
-			cmb_Direction.Items.Add(new DataItem("左上磅", "左上磅"));
-			cmb_Direction.Items.Add(new DataItem("右上磅", "右上磅"));
+			cmb_Direction.Items.Add(new DataItem("重车磅", "重车磅"));
+			cmb_Direction.Items.Add(new DataItem("轻车磅", "轻车磅"));
 			cmb_Direction.Items.Add(new DataItem("双向磅", "双向磅"));
 			cmb_Direction.SelectedIndex = 0;
 		}
@@ -109,6 +109,8 @@ namespace CMCS.CarTransport.Weighter.Frms
 			txtSelfConnStr.Text = commonAppConfig.SelfConnStr;
 			chbStartup.Checked = (commonDAO.GetAppletConfigString("开机启动") == "1");
 			chkAutoPrint.Checked = (commonDAO.GetAppletConfigString("自动打印磅单") == "1");
+			chkUseRwer.Checked = (commonDAO.GetAppletConfigString("启用读卡器") == "1");
+			chkUseCamera.Checked = (commonDAO.GetAppletConfigString("启用识别相机") == "1");
 
 			// IO控制器
 			SelectedComboBoxItem(cmbIocerCom, commonDAO.GetAppletConfigInt32("IO控制器_串口").ToString());
@@ -167,11 +169,19 @@ namespace CMCS.CarTransport.Weighter.Frms
 		{
 			if (!TestDBConnect()) return false;
 
+			if (!chkUseCamera.Checked && !chkUseRwer.Checked)
+			{
+				MessageBoxEx.Show("识别相机与读卡器必须启用一个", "操作提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return false;
+			}
+
 			commonAppConfig.AppIdentifier = txtAppIdentifier.Text.Trim();
 			commonAppConfig.SelfConnStr = txtSelfConnStr.Text;
 			commonAppConfig.Save();
 			commonDAO.SetAppletConfig("开机启动", Convert.ToInt16(chbStartup.Checked).ToString());
 			commonDAO.SetAppletConfig("自动打印磅单", Convert.ToInt16(chkAutoPrint.Checked).ToString());
+			commonDAO.SetAppletConfig("启用读卡器", Convert.ToInt16(chkUseRwer.Checked).ToString());
+			commonDAO.SetAppletConfig("启用识别相机", Convert.ToInt16(chkUseCamera.Checked).ToString());
 
 			try
 			{

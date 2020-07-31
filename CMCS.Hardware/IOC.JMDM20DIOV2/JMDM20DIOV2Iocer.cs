@@ -126,7 +126,7 @@ namespace IOC.JMDM20DIOV2
 
                 serialPort.DataReceived -= new SerialDataReceivedEventHandler(serialPort_DataReceived);
                 //serialPort.Close();
-                serialPort.Dispose();
+                //serialPort.Dispose();
                 SetStatus(false);
             }
             catch { }

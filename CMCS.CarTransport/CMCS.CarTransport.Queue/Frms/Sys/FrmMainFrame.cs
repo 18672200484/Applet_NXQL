@@ -101,7 +101,7 @@ namespace CMCS.CarTransport.Queue.Frms.Sys
             if (FrmMainFrame.superTabControlManager.GetTab(uniqueKey) == null)
             {
                 FrmQueuer frm = new FrmQueuer();
-                FrmMainFrame.superTabControlManager.CreateTab(frm.Text, uniqueKey, frm, false, false);
+                FrmMainFrame.superTabControlManager.CreateTab(frm.Text, uniqueKey, frm, true, false);
             }
             else
                 FrmMainFrame.superTabControlManager.ChangeToTab(uniqueKey);

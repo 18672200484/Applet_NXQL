@@ -121,11 +121,11 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
             gridColumn3.NullString = "删除";
             gridColumn3.Width = 32;
             gridColumn4.CellStyles.Default.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Underline);
-            gridColumn4.DefaultNewRowCellValue = "抓拍";
+            gridColumn4.DefaultNewRowCellValue = "打印";
             gridColumn4.HeaderText = "";
             gridColumn4.InfoImageAlignment = DevComponents.DotNetBar.SuperGrid.Style.Alignment.MiddleCenter;
-            gridColumn4.Name = "clmPic";
-            gridColumn4.NullString = "抓拍";
+            gridColumn4.Name = "clmPrint";
+            gridColumn4.NullString = "打印";
             gridColumn4.Width = 32;
             gridColumn5.AutoSizeMode = DevComponents.DotNetBar.SuperGrid.ColumnAutoSizeMode.AllCells;
             gridColumn5.CellStyles.Default.Alignment = DevComponents.DotNetBar.SuperGrid.Style.Alignment.MiddleCenter;
@@ -239,7 +239,7 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
             this.superGridControl1.PrimaryGrid.Columns.Add(gridColumn18);
             this.superGridControl1.PrimaryGrid.InitialSelection = DevComponents.DotNetBar.SuperGrid.RelativeSelection.Row;
             this.superGridControl1.PrimaryGrid.SelectionGranularity = DevComponents.DotNetBar.SuperGrid.SelectionGranularity.Row;
-            this.superGridControl1.Size = new System.Drawing.Size(1419, 611);
+            this.superGridControl1.Size = new System.Drawing.Size(1418, 611);
             this.superGridControl1.TabIndex = 4;
             this.superGridControl1.Text = "superGridControl1";
             this.superGridControl1.CellMouseDown += new System.EventHandler<DevComponents.DotNetBar.SuperGrid.GridCellMouseEventArgs>(this.superGridControl1_CellMouseDown);
@@ -252,7 +252,7 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
             this.btnPrevious.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPrevious.CommandParameter = "Previous";
             this.btnPrevious.Font = new System.Drawing.Font("Segoe UI", 11.25F);
-            this.btnPrevious.Location = new System.Drawing.Point(1204, 9);
+            this.btnPrevious.Location = new System.Drawing.Point(1203, 9);
             this.btnPrevious.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnPrevious.Name = "btnPrevious";
             this.btnPrevious.Size = new System.Drawing.Size(64, 23);
@@ -267,7 +267,7 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
             this.btnFirst.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFirst.CommandParameter = "First";
             this.btnFirst.Font = new System.Drawing.Font("Segoe UI", 11.25F);
-            this.btnFirst.Location = new System.Drawing.Point(1134, 9);
+            this.btnFirst.Location = new System.Drawing.Point(1133, 9);
             this.btnFirst.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnFirst.Name = "btnFirst";
             this.btnFirst.Size = new System.Drawing.Size(64, 23);
@@ -282,7 +282,7 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
             this.btnLast.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLast.CommandParameter = "Last";
             this.btnLast.Font = new System.Drawing.Font("Segoe UI", 11.25F);
-            this.btnLast.Location = new System.Drawing.Point(1343, 9);
+            this.btnLast.Location = new System.Drawing.Point(1342, 9);
             this.btnLast.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLast.Name = "btnLast";
             this.btnLast.Size = new System.Drawing.Size(64, 23);
@@ -297,7 +297,7 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
             this.btnNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnNext.CommandParameter = "Next";
             this.btnNext.Font = new System.Drawing.Font("Segoe UI", 11.25F);
-            this.btnNext.Location = new System.Drawing.Point(1273, 9);
+            this.btnNext.Location = new System.Drawing.Point(1272, 9);
             this.btnNext.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(64, 23);
@@ -311,7 +311,7 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
             this.btnSearch.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearch.Location = new System.Drawing.Point(1343, 9);
+            this.btnSearch.Location = new System.Drawing.Point(1342, 9);
             this.btnSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(64, 23);
@@ -333,7 +333,7 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1419, 40);
+            this.panel2.Size = new System.Drawing.Size(1418, 40);
             this.panel2.TabIndex = 1;
             // 
             // lblPagerInfo
@@ -364,7 +364,7 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
             this.superGridControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.superGridControl2.Name = "superGridControl2";
             this.superGridControl2.PrimaryGrid.Caption.Text = "";
-            this.superGridControl2.Size = new System.Drawing.Size(1419, 611);
+            this.superGridControl2.Size = new System.Drawing.Size(1418, 611);
             this.superGridControl2.TabIndex = 3;
             this.superGridControl2.Text = "superGridControl1";
             // 
@@ -393,7 +393,7 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
             this.splitContainer2.Panel2.Controls.Add(this.panel2);
             this.splitContainer2.Panel2.ForeColor = System.Drawing.Color.White;
             this.splitContainer2.Panel2MinSize = 40;
-            this.splitContainer2.Size = new System.Drawing.Size(1419, 652);
+            this.splitContainer2.Size = new System.Drawing.Size(1418, 652);
             this.splitContainer2.SplitterDistance = 611;
             this.splitContainer2.SplitterWidth = 1;
             this.splitContainer2.TabIndex = 0;
@@ -404,7 +404,7 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitContainer1.ForeColor = System.Drawing.Color.White;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 1);
+            this.splitContainer1.Location = new System.Drawing.Point(1, 1);
             this.splitContainer1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -422,7 +422,7 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
             this.splitContainer1.Panel2.ForeColor = System.Drawing.Color.White;
             this.splitContainer1.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.splitContainer1.Size = new System.Drawing.Size(1419, 693);
+            this.splitContainer1.Size = new System.Drawing.Size(1418, 693);
             this.splitContainer1.SplitterDistance = 40;
             this.splitContainer1.SplitterWidth = 1;
             this.splitContainer1.TabIndex = 147;
@@ -446,7 +446,7 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1419, 40);
+            this.panel1.Size = new System.Drawing.Size(1418, 40);
             this.panel1.TabIndex = 12;
             // 
             // btnReportExport
@@ -475,7 +475,7 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
             this.cmbTimeType.Items.AddRange(new object[] {
             this.comboItem1,
             this.comboItem2});
-            this.cmbTimeType.Location = new System.Drawing.Point(393, 7);
+            this.cmbTimeType.Location = new System.Drawing.Point(392, 7);
             this.cmbTimeType.Name = "cmbTimeType";
             this.cmbTimeType.Size = new System.Drawing.Size(93, 27);
             this.cmbTimeType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -500,7 +500,7 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
             this.cmbStepName.ForeColor = System.Drawing.Color.White;
             this.cmbStepName.FormattingEnabled = true;
             this.cmbStepName.ItemHeight = 21;
-            this.cmbStepName.Location = new System.Drawing.Point(292, 7);
+            this.cmbStepName.Location = new System.Drawing.Point(291, 7);
             this.cmbStepName.Name = "cmbStepName";
             this.cmbStepName.Size = new System.Drawing.Size(92, 27);
             this.cmbStepName.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -512,7 +512,7 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
             this.btnDelSupplier_BuyFuel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnDelSupplier_BuyFuel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDelSupplier_BuyFuel.Font = new System.Drawing.Font("Segoe UI", 11.25F);
-            this.btnDelSupplier_BuyFuel.Location = new System.Drawing.Point(1114, 8);
+            this.btnDelSupplier_BuyFuel.Location = new System.Drawing.Point(1113, 8);
             this.btnDelSupplier_BuyFuel.Name = "btnDelSupplier_BuyFuel";
             this.btnDelSupplier_BuyFuel.Size = new System.Drawing.Size(25, 25);
             this.btnDelSupplier_BuyFuel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -525,7 +525,7 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
             this.btnSelectSupplier_BuyFuel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnSelectSupplier_BuyFuel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSelectSupplier_BuyFuel.Font = new System.Drawing.Font("Segoe UI", 11.25F);
-            this.btnSelectSupplier_BuyFuel.Location = new System.Drawing.Point(1143, 8);
+            this.btnSelectSupplier_BuyFuel.Location = new System.Drawing.Point(1142, 8);
             this.btnSelectSupplier_BuyFuel.Name = "btnSelectSupplier_BuyFuel";
             this.btnSelectSupplier_BuyFuel.Size = new System.Drawing.Size(25, 25);
             this.btnSelectSupplier_BuyFuel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -544,7 +544,7 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
             this.txtSupplierName_BuyFuel.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtSupplierName_BuyFuel.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.txtSupplierName_BuyFuel.ForeColor = System.Drawing.Color.White;
-            this.txtSupplierName_BuyFuel.Location = new System.Drawing.Point(930, 6);
+            this.txtSupplierName_BuyFuel.Location = new System.Drawing.Point(929, 6);
             this.txtSupplierName_BuyFuel.Name = "txtSupplierName_BuyFuel";
             this.txtSupplierName_BuyFuel.ReadOnly = true;
             this.txtSupplierName_BuyFuel.Size = new System.Drawing.Size(240, 29);
@@ -568,7 +568,7 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
             this.dtInputEnd.ForeColor = System.Drawing.Color.White;
             this.dtInputEnd.Format = DevComponents.Editors.eDateTimePickerFormat.Custom;
             this.dtInputEnd.IsPopupCalendarOpen = false;
-            this.dtInputEnd.Location = new System.Drawing.Point(718, 7);
+            this.dtInputEnd.Location = new System.Drawing.Point(717, 7);
             // 
             // 
             // 
@@ -617,7 +617,7 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
             this.lblto.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblto.Font = new System.Drawing.Font("Segoe UI", 11.25F);
             this.lblto.ForeColor = System.Drawing.Color.White;
-            this.lblto.Location = new System.Drawing.Point(692, 9);
+            this.lblto.Location = new System.Drawing.Point(691, 9);
             this.lblto.Name = "lblto";
             this.lblto.Size = new System.Drawing.Size(21, 23);
             this.lblto.TabIndex = 263;
@@ -639,7 +639,7 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
             this.dtInputStart.ForeColor = System.Drawing.Color.White;
             this.dtInputStart.Format = DevComponents.Editors.eDateTimePickerFormat.Custom;
             this.dtInputStart.IsPopupCalendarOpen = false;
-            this.dtInputStart.Location = new System.Drawing.Point(492, 7);
+            this.dtInputStart.Location = new System.Drawing.Point(491, 7);
             // 
             // 
             // 
@@ -689,7 +689,7 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
             this.txtCarNumber_Ser.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtCarNumber_Ser.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCarNumber_Ser.ForeColor = System.Drawing.Color.White;
-            this.txtCarNumber_Ser.Location = new System.Drawing.Point(1187, 7);
+            this.txtCarNumber_Ser.Location = new System.Drawing.Point(1186, 7);
             this.txtCarNumber_Ser.Name = "txtCarNumber_Ser";
             this.txtCarNumber_Ser.Size = new System.Drawing.Size(150, 27);
             this.txtCarNumber_Ser.TabIndex = 14;

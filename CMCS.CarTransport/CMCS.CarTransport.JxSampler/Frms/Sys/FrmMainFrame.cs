@@ -44,7 +44,7 @@ namespace CMCS.CarTransport.JxSampler.Frms.Sys
             if (e.CloseReason == CloseReason.UserClosing)
             {
                 if (MessageBoxEx.Show("确认退出系统？", "操作提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                { 
+                {
                     commonDAO.SetSignalDataValue(CommonAppConfig.GetInstance().AppIdentifier, eSignalDataName.系统.ToString(), "0");
 
                     Application.Exit();
@@ -85,7 +85,7 @@ namespace CMCS.CarTransport.JxSampler.Frms.Sys
             if (FrmMainFrame.superTabControlManager.GetTab(uniqueKey) == null)
             {
                 FrmJxSampler frm = new FrmJxSampler();
-                FrmMainFrame.superTabControlManager.CreateTab(frm.Text, uniqueKey, frm, false, false);
+                FrmMainFrame.superTabControlManager.CreateTab(frm.Text, uniqueKey, frm, true, false);
             }
             else
                 FrmMainFrame.superTabControlManager.ChangeToTab(uniqueKey);

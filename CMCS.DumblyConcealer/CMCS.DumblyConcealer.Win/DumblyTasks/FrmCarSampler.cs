@@ -44,26 +44,47 @@ namespace CMCS.DumblyConcealer.Win.DumblyTasks
         {
             #region #1汽车机械采样机
 
-            EquCarJXSamplerDAO carJXSamplerDAO1 = new EquCarJXSamplerDAO(GlobalVars.MachineCode_QCJXCYJ_1, new DapperDber.Dbs.SqlServerDb.SqlServerDapperDber(CommonDAO.GetInstance().GetCommonAppletConfigString("#1汽车机械采样机接口连接字符串")));
+            //EquCarJXSamplerDAO carJXSamplerDAO1 = new EquCarJXSamplerDAO(GlobalVars.MachineCode_QCJXCYJ_1, new DapperDber.Dbs.SqlServerDb.SqlServerDapperDber(CommonDAO.GetInstance().GetCommonAppletConfigString("#1汽车机械采样机接口连接字符串")));
 
-            taskSimpleScheduler.StartNewTask("#1汽车机械采样机-快速同步", () =>
-            {
-                carJXSamplerDAO1.SyncBarrel(this.rTxtOutputer.Output);
-                carJXSamplerDAO1.SyncSampleCmd(this.rTxtOutputer.Output);
-                carJXSamplerDAO1.SyncJXCYControlUnloadCMD(this.rTxtOutputer.Output);
-                carJXSamplerDAO1.SyncUnloadResult(this.rTxtOutputer.Output);
-                carJXSamplerDAO1.SyncQCJXCYJError(this.rTxtOutputer.Output);
-                carJXSamplerDAO1.SyncSignal(this.rTxtOutputer.Output);
+            //taskSimpleScheduler.StartNewTask("#1汽车机械采样机-快速同步", () =>
+            //{
+            //    carJXSamplerDAO1.SyncBarrel(this.rTxtOutputer.Output);
+            //    carJXSamplerDAO1.SyncSampleCmd(this.rTxtOutputer.Output);
+            //    carJXSamplerDAO1.SyncJXCYControlUnloadCMD(this.rTxtOutputer.Output);
+            //    carJXSamplerDAO1.SyncUnloadResult(this.rTxtOutputer.Output);
+            //    carJXSamplerDAO1.SyncQCJXCYJError(this.rTxtOutputer.Output);
+            //    carJXSamplerDAO1.SyncSignal(this.rTxtOutputer.Output);
 
-            }, 2000, OutputError);
+            //}, 2000, OutputError);
 
-            this.taskSimpleScheduler.StartNewTask("#1汽车机械采样机-上位机心跳", () =>
-            {
-                carJXSamplerDAO1.SyncHeartbeatSignal();
-            }, 30000, OutputError);
+            //this.taskSimpleScheduler.StartNewTask("#1汽车机械采样机-上位机心跳", () =>
+            //{
+            //    carJXSamplerDAO1.SyncHeartbeatSignal();
+            //}, 30000, OutputError);
 
             #endregion
 
+            #region #3汽车机械采样机
+
+            EquCarJXSamplerDAO carJXSamplerDAO3 = new EquCarJXSamplerDAO(GlobalVars.MachineCode_QCJXCYJ_3, new DapperDber.Dbs.SqlServerDb.SqlServerDapperDber(CommonDAO.GetInstance().GetCommonAppletConfigString("#3汽车机械采样机接口连接字符串")));
+
+            taskSimpleScheduler.StartNewTask("#3汽车机械采样机-快速同步", () =>
+            {
+                carJXSamplerDAO3.SyncBarrel(this.rTxtOutputer.Output);
+                carJXSamplerDAO3.SyncSampleCmd(this.rTxtOutputer.Output);
+                //carJXSamplerDAO3.SyncJXCYControlUnloadCMD(this.rTxtOutputer.Output);
+                carJXSamplerDAO3.SyncUnloadResult(this.rTxtOutputer.Output);
+                carJXSamplerDAO3.SyncQCJXCYJError(this.rTxtOutputer.Output);
+                carJXSamplerDAO3.SyncSignal(this.rTxtOutputer.Output);
+
+            }, 2000, OutputError);
+
+            this.taskSimpleScheduler.StartNewTask("#3汽车机械采样机-上位机心跳", () =>
+            {
+                carJXSamplerDAO3.SyncHeartbeatSignal();
+            }, 30000, OutputError);
+
+            #endregion
         }
 
         /// <summary>

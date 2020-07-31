@@ -15,7 +15,7 @@ namespace CMCS.DumblyConcealer.Tasks.CarJXSampler.Entities
     {
         private string _TagName;
         private string _TagValue;
-        private DateTime _UpdateTime;
+        private string _UpdateTime;
         private int _DataFlag;
 
         /// <summary>
@@ -37,9 +37,14 @@ namespace CMCS.DumblyConcealer.Tasks.CarJXSampler.Entities
         }
 
         /// <summary>
+        /// 更新日期
+        /// </summary>
+        public string UpdateDate { get; set; }
+
+        /// <summary>
         /// 更新时间
         /// </summary>
-        public DateTime UpdateTime
+        public string UpdateTime
         {
             get { return _UpdateTime; }
             set { _UpdateTime = value; }

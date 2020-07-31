@@ -29,6 +29,7 @@ using HikVisionSDK.Core;
 using System.Threading.Tasks;
 using System.Drawing.Printing;
 using LED.YB_Bx5K1;
+using CMCS.CarTransport.Weight.Frms.Transport.Print;
 
 namespace CMCS.CarTransport.Weighter.Frms
 {
@@ -73,11 +74,6 @@ namespace CMCS.CarTransport.Weighter.Frms
 			}
 			set
 			{
-				if (value && this.CurrentFlowFlag == eFlowFlag.等待车辆)
-				{
-					this.CurrentDirection = eDirection.Way1;
-					this.CurrentFlowFlag = eFlowFlag.开始读卡;
-				}
 				inductorCoil1 = value;
 
 				panCurrentWeight.Refresh();
@@ -270,10 +266,15 @@ namespace CMCS.CarTransport.Weighter.Frms
 			}
 		}
 
+		string cameraCarNumber = string.Empty;
 		/// <summary>
 		/// 当前相机识别的车牌号
 		/// </summary>
-		string CameraCarNumber = string.Empty;
+		public string CameraCarNumber
+		{
+			get { return cameraCarNumber; }
+			set { cameraCarNumber = value; }
+		}
 
 		public static PassCarQueuer passCarQueuer = new PassCarQueuer();
 
@@ -287,11 +288,13 @@ namespace CMCS.CarTransport.Weighter.Frms
 			set
 			{
 				currentImperfectCar = value;
-
-				if (value != null)
-					panCurrentCarNumber.Text = value.Voucher;
-				else
-					panCurrentCarNumber.Text = "等待车辆";
+				InvokeEx(() =>
+				{
+					if (value != null)
+						panCurrentCarNumber.Text = value.Voucher;
+					else
+						panCurrentCarNumber.Text = "等待车辆";
+				});
 			}
 		}
 
@@ -306,7 +309,7 @@ namespace CMCS.CarTransport.Weighter.Frms
 			set
 			{
 				direction = value;
-				if (value == "左上磅")
+				if (value == "重车磅")
 				{
 					slightLED2.Visible = false;
 					lab_slightLED2.Visible = false;
@@ -320,7 +323,7 @@ namespace CMCS.CarTransport.Weighter.Frms
 
 					this.CurrentDirection = eDirection.Way1;
 				}
-				else if (value == "右上磅")
+				else if (value == "轻车磅")
 				{
 					slightLED1.Visible = false;
 					lab_slightLED1.Visible = false;
@@ -437,6 +440,15 @@ namespace CMCS.CarTransport.Weighter.Frms
 		/// </summary>
 		decimal TicketDiff = 0;
 
+		/// <summary>
+		/// 启用读卡器
+		/// </summary>
+		public bool UseRwer = true;
+
+		/// <summary>
+		/// 启用识别相机
+		/// </summary>
+		public bool UseCamera = true;
 		#endregion
 
 		/// <summary>
@@ -448,7 +460,7 @@ namespace CMCS.CarTransport.Weighter.Frms
 
 			// 默认自动
 			sbtnChangeAutoHandMode.Value = true;
-			Direction = commonDAO.GetAppletConfigString("上磅方向");
+
 			// 重置程序远程控制命令
 			commonDAO.ResetAppRemoteControlCmd(CommonAppConfig.GetInstance().AppIdentifier);
 
@@ -461,6 +473,10 @@ namespace CMCS.CarTransport.Weighter.Frms
 
 		private void FrmWeighter_Shown(object sender, EventArgs e)
 		{
+			Direction = commonDAO.GetAppletConfigString("上磅方向");
+			this.UseRwer = commonDAO.GetAppletConfigInt32("启用读卡器") == 1;
+			this.UseCamera = commonDAO.GetAppletConfigInt32("启用识别相机") == 1;
+
 			InitHardware();
 
 			InitForm();
@@ -533,12 +549,14 @@ namespace CMCS.CarTransport.Weighter.Frms
 
 			if (this.CurrentImperfectCar.PassWay == eDirection.Way1)
 			{
-				this.iocControler.Gate2Down();
+				if (!this.InductorCoil2)
+					this.iocControler.Gate2Down();
 				this.iocControler.RedLight2();
 			}
 			else if (this.CurrentImperfectCar.PassWay == eDirection.Way2)
 			{
-				this.iocControler.Gate1Down();
+				if (!this.InductorCoil1)
+					this.iocControler.Gate1Down();
 				this.iocControler.RedLight1();
 			}
 		}
@@ -571,12 +589,14 @@ namespace CMCS.CarTransport.Weighter.Frms
 
 			if (this.CurrentImperfectCar.PassWay == eDirection.Way1)
 			{
-				this.iocControler.Gate1Down();
+				if (!this.InductorCoil1)
+					this.iocControler.Gate1Down();
 				this.iocControler.RedLight1();
 			}
 			else if (this.CurrentImperfectCar.PassWay == eDirection.Way2)
 			{
-				this.iocControler.Gate2Down();
+				if (!this.InductorCoil2)
+					this.iocControler.Gate2Down();
 				this.iocControler.RedLight2();
 			}
 		}
@@ -891,36 +911,30 @@ namespace CMCS.CarTransport.Weighter.Frms
 
 		#region 海康网络抓拍相机
 
-		/// <summary>
-		/// 海康网络摄像机
-		/// </summary>
-		IPCer iPCer_Identify1 = new IPCer();
-		IPCer iPCer_Identify2 = new IPCer();
+		void ReceiveCarNumberData(string carNumber, string ip)
+		{
+			InvokeEx(() =>
+			{
+				UpdateLed1Show("识别到车号:" + carNumber);
+				if (this.UseCamera && this.CurrentFlowFlag == eFlowFlag.等待车辆)
+				{
+					CameraCarNumber = carNumber.Replace("无车牌", "");
+					if (ip == Hardwarer.IPCer_Identify1.IP)
+					{
+						this.CurrentDirection = eDirection.Way1;
+						passCarQueuer.Enqueue(eDirection.Way1, CameraCarNumber);
+					}
+					else if (ip == Hardwarer.IPCer_Identify2.IP)
+					{
+						this.CurrentDirection = eDirection.Way2;
+						passCarQueuer.Enqueue(eDirection.Way2, CameraCarNumber);
+					}
+					this.CurrentFlowFlag = eFlowFlag.识别车辆;
+					timer1_Tick(null, null);
+				}
+			});
+		}
 
-		void ReceiveData1(string carNumber)
-		{
-			UpdateLed1Show("识别到车号:" + carNumber);
-			if (this.CurrentFlowFlag == eFlowFlag.等待车辆)
-			{
-				CameraCarNumber = carNumber.Replace("无车牌", "");
-				this.CurrentDirection = eDirection.Way1;
-				passCarQueuer.Enqueue(eDirection.Way1, CameraCarNumber);
-				this.CurrentFlowFlag = eFlowFlag.验证信息;
-				timer1_Tick(null, null);
-			}
-		}
-		void ReceiveData2(string carNumber)
-		{
-			UpdateLed2Show("识别到车号:" + carNumber);
-			if (this.CurrentFlowFlag == eFlowFlag.等待车辆)
-			{
-				CameraCarNumber = carNumber.Replace("无车牌", "");
-				this.CurrentDirection = eDirection.Way2;
-				passCarQueuer.Enqueue(eDirection.Way2, CameraCarNumber);
-				this.CurrentFlowFlag = eFlowFlag.验证信息;
-				timer1_Tick(null, null);
-			}
-		}
 		#endregion
 
 		#region 设备初始化与卸载
@@ -960,10 +974,10 @@ namespace CMCS.CarTransport.Weighter.Frms
 				Hardwarer.Wber.OnSteadyChange += new WB.JinZhong.JinZhongWber.SteadyChangeEventHandler(Wber_OnSteadyChange);
 				Hardwarer.Wber.OnWeightChange += new WB.JinZhong.JinZhongWber.WeightChangeEventHandler(Wber_OnWeightChange);
 				success = Hardwarer.Wber.OpenCom(commonDAO.GetAppletConfigInt32("地磅仪表_串口"), commonDAO.GetAppletConfigInt32("地磅仪表_波特率"), commonDAO.GetAppletConfigInt32("地磅仪表_数据位"), commonDAO.GetAppletConfigInt32("地磅仪表_停止位"), commonDAO.GetAppletConfigInt32("地磅仪表_校验位"));
-
+				this.iocControler.GreenLight1();
 				IPCer.InitSDK();
 
-				if (this.Direction == "左上磅" || this.Direction == "双向磅")
+				if (this.Direction == "重车磅" || this.Direction == "双向磅")
 				{
 					// 读卡器1
 					Hardwarer.Rwer1.StartWith = commonDAO.GetAppletConfigString("读卡器_标签过滤");
@@ -1007,17 +1021,17 @@ namespace CMCS.CarTransport.Weighter.Frms
 					{
 						if (CommonUtil.PingReplyTest(video_Identify1.Ip))
 						{
-							if (iPCer_Identify1.Login(video_Identify1.Ip, video_Identify1.Port, video_Identify1.UserName, video_Identify1.Password))
+							if (Hardwarer.IPCer_Identify1.Login(video_Identify1.Ip, video_Identify1.Port, video_Identify1.UserName, video_Identify1.Password))
 							{
-								iPCer_Identify1.StartPreview(panVideo1.Handle, video_Identify1.Channel);
-								iPCer_Identify1.OnReceived = ReceiveData1;
-								iPCer_Identify1.SetDVRCallBack();
-								iPCer_Identify1.SetupAlarm();
+								Hardwarer.IPCer_Identify1.StartPreview(panVideo1.Handle, video_Identify1.Channel);
+								Hardwarer.IPCer_Identify1.OnReceived += new IPCer.ReceivedEventHandler(ReceiveCarNumberData);
+								Hardwarer.IPCer_Identify1.SetDVRCallBack();
+								Hardwarer.IPCer_Identify1.SetupAlarm();
 							}
 						}
 					}
 				}
-				if (this.Direction == "右上磅" || this.Direction == "双向磅")
+				if (this.Direction == "轻车磅" || this.Direction == "双向磅")
 				{
 					// 读卡器2
 					Hardwarer.Rwer2.StartWith = commonDAO.GetAppletConfigString("读卡器_标签过滤");
@@ -1062,12 +1076,12 @@ namespace CMCS.CarTransport.Weighter.Frms
 					{
 						if (CommonUtil.PingReplyTest(video_Identify2.Ip))
 						{
-							if (iPCer_Identify2.Login(video_Identify2.Ip, video_Identify2.Port, video_Identify2.UserName, video_Identify2.Password))
+							if (Hardwarer.IPCer_Identify2.Login(video_Identify2.Ip, video_Identify2.Port, video_Identify2.UserName, video_Identify2.Password))
 							{
-								iPCer_Identify2.StartPreview(panVideo2.Handle, video_Identify2.Channel);
-								iPCer_Identify2.OnReceived = ReceiveData2;
-								iPCer_Identify2.SetDVRCallBack();
-								iPCer_Identify2.SetupAlarm();
+								Hardwarer.IPCer_Identify2.StartPreview(panVideo2.Handle, video_Identify2.Channel);
+								Hardwarer.IPCer_Identify2.OnReceived += new IPCer.ReceivedEventHandler(ReceiveCarNumberData);
+								Hardwarer.IPCer_Identify2.SetDVRCallBack();
+								Hardwarer.IPCer_Identify2.SetupAlarm();
 							}
 						}
 					}
@@ -1126,6 +1140,7 @@ namespace CMCS.CarTransport.Weighter.Frms
 			catch { }
 			try
 			{
+				this.iocControler.RedLight1();
 				Hardwarer.Iocer.OnReceived -= new IOC.JMDM20DIOV2.JMDM20DIOV2Iocer.ReceivedEventHandler(Iocer_Received);
 				Hardwarer.Iocer.OnStatusChange -= new IOC.JMDM20DIOV2.JMDM20DIOV2Iocer.StatusChangeHandler(Iocer_StatusChange);
 
@@ -1146,6 +1161,7 @@ namespace CMCS.CarTransport.Weighter.Frms
 			{
 				if (this.LED1ConnectStatus)
 				{
+					UpdateLed1Show("  停止过磅");
 					LED1.CloseListent();
 				}
 			}
@@ -1154,19 +1170,20 @@ namespace CMCS.CarTransport.Weighter.Frms
 			{
 				if (this.LED2ConnectStatus)
 				{
+					UpdateLed2Show("  停止过磅");
 					LED2.CloseListent();
 				}
 			}
 			catch { }
 			try
 			{
-				iPCer_Identify1.OnReceived = null;
-				iPCer_Identify1.CloseAlarm();
-				iPCer_Identify1.LoginOut();
+				Hardwarer.IPCer_Identify1.OnReceived -= new IPCer.ReceivedEventHandler(ReceiveCarNumberData);
+				Hardwarer.IPCer_Identify1.CloseAlarm();
+				Hardwarer.IPCer_Identify1.LoginOut();
 
-				iPCer_Identify2.OnReceived = null;
-				iPCer_Identify2.CloseAlarm();
-				iPCer_Identify2.LoginOut();
+				Hardwarer.IPCer_Identify2.OnReceived -= new IPCer.ReceivedEventHandler(ReceiveCarNumberData);
+				Hardwarer.IPCer_Identify2.CloseAlarm();
+				Hardwarer.IPCer_Identify2.LoginOut();
 
 				IPCer.CleanupSDK();
 			}
@@ -1231,7 +1248,7 @@ namespace CMCS.CarTransport.Weighter.Frms
 		private void timer1_Tick(object sender, EventArgs e)
 		{
 			timer1.Stop();
-			timer1.Interval = 2000;
+			timer1.Interval = 500;
 
 			try
 			{
@@ -1242,29 +1259,34 @@ namespace CMCS.CarTransport.Weighter.Frms
 				{
 					case eFlowFlag.等待车辆:
 						#region
-
-						// Direction.Way1
-						if ((this.InductorCoil1 || this.InfraredSensor1))
+						if (this.UseRwer)
 						{
-							// 当读卡区域地感有信号，触发读卡或者车号识别
-							this.CurrentDirection = eDirection.Way1;
-
-							this.CurrentFlowFlag = eFlowFlag.开始读卡;
+							List<string> tags = new List<string>();
+							if (this.Direction != "轻车磅")
+							{
+								tags = Hardwarer.Rwer1.ScanTags();
+								if (tags.Count > 0)
+								{
+									this.CurrentDirection = eDirection.Way1;
+									passCarQueuer.Enqueue(eDirection.Way1, tags[0]);
+									FrmDebugConsole.GetInstance().Output("读卡器1识别到卡号:" + tags[0]);
+									commonDAO.SetSignalDataValue(CommonAppConfig.GetInstance().AppIdentifier, eSignalDataName.上磅方向.ToString(), "0");
+								}
+							}
+							if (this.Direction != "重车磅")
+							{
+								tags = Hardwarer.Rwer2.ScanTags();
+								if (tags.Count > 0)
+								{
+									this.CurrentDirection = eDirection.Way2;
+									passCarQueuer.Enqueue(eDirection.Way2, tags[0]);
+									FrmDebugConsole.GetInstance().Output("读卡器2识别到卡号:" + tags[0]);
+									commonDAO.SetSignalDataValue(CommonAppConfig.GetInstance().AppIdentifier, eSignalDataName.上磅方向.ToString(), "1");
+								}
+							}
 						}
-						// Direction.Way2
-						else if (this.InductorCoil2 || this.InfraredSensor3)
-						{
-							// 当读卡区域地感有信号，触发读卡或者车号识别
-							this.CurrentDirection = eDirection.Way2;
+						if (passCarQueuer.Count > 0) this.CurrentFlowFlag = eFlowFlag.识别车辆;
 
-							this.CurrentFlowFlag = eFlowFlag.开始读卡;
-						}
-
-						if (passCarQueuer.Count > 0)
-						{
-							this.CurrentFlowFlag = eFlowFlag.开始读卡;
-							this.CurrentDirection = passCarQueuer.Dequeue().PassWay;
-						}
 						#endregion
 						break;
 
@@ -1272,28 +1294,28 @@ namespace CMCS.CarTransport.Weighter.Frms
 						#region
 
 						//提高读卡灵敏度
-						timer1.Interval = 500;
+						//timer1.Interval = 500;
 
-						if (this.CurrentDirection == eDirection.Way1)
-						{
-							List<string> tags = Hardwarer.Rwer1.ScanTags();
-							if (tags.Count > 0) passCarQueuer.Enqueue(eDirection.Way1, tags[0]);
+						//if (this.CurrentDirection == eDirection.Way1)
+						//{
+						//    List<string> tags = Hardwarer.Rwer1.ScanTags();
+						//    if (tags.Count > 0) passCarQueuer.Enqueue(eDirection.Way1, tags[0]);
 
-							commonDAO.SetSignalDataValue(CommonAppConfig.GetInstance().AppIdentifier, eSignalDataName.上磅方向.ToString(), "0");
+						//    commonDAO.SetSignalDataValue(CommonAppConfig.GetInstance().AppIdentifier, eSignalDataName.上磅方向.ToString(), "0");
 
-						}
-						else if (this.CurrentDirection == eDirection.Way2)
-						{
-							List<string> tags = Hardwarer.Rwer2.ScanTags();
-							if (tags.Count > 0) passCarQueuer.Enqueue(eDirection.Way2, tags[0]);
+						//}
+						//else if (this.CurrentDirection == eDirection.Way2)
+						//{
+						//    List<string> tags = Hardwarer.Rwer2.ScanTags();
+						//    if (tags.Count > 0) passCarQueuer.Enqueue(eDirection.Way2, tags[0]);
 
-							commonDAO.SetSignalDataValue(CommonAppConfig.GetInstance().AppIdentifier, eSignalDataName.上磅方向.ToString(), "1");
-						}
+						//    commonDAO.SetSignalDataValue(CommonAppConfig.GetInstance().AppIdentifier, eSignalDataName.上磅方向.ToString(), "1");
+						//}
 
-						if (passCarQueuer.Count > 0) this.CurrentFlowFlag = eFlowFlag.识别车辆;
+						//if (passCarQueuer.Count > 0) this.CurrentFlowFlag = eFlowFlag.识别车辆;
 
 
-						UpdateLedShow("  正在读卡");
+						//UpdateLedShow("  正在读卡");
 
 						#endregion
 						break;
@@ -1332,30 +1354,32 @@ namespace CMCS.CarTransport.Weighter.Frms
 								{
 									this.timer_BuyFuel_Cancel = false;
 									this.CurrentFlowFlag = eFlowFlag.验证信息;
+									timer_BuyFuel_Tick(null, null);
 								}
 								else if (this.CurrentAutotruck.CarType == eCarType.其他物资.ToString())
 								{
 									this.timer_Goods_Cancel = false;
 									this.CurrentFlowFlag = eFlowFlag.验证信息;
+									timer_Goods_Tick(null, null);
 								}
 							}
 							else
 							{
 								UpdateLedShow(this.CurrentAutotruck.CarNumber, "已停用");
 								this.voiceSpeaker.Speak("车牌号 " + this.CurrentAutotruck.CarNumber + " 已停用，禁止通过", 1, false);
-
+								this.CurrentImperfectCar = null;
 								timer1.Interval = 20000;
 							}
 						}
 						else
 						{
-							UpdateLedShow(this.CurrentImperfectCar.Voucher, "未登记");
+							UpdateLedShow("未登记", "禁止通过");
 
 							//方式一：车号识别
-							this.voiceSpeaker.Speak("车牌号 " + this.CurrentImperfectCar.Voucher + " 未登记，禁止通过", 1, false);
+							this.voiceSpeaker.Speak(" 未登记 禁止通过", 1, false);
 							//// 方式二：刷卡方式
 							//this.voiceSpeaker.Speak("卡号未登记，禁止通过", 2, false);
-
+							this.CurrentImperfectCar = null;
 							timer1.Interval = 20000;
 						}
 
@@ -1364,7 +1388,7 @@ namespace CMCS.CarTransport.Weighter.Frms
 				}
 
 				// 当前地磅重量小于最小称重且所有地感、对射无信号时重置
-				if (Hardwarer.Wber.Weight < this.WbMinWeight && !HasCarOnEnterWay() && !HasCarOnLeaveWay() && this.CurrentFlowFlag != eFlowFlag.等待车辆 && this.CurrentImperfectCar != null && string.IsNullOrEmpty(this.CameraCarNumber))
+				if (Hardwarer.Wber.Weight < this.WbMinWeight && !HasCarOnEnterWay() && !HasCarOnLeaveWay() && this.CurrentFlowFlag != eFlowFlag.等待车辆 && passCarQueuer.Count == 0 && this.CurrentImperfectCar == null)
 				{
 					ResetBuyFuel();
 					ResetGoods();
@@ -1594,7 +1618,7 @@ namespace CMCS.CarTransport.Weighter.Frms
 				decimal diffValue = 0;
 
 				decimal Weight = (decimal)Hardwarer.Wber.Weight;
-
+				if (Weight < (decimal)this.WbMinWeight) return false;
 				if (this.CurrentBuyFuelTransport.StepName == eTruckInFactoryStep.重车.ToString())
 				{
 					//启用净重超差
@@ -1620,10 +1644,16 @@ namespace CMCS.CarTransport.Weighter.Frms
 
 					btnSaveTransport_BuyFuel.Enabled = false;
 					this.CurrentFlowFlag = eFlowFlag.等待离开;
-
-					UpdateLedShow("称重完毕", "请下磅");
-					this.voiceSpeaker.Speak("称重完毕请下磅", 1, false);
-
+					if (this.CurrentBuyFuelTransport.SuttleWeight == 0)
+					{
+						UpdateLedShow("称重成功", "请下磅");
+						this.voiceSpeaker.Speak("称重成功 请下磅", 1, false);
+					}
+					else if (this.CurrentBuyFuelTransport.SuttleWeight > 0)
+					{
+						UpdateLedShow("回皮成功", "请下磅");
+						this.voiceSpeaker.Speak("回皮成功 请下磅", 1, false);
+					}
 					LoadTodayUnFinishBuyFuelTransport();
 					LoadTodayFinishBuyFuelTransport();
 
@@ -1729,7 +1759,7 @@ namespace CMCS.CarTransport.Weighter.Frms
 									{
 										UpdateLedShow(this.CurrentAutotruck.CarNumber, "已称重");
 										this.voiceSpeaker.Speak("车牌号 " + this.CurrentAutotruck.CarNumber + " 已称重", 1, false);
-
+										this.CurrentFlowFlag = eFlowFlag.等待离开;
 										timer_BuyFuel.Interval = 20000;
 									}
 								}
@@ -1737,7 +1767,7 @@ namespace CMCS.CarTransport.Weighter.Frms
 								{
 									UpdateLedShow("路线错误", "禁止通过");
 									this.voiceSpeaker.Speak("路线错误 禁止通过 " + (!string.IsNullOrEmpty(nextPlace) ? "请前往" + nextPlace : ""), 1, false);
-
+									this.CurrentFlowFlag = eFlowFlag.等待离开;
 									timer_BuyFuel.Interval = 20000;
 								}
 							}
@@ -1750,7 +1780,7 @@ namespace CMCS.CarTransport.Weighter.Frms
 						{
 							UpdateLedShow(this.CurrentAutotruck.CarNumber, "未排队");
 							this.voiceSpeaker.Speak("车牌号 " + this.CurrentAutotruck.CarNumber + " 未找到排队记录", 1, false);
-
+							this.CurrentFlowFlag = eFlowFlag.等待离开;
 							timer_BuyFuel.Interval = 20000;
 						}
 
@@ -1761,7 +1791,7 @@ namespace CMCS.CarTransport.Weighter.Frms
 						#region
 
 						// 当地磅仪表重量大于最小称重且来车方向的地感与对射均无信号，则判定车已经完全上磅
-						if (Hardwarer.Wber.Weight >= this.WbMinWeight && !HasCarOnEnterWay())
+						if (Hardwarer.Wber.Weight >= this.WbMinWeight && !HasCarOnEnterWay() && this.InfraredSensor2)
 						{
 							BackGateDown();
 
@@ -1782,7 +1812,7 @@ namespace CMCS.CarTransport.Weighter.Frms
 
 						btnSaveTransport_BuyFuel.Enabled = this.WbSteady;
 
-						UpdateLedShow(this.CurrentAutotruck.CarNumber, Hardwarer.Wber.Weight.ToString("#0.######"));
+						UpdateLedShow(this.CurrentAutotruck.CarNumber, "    " + Hardwarer.Wber.Weight.ToString("#0.######") + "吨");
 
 						if (this.WbSteady)
 						{
@@ -1811,7 +1841,7 @@ namespace CMCS.CarTransport.Weighter.Frms
 						#region
 
 						// 当前地磅重量小于最小称重且所有地感、对射无信号时重置
-						if (Hardwarer.Wber.Weight < this.WbMinWeight && !HasCarOnLeaveWay()) ResetBuyFuel();
+						if (Hardwarer.Wber.Weight < this.WbMinWeight && !HasCarOnLeaveWay() && !HasCarOnEnterWay()) ResetBuyFuel();
 
 						// 降低灵敏度
 						timer_BuyFuel.Interval = 4000;
@@ -1822,7 +1852,7 @@ namespace CMCS.CarTransport.Weighter.Frms
 
 				// 当前地磅重量小于最小称重且所有地感、对射无信号时重置
 				if (Hardwarer.Wber.Weight < this.WbMinWeight && !HasCarOnEnterWay() && !HasCarOnLeaveWay() && this.CurrentFlowFlag != eFlowFlag.等待车辆
-					&& this.CurrentImperfectCar != null) ResetBuyFuel();
+					&& this.CurrentImperfectCar == null) ResetBuyFuel();
 			}
 			catch (Exception ex)
 			{
@@ -2060,7 +2090,7 @@ namespace CMCS.CarTransport.Weighter.Frms
 								{
 									UpdateLedShow("路线错误", "禁止通过");
 									this.voiceSpeaker.Speak("路线错误 禁止通过 " + (!string.IsNullOrEmpty(nextPlace) ? "请前往" + nextPlace : ""), 1, false);
-
+									this.CurrentFlowFlag = eFlowFlag.等待离开;
 									timer_Goods.Interval = 20000;
 								}
 							}
@@ -2073,7 +2103,7 @@ namespace CMCS.CarTransport.Weighter.Frms
 						{
 							UpdateLedShow(this.CurrentAutotruck.CarNumber, "未排队");
 							this.voiceSpeaker.Speak("车牌号 " + this.CurrentAutotruck.CarNumber + " 未找到排队记录", 1, false);
-
+							this.CurrentFlowFlag = eFlowFlag.等待离开;
 							timer_Goods.Interval = 20000;
 						}
 
@@ -2131,7 +2161,7 @@ namespace CMCS.CarTransport.Weighter.Frms
 						#region
 
 						// 当前地磅重量小于最小称重且所有地感、对射无信号时重置
-						if (Hardwarer.Wber.Weight < this.WbMinWeight && !HasCarOnLeaveWay()) ResetGoods();
+						if (Hardwarer.Wber.Weight < this.WbMinWeight && !HasCarOnLeaveWay() && !HasCarOnEnterWay()) ResetGoods();
 
 						// 降低灵敏度
 						timer_Goods.Interval = 4000;
@@ -2142,7 +2172,7 @@ namespace CMCS.CarTransport.Weighter.Frms
 
 				// 当前地磅重量小于最小称重且所有地感、对射无信号时重置
 				if (Hardwarer.Wber.Weight < this.WbMinWeight && !HasCarOnEnterWay() && !HasCarOnLeaveWay() && this.CurrentFlowFlag != eFlowFlag.等待车辆
-					&& this.CurrentImperfectCar != null) ResetGoods();
+					&& this.CurrentImperfectCar != null && string.IsNullOrEmpty(this.CameraCarNumber)) ResetGoods();
 			}
 			catch (Exception ex)
 			{
@@ -2214,21 +2244,23 @@ namespace CMCS.CarTransport.Weighter.Frms
 				e.Graphics.DrawLine(this.InfraredSensor1 ? redPen1 : greenPen1, 35, 1, 35, height);
 				e.Graphics.DrawLine(this.InfraredSensor1 ? redPen1 : greenPen1, 35, panel.Height - height, 35, panel.Height - 1);
 
-				// 绘制对射2
-				e.Graphics.DrawLine(this.InfraredSensor2 ? redPen1 : greenPen1, panel.Width / 2, 1, panel.Width / 2, height);
-				e.Graphics.DrawLine(this.InfraredSensor2 ? redPen1 : greenPen1, panel.Width / 2, panel.Height - height, panel.Width / 2, panel.Height - 1);
-
+				if (this.Direction != "轻车磅")
+				{
+					// 绘制对射2
+					e.Graphics.DrawLine(this.InfraredSensor2 ? redPen1 : greenPen1, panel.Width / 2, 1, panel.Width / 2, height);
+					e.Graphics.DrawLine(this.InfraredSensor2 ? redPen1 : greenPen1, panel.Width / 2, panel.Height - height, panel.Width / 2, panel.Height - 1);
+				}
 				// 绘制对射3
 				e.Graphics.DrawLine(this.InfraredSensor3 ? redPen1 : greenPen1, panel.Width - 35, 1, panel.Width - 35, height);
 				e.Graphics.DrawLine(this.InfraredSensor3 ? redPen1 : greenPen1, panel.Width - 35, panel.Height - height, panel.Width - 35, panel.Height - 1);
 
 				// 上磅方向
 				eDirection direction = this.CurrentDirection;
-				if (this.Direction != "右上磅")
+				if (this.Direction != "轻车磅")
 				{
 					e.Graphics.DrawString("﹥>", directionFont, direction == eDirection.Way1 ? Brushes.Red : Brushes.Lime, 2, 17);
 				}
-				if (this.Direction != "左上磅")
+				if (this.Direction != "重车磅")
 				{
 					e.Graphics.DrawString("<﹤", directionFont, direction == eDirection.Way2 ? Brushes.Red : Brushes.Lime, panel.Width - 47, 17);
 				}
@@ -2267,6 +2299,20 @@ namespace CMCS.CarTransport.Weighter.Frms
 		}
 
 		#endregion
+
+		/// <summary>
+		/// 打印磅单
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void tmsiPrint_Click(object sender, EventArgs e)
+		{
+			GridRow grid = superGridControl2_BuyFuel.PrimaryGrid.ActiveRow as GridRow;
+			View_BuyFuelTransport entity = grid.DataItem as View_BuyFuelTransport;
+			CmcsBuyFuelTransport transport = commonDAO.SelfDber.Get<CmcsBuyFuelTransport>(entity.Id);
+			FrmPrintWeb frm = new FrmPrintWeb(transport);
+			frm.ShowDialog();
+		}
 
 	}
 }

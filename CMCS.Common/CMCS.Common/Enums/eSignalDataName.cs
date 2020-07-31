@@ -13,6 +13,7 @@ namespace CMCS.Common.Enums
         #region 综合
 
         系统,
+        设备状态,
         当前车号,
         当前车Id,
 

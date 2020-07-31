@@ -494,3 +494,4 @@ Logs/
 /CMCS.Test/CMCS.DataTester/bin/CMCS.DataTester.exe.config
 /CMCS.Test/CMCS.DataTester/bin/CMCS.DataTester.exe
 /CMCS.Test/CMCS.DataTester/bin/HikVisionSDK.Core.dll
+*.zip

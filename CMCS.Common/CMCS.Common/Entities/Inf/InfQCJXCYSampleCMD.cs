@@ -60,6 +60,11 @@ namespace CMCS.Common.Entities.Inf
         }
 
         /// <summary>
+        /// 标签卡
+        /// </summary>
+        public string RFID { get; set; }
+
+        /// <summary>
         /// 批次Id
         /// </summary>
         public string InFactoryBatchId
@@ -84,6 +89,16 @@ namespace CMCS.Common.Entities.Inf
         {
             get { return _Mt; }
             set { _Mt = value; }
+        }
+
+        private int _SuoFen = 30;
+        /// <summary>
+        /// 缩分
+        /// </summary>
+        public int SuoFen
+        {
+            get { return _SuoFen; }
+            set { _SuoFen = value; }
         }
 
         /// <summary>

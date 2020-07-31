@@ -61,15 +61,13 @@ namespace CMCS.CarTransport.DAO
         /// <param name="place">地点</param>
         /// <param name="samplingType">采样方式</param> 
         /// <returns></returns>
-        public bool JoinQueueBuyFuelTransport(CmcsAutotruck autotruck, CmcsSupplier supplier, CmcsMine mine, CmcsTransportCompany transportCompany, CmcsFuelKind fuelKind, CmcsInNetTransport inNetTransport, decimal ticketWeight, string samplerCode, string weighterCode, DateTime inFactoryTime, string remark, string place)
+        public bool JoinQueueBuyFuelTransport(CmcsAutotruck autotruck, CmcsMine mine, CmcsTransportCompany transportCompany, CmcsFuelKind fuelKind, CmcsInNetTransport inNetTransport, decimal ticketWeight, string samplerCode, string weighterCode, DateTime inFactoryTime, string remark, string place, CmcsSupplier supplier = null)
         {
             CmcsBuyFuelTransport transport = new CmcsBuyFuelTransport
             {
                 SerialNumber = carTransportDAO.CreateNewTransportSerialNumber(eCarType.入厂煤, inFactoryTime),
                 AutotruckId = autotruck.Id,
                 CarNumber = autotruck.CarNumber,
-                SupplierId = supplier.Id,
-                SupplierName = supplier.Name,
                 MineId = mine.Id,
                 MineName = mine.Name,
                 TransportCompanyId = transportCompany.Id,
@@ -86,7 +84,11 @@ namespace CMCS.CarTransport.DAO
                 GrossPlace = weighterCode,
                 Remark = remark
             };
-
+            if (supplier != null)
+            {
+                transport.SupplierId = supplier.Id;
+                transport.SupplierName = supplier.Name;
+            }
             // 生成批次以及采制化三级编码数据 
             CmcsInFactoryBatch inFactoryBatch = carTransportDAO.GCQCInFactoryBatchByBuyFuelTransport(transport);
             if (inFactoryBatch != null)
@@ -113,6 +115,23 @@ namespace CMCS.CarTransport.DAO
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// 保存入厂煤运输记录
+        /// </summary>
+        /// <param name="transportId"></param> 
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public bool SaveBuyFuelTransport(string transportId, DateTime dt)
+        {
+            CmcsBuyFuelTransport transport = SelfDber.Get<CmcsBuyFuelTransport>(transportId);
+            if (transport == null) return false;
+
+            transport.StepName = eTruckInFactoryStep.入厂.ToString();
+            transport.InFactoryTime = dt;
+
+            return SelfDber.Update(transport) > 0;
         }
 
         /// <summary>

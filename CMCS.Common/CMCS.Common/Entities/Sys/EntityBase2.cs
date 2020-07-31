@@ -13,11 +13,11 @@ namespace CMCS.Common.Entities.Sys
         public EntityBase2()
         {
             this.Id = Guid.NewGuid().ToString();
-            this.CreationTime = DateTime.Now;
+            this.CreateDate = DateTime.Now;
         }
 
         [DapperPrimaryKey]
         public string Id { get; set; }
-        public DateTime CreationTime { get; set; }
+        public DateTime CreateDate { get; set; }
     }
 }

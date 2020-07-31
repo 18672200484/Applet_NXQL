@@ -100,6 +100,10 @@
     <Compile Include="Tasks\DataHandler\DataHandlerDAO.cs" />
     <Compile Include="Tasks\DataHandler\Entities\CmcsGuardInfo.cs" />
     <Compile Include="Tasks\DataHandler\Enums\eEventCode.cs" />
+    <Compile Include="Tasks\Intelogistics\Entities\WL_CarSendInfo.cs" />
+    <Compile Include="Tasks\Intelogistics\Entities\WL_TransportInfo.cs" />
+    <Compile Include="Tasks\Intelogistics\Entities\WL_AssayInfo.cs" />
+    <Compile Include="Tasks\Intelogistics\IntelogisticsDAO.cs" />
     <Compile Include="Tasks\SyncNetData\Entities\DepartManage.cs" />
     <Compile Include="Tasks\SyncNetData\Entities\DepartManageDetail.cs" />
     <Compile Include="Tasks\SyncNetData\Entities\TransportPlan.cs" />
@@ -107,8 +111,12 @@
     <Compile Include="Tasks\TrainDiscriminator\TrainDiscriminatorDAO.cs" />
     <Compile Include="Tasks\TrainDiscriminator\TrainDiscriminatorDBW.cs" />
     <Compile Include="Tasks\TrainDiscriminator\TrainDiscriminatorTCPIP.cs" />
+    <Compile Include="Tasks\UploadData\Entities\PropertySet.cs" />
+    <Compile Include="Tasks\UploadData\Entities\TableOrView.cs" />
+    <Compile Include="Tasks\UploadData\UploadDataDAO.cs" />
     <Compile Include="Tasks\WeightBridger\EquWeightBridgerDAO.cs" />
     <Compile Include="Utilities\GaodeHelper.cs" />
+    <Compile Include="Utilities\UploadXmlHelper.cs" />
     <Compile Include="Utilities\WebApiHelper.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -136,8 +144,10 @@
     <Content Include="Tasks\CarSpeedRoute\车速异常监测.txt" />
     <Content Include="Tasks\CarStopTime\车辆异常停留位置.txt" />
     <Content Include="Tasks\DataHandler\综合事件处理.txt" />
+    <Content Include="Tasks\Intelogistics\智能物流接口同步.txt" />
     <Content Include="Tasks\SyncNetData\数据内外网同步.txt" />
     <Content Include="Tasks\TrainDiscriminator\车号识别数据接口.txt" />
+    <Content Include="Tasks\UploadData\智仁接口同步程序.txt" />
     <Content Include="Tasks\WeightBridger\火车轨道衡数据同步程序.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

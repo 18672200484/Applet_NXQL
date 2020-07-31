@@ -84,12 +84,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\CarriagePositioner.cs" />
     <Compile Include="Core\DataItem.cs" />
     <Compile Include="Core\Hardwarer.cs" />
     <Compile Include="Core\ImperfectCar.cs" />
     <Compile Include="Core\IocControler.cs" />
     <Compile Include="Core\PassCarQueuer.cs" />
-    <Compile Include="Core\PreviewCarBmp.cs" />
     <Compile Include="Core\SelfVars.cs" />
     <Compile Include="Enums\eFlowFlag.cs" />
     <Compile Include="Frms\FrmJxSampler.cs">

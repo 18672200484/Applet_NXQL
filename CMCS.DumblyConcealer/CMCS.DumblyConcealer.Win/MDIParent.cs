@@ -340,5 +340,35 @@ namespace CMCS.DumblyConcealer.Win
                 taskForm.Show();
             }
         }
+
+        /// <summary>
+        /// 13.数据上报(智仁)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsmiOpenFrmUploadData_Click(object sender, EventArgs e)
+        {
+            TaskForm taskForm = new FrmUploadData();
+            if (HaveOpened(taskForm, this))
+            {
+                taskForm.MdiParent = this;
+                taskForm.Show();
+            }
+        }
+
+        /// <summary>
+        /// 14.智能物流接口同步
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsmiOpenFrmIntelogistics_Click(object sender, EventArgs e)
+        {
+            TaskForm taskForm = new FrmIntelogistics();
+            if (HaveOpened(taskForm, this))
+            {
+                taskForm.MdiParent = this;
+                taskForm.Show();
+            }
+        }
     }
 }

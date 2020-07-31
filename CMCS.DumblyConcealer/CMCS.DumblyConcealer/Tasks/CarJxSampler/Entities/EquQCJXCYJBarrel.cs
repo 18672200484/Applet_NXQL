@@ -102,6 +102,17 @@ namespace CMCS.DumblyConcealer.Tasks.CarJXSampler.Entities
         {
             get { return _BarrelType; }
             set { _BarrelType = value; }
-        }
-    }
+		}
+
+		private double _SampleWeight;
+		/// <summary>
+		/// 样重
+		/// </summary>
+        public double SampleWeigh
+		{
+			get { return _SampleWeight; }
+			set { _SampleWeight = value; }
+		}
+
+	}
 }

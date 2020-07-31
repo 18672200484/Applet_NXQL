@@ -16,7 +16,7 @@ namespace CMCS.DapperDber.Dbs.MySqlDb
         /// MySqlSqlBuilder
         /// </summary>
         public MySqlSqlBuilder()
-            : base(":")
+            : base("@")
         {
 
         }

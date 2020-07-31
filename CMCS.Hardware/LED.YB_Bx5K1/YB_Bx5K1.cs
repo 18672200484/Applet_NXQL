@@ -93,6 +93,7 @@ namespace LED.YB_Bx5K1
         /// </summary>
         public void CloseListent()
         {
+            UpdateArea("  停止过磅");
             Led5kSDK.Destroy(m_dwCurHand);
             SetStatus(false);
         }

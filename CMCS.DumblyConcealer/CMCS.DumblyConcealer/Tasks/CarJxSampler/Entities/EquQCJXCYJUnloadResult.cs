@@ -38,15 +38,15 @@ namespace CMCS.DumblyConcealer.Tasks.CarJXSampler.Entities
             set { _SampleCode = value; }
         }
 
-        private string barrelNumber;
-        /// <summary>
-        /// 样罐编号
-        /// </summary>
-        public string BarrelNumber
-        {
-            get { return barrelNumber; }
-            set { barrelNumber = value; }
-        }
+        //private string barrelNumber;
+        ///// <summary>
+        ///// 样罐编号
+        ///// </summary>
+        //public string BarrelNumber
+        //{
+        //    get { return barrelNumber; }
+        //    set { barrelNumber = value; }
+        //}
 
         /// <summary>
         /// 样罐编码

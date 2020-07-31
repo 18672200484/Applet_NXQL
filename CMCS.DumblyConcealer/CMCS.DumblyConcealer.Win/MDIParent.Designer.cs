@@ -43,6 +43,8 @@
             this.tsmiOpenFrmCarSpeedRoute = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiOpenFrmCarStopTime = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiOpenFrmSyncNetData = new System.Windows.Forms.ToolStripMenuItem();
+            this.车辆报修监测ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiOpenFrmUploadData = new System.Windows.Forms.ToolStripMenuItem();
             this.windowsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.cascadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tileVerticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,7 +54,7 @@
             this.tsslblVersion = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.车辆报修监测ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiOpenFrmIntelogistics = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -66,7 +68,7 @@
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.MdiWindowListItem = this.windowsMenu;
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(632, 24);
+            this.menuStrip.Size = new System.Drawing.Size(632, 25);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "MenuStrip";
             // 
@@ -84,88 +86,104 @@
             this.tsmiOpenFrmCarSpeedRoute,
             this.tsmiOpenFrmCarStopTime,
             this.tsmiOpenFrmSyncNetData,
-            this.车辆报修监测ToolStripMenuItem});
+            this.车辆报修监测ToolStripMenuItem,
+            this.tsmiOpenFrmUploadData,
+            this.tsmiOpenFrmIntelogistics});
             this.tsmiTasks.ImageTransparentColor = System.Drawing.SystemColors.ActiveBorder;
             this.tsmiTasks.Name = "tsmiTasks";
-            this.tsmiTasks.Size = new System.Drawing.Size(59, 20);
+            this.tsmiTasks.Size = new System.Drawing.Size(59, 21);
             this.tsmiTasks.Text = "任务(&T)";
             // 
             // tsmiOpenFrmDataHandler
             // 
             this.tsmiOpenFrmDataHandler.Name = "tsmiOpenFrmDataHandler";
-            this.tsmiOpenFrmDataHandler.Size = new System.Drawing.Size(244, 22);
+            this.tsmiOpenFrmDataHandler.Size = new System.Drawing.Size(251, 22);
             this.tsmiOpenFrmDataHandler.Text = "01.综合事件处理";
             this.tsmiOpenFrmDataHandler.Click += new System.EventHandler(this.tsmiOpenFrmDataHandler_Click);
             // 
             // tsmiOpenFrmWeightBridger
             // 
             this.tsmiOpenFrmWeightBridger.Name = "tsmiOpenFrmWeightBridger";
-            this.tsmiOpenFrmWeightBridger.Size = new System.Drawing.Size(244, 22);
+            this.tsmiOpenFrmWeightBridger.Size = new System.Drawing.Size(251, 22);
             this.tsmiOpenFrmWeightBridger.Text = "02.同步轨道衡数据接口";
             this.tsmiOpenFrmWeightBridger.Click += new System.EventHandler(this.tsmiOpenFrmWeightBridger_Click);
             // 
             // tsmiOpenFrmBeltBalancer
             // 
             this.tsmiOpenFrmBeltBalancer.Name = "tsmiOpenFrmBeltBalancer";
-            this.tsmiOpenFrmBeltBalancer.Size = new System.Drawing.Size(244, 22);
+            this.tsmiOpenFrmBeltBalancer.Size = new System.Drawing.Size(251, 22);
             this.tsmiOpenFrmBeltBalancer.Text = "03.皮带秤称重数据同步";
             this.tsmiOpenFrmBeltBalancer.Click += new System.EventHandler(this.tsmiOpenFrmBeltBalancer_Click);
             // 
             // tsmiOpenFrmTrainWeight
             // 
             this.tsmiOpenFrmTrainWeight.Name = "tsmiOpenFrmTrainWeight";
-            this.tsmiOpenFrmTrainWeight.Size = new System.Drawing.Size(244, 22);
+            this.tsmiOpenFrmTrainWeight.Size = new System.Drawing.Size(251, 22);
             this.tsmiOpenFrmTrainWeight.Text = "04.车号识别报文TCP/IP同步业务";
             this.tsmiOpenFrmTrainWeight.Click += new System.EventHandler(this.tsmiOpenFrmTrainWeight_Click);
             // 
             // tsmiOpenFrmAssayDevice
             // 
             this.tsmiOpenFrmAssayDevice.Name = "tsmiOpenFrmAssayDevice";
-            this.tsmiOpenFrmAssayDevice.Size = new System.Drawing.Size(244, 22);
+            this.tsmiOpenFrmAssayDevice.Size = new System.Drawing.Size(251, 22);
             this.tsmiOpenFrmAssayDevice.Text = "05.化验设备数据同步业务";
             this.tsmiOpenFrmAssayDevice.Click += new System.EventHandler(this.tsmiOpenFrmAssayDevice_Click);
             // 
             // tsmiOpenFrmCarSampler
             // 
             this.tsmiOpenFrmCarSampler.Name = "tsmiOpenFrmCarSampler";
-            this.tsmiOpenFrmCarSampler.Size = new System.Drawing.Size(244, 22);
+            this.tsmiOpenFrmCarSampler.Size = new System.Drawing.Size(251, 22);
             this.tsmiOpenFrmCarSampler.Text = "06.汽车机械采样机接口";
             this.tsmiOpenFrmCarSampler.Click += new System.EventHandler(this.tsmiOpenFrmCarSampler_Click);
             // 
             // tsmiOpenFrmAutoMaker
             // 
             this.tsmiOpenFrmAutoMaker.Name = "tsmiOpenFrmAutoMaker";
-            this.tsmiOpenFrmAutoMaker.Size = new System.Drawing.Size(244, 22);
+            this.tsmiOpenFrmAutoMaker.Size = new System.Drawing.Size(251, 22);
             this.tsmiOpenFrmAutoMaker.Text = "07.全自动制样机接口";
             this.tsmiOpenFrmAutoMaker.Click += new System.EventHandler(this.tsmiOpenFrmAutoMaker_Click);
             // 
             // tsmiOpenFrmCarDeviationRoute
             // 
             this.tsmiOpenFrmCarDeviationRoute.Name = "tsmiOpenFrmCarDeviationRoute";
-            this.tsmiOpenFrmCarDeviationRoute.Size = new System.Drawing.Size(244, 22);
+            this.tsmiOpenFrmCarDeviationRoute.Size = new System.Drawing.Size(251, 22);
             this.tsmiOpenFrmCarDeviationRoute.Text = "08.车辆路线偏移监测";
             this.tsmiOpenFrmCarDeviationRoute.Click += new System.EventHandler(this.tsmiOpenFrmCarDeviationRoute_Click);
             // 
             // tsmiOpenFrmCarSpeedRoute
             // 
             this.tsmiOpenFrmCarSpeedRoute.Name = "tsmiOpenFrmCarSpeedRoute";
-            this.tsmiOpenFrmCarSpeedRoute.Size = new System.Drawing.Size(244, 22);
+            this.tsmiOpenFrmCarSpeedRoute.Size = new System.Drawing.Size(251, 22);
             this.tsmiOpenFrmCarSpeedRoute.Text = "09.车速异常检测";
             this.tsmiOpenFrmCarSpeedRoute.Click += new System.EventHandler(this.tsmiOpenFrmCarSpeedRoute_Click);
             // 
             // tsmiOpenFrmCarStopTime
             // 
             this.tsmiOpenFrmCarStopTime.Name = "tsmiOpenFrmCarStopTime";
-            this.tsmiOpenFrmCarStopTime.Size = new System.Drawing.Size(244, 22);
+            this.tsmiOpenFrmCarStopTime.Size = new System.Drawing.Size(251, 22);
             this.tsmiOpenFrmCarStopTime.Text = "10.车辆异常停留监测";
             this.tsmiOpenFrmCarStopTime.Click += new System.EventHandler(this.tsmiOpenFrmCarStopTime_Click);
             // 
             // tsmiOpenFrmSyncNetData
             // 
             this.tsmiOpenFrmSyncNetData.Name = "tsmiOpenFrmSyncNetData";
-            this.tsmiOpenFrmSyncNetData.Size = new System.Drawing.Size(244, 22);
+            this.tsmiOpenFrmSyncNetData.Size = new System.Drawing.Size(251, 22);
             this.tsmiOpenFrmSyncNetData.Text = "11.内外网数据同步业务";
             this.tsmiOpenFrmSyncNetData.Click += new System.EventHandler(this.tsmiOpenFrmSyncNetData_Click);
+            // 
+            // 车辆报修监测ToolStripMenuItem
+            // 
+            this.车辆报修监测ToolStripMenuItem.Name = "车辆报修监测ToolStripMenuItem";
+            this.车辆报修监测ToolStripMenuItem.Size = new System.Drawing.Size(251, 22);
+            this.车辆报修监测ToolStripMenuItem.Text = "12.车辆报修监测";
+            this.车辆报修监测ToolStripMenuItem.Click += new System.EventHandler(this.tsmiOpenFrmCarRepair_Click);
+            // 
+            // tsmiOpenFrmUploadData
+            // 
+            this.tsmiOpenFrmUploadData.Name = "tsmiOpenFrmUploadData";
+            this.tsmiOpenFrmUploadData.Size = new System.Drawing.Size(251, 22);
+            this.tsmiOpenFrmUploadData.Text = "13.数据上报（智仁）";
+            this.tsmiOpenFrmUploadData.Click += new System.EventHandler(this.tsmiOpenFrmUploadData_Click);
             // 
             // windowsMenu
             // 
@@ -174,27 +192,27 @@
             this.tileVerticalToolStripMenuItem,
             this.tileHorizontalToolStripMenuItem});
             this.windowsMenu.Name = "windowsMenu";
-            this.windowsMenu.Size = new System.Drawing.Size(59, 20);
+            this.windowsMenu.Size = new System.Drawing.Size(64, 21);
             this.windowsMenu.Text = "窗口(&W)";
             // 
             // cascadeToolStripMenuItem
             // 
             this.cascadeToolStripMenuItem.Name = "cascadeToolStripMenuItem";
-            this.cascadeToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.cascadeToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.cascadeToolStripMenuItem.Text = "层叠(&C)";
             this.cascadeToolStripMenuItem.Click += new System.EventHandler(this.CascadeToolStripMenuItem_Click);
             // 
             // tileVerticalToolStripMenuItem
             // 
             this.tileVerticalToolStripMenuItem.Name = "tileVerticalToolStripMenuItem";
-            this.tileVerticalToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.tileVerticalToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.tileVerticalToolStripMenuItem.Text = "垂直平铺(&V)";
             this.tileVerticalToolStripMenuItem.Click += new System.EventHandler(this.TileVerticalToolStripMenuItem_Click);
             // 
             // tileHorizontalToolStripMenuItem
             // 
             this.tileHorizontalToolStripMenuItem.Name = "tileHorizontalToolStripMenuItem";
-            this.tileHorizontalToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.tileHorizontalToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.tileHorizontalToolStripMenuItem.Text = "水平平铺(&H)";
             this.tileHorizontalToolStripMenuItem.Click += new System.EventHandler(this.TileHorizontalToolStripMenuItem_Click);
             // 
@@ -213,13 +231,13 @@
             // toolStripStatusLabel
             // 
             this.toolStripStatusLabel.Name = "toolStripStatusLabel";
-            this.toolStripStatusLabel.Size = new System.Drawing.Size(41, 17);
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(44, 17);
             this.toolStripStatusLabel.Text = "版本：";
             // 
             // tsslblVersion
             // 
             this.tsslblVersion.Name = "tsslblVersion";
-            this.tsslblVersion.Size = new System.Drawing.Size(47, 17);
+            this.tsslblVersion.Size = new System.Drawing.Size(45, 17);
             this.tsslblVersion.Text = "1.0.0.0";
             // 
             // timer1
@@ -227,12 +245,12 @@
             this.timer1.Interval = 2000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // 车辆报修监测ToolStripMenuItem
+            // tsmiOpenFrmIntelogistics
             // 
-            this.车辆报修监测ToolStripMenuItem.Name = "车辆报修监测ToolStripMenuItem";
-            this.车辆报修监测ToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
-            this.车辆报修监测ToolStripMenuItem.Text = "12.车辆报修监测";
-            this.车辆报修监测ToolStripMenuItem.Click += new System.EventHandler(this.tsmiOpenFrmCarRepair_Click);
+            this.tsmiOpenFrmIntelogistics.Name = "tsmiOpenFrmIntelogistics";
+            this.tsmiOpenFrmIntelogistics.Size = new System.Drawing.Size(251, 22);
+            this.tsmiOpenFrmIntelogistics.Text = "14.智能物流接口同步";
+            this.tsmiOpenFrmIntelogistics.Click += new System.EventHandler(this.tsmiOpenFrmIntelogistics_Click);
             // 
             // MDIParent
             // 
@@ -284,6 +302,8 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiOpenFrmCarStopTime;
         private System.Windows.Forms.ToolStripMenuItem tsmiOpenFrmSyncNetData;
         private System.Windows.Forms.ToolStripMenuItem 车辆报修监测ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsmiOpenFrmUploadData;
+        private System.Windows.Forms.ToolStripMenuItem tsmiOpenFrmIntelogistics;
     }
 }
 

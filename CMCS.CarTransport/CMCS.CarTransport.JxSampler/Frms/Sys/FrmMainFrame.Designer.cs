@@ -43,11 +43,11 @@ namespace CMCS.CarTransport.JxSampler.Frms.Sys
             this.superTabControlPanel2 = new DevComponents.DotNetBar.SuperTabControlPanel();
             this.superTabItem2 = new DevComponents.DotNetBar.SuperTabItem();
             this.panelEx2 = new DevComponents.DotNetBar.PanelEx();
+            this.btnDebugConsole = new DevComponents.DotNetBar.ButtonX();
             this.lblCurrentTime = new System.Windows.Forms.Label();
             this.btnApplicationExit = new DevComponents.DotNetBar.ButtonX();
             this.btnOpenSetting = new DevComponents.DotNetBar.ButtonX();
             this.timer_CurrentTime = new System.Windows.Forms.Timer(this.components);
-            this.btnDebugConsole = new DevComponents.DotNetBar.ButtonX();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.superTabControl1)).BeginInit();
             this.superTabControl1.SuspendLayout();
@@ -72,7 +72,7 @@ namespace CMCS.CarTransport.JxSampler.Frms.Sys
             this.lblLoginUserName});
             this.metroStatusBar1.Location = new System.Drawing.Point(0, 790);
             this.metroStatusBar1.Name = "metroStatusBar1";
-            this.metroStatusBar1.Size = new System.Drawing.Size(1424, 22);
+            this.metroStatusBar1.Size = new System.Drawing.Size(1432, 22);
             this.metroStatusBar1.TabIndex = 6;
             this.metroStatusBar1.Text = "metroStatusBar1";
             // 
@@ -118,7 +118,7 @@ namespace CMCS.CarTransport.JxSampler.Frms.Sys
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1424, 790);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1432, 790);
             this.tableLayoutPanel1.TabIndex = 7;
             // 
             // superTabControl1
@@ -150,7 +150,7 @@ namespace CMCS.CarTransport.JxSampler.Frms.Sys
             this.superTabControl1.ReorderTabsEnabled = true;
             this.superTabControl1.SelectedTabFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.superTabControl1.SelectedTabIndex = 0;
-            this.superTabControl1.Size = new System.Drawing.Size(1424, 740);
+            this.superTabControl1.Size = new System.Drawing.Size(1432, 740);
             this.superTabControl1.TabFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.superTabControl1.TabIndex = 10;
             this.superTabControl1.Tabs.AddRange(new DevComponents.DotNetBar.BaseItem[] {
@@ -163,7 +163,7 @@ namespace CMCS.CarTransport.JxSampler.Frms.Sys
             this.superTabControlPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.superTabControlPanel2.Location = new System.Drawing.Point(0, 36);
             this.superTabControlPanel2.Name = "superTabControlPanel2";
-            this.superTabControlPanel2.Size = new System.Drawing.Size(1424, 704);
+            this.superTabControlPanel2.Size = new System.Drawing.Size(1432, 704);
             this.superTabControlPanel2.TabIndex = 0;
             this.superTabControlPanel2.TabItem = this.superTabItem2;
             // 
@@ -188,7 +188,7 @@ namespace CMCS.CarTransport.JxSampler.Frms.Sys
             this.panelEx2.Location = new System.Drawing.Point(0, 0);
             this.panelEx2.Margin = new System.Windows.Forms.Padding(0);
             this.panelEx2.Name = "panelEx2";
-            this.panelEx2.Size = new System.Drawing.Size(1424, 50);
+            this.panelEx2.Size = new System.Drawing.Size(1432, 50);
             this.panelEx2.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelEx2.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelEx2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -196,14 +196,28 @@ namespace CMCS.CarTransport.JxSampler.Frms.Sys
             this.panelEx2.Style.GradientAngle = 90;
             this.panelEx2.TabIndex = 1;
             // 
+            // btnDebugConsole
+            // 
+            this.btnDebugConsole.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnDebugConsole.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.btnDebugConsole.AutoExpandOnClick = true;
+            this.btnDebugConsole.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDebugConsole.Location = new System.Drawing.Point(117, 10);
+            this.btnDebugConsole.Name = "btnDebugConsole";
+            this.btnDebugConsole.Size = new System.Drawing.Size(108, 31);
+            this.btnDebugConsole.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnDebugConsole.TabIndex = 21;
+            this.btnDebugConsole.Text = "调 试 窗 口";
+            this.btnDebugConsole.Click += new System.EventHandler(this.btnDebugConsole_Click);
+            // 
             // lblCurrentTime
             // 
-            this.lblCurrentTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCurrentTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCurrentTime.AutoSize = true;
             this.lblCurrentTime.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCurrentTime.ForeColor = System.Drawing.Color.White;
-            this.lblCurrentTime.Location = new System.Drawing.Point(1177, 11);
+            this.lblCurrentTime.Location = new System.Drawing.Point(1185, 11);
             this.lblCurrentTime.Name = "lblCurrentTime";
             this.lblCurrentTime.Size = new System.Drawing.Size(239, 28);
             this.lblCurrentTime.TabIndex = 14;
@@ -243,27 +257,14 @@ namespace CMCS.CarTransport.JxSampler.Frms.Sys
             this.timer_CurrentTime.Interval = 1000;
             this.timer_CurrentTime.Tick += new System.EventHandler(this.timer_CurrentTime_Tick);
             // 
-            // btnDebugConsole
-            // 
-            this.btnDebugConsole.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnDebugConsole.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.btnDebugConsole.AutoExpandOnClick = true;
-            this.btnDebugConsole.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDebugConsole.Location = new System.Drawing.Point(117, 10);
-            this.btnDebugConsole.Name = "btnDebugConsole";
-            this.btnDebugConsole.Size = new System.Drawing.Size(108, 31);
-            this.btnDebugConsole.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnDebugConsole.TabIndex = 21;
-            this.btnDebugConsole.Text = "调 试 窗 口";
-            this.btnDebugConsole.Click += new System.EventHandler(this.btnDebugConsole_Click);
-            // 
             // FrmMainFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1424, 812);
+            this.ClientSize = new System.Drawing.Size(1432, 812);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.metroStatusBar1);
+            this.ForeColor = System.Drawing.Color.White;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(1440, 816);
             this.Name = "FrmMainFrame";

@@ -10,9 +10,9 @@ namespace CMCS.Common.Enums
     /// </summary>
     public enum eEquInfSamplerSystemStatus
     {
-        正在运行 = 1,
-        发生故障 = 2,
+        系统停止 = 1,
+        正在运行 = 2,
         就绪待机 = 3,
-        正在卸样 = 4
+        发生故障 = 4
     }
 }

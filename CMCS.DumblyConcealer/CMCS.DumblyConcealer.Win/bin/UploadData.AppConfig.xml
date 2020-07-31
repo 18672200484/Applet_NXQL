@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TranferAppConfig>
+
+  <!--TableOrView节点属性说明：
+  source：来源表或视图
+  destination：同步到的表或视图
+  type：类型是上传（upload）还是从接口取数(download)
+  description：描述
+  isSoftDelete：需要同步到的表是否是逻辑删除，是的话删除数据是为更新IsDeleted为1，否则直接删除整条数据
+  isHaveSyncTime：需要同步到的表是否有SyncTime字段
+  timeIntervalProperty：取数时间间隔依据的字段
+  treeParentId：如果同步的目标表是树结构，需要制定parentId
+  IsUse:是否启用-->
+
+  <!--PropertySet节点属性说明：
+  source：来源字段
+  destination：对应的同步到的字段
+  desType：数据类型（string，DateTime，decimal）
+  desLength：数据长度
+  description：字段描述
+  desPrimaryKey：该字段是否可以作为该表数据的唯一键用来判断表中是否已有该数据，可以多字段组合当做主键
+  format：时间格式-->
+
+
+  <TableOrView source="V_JK_MEIK" destination="fultbmine" type="download" description="矿点同步" isSoftDelete="true" isHaveSyncTime="true" treeParentId="-1" IsUse="false">
+    <PropertySet source="CODE" destination="CompanyCode" desType="string" desLength="36" description="编码" desPrimaryKey="true"/>
+    <PropertySet source="MEIKMC" destination="ShortName" desType="string" desLength="64" description="煤矿简称"/>
+    <PropertySet source="MEIKQC" destination="Name" desType="string" desLength="128" description="煤矿全称"/>
+  </TableOrView>
+
+  <TableOrView source="V_JK_YUNSDW" destination="fultbtransportcompany" type="download" description="运输单位同步" isSoftDelete="true" isHaveSyncTime="true" IsUse="false">
+    <PropertySet source="CODE" destination="CODE" desType="string" desLength="64" description="编码" desPrimaryKey="true"/>
+    <PropertySet source="YUNSDWMC" destination="ShortName" desType="string" desLength="64" description="运输单位简称"/>
+    <PropertySet source="YUNSDWQC" destination="NAME" desType="string" desLength="64" description="运输单位全称"/>
+  </TableOrView>
+
+  <TableOrView source="V_JK_MEIZ" destination="fultbfuelkind" type="download" description="煤种同步" isSoftDelete="true" isHaveSyncTime="true" treeParentId="-1" IsUse="false">
+    <PropertySet source="CODE" destination="CompanyCode" desType="string" desLength="36" description="编码" desPrimaryKey="true"/>
+    <PropertySet source="MEIZMC" destination="NAME" desType="string" desLength="128" description="煤种名称"/>
+  </TableOrView>
+
+
+  <TableOrView source="View_T_JK_TRUCKENTER" destination="T_JK_TRUCKENTER" type="upload" description="计量接口表" timeIntervalProperty="factArriveDate" IsUse="true">
+    <PropertySet source="ID" destination="ID" desType="decimal" desLength="10" description="序号" desPrimaryKey="true"/>
+    <PropertySet source="COLLIERYCODE" destination="COLLIERYCODE" desType="string" desLength="20" description="煤矿编码"/>
+    <PropertySet source="COLLIERYNAME" destination="COLLIERYNAME" desType="string" desLength="40" description="煤矿名称"/>
+    <PropertySet source="NUMBERPLATE" destination="NUMBERPLATE" desType="string" desLength="10" description="车牌号"/>
+    <PropertySet source="TRANSUNITCODE" destination="TRANSUNITCODE" desType="string" desLength="20" description="车队号码"/>
+    <PropertySet source="TRANSUNITNAME" destination="TRANSUNITNAME" desType="string" desLength="40" description="车队名称"/>
+    <PropertySet source="FWEIGHT" destination="FWEIGHT" desType="decimal" desLength="40" description="毛重"/>
+    <PropertySet source="EWEIGHT" destination="EWEIGHT" desType="decimal" desLength="40" description="皮重"/>
+    <PropertySet source="DEDCUTTON" destination="DEDCUTTON" desType="decimal" desLength="40" description="扣吨"/>
+    <PropertySet source="NETWEIGHT" destination="NETWEIGHT" desType="decimal" desLength="40" description="净重"/>
+    <PropertySet source="WEIGHTUSER" destination="WEIGHTUSER" desType="string" desLength="20" description="过重人员"/>
+    <PropertySet source="WEIGHNO" destination="WEIGHNO" desType="decimal" desLength="40" description="过重衡号"/>
+    <PropertySet source="grosstime" destination="FWEIGHTDATE" desType="DateTime" desLength="20" description="过衡日期" format="yyyy-MM-dd"/>
+    <PropertySet source="grosstime" destination="FWEIGHTIME" desType="DateTime" desLength="40" description="过重时间" format="HH:mm:ss"/>
+    <PropertySet source="HASHUSER" destination="HASHUSER" desType="string" desLength="20" description="过皮人员"/>
+    <PropertySet source="HASHNO" destination="HASHNO" desType="decimal" desLength="40" description="过皮衡号"/>
+    <PropertySet source="taretime" destination="EWEIGHTDATE" desType="DateTime" desLength="40" description="过皮日期" format="yyyy-MM-dd"/>
+    <PropertySet source="taretime" destination="EWEIGHTIME" desType="DateTime" desLength="40" description="过皮时间" format="HH:mm:ss"/>
+    <PropertySet source="FDEDUCTUSER" destination="FDEDUCTUSER" desType="string" desLength="20" description="煤场质检员"/>
+    <PropertySet source="SDEDUCTUSER" destination="SDEDUCTUSER" desType="string" desLength="20" description="扣吨质检员"/>
+    <PropertySet source="SamplingDate" destination="TOSAMDATE" desType="DateTime" desLength="40" description="采样日期" format="yyyy-MM-dd"/>
+    <PropertySet source="SamplingDate" destination="TOSAMTIME" desType="DateTime" desLength="40" description="采样时间" format="HH:mm:ss"/>
+    <PropertySet source="TAKECOALNO" destination="TAKECOALNO" desType="string" desLength="30" description="提煤单号"/>
+    <PropertySet source="SAMCODE" destination="SAMCODE" desType="string" desLength="30" description="批次号"/>
+    <PropertySet source="SELLERWEIGHT" destination="SELLERWEIGHT" desType="decimal" desLength="10" description="矿发量"/>
+    <PropertySet source="tickettime" destination="SELLERDATE" desType="string" desLength="30" description="矿发日期" format="yyyy-MM-dd"/>
+    <PropertySet source="tickettime" destination="SELLERTIME" desType="string" desLength="30" description="矿发时间" format="HH:mm:ss"/>
+  </TableOrView>
+
+  <TableOrView source="View_T_JK_ASSAYCODE" destination="T_JK_ASSAYCODE" type="upload" description="编码接口表" timeIntervalProperty="factArriveDate" IsUse="true">
+    <PropertySet source="ID" destination="ID" desType="decimal" desLength="10" description="序号" desPrimaryKey="true"/>
+    <PropertySet source="COLLIERYCODE" destination="COLLIERYCODE" desType="string" desLength="20" description="煤矿编码"/>
+    <PropertySet source="COLLIERYNAME" destination="COLLIERYNAME" desType="string" desLength="40" description="煤矿名称"/>
+    <PropertySet source="COALKINDNAME" destination="COALKINDNAME" desType="string" desLength="10" description="煤种名称"/>
+    <PropertySet source="TRANSUNITCODE" destination="TRANSUNITCODE" desType="string" desLength="20" description="车队号码"/>
+    <PropertySet source="TRANSUNITNAME" destination="TRANSUNITNAME" desType="string" desLength="40" description="车队名称"/>
+    <PropertySet source="SAMCODE" destination="SAMCODE" desType="string" desLength="20" description="批次号"/>
+    <PropertySet source="ASSAYCODE" destination="ASSAYCODE" desType="string" desLength="20" description="化验编码"/>
+    <PropertySet source="ASSAYTIME" destination="ASSAYTIME" desType="DateTime" desLength="40" description="出码时间" format="yyyy-MM-dd HH:mm:ss"/>
+    <PropertySet source="SAMCODEONE" destination="SAMCODEONE" desType="string" desLength="20" description="采样编码"/>
+    <PropertySet source="SAMCODETWO" destination="SAMCODETWO" desType="string" desLength="20" description="制样编码"/>
+  </TableOrView>
+
+  <TableOrView source="FULTBBATCHOPERLOG" destination="T_JK_MODIFYLOG" type="upload" description="操作日志接口表" timeIntervalProperty="CREATIONTIME" IsUse="true">
+    <PropertySet source="TRANSPORTID" destination="TRUCKENTERID" desType="decimal" desLength="10" description="来煤ID" desPrimaryKey="true"/>
+    <PropertySet source="OPERTYPE" destination="TYPE" desType="string" desLength="20" description="操作类型"/>
+    <PropertySet source="CREATIONTIME" destination="HANDLEDATE" desType="string" desLength="40" description="操作时间" format="yyyy-MM-dd HH:mm:ss" desPrimaryKey="false"/>
+  </TableOrView>
+
+</TranferAppConfig>
+

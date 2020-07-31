@@ -58,6 +58,12 @@ namespace CMCS.DumblyConcealer.Win.DumblyTasks
                 dataHandlerDAO.SyncUpdateTransportStepName(this.rTxtOutputer.Output, outNetWebApi);
 
             }, 2000, OutputError);
+
+            taskSimpleScheduler.StartNewTask("同步运输记录到批次明细", () =>
+            {
+                dataHandlerDAO.SyncToBatch(this.rTxtOutputer.Output);
+
+            }, 2000, OutputError);
         }
 
         /// <summary>

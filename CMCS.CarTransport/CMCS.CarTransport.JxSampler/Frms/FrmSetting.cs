@@ -38,7 +38,7 @@ namespace CMCS.CarTransport.JxSampler.Frms
 			InitComPortComboBoxs(cmbIocerCom);
 			InitBandrateComboBoxs(cmbIocerBandrate);
 			InitNumberAscComboBoxs(5, 8, cmbIocerDataBits);
-			InitNumberAscComboBoxs(1, 15, cmbInductorCoil1Port, cmbInductorCoil2Port, cmbInductorCoil3Port, cmbInductorCoil4Port, cmbGate1UpPort, cmbGate1DownPort, cmbGate2UpPort, cmbGate2DownPort, cmbSignalLight1Port);
+			InitNumberAscComboBoxs(1, 15, cmbInductorCoil1Port, cmbInductorCoil2Port, cmbInductorCoil3Port, cmbInductorCoil4Port, cmbInfraredSensor1Port, cmbInfraredSensor2Port, cmbGate1UpPort, cmbGate1DownPort, cmbGate2UpPort, cmbGate2DownPort, cmbSignalLight1Port);
 			InitNumberAscComboBoxs(1, 30, cmbRwer1Port);
 			InitStopBitsComboBoxs(cmbIocerStopBits);
 			InitParityComboBoxs(cmbIocerParity);
@@ -104,6 +104,8 @@ namespace CMCS.CarTransport.JxSampler.Frms
 			txtAppIdentifier.Text = commonAppConfig.AppIdentifier;
 			txtSelfConnStr.Text = commonAppConfig.SelfConnStr;
 			chbStartup.Checked = (commonDAO.GetAppletConfigString("开机启动") == "1");
+			chkUseRwer.Checked = (commonDAO.GetAppletConfigString("启用读卡器") == "1");
+			chkUseCamera.Checked = (commonDAO.GetAppletConfigString("启用识别相机") == "1");
 
 			txtJxSamplerMachineCode.Text = commonDAO.GetAppletConfigString("采样机设备编码");
 
@@ -117,6 +119,8 @@ namespace CMCS.CarTransport.JxSampler.Frms
 			SelectedComboBoxItem(cmbInductorCoil2Port, commonDAO.GetAppletConfigInt32("IO控制器_地感2端口").ToString());
 			SelectedComboBoxItem(cmbInductorCoil3Port, commonDAO.GetAppletConfigInt32("IO控制器_地感3端口").ToString());
 			SelectedComboBoxItem(cmbInductorCoil4Port, commonDAO.GetAppletConfigInt32("IO控制器_地感4端口").ToString());
+			SelectedComboBoxItem(cmbInfraredSensor1Port, commonDAO.GetAppletConfigInt32("IO控制器_对射1端口").ToString());
+			SelectedComboBoxItem(cmbInfraredSensor2Port, commonDAO.GetAppletConfigInt32("IO控制器_对射2端口").ToString());
 			SelectedComboBoxItem(cmbGate1UpPort, commonDAO.GetAppletConfigInt32("IO控制器_道闸1升杆端口").ToString());
 			SelectedComboBoxItem(cmbGate1DownPort, commonDAO.GetAppletConfigInt32("IO控制器_道闸1降杆端口").ToString());
 			SelectedComboBoxItem(cmbGate2UpPort, commonDAO.GetAppletConfigInt32("IO控制器_道闸2升杆端口").ToString());
@@ -146,10 +150,18 @@ namespace CMCS.CarTransport.JxSampler.Frms
 		{
 			if (!TestDBConnect()) return false;
 
+			if (!chkUseCamera.Checked && !chkUseRwer.Checked)
+			{
+				MessageBoxEx.Show("识别相机与读卡器必须启用一个", "操作提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return false;
+			}
+
 			commonAppConfig.AppIdentifier = txtAppIdentifier.Text.Trim();
 			commonAppConfig.SelfConnStr = txtSelfConnStr.Text;
 			commonAppConfig.Save();
 			commonDAO.SetAppletConfig("开机启动", Convert.ToInt16(chbStartup.Checked).ToString());
+			commonDAO.SetAppletConfig("启用读卡器", Convert.ToInt16(chkUseRwer.Checked).ToString());
+			commonDAO.SetAppletConfig("启用识别相机", Convert.ToInt16(chkUseCamera.Checked).ToString());
 
 			commonDAO.SetAppletConfig("采样机设备编码", txtJxSamplerMachineCode.Text.Trim());
 
@@ -177,6 +189,8 @@ namespace CMCS.CarTransport.JxSampler.Frms
 			commonDAO.SetAppletConfig("IO控制器_地感2端口", (cmbInductorCoil2Port.SelectedItem as DataItem).Value);
 			commonDAO.SetAppletConfig("IO控制器_地感3端口", (cmbInductorCoil3Port.SelectedItem as DataItem).Value);
 			commonDAO.SetAppletConfig("IO控制器_地感4端口", (cmbInductorCoil4Port.SelectedItem as DataItem).Value);
+			commonDAO.SetAppletConfig("IO控制器_对射1端口", (cmbInfraredSensor1Port.SelectedItem as DataItem).Value);
+			commonDAO.SetAppletConfig("IO控制器_对射2端口", (cmbInfraredSensor2Port.SelectedItem as DataItem).Value);
 			commonDAO.SetAppletConfig("IO控制器_道闸1升杆端口", (cmbGate1UpPort.SelectedItem as DataItem).Value);
 			commonDAO.SetAppletConfig("IO控制器_道闸1降杆端口", (cmbGate1DownPort.SelectedItem as DataItem).Value);
 			commonDAO.SetAppletConfig("IO控制器_道闸2升杆端口", (cmbGate2UpPort.SelectedItem as DataItem).Value);

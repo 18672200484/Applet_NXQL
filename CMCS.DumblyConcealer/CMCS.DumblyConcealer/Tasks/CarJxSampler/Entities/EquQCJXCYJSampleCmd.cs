@@ -67,6 +67,10 @@ namespace CMCS.DumblyConcealer.Tasks.CarJXSampler.Entities
             set { _SampleCode = value; }
         }
 
+        public int MachineCode { get; set; }
+
+        public string RFID { get; set; }
+
         /// <summary>
         /// 外水分
         /// </summary>
@@ -74,6 +78,16 @@ namespace CMCS.DumblyConcealer.Tasks.CarJXSampler.Entities
         {
             get { return _Mt; }
             set { _Mt = value; }
+        }
+
+        private int _SuoFen = 30;
+        /// <summary>
+        /// 缩分
+        /// </summary>
+        public int SuoFen
+        {
+            get { return _SuoFen; }
+            set { _SuoFen = value; }
         }
 
         /// <summary>
