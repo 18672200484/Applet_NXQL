@@ -495,3 +495,5 @@ Logs/
 /CMCS.Test/CMCS.DataTester/bin/CMCS.DataTester.exe
 /CMCS.Test/CMCS.DataTester/bin/HikVisionSDK.Core.dll
 *.zip
+/CMCS.CarTransport/CMCS.CarTransport.Queue/bin/CMCS.Forms.UserControls.dll
+/CMCS.DumblyConcealer/CMCS.DumblyConcealer/bin/CMCS.DumblyConcealer.dll

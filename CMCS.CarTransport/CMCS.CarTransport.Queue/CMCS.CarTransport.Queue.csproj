@@ -263,15 +263,6 @@
     <Compile Include="Frms\FrmTransport_Confirm.Designer.cs">
       <DependentUpon>FrmTransport_Confirm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Frms\Print\FrmPrintWeb.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Frms\Print\FrmPrintWeb.designer.cs">
-      <DependentUpon>FrmPrintWeb.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Frms\Print\WagonPrinter.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Frms\SysManage\Frm_Module_List.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -523,12 +514,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Frms\FrmTransport_Confirm.resx">
       <DependentUpon>FrmTransport_Confirm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Frms\Print\FrmPrintWeb.resx">
-      <DependentUpon>FrmPrintWeb.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Frms\Print\WagonPrinter.resx">
-      <DependentUpon>WagonPrinter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Frms\SysManage\Frm_Module_List.resx">
       <DependentUpon>Frm_Module_List.cs</DependentUpon>

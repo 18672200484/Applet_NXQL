@@ -119,15 +119,6 @@
     <Compile Include="Frms\FrmSetting.Designer.cs">
       <DependentUpon>FrmSetting.cs</DependentUpon>
     </Compile>
-    <Compile Include="Frms\Print\FrmPrintWeb.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Frms\Print\FrmPrintWeb.designer.cs">
-      <DependentUpon>FrmPrintWeb.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Frms\Print\WagonPrinter.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Frms\Sys\FrmDebugConsole.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -152,12 +143,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Frms\FrmSetting.resx">
       <DependentUpon>FrmSetting.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Frms\Print\FrmPrintWeb.resx">
-      <DependentUpon>FrmPrintWeb.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Frms\Print\WagonPrinter.resx">
-      <DependentUpon>WagonPrinter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Frms\Sys\FrmDebugConsole.resx">
       <DependentUpon>FrmDebugConsole.cs</DependentUpon>
@@ -223,6 +208,10 @@
     <ProjectReference Include="..\..\CMCS.Hardware\WB.JingZhong\WB.JinZhong.csproj">
       <Project>{07F3B1B7-F8EF-4B54-A820-8C89D93D1B16}</Project>
       <Name>WB.JinZhong</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CMCS.CarTransport.Queue\CMCS.CarTransport.Queue.csproj">
+      <Project>{6d1e6459-d918-445d-aade-196027a2ff17}</Project>
+      <Name>CMCS.CarTransport.Queue</Name>
     </ProjectReference>
     <ProjectReference Include="..\CMCS.CarTransport\CMCS.CarTransport.csproj">
       <Project>{5ED15A98-0895-48D3-851C-088A217D41E7}</Project>

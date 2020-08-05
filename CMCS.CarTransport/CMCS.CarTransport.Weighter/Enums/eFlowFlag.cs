@@ -14,6 +14,7 @@ namespace CMCS.CarTransport.Weighter.Enums
         开始读卡,
         识别车辆,
         验证信息,
+		录入数据,
         等待上磅,
         等待稳定,
         等待离开

@@ -20,7 +20,7 @@ namespace CMCS.CarTransport.Weight.Frms.Transport.Print
 	class WagonPrinter : MetroForm
 	{
 		Font TitleFont = new Font("宋体", 30, FontStyle.Bold, GraphicsUnit.Pixel);
-		Font ContentFont = new Font("微软雅黑", 20, FontStyle.Regular, GraphicsUnit.Pixel);
+		Font ContentFont = new Font("宋体", 12, FontStyle.Regular, GraphicsUnit.Pixel);
 		PrintDocument _PrintDocument = null;
 		CmcsBuyFuelTransport _BuyFuelTransport = null;
 		int PageIndex = 1;
@@ -87,7 +87,7 @@ namespace CMCS.CarTransport.Weight.Frms.Transport.Print
 				// 行间距 24 
 				float TopValue = 53;
 				string printValue = "";
-				g.DrawString("国电投青铝发电有限公司", new Font("黑体", 20, FontStyle.Bold, GraphicsUnit.Pixel), Brushes.Black, 30, TopValue);
+				g.DrawString("国电投青铝发电有限公司过磅单", new Font("黑体", 14, FontStyle.Bold, GraphicsUnit.Pixel), Brushes.Black, 30, TopValue);
 				TopValue += 34;
 
 				g.DrawString("打印时间：" + DateTime.Now.ToString("yyyy-MM-dd HH:mm"), ContentFont, Brushes.Black, 30, TopValue);
@@ -100,11 +100,11 @@ namespace CMCS.CarTransport.Weight.Frms.Transport.Print
 				TopValue += 24;
 
 				printValue = "矿    点：" + MineName;
-				if (printValue.Length > 12)
+				if (printValue.Length > 18)
 				{
-					g.DrawString(printValue.Substring(0, 12), ContentFont, Brushes.Black, 30, TopValue);
+					g.DrawString(printValue.Substring(0, 18), ContentFont, Brushes.Black, 30, TopValue);
 					TopValue += 24;
-					g.DrawString(printValue.Substring(12, printValue.Length - 12), ContentFont, Brushes.Black, 105, TopValue);
+					g.DrawString(printValue.Substring(18, printValue.Length - 18), ContentFont, Brushes.Black, 105, TopValue);
 					TopValue += 24;
 				}
 				else

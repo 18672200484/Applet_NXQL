@@ -26,6 +26,7 @@ using DevComponents.DotNetBar.Controls;
 using DevComponents.DotNetBar.SuperGrid;
 using LED.YB_Bx5K1;
 using CMCS.CarTransport.Out.Frms.Transport.Print;
+using CMCS.Common.Print;
 
 namespace CMCS.CarTransport.Out.Frms
 {
@@ -823,7 +824,7 @@ namespace CMCS.CarTransport.Out.Frms
 				if (outerDAO.SaveBuyFuelTransport(this.CurrentBuyFuelTransport.Id, DateTime.Now))
 				{
 					// ´òÓ¡°õµ¥
-					if (chkAutoPrint.Checked)
+					if (chkAutoPrint.Checked && this.CurrentBuyFuelTransport.SuttleWeight > 0)
 					{
 						WagonPrinter print = new WagonPrinter(this.printDocument1);
 						print.Print(this.CurrentBuyFuelTransport);
