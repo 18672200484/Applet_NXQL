@@ -129,33 +129,36 @@ namespace CMCS.DumblyConcealer.Tasks.CarJXSampler
 					SampleWeight = entity.SampleWeigh
 				}))
 				{
-					//写入采样码记录
-					CmcsRCSampling sampling = commonDAO.SelfDber.Entity<CmcsRCSampling>("where SampleCode=:SampleCode", new { SampleCode = entity.SampleCode });
-					CmcsCYJCodeInfo codeInfo = commonDAO.SelfDber.Entity<CmcsCYJCodeInfo>("where SampleCode=:SampleCode and BarrelCode=:BarrelCode and IsClear=0", new { SampleCode = entity.SampleCode, BarrelCode = entity.BarrelNumber });
-					int carCount = 0;
-					if (sampling != null)
-						carCount = commonDAO.SelfDber.Count<CmcsBuyFuelTransport>("where SamplingId=:SamplingId and SamplePlace=:SamplePlace", new { SamplingId = sampling.Id, SamplePlace = this.MachineCode });
-					if (codeInfo == null)
+					if (!string.IsNullOrEmpty(entity.BarrelNumber))
 					{
-						codeInfo = new CmcsCYJCodeInfo();
-						codeInfo.SampleCode = entity.SampleCode;
-						codeInfo.BarrelCode = Convert.ToInt32(entity.BarrelNumber);
-						codeInfo.SampleCount = entity.SampleCount;
-						codeInfo.CarCount = carCount;
-						codeInfo.SampleWeight = entity.SampleWeigh;
-						codeInfo.SamplerName = this.MachineCode;
-						codeInfo.SamplingId = sampling != null ? sampling.Id : "";
-						codeInfo.StartTime = entity.UpdateTime;
-						codeInfo.IsClear = 0;
-						commonDAO.SelfDber.Insert(codeInfo);
-					}
-					else
-					{
-						codeInfo.SampleCount = entity.SampleCount;
-						codeInfo.CarCount = carCount;
-						codeInfo.SampleWeight = entity.SampleWeigh;
-						codeInfo.EndTime = DateTime.Now;
-						commonDAO.SelfDber.Update(codeInfo);
+						//写入采样码记录
+						CmcsRCSampling sampling = commonDAO.SelfDber.Entity<CmcsRCSampling>("where SampleCode=:SampleCode", new { SampleCode = entity.SampleCode });
+						CmcsCYJCodeInfo codeInfo = commonDAO.SelfDber.Entity<CmcsCYJCodeInfo>("where SampleCode=:SampleCode and BarrelCode=:BarrelCode and IsClear=0", new { SampleCode = entity.SampleCode, BarrelCode = entity.BarrelNumber });
+						int carCount = 0;
+						if (sampling != null)
+							carCount = commonDAO.SelfDber.Count<CmcsBuyFuelTransport>("where SamplingId=:SamplingId and SamplePlace=:SamplePlace", new { SamplingId = sampling.Id, SamplePlace = this.MachineCode });
+						if (codeInfo == null)
+						{
+							codeInfo = new CmcsCYJCodeInfo();
+							codeInfo.SampleCode = entity.SampleCode;
+							codeInfo.BarrelCode = Convert.ToInt32(entity.BarrelNumber);
+							codeInfo.SampleCount = entity.SampleCount;
+							codeInfo.CarCount = carCount;
+							codeInfo.SampleWeight = entity.SampleWeigh;
+							codeInfo.SamplerName = this.MachineCode;
+							codeInfo.SamplingId = sampling != null ? sampling.Id : "";
+							codeInfo.StartTime = entity.UpdateTime;
+							codeInfo.IsClear = 0;
+							commonDAO.SelfDber.Insert(codeInfo);
+						}
+						else
+						{
+							codeInfo.SampleCount = entity.SampleCount;
+							codeInfo.CarCount = carCount;
+							codeInfo.SampleWeight = entity.SampleWeigh;
+							codeInfo.EndTime = DateTime.Now;
+							commonDAO.SelfDber.Update(codeInfo);
+						}
 					}
 					entity.DataFlag = 1;
 					this.EquDber.Update(entity);
@@ -410,9 +413,10 @@ namespace CMCS.DumblyConcealer.Tasks.CarJXSampler
 							BarrellingTime = entity.UnloadTime,
 							BarrelNumber = entity.BarrelCode,
 							InFactoryBatchId = qCJXCYJSampleCmd.InFactoryBatchId,
-							SamplerName = commonDAO.GetMachineNameByCode(this.MachineCode),
+							SamplerName = this.MachineCode,
 							SampleType = eSamplingType.机械采样.ToString(),
-							SamplingId = sampling != null ? sampling.Id : entity.SamplingId
+							SamplingId = sampling != null ? sampling.Id : entity.SamplingId,
+							SampleWeight = entity.SampleWeigh
 						};
 
 						if (commonDAO.SelfDber.Insert(rCSampleBarrel) > 0)

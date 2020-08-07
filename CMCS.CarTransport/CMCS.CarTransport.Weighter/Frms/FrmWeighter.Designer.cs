@@ -159,6 +159,8 @@ namespace CMCS.CarTransport.Weighter.Frms
 			this.superTabItem3 = new DevComponents.DotNetBar.SuperTabItem();
 			this.superTabControlPanel8 = new DevComponents.DotNetBar.SuperTabControlPanel();
 			this.superGridControl2_Goods = new DevComponents.DotNetBar.SuperGrid.SuperGridControl();
+			this.contextMenuStrip_Goods = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.tsmiPrint_Goods = new System.Windows.Forms.ToolStripMenuItem();
 			this.superTabItem4 = new DevComponents.DotNetBar.SuperTabItem();
 			this.panelEx5 = new DevComponents.DotNetBar.PanelEx();
 			this.btnSelectReceive_Goods = new DevComponents.DotNetBar.ButtonX();
@@ -220,6 +222,7 @@ namespace CMCS.CarTransport.Weighter.Frms
 			this.superTabControl3.SuspendLayout();
 			this.superTabControlPanel7.SuspendLayout();
 			this.superTabControlPanel8.SuspendLayout();
+			this.contextMenuStrip_Goods.SuspendLayout();
 			this.panelEx5.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -1658,6 +1661,7 @@ namespace CMCS.CarTransport.Weighter.Frms
 			// superGridControl2_Goods
 			// 
 			this.superGridControl2_Goods.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
+			this.superGridControl2_Goods.ContextMenuStrip = this.contextMenuStrip_Goods;
 			this.superGridControl2_Goods.DefaultVisualStyles.CellStyles.Default.Alignment = DevComponents.DotNetBar.SuperGrid.Style.Alignment.MiddleCenter;
 			this.superGridControl2_Goods.DefaultVisualStyles.CellStyles.Default.Font = new System.Drawing.Font("Segoe UI", 11.25F);
 			this.superGridControl2_Goods.DefaultVisualStyles.ColumnHeaderStyles.Default.Font = new System.Drawing.Font("Segoe UI", 11.25F);
@@ -1730,6 +1734,20 @@ namespace CMCS.CarTransport.Weighter.Frms
 			this.superGridControl2_Goods.Text = "superGridControl1";
 			this.superGridControl2_Goods.GetRowHeaderText += new System.EventHandler<DevComponents.DotNetBar.SuperGrid.GridGetRowHeaderTextEventArgs>(this.superGridControl_GetRowHeaderText);
 			// 
+			// contextMenuStrip_Goods
+			// 
+			this.contextMenuStrip_Goods.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiPrint_Goods});
+			this.contextMenuStrip_Goods.Name = "contextMenuStrip1";
+			this.contextMenuStrip_Goods.Size = new System.Drawing.Size(125, 26);
+			// 
+			// tsmiPrint_Goods
+			// 
+			this.tsmiPrint_Goods.Name = "tsmiPrint_Goods";
+			this.tsmiPrint_Goods.Size = new System.Drawing.Size(124, 22);
+			this.tsmiPrint_Goods.Text = "¥Ú”°∞ıµ•";
+			this.tsmiPrint_Goods.Click += new System.EventHandler(this.tsmiPrint_Goods_Click);
+			// 
 			// superTabItem4
 			// 
 			this.superTabItem4.AttachedControl = this.superTabControlPanel8;
@@ -1785,6 +1803,7 @@ namespace CMCS.CarTransport.Weighter.Frms
 			this.btnSelectReceive_Goods.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.btnSelectReceive_Goods.TabIndex = 53;
 			this.btnSelectReceive_Goods.Text = "—°";
+			this.btnSelectReceive_Goods.Click += new System.EventHandler(this.btnSelectReceive_Goods_Click);
 			// 
 			// btnSelectGoodsType_Goods
 			// 
@@ -2247,6 +2266,7 @@ namespace CMCS.CarTransport.Weighter.Frms
 			this.superTabControl3.ResumeLayout(false);
 			this.superTabControlPanel7.ResumeLayout(false);
 			this.superTabControlPanel8.ResumeLayout(false);
+			this.contextMenuStrip_Goods.ResumeLayout(false);
 			this.panelEx5.ResumeLayout(false);
 			this.panelEx5.PerformLayout();
 			this.ResumeLayout(false);
@@ -2365,5 +2385,7 @@ namespace CMCS.CarTransport.Weighter.Frms
 		private DevComponents.DotNetBar.ButtonX btnSelectGoodsType_Goods;
 		private DevComponents.DotNetBar.ButtonX btnbtnSelectSupply_Goods;
 		private System.Drawing.Printing.PrintDocument printDocument1;
+		private System.Windows.Forms.ContextMenuStrip contextMenuStrip_Goods;
+		private System.Windows.Forms.ToolStripMenuItem tsmiPrint_Goods;
 	}
 }

@@ -1,38 +1,34 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.IO;
 using System.IO.Ports;
 using System.Linq;
-using System.Text;
-using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+//
 using CMCS.CarTransport.DAO;
+using CMCS.CarTransport.Queue.Frms;
+using CMCS.CarTransport.Queue.Frms.BaseInfo.Supplier;
+using CMCS.CarTransport.Queue.Frms.BaseInfo.SupplyReceive;
 using CMCS.CarTransport.Weighter.Core;
 using CMCS.CarTransport.Weighter.Enums;
 using CMCS.CarTransport.Weighter.Frms.Sys;
 using CMCS.Common;
 using CMCS.Common.DAO;
-using CMCS.Common.Entities;
 using CMCS.Common.Entities.BaseInfo;
 using CMCS.Common.Entities.CarTransport;
 using CMCS.Common.Entities.Sys;
 using CMCS.Common.Enums;
+using CMCS.Common.Print;
 using CMCS.Common.Utilities;
 using CMCS.Common.Views;
 using DevComponents.DotNetBar;
-using DevComponents.DotNetBar.Controls;
 using DevComponents.DotNetBar.SuperGrid;
 using HikVisionSDK.Core;
-using System.Threading.Tasks;
-using System.Drawing.Printing;
 using LED.YB_Bx5K1;
-using CMCS.CarTransport.Weight.Frms.Transport.Print;
-using CMCS.CarTransport.Queue.Frms.BaseInfo.Supplier;
-using CMCS.CarTransport.Queue.Frms;
-using CMCS.Common.Print;
 
 namespace CMCS.CarTransport.Weighter.Frms
 {
@@ -2305,7 +2301,7 @@ namespace CMCS.CarTransport.Weighter.Frms
 		/// <param name="e"></param>
 		private void btnbtnSelectSupply_Goods_Click(object sender, EventArgs e)
 		{
-			FrmSupplier_Select frm = new FrmSupplier_Select("where IsStop=0 order by Name asc");
+			FrmSupplyReceive_Select frm = new FrmSupplyReceive_Select("where IsValid=1 order by UnitName asc");
 			if (frm.ShowDialog() == DialogResult.OK)
 			{
 				this.SelectedSupplyUnit_Goods = frm.Output;
@@ -2319,7 +2315,7 @@ namespace CMCS.CarTransport.Weighter.Frms
 		/// <param name="e"></param>
 		private void btnSelectReceive_Goods_Click(object sender, EventArgs e)
 		{
-			FrmSupplier_Select frm = new FrmSupplier_Select("where IsStop=0 order by Name asc");
+			FrmSupplyReceive_Select frm = new FrmSupplyReceive_Select("where IsValid=1 order by Name asc");
 			if (frm.ShowDialog() == DialogResult.OK)
 			{
 				this.SelectedReceiveUnit_Goods = frm.Output;
@@ -2340,11 +2336,11 @@ namespace CMCS.CarTransport.Weighter.Frms
 			}
 		}
 
-		private CmcsSupplier selectedSupplyUnit_Goods;
+		private CmcsSupplyReceive selectedSupplyUnit_Goods;
 		/// <summary>
 		/// 选择的供货单位
 		/// </summary>
-		public CmcsSupplier SelectedSupplyUnit_Goods
+		public CmcsSupplyReceive SelectedSupplyUnit_Goods
 		{
 			get { return selectedSupplyUnit_Goods; }
 			set
@@ -2353,7 +2349,7 @@ namespace CMCS.CarTransport.Weighter.Frms
 
 				if (value != null)
 				{
-					txtSupplyUnitName_Goods.Text = value.Name;
+					txtSupplyUnitName_Goods.Text = value.UnitName;
 				}
 				else
 				{
@@ -2362,11 +2358,11 @@ namespace CMCS.CarTransport.Weighter.Frms
 			}
 		}
 
-		private CmcsSupplier selectedReceiveUnit_Goods;
+		private CmcsSupplyReceive selectedReceiveUnit_Goods;
 		/// <summary>
 		/// 选择的收货单位
 		/// </summary>
-		public CmcsSupplier SelectedReceiveUnit_Goods
+		public CmcsSupplyReceive SelectedReceiveUnit_Goods
 		{
 			get { return selectedReceiveUnit_Goods; }
 			set
@@ -2375,7 +2371,7 @@ namespace CMCS.CarTransport.Weighter.Frms
 
 				if (value != null)
 				{
-					txtReceiveUnitName_Goods.Text = value.Name;
+					txtReceiveUnitName_Goods.Text = value.UnitName;
 				}
 				else
 				{
@@ -2507,7 +2503,7 @@ namespace CMCS.CarTransport.Weighter.Frms
 		#endregion
 
 		/// <summary>
-		/// 打印磅单
+		/// 入厂煤磅单
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
@@ -2515,10 +2511,24 @@ namespace CMCS.CarTransport.Weighter.Frms
 		{
 			GridRow grid = superGridControl2_BuyFuel.PrimaryGrid.ActiveRow as GridRow;
 			View_BuyFuelTransport entity = grid.DataItem as View_BuyFuelTransport;
+			if (entity == null) return;
 			CmcsBuyFuelTransport transport = commonDAO.SelfDber.Get<CmcsBuyFuelTransport>(entity.Id);
 			FrmPrintWeb frm = new FrmPrintWeb(transport);
 			frm.ShowDialog();
 		}
 
+		/// <summary>
+		/// 其他物资磅单
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void tsmiPrint_Goods_Click(object sender, EventArgs e)
+		{
+			GridRow grid = superGridControl2_Goods.PrimaryGrid.ActiveRow as GridRow;
+			CmcsGoodsTransport entity = grid.DataItem as CmcsGoodsTransport;
+			if (entity == null) return;
+			FrmPrintWeb frm = new FrmPrintWeb(null, entity);
+			frm.ShowDialog();
+		}
 	}
 }

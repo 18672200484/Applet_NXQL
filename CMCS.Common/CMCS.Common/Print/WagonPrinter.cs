@@ -140,7 +140,7 @@ namespace CMCS.Common.Print
 
 				g.DrawString(string.Format("签    字："), ContentFont, Brushes.Black, 30, TopValue);
 				TopValue += 34;
-
+				g.DrawString("", ContentFont, Brushes.Black, 30, TopValue);
 				#endregion
 			}
 			else if (this._GoodsTransport != null)
@@ -205,7 +205,7 @@ namespace CMCS.Common.Print
 
 				g.DrawString(string.Format("签    字："), ContentFont, Brushes.Black, 30, TopValue);
 				TopValue += 34;
-
+				g.DrawString("", ContentFont, Brushes.Black, 30, TopValue);
 				#endregion
 			}
 		}

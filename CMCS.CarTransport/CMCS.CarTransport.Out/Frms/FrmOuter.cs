@@ -1,32 +1,23 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.IO;
 using System.IO.Ports;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Windows.Forms;
+//
 using CMCS.CarTransport.DAO;
 using CMCS.CarTransport.Out.Core;
 using CMCS.CarTransport.Out.Enums;
 using CMCS.CarTransport.Out.Frms.Sys;
 using CMCS.Common;
 using CMCS.Common.DAO;
-using CMCS.Common.Entities;
 using CMCS.Common.Entities.CarTransport;
 using CMCS.Common.Entities.Sys;
 using CMCS.Common.Enums;
+using CMCS.Common.Print;
 using CMCS.Common.Utilities;
 using CMCS.Common.Views;
 using DevComponents.DotNetBar;
-using DevComponents.DotNetBar.Controls;
 using DevComponents.DotNetBar.SuperGrid;
-using LED.YB_Bx5K1;
-using CMCS.CarTransport.Out.Frms.Transport.Print;
-using CMCS.Common.Print;
 
 namespace CMCS.CarTransport.Out.Frms
 {

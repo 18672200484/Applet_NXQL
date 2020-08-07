@@ -390,7 +390,7 @@ namespace CMCS.CarTransport.DAO
 		/// <param name="remark">备注</param>
 		/// <param name="place">地点</param>
 		/// <returns></returns>
-		public bool JoinQueueGoodsTransport(CmcsAutotruck autotruck, CmcsSupplier supply, CmcsSupplier receive, CmcsGoodsType goodsType, DateTime inFactoryTime, string remark, string place, CmcsGoodsTransport transport = null)
+		public bool JoinQueueGoodsTransport(CmcsAutotruck autotruck, CmcsSupplyReceive supply, CmcsSupplyReceive receive, CmcsGoodsType goodsType, DateTime inFactoryTime, string remark, string place, CmcsGoodsTransport transport = null)
 		{
 			transport = new CmcsGoodsTransport
 			{
@@ -398,9 +398,9 @@ namespace CMCS.CarTransport.DAO
 				AutotruckId = autotruck.Id,
 				CarNumber = autotruck.CarNumber,
 				SupplyUnitId = supply.Id,
-				SupplyUnitName = supply.Name,
+				SupplyUnitName = supply.UnitName,
 				ReceiveUnitId = receive.Id,
-				ReceiveUnitName = receive.Name,
+				ReceiveUnitName = receive.UnitName,
 				GoodsTypeId = goodsType.Id,
 				GoodsTypeName = goodsType.GoodsName,
 				InFactoryTime = inFactoryTime,

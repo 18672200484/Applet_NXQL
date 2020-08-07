@@ -48,6 +48,10 @@ namespace CMCS.CarTransport.Weighter.Frms.Sys
 			this.btnApplicationExit = new DevComponents.DotNetBar.ButtonX();
 			this.btnOpenSetting = new DevComponents.DotNetBar.ButtonX();
 			this.timer_CurrentTime = new System.Windows.Forms.Timer(this.components);
+			this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
+			this.OpenSupplyReceiveLoad = new DevComponents.DotNetBar.ButtonItem();
+			this.OpenGoodsTypeLoad = new DevComponents.DotNetBar.ButtonItem();
+			this.OpenGoodsTransportLoad = new DevComponents.DotNetBar.ButtonItem();
 			this.tableLayoutPanel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.superTabControl1)).BeginInit();
 			this.superTabControl1.SuspendLayout();
@@ -180,6 +184,7 @@ namespace CMCS.CarTransport.Weighter.Frms.Sys
 			// 
 			this.panelEx2.CanvasColor = System.Drawing.SystemColors.Control;
 			this.panelEx2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.panelEx2.Controls.Add(this.buttonX1);
 			this.panelEx2.Controls.Add(this.btnDebugConsole);
 			this.panelEx2.Controls.Add(this.lblCurrentTime);
 			this.panelEx2.Controls.Add(this.btnApplicationExit);
@@ -202,7 +207,7 @@ namespace CMCS.CarTransport.Weighter.Frms.Sys
 			this.btnDebugConsole.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.btnDebugConsole.AutoExpandOnClick = true;
 			this.btnDebugConsole.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnDebugConsole.Location = new System.Drawing.Point(243, 9);
+			this.btnDebugConsole.Location = new System.Drawing.Point(230, 9);
 			this.btnDebugConsole.Name = "btnDebugConsole";
 			this.btnDebugConsole.Size = new System.Drawing.Size(108, 31);
 			this.btnDebugConsole.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -229,7 +234,7 @@ namespace CMCS.CarTransport.Weighter.Frms.Sys
 			this.btnApplicationExit.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.btnApplicationExit.AutoExpandOnClick = true;
 			this.btnApplicationExit.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnApplicationExit.Location = new System.Drawing.Point(357, 9);
+			this.btnApplicationExit.Location = new System.Drawing.Point(344, 9);
 			this.btnApplicationExit.Name = "btnApplicationExit";
 			this.btnApplicationExit.Size = new System.Drawing.Size(108, 31);
 			this.btnApplicationExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -243,7 +248,7 @@ namespace CMCS.CarTransport.Weighter.Frms.Sys
 			this.btnOpenSetting.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.btnOpenSetting.AutoExpandOnClick = true;
 			this.btnOpenSetting.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnOpenSetting.Location = new System.Drawing.Point(129, 9);
+			this.btnOpenSetting.Location = new System.Drawing.Point(116, 9);
 			this.btnOpenSetting.Name = "btnOpenSetting";
 			this.btnOpenSetting.Size = new System.Drawing.Size(108, 31);
 			this.btnOpenSetting.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -256,6 +261,44 @@ namespace CMCS.CarTransport.Weighter.Frms.Sys
 			this.timer_CurrentTime.Enabled = true;
 			this.timer_CurrentTime.Interval = 1000;
 			this.timer_CurrentTime.Tick += new System.EventHandler(this.timer_CurrentTime_Tick);
+			// 
+			// buttonX1
+			// 
+			this.buttonX1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonX1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.buttonX1.AutoExpandOnClick = true;
+			this.buttonX1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.buttonX1.Location = new System.Drawing.Point(2, 9);
+			this.buttonX1.Name = "buttonX1";
+			this.buttonX1.Size = new System.Drawing.Size(108, 31);
+			this.buttonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonX1.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.OpenSupplyReceiveLoad,
+            this.OpenGoodsTypeLoad,
+            this.OpenGoodsTransportLoad});
+			this.buttonX1.TabIndex = 21;
+			this.buttonX1.Text = "物 资 信 息";
+			// 
+			// OpenSupplyReceiveLoad
+			// 
+			this.OpenSupplyReceiveLoad.GlobalItem = false;
+			this.OpenSupplyReceiveLoad.Name = "OpenSupplyReceiveLoad";
+			this.OpenSupplyReceiveLoad.Text = "供货、收货单位";
+			this.OpenSupplyReceiveLoad.Click += new System.EventHandler(this.btnOpenSupplyReceiveLoad_Click);
+			// 
+			// OpenGoodsTypeLoad
+			// 
+			this.OpenGoodsTypeLoad.GlobalItem = false;
+			this.OpenGoodsTypeLoad.Name = "OpenGoodsTypeLoad";
+			this.OpenGoodsTypeLoad.Text = "物资类型";
+			this.OpenGoodsTypeLoad.Click += new System.EventHandler(this.btnOpenGoodsTypeLoad_Click);
+			// 
+			// OpenGoodsTransportLoad
+			// 
+			this.OpenGoodsTransportLoad.GlobalItem = false;
+			this.OpenGoodsTransportLoad.Name = "OpenGoodsTransportLoad";
+			this.OpenGoodsTransportLoad.Text = "物资运输记录";
+			this.OpenGoodsTransportLoad.Click += new System.EventHandler(this.btnOpenGoodsTransportLoad_Click);
 			// 
 			// FrmMainFrame
 			// 
@@ -300,6 +343,10 @@ namespace CMCS.CarTransport.Weighter.Frms.Sys
         private DevComponents.DotNetBar.SuperTabControlPanel superTabControlPanel2;
         private DevComponents.DotNetBar.SuperTabItem superTabItem2;
         private DevComponents.DotNetBar.ButtonX btnDebugConsole;
-    }
+		private DevComponents.DotNetBar.ButtonX buttonX1;
+		private DevComponents.DotNetBar.ButtonItem OpenSupplyReceiveLoad;
+		private DevComponents.DotNetBar.ButtonItem OpenGoodsTypeLoad;
+		private DevComponents.DotNetBar.ButtonItem OpenGoodsTransportLoad;
+	}
 }
 
