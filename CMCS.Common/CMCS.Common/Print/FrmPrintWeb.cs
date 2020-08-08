@@ -5,6 +5,9 @@ using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
 using CMCS.Common.Entities.CarTransport;
 using CMCS.Common.Enums;
+using System.Collections;
+using CMCS.Common.DAO;
+using System.Collections.Generic;
 
 namespace CMCS.Common.Print
 {
@@ -16,8 +19,8 @@ namespace CMCS.Common.Print
 		WagonPrinter wagonPrinter = null;
 		CmcsBuyFuelTransport _BuyFuelTransport = null;
 		CmcsGoodsTransport _GoodsTransport = null;
-		Font TitleFont = new Font("宋体", 14, FontStyle.Bold, GraphicsUnit.Pixel);
-		Font ContentFont = new Font("宋体", 12, FontStyle.Regular, GraphicsUnit.Pixel);
+		Font TitleFont = new Font("宋体", 18, FontStyle.Bold, GraphicsUnit.Pixel);
+		Font ContentFont = new Font("宋体", 14, FontStyle.Regular, GraphicsUnit.Pixel);
 
 		int PageIndex = 1;
 
@@ -70,6 +73,7 @@ namespace CMCS.Common.Print
 				TareWeight = this._BuyFuelTransport.TareWeight.ToString("F2").PadLeft(6, ' ');
 				SuttleWeight = this._BuyFuelTransport.SuttleWeight.ToString("F2").PadLeft(6, ' ');
 				DeductWeight = this._BuyFuelTransport.DeductWeight.ToString("F2").PadLeft(6, ' ');
+				List<CmcsBuyFuelTransportDeduct> deductlist = CommonDAO.GetInstance().SelfDber.Entities<CmcsBuyFuelTransportDeduct>("where TransportId=:Transportid order by CreationTime desc", new { Transportid = this._BuyFuelTransport.Id });
 				#region 入厂煤
 				// 行间距 24 
 				float TopValue = 53;
@@ -118,8 +122,13 @@ namespace CMCS.Common.Print
 				g.DrawString("皮重时间：" + this._BuyFuelTransport.TareTime.ToString("yyyy-MM-dd HH:mm"), ContentFont, Brushes.White, 30, TopValue);
 				TopValue += 24;
 
-				g.DrawString(string.Format("扣    吨：{0} 吨", DeductWeight), ContentFont, Brushes.White, 30, TopValue);
-				TopValue += 24;
+				int deductindex = 1;
+				foreach (CmcsBuyFuelTransportDeduct item in deductlist)
+				{
+					g.DrawString(string.Format("扣   吨{0}：{1} 吨 ({2})", deductindex, item.DeductWeight, item.DeductType), ContentFont, Brushes.White, 30, TopValue);
+					TopValue += 24;
+					deductindex++;
+				}
 
 				g.DrawString(string.Format("净    重：{0} 吨", SuttleWeight), ContentFont, Brushes.White, 30, TopValue);
 				TopValue += 24;

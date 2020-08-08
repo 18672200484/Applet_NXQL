@@ -1,21 +1,15 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.IO;
 using System.IO.Ports;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Windows.Forms;
+//
 using CMCS.CarTransport.DAO;
 using CMCS.CarTransport.JxSampler.Core;
 using CMCS.CarTransport.JxSampler.Enums;
 using CMCS.CarTransport.JxSampler.Frms.Sys;
 using CMCS.Common;
 using CMCS.Common.DAO;
-using CMCS.Common.Entities;
 using CMCS.Common.Entities.BaseInfo;
 using CMCS.Common.Entities.CarTransport;
 using CMCS.Common.Entities.Fuel;
@@ -934,17 +928,18 @@ namespace CMCS.CarTransport.JxSampler.Frms
 						break;
 					case eFlowFlag.等待到位:
 						#region
-						bool IsArrive = false;
-						if (this.CurrentAutotruck.CarriageLength >= 9000 && this.InfraredSensor1)
+						bool IsArrive = false, ChaoShenBo = false;
+						ChaoShenBo = commonDAO.GetSignalDataValue(this.SamplerMachineCode, eSignalDataName.超声波就位.ToString()) == "0";
+						if (this.CurrentAutotruck.CarriageLength >= 11000 && this.InfraredSensor1)
 						{
 							IsArrive = true;
 						}
-						else if (this.CurrentAutotruck.CarriageLength < 9000 && !this.InfraredSensor1 && this.InfraredSensor2)
+						else if (this.CurrentAutotruck.CarriageLength < 11000 && !this.InfraredSensor1 && this.InfraredSensor2)
 						{
 							IsArrive = true;
 						}
 
-						if (IsArrive)
+						if (IsArrive && ChaoShenBo)
 						{
 							UpdateLedShow("请熄火下车 开始采样");
 							this.voiceSpeaker.Speak("请熄火下车 开始采样");
@@ -953,8 +948,16 @@ namespace CMCS.CarTransport.JxSampler.Frms
 						}
 						else
 						{
-							UpdateLedShow("停车不到位");
-							this.voiceSpeaker.Speak("停车不到位");
+							if (!ChaoShenBo)
+							{
+								UpdateLedShow("超声波被遮挡");
+								this.voiceSpeaker.Speak("超声波被遮挡");
+							}
+							else
+							{
+								UpdateLedShow("停车不到位");
+								this.voiceSpeaker.Speak("停车不到位");
+							}
 							timer1.Interval = 4000;
 						}
 						#endregion

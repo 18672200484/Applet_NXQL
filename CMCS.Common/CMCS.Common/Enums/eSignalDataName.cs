@@ -65,6 +65,10 @@ namespace CMCS.Common.Enums
         IO控制器_连接状态,
         毛重,
         皮重,
-        #endregion
-    }
+		#endregion
+
+		#region 汽车机械采样机
+		超声波就位,
+		#endregion
+	}
 }

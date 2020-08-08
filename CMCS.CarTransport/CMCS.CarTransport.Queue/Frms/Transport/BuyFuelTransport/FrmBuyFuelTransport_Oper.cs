@@ -252,9 +252,8 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
 				CmcsInFactoryBatch inFactoryBatch = carTransportDAO.GCQCInFactoryBatchByBuyFuelTransport(CmcsBuyFuelTransport);
 				if (inFactoryBatch != null)
 				{
-					//commonDAO.SaveModifyLog<CmcsBuyFuelTransport>(CmcsBuyFuelTransport, "入厂煤运输记录", SelfVars.LoginUser != null ? SelfVars.LoginUser.UserName : "admin");
 					//扣吨量
-					CmcsBuyFuelTransport.DeductWeight = WeighterDAO.GetInstance().GetDeductWeight(CmcsBuyFuelTransport.Id);
+					CmcsBuyFuelTransport.DeductWeight = WeighterDAO.GetInstance().GetDeductWeightWithOutAuto(CmcsBuyFuelTransport.Id);
 
 					if (CmcsBuyFuelTransport.GrossWeight > 0 && CmcsBuyFuelTransport.TareWeight > 0)
 					{
@@ -265,17 +264,26 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
 						}
 						else if (CmcsBuyFuelTransport.TicketWeight > 0 && CmcsBuyFuelTransport.TicketWeight < (CmcsBuyFuelTransport.GrossWeight - CmcsBuyFuelTransport.TareWeight))
 						{
-							CmcsBuyFuelTransport.SuttleWeight = CmcsBuyFuelTransport.TicketWeight - CmcsBuyFuelTransport.DeductWeight;
-							decimal KgWeight = CmcsBuyFuelTransport.GrossWeight - CmcsBuyFuelTransport.TareWeight - CmcsBuyFuelTransport.TicketWeight;
-							CmcsBuyFuelTransportDeduct deduct = new CmcsBuyFuelTransportDeduct();
-							deduct.TransportId = CmcsBuyFuelTransport.Id;
-							deduct.DeductType = "扣矸";
-							deduct.DeductWeight = KgWeight;
-							deduct.Remark = "自动抹平";
-							Dbers.GetInstance().SelfDber.Insert(deduct);
+							CmcsBuyFuelTransportDeduct deduct = commonDAO.SelfDber.Entity<CmcsBuyFuelTransportDeduct>("where TransportId=:TransportId and DeductType = '磅差'", new { TransportId = CmcsBuyFuelTransport.Id });
+							decimal KgWeight = CmcsBuyFuelTransport.GrossWeight - CmcsBuyFuelTransport.TareWeight - CmcsBuyFuelTransport.TicketWeight + 0.1m;
+							CmcsBuyFuelTransport.SuttleWeight = CmcsBuyFuelTransport.TicketWeight - 0.1m - CmcsBuyFuelTransport.DeductWeight;
+							if (deduct == null)
+							{
+								deduct = new CmcsBuyFuelTransportDeduct();
+								deduct.TransportId = CmcsBuyFuelTransport.Id;
+								deduct.DeductType = "磅差";
+								deduct.DeductWeight = KgWeight;
+								Dbers.GetInstance().SelfDber.Insert(deduct);
+							}
+							else if (deduct != null && deduct.DeductWeight != KgWeight)
+							{
+								deduct.DeductWeight = KgWeight;
+								Dbers.GetInstance().SelfDber.Update(deduct);
+							}
+							CmcsBuyFuelTransport.DeductWeight += KgWeight;
 						}
 					}
-
+					CmcsBuyFuelTransport.IsSyncBatch = 0;
 					Dbers.GetInstance().SelfDber.Update(CmcsBuyFuelTransport, GlobalVars.LoginUser != null ? GlobalVars.LoginUser.UserName : "admin");
 				}
 			}

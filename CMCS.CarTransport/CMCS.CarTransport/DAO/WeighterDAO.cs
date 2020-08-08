@@ -91,19 +91,35 @@ namespace CMCS.CarTransport.DAO
 				transport.TareTime = dt;
 				transport.OutFactoryTime = dt;
 				//扣吨量
-				transport.DeductWeight = GetDeductWeight(transport.Id);
-				transport.SuttleWeight = transport.GrossWeight - transport.TareWeight - transport.DeductWeight;
-				if (transport.TicketWeight == 0) transport.TicketWeight = transport.SuttleWeight;
-				else if (transport.TicketWeight > 0 && transport.TicketWeight < (transport.GrossWeight - transport.TareWeight))
+				transport.DeductWeight = GetDeductWeightWithOutAuto(transport.Id);
+
+				if (transport.GrossWeight > 0 && transport.TareWeight > 0)
 				{
-					transport.SuttleWeight = transport.TicketWeight - transport.DeductWeight;
-					decimal KgWeight = transport.GrossWeight - transport.TareWeight - transport.TicketWeight;
-					CmcsBuyFuelTransportDeduct deduct = new CmcsBuyFuelTransportDeduct();
-					deduct.TransportId = transport.Id;
-					deduct.DeductType = "扣矸";
-					deduct.DeductWeight = KgWeight;
-					deduct.Remark = "自动抹平";
-					SelfDber.Insert(deduct);
+					if (transport.TicketWeight == 0)
+					{
+						transport.SuttleWeight = transport.GrossWeight - transport.TareWeight - transport.DeductWeight;
+						transport.TicketWeight = transport.SuttleWeight;
+					}
+					else if (transport.TicketWeight > 0 && transport.TicketWeight < (transport.GrossWeight - transport.TareWeight))
+					{
+						CmcsBuyFuelTransportDeduct deduct = commonDAO.SelfDber.Entity<CmcsBuyFuelTransportDeduct>("where TransportId=:TransportId and DeductType = '磅差'", new { TransportId = transport.Id });
+						decimal KgWeight = transport.GrossWeight - transport.TareWeight - transport.TicketWeight + 0.1m;
+						transport.SuttleWeight = transport.TicketWeight - 0.1m - transport.DeductWeight;
+						if (deduct == null)
+						{
+							deduct = new CmcsBuyFuelTransportDeduct();
+							deduct.TransportId = transport.Id;
+							deduct.DeductType = "磅差";
+							deduct.DeductWeight = KgWeight;
+							Dbers.GetInstance().SelfDber.Insert(deduct);
+						}
+						else if (deduct != null && deduct.DeductWeight != KgWeight)
+						{
+							deduct.DeductWeight = KgWeight;
+							Dbers.GetInstance().SelfDber.Update(deduct);
+						}
+						transport.DeductWeight += KgWeight;
+					}
 				}
 				// 回皮即完结
 				transport.IsFinish = 1;
@@ -127,7 +143,22 @@ namespace CMCS.CarTransport.DAO
 		public decimal GetDeductWeight(string transportId)
 		{
 			decimal DeductWeight = 0;
-			List<CmcsBuyFuelTransportDeduct> listDeducts = SelfDber.Entities<CmcsBuyFuelTransportDeduct>("where TransportId=:TransportId and Remark!='自动抹平'", new { TransportId = transportId });
+			List<CmcsBuyFuelTransportDeduct> listDeducts = SelfDber.Entities<CmcsBuyFuelTransportDeduct>("where TransportId=:TransportId ", new { TransportId = transportId });
+			if (listDeducts.Count > 0)
+				DeductWeight = listDeducts.Sum(a => a.DeductWeight);
+
+			return DeductWeight;
+		}
+
+		/// <summary>
+		/// 获取扣吨量(不包括自动扣磅差)
+		/// </summary>
+		/// <param name="transportId"></param>
+		/// <returns></returns>
+		public decimal GetDeductWeightWithOutAuto(string transportId)
+		{
+			decimal DeductWeight = 0;
+			List<CmcsBuyFuelTransportDeduct> listDeducts = SelfDber.Entities<CmcsBuyFuelTransportDeduct>("where TransportId=:TransportId and DeductType!='磅差'", new { TransportId = transportId });
 			if (listDeducts.Count > 0)
 				DeductWeight = listDeducts.Sum(a => a.DeductWeight);
 
