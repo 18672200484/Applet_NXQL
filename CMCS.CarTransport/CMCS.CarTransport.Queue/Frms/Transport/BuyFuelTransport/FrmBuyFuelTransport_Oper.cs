@@ -257,12 +257,13 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
 
 					if (CmcsBuyFuelTransport.GrossWeight > 0 && CmcsBuyFuelTransport.TareWeight > 0)
 					{
+						CmcsBuyFuelTransport.SuttleWeight = CmcsBuyFuelTransport.GrossWeight - CmcsBuyFuelTransport.TareWeight - CmcsBuyFuelTransport.DeductWeight;
 						if (CmcsBuyFuelTransport.TicketWeight == 0)
 						{
 							CmcsBuyFuelTransport.SuttleWeight = CmcsBuyFuelTransport.GrossWeight - CmcsBuyFuelTransport.TareWeight - CmcsBuyFuelTransport.DeductWeight;
 							CmcsBuyFuelTransport.TicketWeight = CmcsBuyFuelTransport.SuttleWeight;
 						}
-						else if (CmcsBuyFuelTransport.TicketWeight > 0 && CmcsBuyFuelTransport.TicketWeight < (CmcsBuyFuelTransport.GrossWeight - CmcsBuyFuelTransport.TareWeight))
+						else if (CmcsBuyFuelTransport.TicketWeight > 0 && CmcsBuyFuelTransport.TicketWeight <= (CmcsBuyFuelTransport.GrossWeight - CmcsBuyFuelTransport.TareWeight))
 						{
 							CmcsBuyFuelTransportDeduct deduct = commonDAO.SelfDber.Entity<CmcsBuyFuelTransportDeduct>("where TransportId=:TransportId and DeductType = '°õ²î'", new { TransportId = CmcsBuyFuelTransport.Id });
 							decimal KgWeight = CmcsBuyFuelTransport.GrossWeight - CmcsBuyFuelTransport.TareWeight - CmcsBuyFuelTransport.TicketWeight + 0.1m;

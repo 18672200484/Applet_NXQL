@@ -930,11 +930,11 @@ namespace CMCS.CarTransport.JxSampler.Frms
 						#region
 						bool IsArrive = false, ChaoShenBo = false;
 						ChaoShenBo = commonDAO.GetSignalDataValue(this.SamplerMachineCode, eSignalDataName.超声波就位.ToString()) == "0";
-						if (this.CurrentAutotruck.CarriageLength >= 11000 && this.InfraredSensor1)
+						if (this.CurrentAutotruck.CarriageLength > 11000 && this.InfraredSensor1)
 						{
 							IsArrive = true;
 						}
-						else if (this.CurrentAutotruck.CarriageLength < 11000 && !this.InfraredSensor1 && this.InfraredSensor2)
+						else if (this.CurrentAutotruck.CarriageLength <= 11000 && !this.InfraredSensor1 && this.InfraredSensor2)
 						{
 							IsArrive = true;
 						}
@@ -955,8 +955,8 @@ namespace CMCS.CarTransport.JxSampler.Frms
 							}
 							else
 							{
-								UpdateLedShow("停车不到位");
-								this.voiceSpeaker.Speak("停车不到位");
+								UpdateLedShow("停车不到位","请前移");
+								this.voiceSpeaker.Speak("停车不到位 请往前开");
 							}
 							timer1.Interval = 4000;
 						}

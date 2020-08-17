@@ -1451,11 +1451,11 @@ namespace CMCS.CarTransport.Queue.Frms
 								}
 							}
 
-							this.SelectedFuelKind_BuyFuel = Dbers.GetInstance().SelfDber.Get<CmcsFuelKind>(this.CurrInNetTransport.FuelKindId);
-							this.SelectedMine_BuyFuel = Dbers.GetInstance().SelfDber.Get<CmcsMine>(this.CurrInNetTransport.MineId);
-							this.SelectedSupplier_BuyFuel = Dbers.GetInstance().SelfDber.Get<CmcsSupplier>(this.CurrInNetTransport.SupplierId);
-							this.SelectedTransportCompany_BuyFuel = Dbers.GetInstance().SelfDber.Get<CmcsTransportCompany>(this.CurrInNetTransport.TransportCompanyId);
-							txtTicketWeight_BuyFuel.Value = (double)this.CurrInNetTransport.TicketWeight;
+							//this.SelectedFuelKind_BuyFuel = Dbers.GetInstance().SelfDber.Get<CmcsFuelKind>(this.CurrInNetTransport.FuelKindId);
+							//this.SelectedMine_BuyFuel = Dbers.GetInstance().SelfDber.Get<CmcsMine>(this.CurrInNetTransport.MineId);
+							//this.SelectedSupplier_BuyFuel = Dbers.GetInstance().SelfDber.Get<CmcsSupplier>(this.CurrInNetTransport.SupplierId);
+							//this.SelectedTransportCompany_BuyFuel = Dbers.GetInstance().SelfDber.Get<CmcsTransportCompany>(this.CurrInNetTransport.TransportCompanyId);
+							//txtTicketWeight_BuyFuel.Value = (double)this.CurrInNetTransport.TicketWeight;
 						}
 
 						if (this.AutoHandMode)

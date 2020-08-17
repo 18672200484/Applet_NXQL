@@ -139,6 +139,8 @@ namespace CMCS.CarTransport.Weighter.Frms
 			SelectedComboBoxItem(cmbWberStopBits, commonDAO.GetAppletConfigInt32("地磅仪表_停止位").ToString());
 			SelectedComboBoxItem(cmbWberParity, commonDAO.GetAppletConfigInt32("地磅仪表_校验位").ToString());
 			dbtxtMinWeight.Value = commonDAO.GetAppletConfigDouble("地磅仪表_最小称重");
+			dbtxtGrossMinWeight.Value = commonDAO.GetAppletConfigDouble("地磅仪表_毛重最小称重");
+			dbtxtTareMinWeight.Value = commonDAO.GetAppletConfigDouble("地磅仪表_皮重最小称重");
 
 			// 读卡器
 			ip_Rwer1.Value = commonDAO.GetAppletConfigString("读卡器1_IP地址");
@@ -224,6 +226,8 @@ namespace CMCS.CarTransport.Weighter.Frms
 			commonDAO.SetAppletConfig("地磅仪表_停止位", (cmbWberStopBits.SelectedItem as DataItem).Value);
 			commonDAO.SetAppletConfig("地磅仪表_校验位", (cmbWberParity.SelectedItem as DataItem).Value);
 			commonDAO.SetAppletConfig("地磅仪表_最小称重", dbtxtMinWeight.Value.ToString());
+			commonDAO.SetAppletConfig("地磅仪表_毛重最小称重", dbtxtGrossMinWeight.Value.ToString());
+			commonDAO.SetAppletConfig("地磅仪表_皮重最小称重", dbtxtTareMinWeight.Value.ToString());
 
 			// 读卡器
 			commonDAO.SetAppletConfig("读卡器1_IP地址", ip_Rwer1.Value);

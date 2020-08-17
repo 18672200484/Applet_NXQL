@@ -1664,6 +1664,12 @@ namespace CMCS.CarTransport.Weighter.Frms
 				if (Weight < (decimal)this.WbMinWeight) return false;
 				if (this.CurrentBuyFuelTransport.StepName == eTruckInFactoryStep.重车.ToString())
 				{
+					if (Weight < (decimal)commonDAO.GetAppletConfigDouble("地磅仪表_皮重最小称重"))
+					{
+						UpdateLedShow("重量低于最小皮重");
+						this.voiceSpeaker.Speak("重量低于最小皮重 称重失败");
+						return false;
+					}
 					//启用净重超差
 					if (this.IsTicketDiff && this.CurrentBuyFuelTransport.TicketWeight > 0)
 					{
@@ -1676,6 +1682,15 @@ namespace CMCS.CarTransport.Weighter.Frms
 							this.voiceSpeaker.Speak(this.CurrentAutotruck.CarNumber + "净重超差：" + diffValue + "吨", 1, false);
 							return false;
 						}
+					}
+				}
+				else if (this.CurrentBuyFuelTransport.StepName == eTruckInFactoryStep.采样.ToString())
+				{
+					if (Weight < (decimal)commonDAO.GetAppletConfigDouble("地磅仪表_毛重最小称重"))
+					{
+						UpdateLedShow("重量低于最小毛重");
+						this.voiceSpeaker.Speak("重量低于最小毛重 称重失败");
+						return false;
 					}
 				}
 
@@ -1790,7 +1805,8 @@ namespace CMCS.CarTransport.Weighter.Frms
 							{
 								// 判断路线设置
 								string nextPlace;
-								if (carTransportDAO.CheckNextTruckInFactoryWay(this.CurrentAutotruck.CarType, this.CurrentBuyFuelTransport.StepName, "重车|轻车", CommonAppConfig.GetInstance().AppIdentifier, out nextPlace))
+								//if (carTransportDAO.CheckNextTruckInFactoryWay(this.CurrentAutotruck.CarType, this.CurrentBuyFuelTransport.StepName, "重车|轻车", CommonAppConfig.GetInstance().AppIdentifier, out nextPlace))
+								if (!string.IsNullOrEmpty(this.CurrentBuyFuelTransport.SamplePlace))
 								{
 									if (this.CurrentBuyFuelTransport.SuttleWeight == 0)
 									{
@@ -1811,8 +1827,10 @@ namespace CMCS.CarTransport.Weighter.Frms
 								}
 								else
 								{
-									UpdateLedShow("路线错误", "禁止通过");
-									this.voiceSpeaker.Speak("路线错误 禁止通过 " + (!string.IsNullOrEmpty(nextPlace) ? "请前往" + nextPlace : ""), 1, false);
+									//UpdateLedShow("路线错误", "禁止通过");
+									//this.voiceSpeaker.Speak("路线错误 禁止通过 " + (!string.IsNullOrEmpty(nextPlace) ? "请前往" + nextPlace : ""), 1, false);
+									UpdateLedShow("未采样禁止通过");
+									this.voiceSpeaker.Speak("未采样 禁止通过");
 									this.CurrentFlowFlag = eFlowFlag.等待离开;
 									timer_BuyFuel.Interval = 20000;
 								}

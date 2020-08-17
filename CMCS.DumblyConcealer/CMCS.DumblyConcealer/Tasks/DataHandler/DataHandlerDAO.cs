@@ -76,10 +76,9 @@ namespace CMCS.DumblyConcealer.Tasks.DataHandler
 					truck.SkinQty = transport.TareWeight;
 					truck.SuttleQty = transport.SuttleWeight;
 					truck.KgQty = transport.DeductWeight;
-					truck.CheckQty = transport.SuttleWeight - transport.DeductWeight;
-					truck.MarginQty = transport.SuttleWeight - transport.DeductWeight - transport.TicketWeight;
+					truck.CheckQty = transport.SuttleWeight;
+					truck.MarginQty = transport.SuttleWeight - transport.TicketWeight;
 					truck.InFactoryBatchId = batch.Id;
-					truck.PKID = transport.Id;
 					truck.DataFrom = "汽车智能化";
 					succes = commonDAO.SelfDber.Update(truck) > 0;
 				}
@@ -89,7 +88,7 @@ namespace CMCS.DumblyConcealer.Tasks.DataHandler
 					{
 						TransportNo = transport.CarNumber,
 						LastModificAtionTime = transport.LastModificAtionTime,
-						InfactoryTime = transport.CreationTime,
+						InfactoryTime = transport.InFactoryTime,
 						ArriveDate = transport.GrossTime,
 						TareDate = transport.TareTime,
 						OutfactoryTime = transport.OutFactoryTime == null ? DateTime.MinValue : transport.OutFactoryTime,
@@ -98,8 +97,8 @@ namespace CMCS.DumblyConcealer.Tasks.DataHandler
 						SkinQty = transport.TareWeight,
 						SuttleQty = transport.SuttleWeight,
 						KgQty = transport.DeductWeight,
-						CheckQty = transport.SuttleWeight - transport.DeductWeight,
-						MarginQty = transport.SuttleWeight - transport.DeductWeight - transport.TicketWeight,
+						CheckQty = transport.SuttleWeight,
+						MarginQty = transport.SuttleWeight - transport.TicketWeight,
 						InFactoryBatchId = batch.Id,
 						PKID = transport.Id,
 						DataFrom = "汽车智能化"

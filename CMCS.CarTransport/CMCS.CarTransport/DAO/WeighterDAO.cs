@@ -92,7 +92,7 @@ namespace CMCS.CarTransport.DAO
 				transport.OutFactoryTime = dt;
 				//扣吨量
 				transport.DeductWeight = GetDeductWeightWithOutAuto(transport.Id);
-
+				transport.SuttleWeight = transport.GrossWeight - transport.TareWeight - transport.DeductWeight;
 				if (transport.GrossWeight > 0 && transport.TareWeight > 0)
 				{
 					if (transport.TicketWeight == 0)
@@ -100,7 +100,7 @@ namespace CMCS.CarTransport.DAO
 						transport.SuttleWeight = transport.GrossWeight - transport.TareWeight - transport.DeductWeight;
 						transport.TicketWeight = transport.SuttleWeight;
 					}
-					else if (transport.TicketWeight > 0 && transport.TicketWeight < (transport.GrossWeight - transport.TareWeight))
+					else if (transport.TicketWeight > 0 && transport.TicketWeight <= (transport.GrossWeight - transport.TareWeight))
 					{
 						CmcsBuyFuelTransportDeduct deduct = commonDAO.SelfDber.Entity<CmcsBuyFuelTransportDeduct>("where TransportId=:TransportId and DeductType = '磅差'", new { TransportId = transport.Id });
 						decimal KgWeight = transport.GrossWeight - transport.TareWeight - transport.TicketWeight + 0.1m;
