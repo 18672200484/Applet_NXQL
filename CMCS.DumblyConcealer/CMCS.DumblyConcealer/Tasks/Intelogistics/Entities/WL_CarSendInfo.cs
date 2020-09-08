@@ -20,7 +20,7 @@ namespace CMCS.DumblyConcealer.Tasks.Intelogistics.Entities
         public string 所属单位名称 { get; set; }
         public string 供应商名称 { get; set; }
         public string 矿点名称 { get; set; }
-        public string 物料名称 { get; set; }
+        public string 品种名称 { get; set; }
         public string 承运商名称 { get; set; }
         public string 车牌号 { get; set; }
         public string 驾驶员身份证 { get; set; }

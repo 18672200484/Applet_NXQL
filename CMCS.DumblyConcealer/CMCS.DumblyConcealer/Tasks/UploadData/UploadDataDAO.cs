@@ -50,7 +50,7 @@ namespace CMCS.DumblyConcealer.Tasks.UploadData
 				output("未在【小程序参数配置】模块中添加配置“接口地址”", eOutputType.Error);
 				return;
 			}
-
+			
 			OracleDapperDber thirdDber = new OracleDapperDber(interfaceUrl);
 
 			foreach (var item in list)
@@ -392,8 +392,8 @@ values ('{0}', sysdate, 1, 0, '{1}', 1, '{2}', 0, '集团接口', '-1', 0, '{1}'
 
 						}
 						else //新增
-							sql = string.Format(@"insert into fultbtransportcompany (ID, CREATIONTIME, CREATORUSERID, ISDELETED, CODE, NAME, ISSTOP, DATAFROM, SYNCFLAG, DATAFLAG, SYNCTIME)
-values ('{0}', sysdate, 1, 0, '{1}', '{2}', 0, '集团接口', 0, 0, sysdate)", Guid.NewGuid().ToString(), item["NEWCODE"], item["NEWNAME"]);
+							sql = string.Format(@"insert into fultbtransportcompany (ID, CREATIONTIME, CREATORUSERID, ISDELETED, CODE, NAME, ISSTOP, DATAFROM, SYNCFLAG, SYNCTIME)
+values ('{0}', sysdate, 1, 0, '{1}', '{2}', 0, '集团接口', 0, sysdate)", Guid.NewGuid().ToString(), item["NEWCODE"], item["NEWNAME"]);
 					}
 					else if (item["DONGZ"].ToString() == "更新")
 						sql = string.Format("update fultbtransportcompany set name='{0}',code='{1}',SYNCTIME=sysdate where name='{2}' and code='{3}'", item["NEWNAME"], item["NEWCODE"], item["OLDNAME"], item["OLDCODE"]);
@@ -455,18 +455,25 @@ values ('{0}', sysdate, 1, 0, '{1}', 1, '{2}', 0, '集团接口', '-1', 0, '{1}'
 				Int32.TryParse(configValue, out intervalValue);
 			DateTime startTime = DateTime.Now.AddDays(-intervalValue);
 
-			string searchSql = string.Format("select * from V_JK_HUAY where RIQ>=to_date('{0}','yyyy-MM-dd hh24:mi:ss')", startTime.ToString("yyyy-MM-dd HH:mm:ss"));
+			string searchSql = string.Format("select * from V_JK_HUAY where assaycode like 'Z%' and RIQ>=to_date('{0}','yyyy-MM-dd hh24:mi:ss')", startTime.ToString("yyyy-MM-dd HH:mm:ss"));
 			DataTable dt = thirdDber.ExecuteDataTable(searchSql);
 			if (dt == null || dt.Rows.Count <= 0)
 				return;
 
 			foreach (DataRow item in dt.Rows)
 			{
-				string assaySql = string.Format("update cmcstbassay set ASSAYDATE=to_date('{0}','yyyy-MM-dd hh24:mi:ss'),ASSAYPLE='{1}' where ASSAYCODE='{2}'", item["RIQ"], item["HUYY"], item["ASSAYCODE"]);
-				string qualitySql = string.Format(@"update fultbfuelquality t set t.mt={0},t.mad={1},t.ad={2},t.aar={3},t.aad={4},t.vad={5},t.vdaf={6},t.std={7},t.stad={8},t.had={9},t.hdaf={10},t.qnetarmj={11},t.qbad={12},t.qgrd={13},t.qgrad={14} where t.id in(select FUELQUALITYID from cmcstbassay where ASSAYCODE='{15}')", item["MT"], item["MAD"], item["AD"], item["AAR"], item["AAD"], item["VAD"], item["VDAF"], item["STD"], item["STAD"], item["HAD"], item["HDAF"], item["QNETAR"], item["QBAD"], item["QGRD"], item["QGRAD"], item["ASSAYCODE"]);
+				string assaycode = string.Empty;
+				DataTable assaydata = SelfDber.ExecuteDataTable(string.Format("select b.assaycode from cmcstbmake a inner join cmcstbassay b on a.id=b.makeid where a.makecode='{0}'", item["ASSAYCODE"]));
+				if (assaydata != null && assaydata.Rows.Count > 0)
+				{
+					assaycode = assaydata.Rows[0][0].ToString();
+				}
+				if (string.IsNullOrEmpty(assaycode)) continue;
+				string assaySql = string.Format("update cmcstbassay set ASSAYDATE=to_date('{0}','yyyy-MM-dd hh24:mi:ss'),ASSAYPLE='{1}' where ASSAYCODE='{2}'", item["RIQ"], item["HUYY"], assaycode);
+				string qualitySql = string.Format(@"update fultbfuelquality t set t.mt={0},t.mad={1},t.ad={2},t.aar={3},t.aad={4},t.vad={5},t.vdaf={6},t.std={7},t.stad={8},t.had={9},t.hdaf={10},t.qnetarmj={11},t.qbad={12},t.qgrd={13},t.qgrad={14} where t.id in(select FUELQUALITYID from cmcstbassay where ASSAYCODE='{15}')", item["MT"], item["MAD"], item["AD"], item["AAR"], item["AAD"], item["VAD"], item["VDAF"], item["STD"], item["STAD"], item["HAD"], item["HDAF"], item["QNETAR"], item["QBAD"], item["QGRD"], item["QGRAD"], assaycode);
 
 				if (SelfDber.Execute(assaySql) + SelfDber.Execute(qualitySql) > 0)
-					output(string.Format("化验编码：{0}，煤质信息同步成功！", item["ASSAYCODE"]), eOutputType.Normal);
+					output(string.Format("化验编码：{0}，煤质信息同步成功！", assaycode), eOutputType.Normal);
 			}
 
 		}

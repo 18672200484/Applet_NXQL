@@ -848,26 +848,35 @@ namespace CMCS.CarTransport.JxSampler.Frms
 										this.CurrentBuyFuelTransport = carTransportDAO.GetBuyFuelTransportById(unFinishTransport.TransportId);
 										if (this.CurrentBuyFuelTransport != null)
 										{
-											// 判断路线设置
-											string nextPlace;
-											if (carTransportDAO.CheckNextTruckInFactoryWay(this.CurrentAutotruck.CarType, this.CurrentBuyFuelTransport.StepName, "采样", CommonAppConfig.GetInstance().AppIdentifier, out nextPlace))
+											if (this.CurrentBuyFuelTransport.IsRefuse == 0)
 											{
-												BackGateUp();
+												// 判断路线设置
+												string nextPlace;
+												if (carTransportDAO.CheckNextTruckInFactoryWay(this.CurrentAutotruck.CarType, this.CurrentBuyFuelTransport.StepName, "采样", CommonAppConfig.GetInstance().AppIdentifier, out nextPlace))
+												{
+													BackGateUp();
 
-												btnSendSamplingPlan.Enabled = true;
+													btnSendSamplingPlan.Enabled = true;
 
-												this.CurrentFlowFlag = eFlowFlag.等待驶入;
-												timer1.Interval = 1000;
+													this.CurrentFlowFlag = eFlowFlag.等待驶入;
+													timer1.Interval = 1000;
 
-												UpdateLedShow(this.CurrentAutotruck.CarNumber, " 驶至采样区域");
-												this.voiceSpeaker.Speak(this.CurrentAutotruck.CarNumber + " 请行驶至采样区域", 1, false);
+													UpdateLedShow(this.CurrentAutotruck.CarNumber, " 驶至采样区域");
+													this.voiceSpeaker.Speak(this.CurrentAutotruck.CarNumber + " 请行驶至采样区域", 1, false);
+												}
+												else
+												{
+													UpdateLedShow("路线错误", "禁止通过");
+													this.voiceSpeaker.Speak("路线错误 禁止通过 " + (!string.IsNullOrEmpty(nextPlace) ? "请前往" + nextPlace : ""), 1, false);
+													this.CurrentImperfectCar = null;
+													timer1.Interval = 20000;
+												}
 											}
 											else
 											{
-												UpdateLedShow("路线错误", "禁止通过");
-												this.voiceSpeaker.Speak("路线错误 禁止通过 " + (!string.IsNullOrEmpty(nextPlace) ? "请前往" + nextPlace : ""), 1, false);
+												UpdateLedShow(this.CurrentAutotruck.CarNumber, "车辆已拒收");
+												this.voiceSpeaker.Speak(this.CurrentAutotruck.CarNumber + " 车辆已拒收 请出厂", 1, false);
 												this.CurrentImperfectCar = null;
-												timer1.Interval = 20000;
 											}
 										}
 										else
@@ -950,13 +959,21 @@ namespace CMCS.CarTransport.JxSampler.Frms
 						{
 							if (!ChaoShenBo)
 							{
-								UpdateLedShow("超声波被遮挡");
-								this.voiceSpeaker.Speak("超声波被遮挡");
+								UpdateLedShow("超声波被遮挡", "请往前开");
+								this.voiceSpeaker.Speak("超声波被遮挡 请往前开");
 							}
-							else
+							else if (!IsArrive)
 							{
-								UpdateLedShow("停车不到位","请前移");
-								this.voiceSpeaker.Speak("停车不到位 请往前开");
+								if ((this.CurrentAutotruck.CarriageLength > 11000 && !this.InfraredSensor1) || (this.CurrentAutotruck.CarriageLength <= 11000 && !this.InfraredSensor2))
+								{
+									UpdateLedShow("停车不到位", "请前移");
+									this.voiceSpeaker.Speak("停车不到位 请往前开");
+								}
+								else if (this.CurrentAutotruck.CarriageLength <= 11000 && this.InfraredSensor1)
+								{
+									UpdateLedShow("停车不到位", "请后移");
+									this.voiceSpeaker.Speak("停车不到位 请往后开");
+								}
 							}
 							timer1.Interval = 4000;
 						}

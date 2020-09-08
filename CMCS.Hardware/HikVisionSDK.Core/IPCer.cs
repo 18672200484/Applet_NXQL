@@ -206,7 +206,7 @@ namespace HikVisionSDK.Core
         #region 布放回调
 
         /// <summary>
-        /// 
+        /// 回调函数
         /// </summary>
         /// <param name="lCommand">报警消息类型</param>
         /// <param name="pAlarmer">报警设备信息</param>
@@ -292,7 +292,7 @@ namespace HikVisionSDK.Core
             //报警设备IP地址
             string strIP = System.Text.Encoding.UTF8.GetString(pAlarmer.sDeviceIP).TrimEnd('\0');
 
-            //上传结果
+            //车牌信息
             string stringPlateLicense = System.Text.Encoding.GetEncoding("GBK").GetString(struPlateResultInfo.struPlateInfo.sLicense).TrimEnd('\0').Replace("无车牌", "");
             if (!string.IsNullOrEmpty(stringPlateLicense))
             {

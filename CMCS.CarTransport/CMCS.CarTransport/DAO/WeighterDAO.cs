@@ -82,6 +82,12 @@ namespace CMCS.CarTransport.DAO
 				transport.GrossWeight = weight;
 				transport.GrossPlace = place;
 				transport.GrossTime = dt;
+				CmcsInNetTransport inNetTransport = SelfDber.Get<CmcsInNetTransport>(transport.OutNetTransportId);
+				if (inNetTransport != null)
+				{
+					inNetTransport.StepName = eTruckInFactoryStep.重车.ToString();
+					SelfDber.Update(inNetTransport);
+				}
 			}
 			else if (transport.StepName == eTruckInFactoryStep.重车.ToString())
 			{
@@ -90,17 +96,23 @@ namespace CMCS.CarTransport.DAO
 				transport.TarePlace = place;
 				transport.TareTime = dt;
 				transport.OutFactoryTime = dt;
+				CmcsInNetTransport inNetTransport = SelfDber.Get<CmcsInNetTransport>(transport.OutNetTransportId);
+				if (inNetTransport != null)
+				{
+					inNetTransport.StepName = eTruckInFactoryStep.轻车.ToString();
+					inNetTransport.IsFinish = 1;
+					SelfDber.Update(inNetTransport);
+				}
 				//扣吨量
 				transport.DeductWeight = GetDeductWeightWithOutAuto(transport.Id);
 				transport.SuttleWeight = transport.GrossWeight - transport.TareWeight - transport.DeductWeight;
 				if (transport.GrossWeight > 0 && transport.TareWeight > 0)
 				{
-					if (transport.TicketWeight == 0)
+					if (transport.TheMine.PurcHaseType == "地方煤")
 					{
-						transport.SuttleWeight = transport.GrossWeight - transport.TareWeight - transport.DeductWeight;
 						transport.TicketWeight = transport.SuttleWeight;
 					}
-					else if (transport.TicketWeight > 0 && transport.TicketWeight <= (transport.GrossWeight - transport.TareWeight))
+					else if (transport.TheMine.PurcHaseType == "厂矿直供" && transport.TicketWeight > 0 && transport.TicketWeight <= (transport.GrossWeight - transport.TareWeight))
 					{
 						CmcsBuyFuelTransportDeduct deduct = commonDAO.SelfDber.Entity<CmcsBuyFuelTransportDeduct>("where TransportId=:TransportId and DeductType = '磅差'", new { TransportId = transport.Id });
 						decimal KgWeight = transport.GrossWeight - transport.TareWeight - transport.TicketWeight + 0.1m;

@@ -121,6 +121,7 @@ namespace CMCS.DumblyConcealer.Tasks.DataHandler
 					batch.TicketQty = listTransport.Sum(a => a.TicketQty);
 					batch.CheckQty = listTransport.Sum(a => a.CheckQty);
 					batch.MarginQty = listTransport.Sum(a => a.MarginQty);
+					batch.KgQty = listTransport.Sum(a => a.KgQty);
 					batch.TransportNumber = listTransport.Count;
 
 					Dbers.GetInstance().SelfDber.Update<CmcsInFactoryBatch>(batch);

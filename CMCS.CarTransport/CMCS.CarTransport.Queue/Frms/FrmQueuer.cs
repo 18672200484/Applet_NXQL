@@ -1426,7 +1426,7 @@ namespace CMCS.CarTransport.Queue.Frms
 					case eFlowFlag.匹配调运:
 						#region
 
-						this.CurrInNetTransport = Dbers.GetInstance().SelfDber.Entity<CmcsInNetTransport>("where CarNumber=:CarNumber and (StepName='矿发' or StepName='在途') order by StartTime desc", new { CarNumber = this.CurrentAutotruck.CarNumber });
+						this.CurrInNetTransport = Dbers.GetInstance().SelfDber.Entity<CmcsInNetTransport>("where CarNumber=:CarNumber and (StepName='矿发' or StepName='在途') order by creationtime desc", new { CarNumber = this.CurrentAutotruck.CarNumber });
 
 						if (this.CurrInNetTransport == null && this.AutoHandMode)
 						{
@@ -1451,11 +1451,11 @@ namespace CMCS.CarTransport.Queue.Frms
 								}
 							}
 
-							//this.SelectedFuelKind_BuyFuel = Dbers.GetInstance().SelfDber.Get<CmcsFuelKind>(this.CurrInNetTransport.FuelKindId);
-							//this.SelectedMine_BuyFuel = Dbers.GetInstance().SelfDber.Get<CmcsMine>(this.CurrInNetTransport.MineId);
-							//this.SelectedSupplier_BuyFuel = Dbers.GetInstance().SelfDber.Get<CmcsSupplier>(this.CurrInNetTransport.SupplierId);
-							//this.SelectedTransportCompany_BuyFuel = Dbers.GetInstance().SelfDber.Get<CmcsTransportCompany>(this.CurrInNetTransport.TransportCompanyId);
-							//txtTicketWeight_BuyFuel.Value = (double)this.CurrInNetTransport.TicketWeight;
+							this.SelectedFuelKind_BuyFuel = Dbers.GetInstance().SelfDber.Get<CmcsFuelKind>(this.CurrInNetTransport.FuelKindId);
+							this.SelectedMine_BuyFuel = Dbers.GetInstance().SelfDber.Get<CmcsMine>(this.CurrInNetTransport.MineId);
+							this.SelectedSupplier_BuyFuel = Dbers.GetInstance().SelfDber.Get<CmcsSupplier>(this.CurrInNetTransport.SupplierId);
+							this.SelectedTransportCompany_BuyFuel = Dbers.GetInstance().SelfDber.Get<CmcsTransportCompany>(this.CurrInNetTransport.TransportCompanyId);
+							txtTicketWeight_BuyFuel.Value = (double)this.CurrInNetTransport.TicketWeight;
 						}
 
 						if (this.AutoHandMode)

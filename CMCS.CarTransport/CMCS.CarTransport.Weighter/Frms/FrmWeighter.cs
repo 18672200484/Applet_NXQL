@@ -51,6 +51,11 @@ namespace CMCS.CarTransport.Weighter.Frms
 		CommonDAO commonDAO = CommonDAO.GetInstance();
 
 		/// <summary>
+		/// 定时器计数
+		/// </summary>
+		int timerCount = 0;
+
+		/// <summary>
 		/// 等待上传的抓拍
 		/// </summary>
 		Queue<string> waitForUpload = new Queue<string>();
@@ -995,33 +1000,38 @@ namespace CMCS.CarTransport.Weighter.Frms
 					if (!success) MessageBoxEx.Show("读卡器1连接失败！", "操作提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
 					#region LED控制卡1
-
-					string led1SocketIP = commonDAO.GetAppletConfigString("LED显示屏1_IP地址");
-					if (!string.IsNullOrEmpty(led1SocketIP))
+					try
 					{
-						if (CommonUtil.PingReplyTest(led1SocketIP))
+						string led1SocketIP = commonDAO.GetAppletConfigString("LED显示屏1_IP地址");
+						if (!string.IsNullOrEmpty(led1SocketIP))
 						{
-							if (LED1.CreateListent(led1SocketIP))
+							if (CommonUtil.PingReplyTest(led1SocketIP))
 							{
-								// 初始化成功
-								this.LED1ConnectStatus = true;
-								UpdateLed1Show("  等待车辆");
+								if (LED1.CreateListent(led1SocketIP))
+								{
+									// 初始化成功
+									this.LED1ConnectStatus = true;
+									UpdateLed1Show("  等待车辆");
+								}
+								else
+								{
+									this.LED1ConnectStatus = false;
+									Log4Neter.Error("LED1控制卡连接失败", new Exception("连接失败"));
+									MessageBoxEx.Show("LED1控制卡连接失败", "操作提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+								}
 							}
 							else
 							{
 								this.LED1ConnectStatus = false;
-								Log4Neter.Error("LED1控制卡连接失败", new Exception("连接失败"));
-								MessageBoxEx.Show("LED1控制卡连接失败", "操作提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+								Log4Neter.Error("初始化LED1控制卡，网络连接失败", new Exception("网络异常"));
+								MessageBoxEx.Show("LED1控制卡网络连接失败！", "操作提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 							}
 						}
-						else
-						{
-							this.LED1ConnectStatus = false;
-							Log4Neter.Error("初始化LED1控制卡，网络连接失败", new Exception("网络异常"));
-							MessageBoxEx.Show("LED1控制卡网络连接失败！", "操作提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-						}
 					}
-
+					catch (Exception ex)
+					{
+						Log4Neter.Error("初始化LED", ex);
+					}
 					#endregion
 
 					CmcsCamare video_Identify1 = commonDAO.SelfDber.Entity<CmcsCamare>("where Name=:Name", new { Name = CommonAppConfig.GetInstance().AppIdentifier + "车号识别1" });
@@ -1767,7 +1777,7 @@ namespace CMCS.CarTransport.Weighter.Frms
 
 			btnSaveTransport_BuyFuel.Enabled = false;
 			this.CameraCarNumber = string.Empty;
-
+			timerCount = 0;
 			FrontGateDown();
 			BackGateDown();
 
@@ -1803,36 +1813,45 @@ namespace CMCS.CarTransport.Weighter.Frms
 							this.CurrentBuyFuelTransport = commonDAO.SelfDber.Get<CmcsBuyFuelTransport>(unFinishTransport.TransportId);
 							if (this.CurrentBuyFuelTransport != null)
 							{
-								// 判断路线设置
-								string nextPlace;
-								//if (carTransportDAO.CheckNextTruckInFactoryWay(this.CurrentAutotruck.CarType, this.CurrentBuyFuelTransport.StepName, "重车|轻车", CommonAppConfig.GetInstance().AppIdentifier, out nextPlace))
-								if (!string.IsNullOrEmpty(this.CurrentBuyFuelTransport.SamplePlace))
+								if (this.CurrentBuyFuelTransport.IsRefuse == 0)
 								{
-									if (this.CurrentBuyFuelTransport.SuttleWeight == 0)
+									// 判断路线设置
+									string nextPlace;
+									//if (carTransportDAO.CheckNextTruckInFactoryWay(this.CurrentAutotruck.CarType, this.CurrentBuyFuelTransport.StepName, "重车|轻车", CommonAppConfig.GetInstance().AppIdentifier, out nextPlace))
+									if (!string.IsNullOrEmpty(this.CurrentBuyFuelTransport.SamplePlace))
 									{
-										BackGateUp();
+										if (this.CurrentBuyFuelTransport.SuttleWeight == 0)
+										{
+											BackGateUp();
 
-										this.CurrentFlowFlag = eFlowFlag.等待上磅;
+											this.CurrentFlowFlag = eFlowFlag.等待上磅;
 
-										UpdateLedShow(this.CurrentAutotruck.CarNumber, "请上磅");
-										this.voiceSpeaker.Speak("车牌号 " + this.CurrentAutotruck.CarNumber + " 请上磅", 1, false);
+											UpdateLedShow(this.CurrentAutotruck.CarNumber, "请上磅");
+											this.voiceSpeaker.Speak("车牌号 " + this.CurrentAutotruck.CarNumber + " 请上磅", 1, false);
+										}
+										else
+										{
+											UpdateLedShow(this.CurrentAutotruck.CarNumber, "已称重");
+											this.voiceSpeaker.Speak("车牌号 " + this.CurrentAutotruck.CarNumber + " 已称重", 1, false);
+											this.CurrentFlowFlag = eFlowFlag.等待离开;
+											timer_BuyFuel.Interval = 20000;
+										}
 									}
 									else
 									{
-										UpdateLedShow(this.CurrentAutotruck.CarNumber, "已称重");
-										this.voiceSpeaker.Speak("车牌号 " + this.CurrentAutotruck.CarNumber + " 已称重", 1, false);
+										//UpdateLedShow("路线错误", "禁止通过");
+										//this.voiceSpeaker.Speak("路线错误 禁止通过 " + (!string.IsNullOrEmpty(nextPlace) ? "请前往" + nextPlace : ""), 1, false);
+										UpdateLedShow("未采样禁止通过");
+										this.voiceSpeaker.Speak("未采样 禁止通过");
 										this.CurrentFlowFlag = eFlowFlag.等待离开;
 										timer_BuyFuel.Interval = 20000;
 									}
 								}
 								else
 								{
-									//UpdateLedShow("路线错误", "禁止通过");
-									//this.voiceSpeaker.Speak("路线错误 禁止通过 " + (!string.IsNullOrEmpty(nextPlace) ? "请前往" + nextPlace : ""), 1, false);
-									UpdateLedShow("未采样禁止通过");
-									this.voiceSpeaker.Speak("未采样 禁止通过");
+									UpdateLedShow(this.CurrentAutotruck.CarNumber, "车辆已拒收");
+									this.voiceSpeaker.Speak(this.CurrentAutotruck.CarNumber + " 车辆已拒收 请出厂", 1, false);
 									this.CurrentFlowFlag = eFlowFlag.等待离开;
-									timer_BuyFuel.Interval = 20000;
 								}
 							}
 							else
@@ -1857,11 +1876,21 @@ namespace CMCS.CarTransport.Weighter.Frms
 						// 当地磅仪表重量大于最小称重且来车方向的地感与对射均无信号，则判定车已经完全上磅
 						if (Hardwarer.Wber.Weight >= this.WbMinWeight && !HasCarOnEnterWay())
 						{
-							if ((this.Direction != "轻车磅" && this.InfraredSensor2) || this.Direction == "轻车磅")
+							if ((this.Direction == "双向磅" && this.InfraredSensor2) || this.Direction != "双向磅")
 							{
 								BackGateDown();
 
 								this.CurrentFlowFlag = eFlowFlag.等待稳定;
+							}
+						}
+						else if (HasCarOnEnterWay())
+						{
+							timerCount++;
+							if (timerCount > 4)
+							{
+								UpdateLedShow("停车不到位", "请往前开");
+								this.voiceSpeaker.Speak("车牌号 " + this.CurrentAutotruck.CarNumber + " 停车不到位 请往前开", 1, false);
+								timerCount = 0;
 							}
 						}
 

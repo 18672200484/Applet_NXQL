@@ -152,12 +152,12 @@ namespace CMCS.Common
 		/// <summary>
 		/// 设备编码 - 汽车机械采样机 #1
 		/// </summary>
-		public static string MachineCode_QCJXCYJ_1 = "#1汽车采样机";
+		public static string MachineCode_QCJXCYJ_1 = "#1机械采样机";
 
 		/// <summary>
 		/// 设备编码 - 汽车机械采样机 #2
 		/// </summary>
-		public static string MachineCode_QCJXCYJ_2 = "#2汽车采样机";
+		public static string MachineCode_QCJXCYJ_2 = "#2机械采样机";
 
 		/// <summary>
 		/// 设备编码 - 汽车机械采样机 #3

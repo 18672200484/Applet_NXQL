@@ -3,6 +3,8 @@
 using System;
 using System.Collections;
 using System.ComponentModel;
+using CMCS.Common.DAO;
+using CMCS.Common.Entities.BaseInfo;
 using CMCS.Common.Entities.Sys;
 
 namespace CMCS.Common.Entities.CarTransport
@@ -154,9 +156,18 @@ namespace CMCS.Common.Entities.CarTransport
 
 		private string _MineId;
 		/// <summary>
-		/// 矿点
+		/// 矿点Id
 		/// </summary>
 		public virtual string MineId { get { return _MineId; } set { _MineId = value; } }
+
+		/// <summary>
+		/// 矿点
+		/// </summary>
+		[CMCS.DapperDber.Attrs.DapperIgnore]
+		public CmcsMine TheMine
+		{
+			get { return CommonDAO.GetInstance().SelfDber.Get<CmcsMine>(this.MineId); }
+		}
 
 		private string _TransportCompanyName;
 		/// <summary>
@@ -233,5 +244,10 @@ namespace CMCS.Common.Entities.CarTransport
 		/// 是否同步到批次
 		/// </summary>
 		public int IsSyncBatch { get; set; }
+
+		/// <summary>
+		/// 是否拒收
+		/// </summary>
+		public int IsRefuse { get; set; }
 	}
 }
