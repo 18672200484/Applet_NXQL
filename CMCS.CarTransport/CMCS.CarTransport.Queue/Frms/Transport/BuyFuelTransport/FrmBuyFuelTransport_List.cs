@@ -6,6 +6,7 @@ using System.Windows.Forms;
 //
 using CMCS.CarTransport.DAO;
 using CMCS.CarTransport.Queue.Enums;
+using CMCS.CarTransport.Queue.Frms.BaseInfo.Mine;
 using CMCS.CarTransport.Queue.Frms.BaseInfo.Supplier;
 using CMCS.Common;
 using CMCS.Common.Entities.BaseInfo;
@@ -53,11 +54,11 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
 
 		CarTransportDAO carTransportDAO = CarTransportDAO.GetInstance();
 
-		private CmcsSupplier selectedSupplier_BuyFuel;
+		private CmcsMine selectedSupplier_BuyFuel;
 		/// <summary>
-		/// 选择的供煤单位
+		/// 选择的矿点
 		/// </summary>
-		public CmcsSupplier SelectedSupplier_BuyFuel
+		public CmcsMine SelectedSupplier_BuyFuel
 		{
 			get { return selectedSupplier_BuyFuel; }
 			set
@@ -65,9 +66,9 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
 				selectedSupplier_BuyFuel = value;
 
 				if (value != null)
-					txtSupplierName_BuyFuel.Text = value.Name;
+					txtMineName_BuyFuel.Text = value.Name;
 				else
-					txtSupplierName_BuyFuel.ResetText();
+					txtMineName_BuyFuel.ResetText();
 			}
 		}
 
@@ -130,7 +131,7 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
 				if (!string.IsNullOrEmpty(dtInputEnd.Text)) this.SqlWhere += " and TareTime <:TareEndTime";
 			}
 
-			if (this.SelectedSupplier_BuyFuel != null) this.SqlWhere += " and SupplierId = '" + this.SelectedSupplier_BuyFuel.Id + "'";
+			if (this.SelectedSupplier_BuyFuel != null) this.SqlWhere += " and MineId = '" + this.SelectedSupplier_BuyFuel.Id + "'";
 
 			if (this.cmbStepName.Text != "全部") this.SqlWhere += " and StepName = '" + this.cmbStepName.Text + "'";
 
@@ -233,7 +234,7 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
 		#region 供应商
 		private void btnSelectSupplier_BuyFuel_Click(object sender, EventArgs e)
 		{
-			FrmSupplier_Select frm = new FrmSupplier_Select("where IsStop=0 order by Name asc");
+			FrmMine_Select frm = new FrmMine_Select("where IsStop=0 order by Name asc");
 			if (frm.ShowDialog() == DialogResult.OK)
 			{
 				this.SelectedSupplier_BuyFuel = frm.Output;

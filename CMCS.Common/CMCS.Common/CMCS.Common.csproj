@@ -193,6 +193,7 @@
     <Compile Include="Enums\Sys\eUserLogInattempts.cs" />
     <Compile Include="EquipmentStatusColors.cs" />
     <Compile Include="GlobalVars.cs" />
+    <Compile Include="PrintAppConfig.cs" />
     <Compile Include="Print\FrmPrintWeb.cs">
       <SubType>Form</SubType>
     </Compile>

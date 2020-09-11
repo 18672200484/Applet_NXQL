@@ -100,7 +100,10 @@
     <Compile Include="Tasks\DataHandler\DataHandlerDAO.cs" />
     <Compile Include="Tasks\DataHandler\Entities\CmcsGuardInfo.cs" />
     <Compile Include="Tasks\DataHandler\Enums\eEventCode.cs" />
+    <Compile Include="Tasks\Intelogistics\Entities\WL_AssayUpdateInfo.cs" />
+    <Compile Include="Tasks\Intelogistics\Entities\WL_CarSendUpdateInfo.cs" />
     <Compile Include="Tasks\Intelogistics\Entities\WL_CarSendInfo.cs" />
+    <Compile Include="Tasks\Intelogistics\Entities\WL_TransportUpdateInfo.cs" />
     <Compile Include="Tasks\Intelogistics\Entities\WL_TransportInfo.cs" />
     <Compile Include="Tasks\Intelogistics\Entities\WL_AssayInfo.cs" />
     <Compile Include="Tasks\Intelogistics\IntelogisticsDAO.cs" />

@@ -325,9 +325,9 @@ namespace CMCS.CarTransport.Weighter.Frms
 					slightRwer2.Visible = false;
 					lab_slightRwer2.Visible = false;
 
-					panRightGateControl.Visible = false;
-					tableLayoutPanel2.ColumnStyles[3].Width = 0;
-					tableLayoutPanel2.Refresh();
+					//panRightGateControl.Visible = false;
+					//tableLayoutPanel2.ColumnStyles[3].Width = 0;
+					//tableLayoutPanel2.Refresh();
 
 					this.CurrentDirection = eDirection.Way1;
 				}
@@ -339,9 +339,9 @@ namespace CMCS.CarTransport.Weighter.Frms
 					slightRwer1.Visible = false;
 					lab_slightRwer1.Visible = false;
 
-					panLeftGateControl.Visible = false;
-					tableLayoutPanel2.ColumnStyles[0].Width = 0;
-					tableLayoutPanel2.Refresh();
+					//panLeftGateControl.Visible = false;
+					//tableLayoutPanel2.ColumnStyles[0].Width = 0;
+					//tableLayoutPanel2.Refresh();
 
 					this.CurrentDirection = eDirection.Way2;
 				}
@@ -1570,10 +1570,10 @@ namespace CMCS.CarTransport.Weighter.Frms
 		/// <param name="e"></param>
 		private void superTabControl2_SelectedTabChanged(object sender, SuperTabStripSelectedTabChangedEventArgs e)
 		{
-			SuperTabItem tab = (SuperTabItem)sender;
-			if (tab.Name == superTabItem_BuyFuel.Name)
+			SuperTabControl tab = (SuperTabControl)sender;
+			if (tab.SelectedTab.Name == superTabItem_BuyFuel.Name)
 				this.TabType = eCarType.入厂煤;
-			else if (tab.Name == superTabItem_Goods.Name)
+			else if (tab.SelectedTab.Name == superTabItem_Goods.Name)
 				this.TabType = eCarType.其他物资;
 		}
 		#endregion
@@ -1876,12 +1876,8 @@ namespace CMCS.CarTransport.Weighter.Frms
 						// 当地磅仪表重量大于最小称重且来车方向的地感与对射均无信号，则判定车已经完全上磅
 						if (Hardwarer.Wber.Weight >= this.WbMinWeight && !HasCarOnEnterWay())
 						{
-							if ((this.Direction == "双向磅" && this.InfraredSensor2) || this.Direction != "双向磅")
-							{
-								BackGateDown();
-
-								this.CurrentFlowFlag = eFlowFlag.等待稳定;
-							}
+							BackGateDown();
+							this.CurrentFlowFlag = eFlowFlag.等待稳定;
 						}
 						else if (HasCarOnEnterWay())
 						{

@@ -33,9 +33,11 @@ namespace CMCS.CarTransport.Weighter.Core
 			int port = commonDAO.GetAppletConfigInt32("IO控制器_道闸1升杆端口");
 			int port2 = commonDAO.GetAppletConfigInt32("IO控制器_道闸1降杆端口");
 
-			this.Iocer.Output(port, true);
-			Thread.Sleep(500);
 			this.Iocer.Output(port2, false);
+			Thread.Sleep(500);
+			this.Iocer.Output(port, true);
+			Thread.Sleep(1000);
+			this.Iocer.Output(port, false);
 			Thread.Sleep(500);
 
 			commonDAO.SetSignalDataValue(CommonAppConfig.GetInstance().AppIdentifier, "道闸1升杆", "1");
@@ -53,8 +55,8 @@ namespace CMCS.CarTransport.Weighter.Core
 			int port2 = commonDAO.GetAppletConfigInt32("IO控制器_道闸1升杆端口");
 
 			this.Iocer.Output(port, true);
-			Thread.Sleep(500);
-			this.Iocer.Output(port2, false);
+			Thread.Sleep(1000);
+			this.Iocer.Output(port, false);
 			Thread.Sleep(500);
 
 			commonDAO.SetSignalDataValue(CommonAppConfig.GetInstance().AppIdentifier, "道闸1升杆", "0");
@@ -71,9 +73,11 @@ namespace CMCS.CarTransport.Weighter.Core
 			int port = commonDAO.GetAppletConfigInt32("IO控制器_道闸2升杆端口");
 			int port2 = commonDAO.GetAppletConfigInt32("IO控制器_道闸2降杆端口");
 
-			this.Iocer.Output(port, true);
-			Thread.Sleep(500);
 			this.Iocer.Output(port2, false);
+			Thread.Sleep(500);
+			this.Iocer.Output(port, true);
+			Thread.Sleep(1000);
+			this.Iocer.Output(port, false);
 			Thread.Sleep(500);
 
 			commonDAO.SetSignalDataValue(CommonAppConfig.GetInstance().AppIdentifier, "道闸2升杆", "1");
@@ -91,8 +95,8 @@ namespace CMCS.CarTransport.Weighter.Core
 			int port2 = commonDAO.GetAppletConfigInt32("IO控制器_道闸2升杆端口");
 
 			this.Iocer.Output(port, true);
-			Thread.Sleep(500);
-			this.Iocer.Output(port2, false);
+			Thread.Sleep(1000);
+			this.Iocer.Output(port, false);
 			Thread.Sleep(500);
 
 			commonDAO.SetSignalDataValue(CommonAppConfig.GetInstance().AppIdentifier, "道闸2升杆", "0");

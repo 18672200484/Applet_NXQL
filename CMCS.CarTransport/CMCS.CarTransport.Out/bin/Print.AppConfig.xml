@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<PrintAppConfig>
+  <!--标题字体大小-->
+  <TitleFontSize>16</TitleFontSize>
+  <!--标题字体-->
+  <TitleFont>宋体</TitleFont>
+  <!--标题内容-->
+  <TitleContent>国电投青铝发电有限公司过磅单</TitleContent>
+  <!--内容字体大小-->
+  <ContentFontSize>12</ContentFontSize>
+  <!--内容字体-->
+  <ContentFont>宋体</ContentFont>
+</PrintAppConfig>
+

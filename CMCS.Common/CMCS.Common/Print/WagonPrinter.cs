@@ -18,8 +18,8 @@ namespace CMCS.Common.Print
 	/// </summary>
 	public class WagonPrinter : MetroForm
 	{
-		Font TitleFont = new Font("宋体", 14, FontStyle.Bold, GraphicsUnit.Pixel);
-		Font ContentFont = new Font("宋体", 12, FontStyle.Regular, GraphicsUnit.Pixel);
+		Font TitleFont = new Font(PrintAppConfig.GetInstance().TitleFont, PrintAppConfig.GetInstance().TitleFontSize, FontStyle.Bold, GraphicsUnit.Pixel);
+		Font ContentFont = new Font(PrintAppConfig.GetInstance().ContentFont, PrintAppConfig.GetInstance().ContentFontSize, FontStyle.Regular, GraphicsUnit.Pixel);
 		PrintDocument _PrintDocument = null;
 		CmcsBuyFuelTransport _BuyFuelTransport = null;
 		CmcsGoodsTransport _GoodsTransport = null;
@@ -90,7 +90,7 @@ namespace CMCS.Common.Print
 				// 行间距 24 
 				float TopValue = 53;
 				string printValue = "";
-				g.DrawString("国电投青铝发电有限公司过磅单", TitleFont, Brushes.Black, 30, TopValue);
+				g.DrawString(PrintAppConfig.GetInstance().TitleContent, TitleFont, Brushes.Black, 30, TopValue);
 				TopValue += 34;
 
 				g.DrawString("打印时间：" + DateTime.Now.ToString("yyyy-MM-dd HH:mm"), ContentFont, Brushes.Black, 30, TopValue);

@@ -496,7 +496,6 @@ namespace CMCS.CarTransport.Queue.Frms
 		private void UpdateLedShow(string value1 = "", string value2 = "")
 		{
 			if (this.CurrentImperfectCar == null) return;
-			FrmDebugConsole.GetInstance().Output("更新LED1:|" + value1 + "|" + value2 + "|");
 			if (this.CurrentImperfectCar.PassWay == ePassWay.Way1)
 				UpdateLed1Show(value1, value2);
 		}
@@ -541,10 +540,9 @@ namespace CMCS.CarTransport.Queue.Frms
 		/// <param name="value2">第二行内容</param>
 		private void UpdateLed1Show(string value1 = "", string value2 = "")
 		{
-			FrmDebugConsole.GetInstance().Output("更新LED1:|" + value1 + "|" + value2 + "|");
+			if (!this.LED1ConnectStatus || this.LED1PrevLedFileContent == value1 + value2) return;
 
-			if (!this.LED1ConnectStatus) return;
-			if (this.LED1PrevLedFileContent == value1 + value2) return;
+			FrmDebugConsole.GetInstance().Output("更新LED1:|" + value1 + "|" + value2 + "|");
 
 			if (LED1.UpdateArea(value1, value2))
 			{
@@ -839,9 +837,11 @@ namespace CMCS.CarTransport.Queue.Frms
 								CmcsUnFinishTransport unFinishTransport = carTransportDAO.GetUnFinishTransportByAutotruckId(this.CurrentAutotruck.Id, this.CurrentAutotruck.CarType);
 								if (unFinishTransport != null)
 								{
+									hasUnFinish = true;
 									if (this.CurrentImperfectCar.IsFromDevice)//有未完成的运输记录直接入厂
 									{
-										UpdateLedShow(this.CurrentAutotruck.CarNumber, "   请入厂");
+										UpdateLedShow(this.CurrentAutotruck.CarNumber, "已登记请入厂");
+										voiceSpeaker.Speak(this.CurrentAutotruck.CarNumber + " 已登记 请入厂");
 										LetPass();
 										if (unFinishTransport.CarType == eCarType.入厂煤.ToString())
 										{
@@ -883,11 +883,13 @@ namespace CMCS.CarTransport.Queue.Frms
 										this.timer_BuyFuel_Cancel = false;
 
 										this.CurrentFlowFlag = eFlowFlag.匹配调运;
+										timer_BuyFuel_Tick(null, null);
 									}
 									else if (this.CurrentAutotruck.CarType == eCarType.其他物资.ToString())
 									{
 										this.timer_Goods_Cancel = false;
 										this.CurrentFlowFlag = eFlowFlag.数据录入;
+										timer_Goods_Tick(null, null);
 									}
 								}
 							}
@@ -1341,7 +1343,7 @@ namespace CMCS.CarTransport.Queue.Frms
 				{
 					btnSaveTransport_BuyFuel.Enabled = false;
 
-					UpdateLedShow(this.CurrentAutotruck.CarNumber + "排队成功", "请前往" + this.CurrentSampler);
+					UpdateLedShow(this.CurrentAutotruck.CarNumber + "排队成功");
 
 					if (!this.AutoHandMode)
 						MessageBoxEx.Show("排队成功", "操作提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -1431,6 +1433,7 @@ namespace CMCS.CarTransport.Queue.Frms
 						if (this.CurrInNetTransport == null && this.AutoHandMode)
 						{
 							UpdateLedShow("矿发信息读取失败，请联系管理员!");
+							voiceSpeaker.Speak("无矿发信息 请联系管理员", 2);
 							//降低灵敏度
 							timer_BuyFuel.Interval = 8000;
 							this.CurrentFlowFlag = eFlowFlag.异常重置2;
@@ -1444,6 +1447,7 @@ namespace CMCS.CarTransport.Queue.Frms
 								if (this.CurrInNetTransport.IsSpeedErr == 1 || this.CurrInNetTransport.IsStopErr == 1 || this.CurrInNetTransport.IsDeviateeErr == 1)
 								{
 									UpdateLedShow("车辆在途状态异常，请联系管理员!");
+									voiceSpeaker.Speak("车辆在途状态异常 请联系管理员", 2);
 									//降低灵敏度
 									timer_BuyFuel.Interval = 8000;
 									this.CurrentFlowFlag = eFlowFlag.异常重置2;

@@ -33,7 +33,7 @@ namespace CMCS.CarTransport.JxSampler.Core
             int port = commonDAO.GetAppletConfigInt32("IO控制器_道闸1升杆端口");
 
             this.Iocer.Output(port, true);
-            Thread.Sleep(100);
+            Thread.Sleep(1000);
             this.Iocer.Output(port, false);
             Thread.Sleep(500);
 
@@ -51,7 +51,7 @@ namespace CMCS.CarTransport.JxSampler.Core
             int port = commonDAO.GetAppletConfigInt32("IO控制器_道闸1降杆端口");
 
             this.Iocer.Output(port, true);
-            Thread.Sleep(100);
+            Thread.Sleep(1000);
             this.Iocer.Output(port, false);
             Thread.Sleep(500);
 
@@ -69,7 +69,7 @@ namespace CMCS.CarTransport.JxSampler.Core
             int port = commonDAO.GetAppletConfigInt32("IO控制器_道闸2升杆端口");
 
             this.Iocer.Output(port, true);
-            Thread.Sleep(100);
+            Thread.Sleep(1000);
             this.Iocer.Output(port, false);
             Thread.Sleep(500);
 
@@ -87,7 +87,7 @@ namespace CMCS.CarTransport.JxSampler.Core
             int port = commonDAO.GetAppletConfigInt32("IO控制器_道闸2降杆端口");
 
             this.Iocer.Output(port, true);
-            Thread.Sleep(100);
+            Thread.Sleep(1000);
             this.Iocer.Output(port, false);
             Thread.Sleep(500);
 

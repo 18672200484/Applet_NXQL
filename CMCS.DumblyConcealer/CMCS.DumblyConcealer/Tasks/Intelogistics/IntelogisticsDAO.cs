@@ -60,7 +60,17 @@ namespace CMCS.DumblyConcealer.Tasks.Intelogistics
 			DateTime startTime = DateTime.Now.AddDays(-intervalValue);
 
 			List<WL_CarSendInfo> sendEntities = mysqlDber.Entities<WL_CarSendInfo>(string.Format(" where (同步完成=0 or 同步完成 is NULL) and 创建时间>='{0}'", startTime));
+			SaveCarSendData(sendEntities, output);
 
+		}
+
+		/// <summary>
+		/// 保存矿发数据
+		/// </summary>
+		/// <param name="sendEntities"></param>
+		/// <param name="output"></param>
+		public void SaveCarSendData(List<WL_CarSendInfo> sendEntities, Action<string, eOutputType> output)
+		{
 			foreach (var item in sendEntities)
 			{
 				if (string.IsNullOrWhiteSpace(item.物流矿发编号)) continue;
@@ -166,7 +176,6 @@ namespace CMCS.DumblyConcealer.Tasks.Intelogistics
 					#endregion
 				}
 			}
-
 		}
 
 		/// <summary>
@@ -193,12 +202,13 @@ namespace CMCS.DumblyConcealer.Tasks.Intelogistics
 
 			foreach (DataRow item in dt.Rows)
 			{
-				var entity = mysqlDber.Entity<WL_TransportInfo>(" where 物流矿发编号=@SerialNumber", new { SerialNumber = item["物流矿发编号"].ToString() });
+				var entity = mysqlDber.Entity<WL_TransportInfo>(" where 检斤编号=@SerialNumber", new { SerialNumber = item["检斤编号"].ToString() });
 				if (entity == null)
 				{
 					#region 新增
 					entity = new WL_TransportInfo();
 					entity.物流矿发编号 = item["物流矿发编号"].ToString();
+					entity.检斤编号 = item["检斤编号"].ToString();
 					entity.所属单位名称 = item["所属单位名称"].ToString();
 					entity.车牌号 = item["车牌号"].ToString();
 					entity.门禁编号 = item["门禁编号"].ToString();
@@ -248,6 +258,7 @@ namespace CMCS.DumblyConcealer.Tasks.Intelogistics
 					entity.发货方名称 = item["发货方名称"].ToString();
 					entity.承运商编号 = item["承运商编号"].ToString();
 					entity.承运商名称 = item["承运商名称"].ToString();
+					entity.矿点名称 = item["矿点名称"].ToString();
 					entity.采样表编号 = item["采样表编号"].ToString();
 
 					DateTime samplingTime = DateTime.Now;
@@ -274,6 +285,7 @@ namespace CMCS.DumblyConcealer.Tasks.Intelogistics
 				{
 					#region 修改
 					entity.物流矿发编号 = item["物流矿发编号"].ToString();
+					entity.检斤编号 = item["检斤编号"].ToString();
 					entity.所属单位名称 = item["所属单位名称"].ToString();
 					entity.车牌号 = item["车牌号"].ToString();
 					entity.门禁编号 = item["门禁编号"].ToString();
@@ -332,8 +344,8 @@ namespace CMCS.DumblyConcealer.Tasks.Intelogistics
 					entity.采样时间 = DateTime.Parse(item["采样时间"].ToString());
 					entity.采样人 = item["采样人"].ToString();
 					entity.检斤备注 = item["检斤备注"].ToString();
-					entity.同步完成 = 0;
-					entity.同步完成时间 = DateTime.Now;
+					//entity.同步完成 = 0;
+					//entity.同步完成时间 = DateTime.Now;
 
 					if (mysqlDber.Update<WL_TransportInfo>(entity) > 0)
 					{
@@ -369,7 +381,7 @@ namespace CMCS.DumblyConcealer.Tasks.Intelogistics
 
 			foreach (DataRow item in dt.Rows)
 			{
-				var entity = mysqlDber.Entity<WL_AssayInfo>(" where 化验编号=@AssayCode", new { AssayCode = item["化验编号"].ToString() });
+				var entity = mysqlDber.Entity<WL_AssayInfo>(" where 化验编号=@AssayCode and 车牌号=@CarNumber", new { AssayCode = item["化验编号"].ToString(), CarNumber = item["车牌号"].ToString() });
 				if (entity == null)
 				{
 					#region 新增
@@ -527,8 +539,8 @@ namespace CMCS.DumblyConcealer.Tasks.Intelogistics
 						continue;
 					}
 					entity.采样日期 = DateTime.Parse(item["采样日期"].ToString());
-					entity.同步完成 = 0;
-					entity.同步完成时间 = DateTime.Now;
+					//entity.同步完成 = 0;
+					//entity.同步完成时间 = DateTime.Now;
 
 					if (mysqlDber.Update<WL_AssayInfo>(entity) > 0)
 					{

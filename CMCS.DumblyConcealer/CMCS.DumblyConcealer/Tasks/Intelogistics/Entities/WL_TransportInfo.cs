@@ -18,8 +18,10 @@ namespace CMCS.DumblyConcealer.Tasks.Intelogistics.Entities
         [DapperAutoPrimaryKeyAttribute]
         public Int32 编号 { get; set; }
         public string 物流矿发编号 { get; set; }
-        public string 所属单位名称 { get; set; }
+		public string 检斤编号 { get; set; }
+		public string 所属单位名称 { get; set; }
         public string 车牌号 { get; set; }
+
         public string 门禁编号 { get; set; }
         public string 化验表编号 { get; set; }
         public DateTime 重车时间 { get; set; }
@@ -41,7 +43,8 @@ namespace CMCS.DumblyConcealer.Tasks.Intelogistics.Entities
         public string 发货方名称 { get; set; }
         public string 承运商编号 { get; set; }
         public string 承运商名称 { get; set; }
-        public string 采样表编号 { get; set; }
+		public string 矿点名称 { get; set; }
+		public string 采样表编号 { get; set; }
         public DateTime 采样时间 { get; set; }
         public string 采样人 { get; set; }
         public string 检斤备注 { get; set; }

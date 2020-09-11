@@ -964,12 +964,12 @@ namespace CMCS.CarTransport.JxSampler.Frms
 							}
 							else if (!IsArrive)
 							{
-								if ((this.CurrentAutotruck.CarriageLength > 11000 && !this.InfraredSensor1) || (this.CurrentAutotruck.CarriageLength <= 11000 && !this.InfraredSensor2))
+								if ((this.CurrentAutotruck.CarriageLength > 11000 && !this.InfraredSensor1))
 								{
 									UpdateLedShow("停车不到位", "请前移");
 									this.voiceSpeaker.Speak("停车不到位 请往前开");
 								}
-								else if (this.CurrentAutotruck.CarriageLength <= 11000 && this.InfraredSensor1)
+								else if ((this.CurrentAutotruck.CarriageLength <= 11000 && !this.InfraredSensor2))
 								{
 									UpdateLedShow("停车不到位", "请后移");
 									this.voiceSpeaker.Speak("停车不到位 请往后开");
