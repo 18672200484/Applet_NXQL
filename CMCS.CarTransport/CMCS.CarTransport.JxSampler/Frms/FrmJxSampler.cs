@@ -839,6 +839,14 @@ namespace CMCS.CarTransport.JxSampler.Frms
 
 							if (this.CurrentAutotruck.IsUse == 1)
 							{
+								if (this.CurrentAutotruck.CarType == eCarType.转煤车辆.ToString() || this.CurrentAutotruck.CarType == eCarType.其他物资.ToString())
+								{
+									UpdateLedShow(this.CurrentAutotruck.CarNumber + "请直接离开");
+									this.voiceSpeaker.Speak(this.CurrentAutotruck.CarNumber + " 请直接离开", 1, false);
+									FrontGateUp();
+									this.CurrentFlowFlag = eFlowFlag.等待离开;
+									break;
+								}
 								if (this.CurrentAutotruck.CarriageLength > 0 && this.CurrentAutotruck.CarriageWidth > 0 && this.CurrentAutotruck.CarriageBottomToFloor > 0)
 								{
 									// 未完成运输记录

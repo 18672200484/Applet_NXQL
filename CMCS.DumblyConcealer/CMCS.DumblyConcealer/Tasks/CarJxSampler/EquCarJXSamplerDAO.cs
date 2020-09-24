@@ -133,7 +133,7 @@ namespace CMCS.DumblyConcealer.Tasks.CarJXSampler
 					{
 						//写入采样码记录
 						CmcsRCSampling sampling = commonDAO.SelfDber.Entity<CmcsRCSampling>("where SampleCode=:SampleCode", new { SampleCode = entity.SampleCode });
-						CmcsCYJCodeInfo codeInfo = commonDAO.SelfDber.Entity<CmcsCYJCodeInfo>("where SampleCode=:SampleCode and BarrelCode=:BarrelCode and IsClear=0", new { SampleCode = entity.SampleCode, BarrelCode = entity.BarrelNumber });
+						CmcsCYJCodeInfo codeInfo = commonDAO.SelfDber.Entity<CmcsCYJCodeInfo>("where SampleCode=:SampleCode and BarrelCode=:BarrelCode and SamplerName=:SamplerName and IsClear=0", new { SampleCode = entity.SampleCode, BarrelCode = entity.BarrelNumber, SamplerName = this.MachineCode });
 						int carCount = 0;
 						if (sampling != null)
 							carCount = commonDAO.SelfDber.Count<CmcsBuyFuelTransport>("where SamplingId=:SamplingId and SamplePlace=:SamplePlace", new { SamplingId = sampling.Id, SamplePlace = this.MachineCode });
@@ -429,7 +429,7 @@ namespace CMCS.DumblyConcealer.Tasks.CarJXSampler
 								DataFlag = entity.DataFlag
 							}) > 0)
 							{
-								CmcsCYJCodeInfo codeInfo = commonDAO.SelfDber.Entity<CmcsCYJCodeInfo>("where SampleCode=:SampleCode and BarrelCode=:BarrelCode and IsClear=0", new { SampleCode = entity.SampleCode, BarrelCode = entity.BarrelCode });
+								CmcsCYJCodeInfo codeInfo = commonDAO.SelfDber.Entity<CmcsCYJCodeInfo>("where SampleCode=:SampleCode and BarrelCode=:BarrelCode and SamplerName=:SamplerName and IsClear=0", new { SampleCode = entity.SampleCode, BarrelCode = entity.BarrelCode, SamplerName = this.MachineCode });
 								if (codeInfo != null)
 								{
 									codeInfo.ClearTime = entity.UnloadTime;

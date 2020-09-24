@@ -390,7 +390,7 @@ namespace CMCS.CarTransport.DAO
 		/// <param name="remark">备注</param>
 		/// <param name="place">地点</param>
 		/// <returns></returns>
-		public bool JoinQueueGoodsTransport(CmcsAutotruck autotruck, CmcsSupplyReceive supply, CmcsSupplyReceive receive, CmcsGoodsType goodsType, DateTime inFactoryTime, string remark, string place, CmcsGoodsTransport transport = null)
+		public bool JoinQueueGoodsTransport(CmcsAutotruck autotruck, CmcsSupplyReceive supply, CmcsSupplyReceive receive, CmcsGoodsType goodsType, DateTime inFactoryTime, string remark, string place, ref CmcsGoodsTransport transport)
 		{
 			transport = new CmcsGoodsTransport
 			{
@@ -407,22 +407,11 @@ namespace CMCS.CarTransport.DAO
 				IsFinish = 0,
 				IsUse = 1,
 				StepName = eTruckInFactoryStep.入厂.ToString(),
-				Remark = remark
+				Remark = remark,
+				CarType = autotruck.CarType
 			};
 
-			if (SelfDber.Insert(transport) > 0)
-			{
-				// 插入未完成运输记录
-				return SelfDber.Insert(new CmcsUnFinishTransport
-				{
-					TransportId = transport.Id,
-					CarType = eCarType.其他物资.ToString(),
-					AutotruckId = autotruck.Id,
-					PrevPlace = place,
-				}) > 0;
-			}
-
-			return false;
+			return SelfDber.Insert(transport) > 0;
 		}
 
 		/// <summary>

@@ -13,6 +13,7 @@ using CMCS.CarTransport.Queue.Frms.BaseInfo.EPCCard;
 using CMCS.CarTransport.Queue.Utilities;
 using CMCS.Common;
 using CMCS.Common.Entities.CarTransport;
+using CMCS.Common.Enums;
 using DevComponents.DotNetBar;
 using DevComponents.DotNetBar.Controls;
 using DevComponents.Editors;
@@ -66,8 +67,9 @@ namespace CMCS.CarTransport.Queue.Frms.BaseInfo.Autotruck
 		{
 			label_warn.ForeColor = Color.Red;
 
-			cmb_CarType.Items.Add("入厂煤");
-			cmb_CarType.Items.Add("其他物资");
+			cmb_CarType.Items.Add(eCarType.入厂煤.ToString());
+			cmb_CarType.Items.Add(eCarType.其他物资.ToString());
+			cmb_CarType.Items.Add(eCarType.转煤车辆.ToString());
 			cmb_CarType.SelectedIndex = 0;
 
 			this.CmcsAutotruck = Dbers.GetInstance().SelfDber.Get<CmcsAutotruck>(this.PId);

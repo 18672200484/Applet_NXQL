@@ -44,6 +44,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Users\Liufan\Desktop\InfluxDB\AutoMonitorTestFor2017\AutoMonitorTestFor2017\bin\DevComponents.DotNetBar2.dll</HintPath>
     </Reference>
+    <Reference Include="DevComponents.Instrumentation, Version=10.5.0.3, Culture=neutral, PublicKeyToken=bc4a9d761ea44ef0, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\CMCS.Resources\DotNetBar\DevComponents.Instrumentation.dll</HintPath>
+    </Reference>
     <Reference Include="DotNetSpeech">
       <HintPath>..\..\CMCS.Resources\DotNetBar\DotNetSpeech.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>

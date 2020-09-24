@@ -885,10 +885,13 @@ namespace CMCS.CarTransport.Queue.Frms
 										this.CurrentFlowFlag = eFlowFlag.匹配调运;
 										timer_BuyFuel_Tick(null, null);
 									}
-									else if (this.CurrentAutotruck.CarType == eCarType.其他物资.ToString())
+									else if (this.CurrentAutotruck.CarType == eCarType.其他物资.ToString() || this.CurrentAutotruck.CarType == eCarType.转煤车辆.ToString())
 									{
+										UpdateLedShow(this.CurrentAutotruck.CarNumber, "请入厂");
+										voiceSpeaker.Speak(this.CurrentAutotruck.CarNumber + " 请入厂");
+										LetPass();
 										this.timer_Goods_Cancel = false;
-										this.CurrentFlowFlag = eFlowFlag.数据录入;
+										this.CurrentFlowFlag = eFlowFlag.等待离开;
 										timer_Goods_Tick(null, null);
 									}
 								}
@@ -1794,7 +1797,8 @@ namespace CMCS.CarTransport.Queue.Frms
 			try
 			{
 				// 生成排队记录
-				if (queuerDAO.JoinQueueGoodsTransport(this.CurrentAutotruck, this.SelectedSupplyUnit_Goods, this.SelectedReceiveUnit_Goods, this.SelectedGoodsType_Goods, DateTime.Now, txtRemark_Goods.Text, CommonAppConfig.GetInstance().AppIdentifier))
+				CmcsGoodsTransport goodstransport = new CmcsGoodsTransport();
+				if (queuerDAO.JoinQueueGoodsTransport(this.CurrentAutotruck, this.SelectedSupplyUnit_Goods, this.SelectedReceiveUnit_Goods, this.SelectedGoodsType_Goods, DateTime.Now, txtRemark_Goods.Text, CommonAppConfig.GetInstance().AppIdentifier, ref goodstransport))
 				{
 					LetPass();
 
