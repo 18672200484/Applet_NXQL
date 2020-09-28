@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3BCD1DF4-C922-4F87-A847-1EB88336C409}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CMCS.CarTransport.QueueScreen</RootNamespace>
+    <AssemblyName>CMCS.CarTransport.QueueScreen</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AU, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\AU.dll</HintPath>
+    </Reference>
+    <Reference Include="BasisPlatform">
+      <HintPath>..\..\CMCS.Resources\BasisPlatform\BasisPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="BasisPlatform.Forms">
+      <HintPath>..\..\CMCS.Resources\BasisPlatform\BasisPlatform.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="DevComponents.DotNetBar2, Version=10.5.0.3, Culture=neutral, PublicKeyToken=c39c3242a43eee2b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\CMCS.Resources\DotNetBar\DevComponents.DotNetBar2.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\CMCS.Resources\BasisPlatform\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess">
+      <HintPath>..\..\CMCS.Resources\Oracle.ManagedDataAccess\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Frms\Sys\FrmQueueScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frms\Sys\FrmQueueScreen.Designer.cs">
+      <DependentUpon>FrmQueueScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControls\UCtrlMineInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCtrlMineInfo.Designer.cs">
+      <DependentUpon>UCtrlMineInfo.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Frms\Sys\FrmQueueScreen.resx">
+      <DependentUpon>FrmQueueScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="UserControls\UCtrlMineInfo.resx">
+      <DependentUpon>UCtrlMineInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\AU.dll" />
+    <Content Include="bin\AutoUpdater.exe" />
+    <Content Include="bin\BasisPlatform.dll" />
+    <Content Include="bin\BasisPlatform.Forms.dll" />
+    <Content Include="bin\Common.AppConfig.xml" />
+    <Content Include="bin\log4net.dll" />
+    <Content Include="bin\Oracle.ManagedDataAccess.dll" />
+    <Content Include="bin\update.xml" />
+    <Content Include="icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CMCS.Common\CMCS.Common\CMCS.Common.csproj">
+      <Project>{7587893A-FEFB-4810-8509-E13A35BBAC35}</Project>
+      <Name>CMCS.Common %28CMCS.Common\CMCS.Common%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CMCS.Common\CMCS.DapperDber\CMCS.DapperDber.csproj">
+      <Project>{6384F3D5-7CB5-4D1F-8A1F-3FA9B0A78F05}</Project>
+      <Name>CMCS.DapperDber</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CMCS.Common\CMCS.DotNetBar.Utilities\CMCS.DotNetBar.Utilities.csproj">
+      <Project>{AB80688E-8CFE-4E41-AF48-090EEE8553BA}</Project>
+      <Name>CMCS.DotNetBar.Utilities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
