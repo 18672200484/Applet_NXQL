@@ -36,11 +36,11 @@
             // 
             this.lblTitle.AutoSize = true;
             this.lblTitle.BackColor = System.Drawing.Color.Black;
-            this.lblTitle.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Bold);
+            this.lblTitle.Font = new System.Drawing.Font("宋体", 14.5F);
             this.lblTitle.ForeColor = System.Drawing.Color.White;
             this.lblTitle.Location = new System.Drawing.Point(3, 3);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(346, 19);
+            this.lblTitle.Size = new System.Drawing.Size(339, 20);
             this.lblTitle.TabIndex = 15;
             this.lblTitle.Text = "中煤乌审旗洗精煤：精煤/18车/800吨";
             // 
@@ -49,7 +49,7 @@
             this.lblCarNumbers.AutoSize = true;
             this.lblCarNumbers.Font = new System.Drawing.Font("宋体", 14.5F);
             this.lblCarNumbers.ForeColor = System.Drawing.Color.White;
-            this.lblCarNumbers.Location = new System.Drawing.Point(11, 20);
+            this.lblCarNumbers.Location = new System.Drawing.Point(11, 21);
             this.lblCarNumbers.Name = "lblCarNumbers";
             this.lblCarNumbers.Size = new System.Drawing.Size(699, 60);
             this.lblCarNumbers.TabIndex = 16;

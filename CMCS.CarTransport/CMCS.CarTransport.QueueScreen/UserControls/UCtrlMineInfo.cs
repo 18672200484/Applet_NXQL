@@ -11,7 +11,7 @@ namespace CMCS.CarTransport.QueueScreen.UserControls
 {
     public partial class UCtrlMineInfo : UserControl
     {
-        private int spacing = 5;
+        private int spacing = 0;
         [Browsable(true)]
         [Description("控件上下间距")]
         public int Spacing

@@ -34,6 +34,8 @@ namespace CMCS.CarTransport.QueueScreen.Frms.Sys
             LoadTotalInfo();
 
             LoadContent();
+
+            BindFromMoveEvent(this);
         }
 
         private void FrmQueueScreen_KeyUp(object sender, KeyEventArgs e)
@@ -118,10 +120,10 @@ namespace CMCS.CarTransport.QueueScreen.Frms.Sys
             int TotalHeight = 0;
 
             List<CmcsInNetTransport> list = commonDAO.SelfDber.Entities<CmcsInNetTransport>("where (StepName='矿发' or StepName='在途') and IDCard is not null");
-            foreach (var item in list.GroupBy(a => a.MineName).OrderBy(a => a.Key))
+            foreach (var item in list.GroupBy(a => new Tuple<string, string>(a.MineName, a.FuelKindName)).OrderBy(a => a.Key))
             {
                 UCtrlMineInfo mineInfo = new UCtrlMineInfo();
-                mineInfo.Title = item.Key;
+                mineInfo.Title = item.Key.Item1 + "：" + item.Key.Item2 + "/" + item.Count() + "车/" + item.Sum(a => a.TicketWeight) + "吨";
                 mineInfo.Content = item.Select(a => a.CarNumber).ToList();
                 mineInfo.Location = new Point(1, 1 + TotalHeight);
                 if ((i % 2) == 0)
@@ -143,6 +145,8 @@ namespace CMCS.CarTransport.QueueScreen.Frms.Sys
                 Offset = panelOut.Height;
             else
                 Offset = vSBarMain.Maximum;
+
+            Offset = 20;
         }
 
         /// <summary>
@@ -190,12 +194,14 @@ namespace CMCS.CarTransport.QueueScreen.Frms.Sys
             try
             {
                 //10秒滚动一页，完成一次后刷新数据
-                if (DateTime.Now.Second % 10 == 0)
+                if (DateTime.Now.Second % 3 == 0)
+                {
                     if (ScrollContent())
                     {
                         LoadTotalInfo();
                         LoadContent();
                     }
+                }
             }
             catch (Exception ex)
             {
@@ -216,5 +222,61 @@ namespace CMCS.CarTransport.QueueScreen.Frms.Sys
         {
             lblCurrentTime.Text = DateTime.Now.ToString("yyyy年MM月dd日 HH:mm");
         }
+
+        #region 移动窗体 移动窗口
+
+        /// <summary>
+        /// 绑定窗体移动事件
+        /// </summary>
+        private void BindFromMoveEvent(Control ctl)
+        {
+            foreach (Control item in ctl.Controls)
+            {
+                if (item.Controls.Count > 0) BindFromMoveEvent(item);
+
+                item.MouseDown += new MouseEventHandler(ctl_MouseDown);
+                item.MouseMove += new MouseEventHandler(ctl_MouseMove);
+            }
+        }
+
+        private Point _mousePoint;
+        private int topA(Control cc)
+        {
+            if (cc == null || cc == this) return 0;
+            if (cc.Parent == null || cc.Parent == this)
+                return cc.Top;
+            else
+                return topA(cc.Parent) + cc.Top;
+        }
+
+        private int leftA(Control cc)
+        {
+            if (cc == null || cc == this) return 0;
+            if (cc.Parent == null || cc.Parent == this)
+                return cc.Left;
+            else
+                return leftA(cc.Parent) + cc.Left;
+        }
+
+        private void ctl_MouseDown(object sender, MouseEventArgs e)
+        {
+            Control cc = (Control)sender;
+            if (e.Button == MouseButtons.Left)
+            {
+                _mousePoint.X = e.X + leftA(cc);
+                _mousePoint.Y = e.Y + topA(cc);
+            }
+        }
+
+        private void ctl_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                Top = MousePosition.Y - _mousePoint.Y;
+                Left = MousePosition.X - _mousePoint.X;
+            }
+        }
+        #endregion
+
     }
 }
