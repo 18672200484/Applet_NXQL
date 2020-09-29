@@ -34,8 +34,6 @@ namespace CMCS.CarTransport.QueueScreen.Frms.Sys
             LoadTotalInfo();
 
             LoadContent();
-
-            BindFromMoveEvent(this);
         }
 
         private void FrmQueueScreen_KeyUp(object sender, KeyEventArgs e)
@@ -139,14 +137,17 @@ namespace CMCS.CarTransport.QueueScreen.Frms.Sys
             }
             panelIn.Height = TotalHeight;
 
-            //设置每次滚动偏移量
-            vSBarMain.Maximum = panelIn.Height - panelOut.Height;
-            if (vSBarMain.Maximum > panelOut.Height)
-                Offset = panelOut.Height;
-            else
-                Offset = vSBarMain.Maximum;
+            //动态设置每次滚动偏移量（一次滚动一页）
+            //vSBarMain.Maximum = panelIn.Height - panelOut.Height;
+            //if (vSBarMain.Maximum > panelOut.Height)
+            //    Offset = panelOut.Height;
+            //else
+            //    Offset = vSBarMain.Maximum;
 
+            //固定滚动偏移量
             Offset = 20;
+
+            BindFromMoveEvent(this);
         }
 
         /// <summary>
