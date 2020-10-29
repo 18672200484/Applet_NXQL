@@ -212,7 +212,7 @@ namespace CMCS.DumblyConcealer.Tasks.Intelogistics
 					entity.所属单位名称 = item["所属单位名称"].ToString();
 					entity.车牌号 = item["车牌号"].ToString();
 					entity.门禁编号 = item["门禁编号"].ToString();
-					entity.化验表编号 = item["化验表编号"].ToString();
+					entity.化验编号 = item["化验表编号"].ToString();
 
 					DateTime grossTime = DateTime.Now;
 					if (string.IsNullOrWhiteSpace(item["重车时间"].ToString()) || !DateTime.TryParse(item["重车时间"].ToString(), out grossTime))
@@ -289,7 +289,7 @@ namespace CMCS.DumblyConcealer.Tasks.Intelogistics
 					entity.所属单位名称 = item["所属单位名称"].ToString();
 					entity.车牌号 = item["车牌号"].ToString();
 					entity.门禁编号 = item["门禁编号"].ToString();
-					entity.化验表编号 = item["化验表编号"].ToString();
+					entity.化验编号 = item["化验表编号"].ToString();
 
 					DateTime grossTime = DateTime.Now;
 					if (string.IsNullOrWhiteSpace(item["重车时间"].ToString()) || !DateTime.TryParse(item["重车时间"].ToString(), out grossTime))

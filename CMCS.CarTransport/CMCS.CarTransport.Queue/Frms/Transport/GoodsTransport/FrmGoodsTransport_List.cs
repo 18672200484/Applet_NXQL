@@ -16,6 +16,7 @@ using CMCS.Common.Entities;
 using CMCS.Common.Entities.BaseInfo;
 using CMCS.Common.Entities.CarTransport;
 using CMCS.Common.Enums;
+using CMCS.Common.Print;
 using DevComponents.DotNetBar;
 using DevComponents.DotNetBar.Metro;
 using DevComponents.DotNetBar.SuperGrid;
@@ -266,10 +267,10 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.GoodsTransport
 		/// </summary>
 		private void BindCarType()
 		{
-			cmbStepName.Items.Add("全部");
+			cmbCarType.Items.Add("全部");
 			cmbCarType.Items.Add(eCarType.其他物资.ToString());
 			cmbCarType.Items.Add(eCarType.转煤车辆.ToString());
-			cmbStepName.SelectedIndex = 0;
+			cmbCarType.SelectedIndex = 0;
 		}
 
 		#region 供货单位
@@ -424,20 +425,14 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.GoodsTransport
 						BindData();
 					}
 					break;
-				case "clmPic":
-
-					if (Dbers.GetInstance().SelfDber.Entities<CmcsTransportPicture>(String.Format(" where TransportId='{0}'", entity.Id)).Count > 0)
+				case "clmPrint":
+					if (entity.SuttleWeight <= 0)
 					{
-						FrmTransportPicture frmPic = new FrmTransportPicture(entity.Id, entity.CarNumber);
-						if (frmPic.ShowDialog() == DialogResult.OK)
-						{
-							BindData();
-						}
+						MessageBoxEx.Show("净重异常禁止打印", "操作提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+						return;
 					}
-					else
-					{
-						MessageBoxEx.Show("暂无抓拍图片！", "操作提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-					}
+					FrmPrintWeb frm = new FrmPrintWeb(null, entity);
+					frm.ShowDialog();
 					break;
 			}
 		}

@@ -392,6 +392,11 @@ namespace CMCS.CarTransport.Queue.Frms.Sys
 				FrmMainFrame.superTabControlManager.ChangeToTab(uniqueKey);
 		}
 
+		/// <summary>
+		/// 物资类型
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void btnOpenGoodsTypeLoad_Click(object sender, EventArgs e)
 		{
 			string uniqueKey = CMCS.CarTransport.Queue.Frms.BaseInfo.GoodsType.FrmGoodsType_List.UniqueKey;
@@ -399,6 +404,24 @@ namespace CMCS.CarTransport.Queue.Frms.Sys
 			if (FrmMainFrame.superTabControlManager.GetTab(uniqueKey) == null)
 			{
 				CMCS.CarTransport.Queue.Frms.BaseInfo.GoodsType.FrmGoodsType_List frm = new CMCS.CarTransport.Queue.Frms.BaseInfo.GoodsType.FrmGoodsType_List();
+				FrmMainFrame.superTabControlManager.CreateTab(frm.Text, uniqueKey, frm, true, true);
+			}
+			else
+				FrmMainFrame.superTabControlManager.ChangeToTab(uniqueKey);
+		}
+
+		/// <summary>
+		/// 供货收货单位
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void OpenSupplyReceive_Click(object sender, EventArgs e)
+		{
+			string uniqueKey = CMCS.CarTransport.Queue.Frms.BaseInfo.SupplyReceive.FrmSupplyReceive_List.UniqueKey;
+
+			if (FrmMainFrame.superTabControlManager.GetTab(uniqueKey) == null)
+			{
+				CMCS.CarTransport.Queue.Frms.BaseInfo.SupplyReceive.FrmSupplyReceive_List frm = new CMCS.CarTransport.Queue.Frms.BaseInfo.SupplyReceive.FrmSupplyReceive_List();
 				FrmMainFrame.superTabControlManager.CreateTab(frm.Text, uniqueKey, frm, true, true);
 			}
 			else

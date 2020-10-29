@@ -69,6 +69,7 @@ namespace CMCS.CarTransport.Queue.Frms.Sys
 			this.btnOpenCamareLoad = new DevComponents.DotNetBar.ButtonItem();
 			this.btnOpenProvinceAbbreviationLoad = new DevComponents.DotNetBar.ButtonItem();
 			this.timer_CurrentTime = new System.Windows.Forms.Timer(this.components);
+			this.OpenSupplyReceive = new DevComponents.DotNetBar.ButtonItem();
 			this.tableLayoutPanel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.superTabControl1)).BeginInit();
 			this.superTabControl1.SuspendLayout();
@@ -392,6 +393,7 @@ namespace CMCS.CarTransport.Queue.Frms.Sys
             this.btnOpenFuelKindlLoad,
             this.btnOpenMineLoad,
             this.btnOpenGoodsTypeLoad,
+            this.OpenSupplyReceive,
             this.btnOpenAppletConfigLoad,
             this.btnOpenCamareLoad,
             this.btnOpenProvinceAbbreviationLoad});
@@ -493,6 +495,13 @@ namespace CMCS.CarTransport.Queue.Frms.Sys
 			this.timer_CurrentTime.Interval = 1000;
 			this.timer_CurrentTime.Tick += new System.EventHandler(this.timer_CurrentTime_Tick);
 			// 
+			// OpenSupplyReceive
+			// 
+			this.OpenSupplyReceive.GlobalItem = false;
+			this.OpenSupplyReceive.Name = "OpenSupplyReceive";
+			this.OpenSupplyReceive.Text = "供货收货单位";
+			this.OpenSupplyReceive.Click += new System.EventHandler(this.OpenSupplyReceive_Click);
+			// 
 			// FrmMainFrame
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -557,6 +566,7 @@ namespace CMCS.CarTransport.Queue.Frms.Sys
         private DevComponents.DotNetBar.ButtonItem btnOpenGoodsTypeLoad;
         private DevComponents.DotNetBar.ButtonItem btnOpenModifyLog;
         private DevComponents.DotNetBar.ButtonItem btnOpenProvinceAbbreviationLoad;
-    }
+		private DevComponents.DotNetBar.ButtonItem OpenSupplyReceive;
+	}
 }
 

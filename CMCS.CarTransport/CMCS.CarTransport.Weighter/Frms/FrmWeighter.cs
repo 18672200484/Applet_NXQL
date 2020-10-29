@@ -2025,7 +2025,7 @@ namespace CMCS.CarTransport.Weighter.Frms
 		/// <param name="e"></param>
 		private void btnSelectAutotruck_Goods_Click(object sender, EventArgs e)
 		{
-			FrmUnFinishTransport_Select frm = new FrmUnFinishTransport_Select("where CarType='" + eCarType.其他物资.ToString() + "' order by CreationTime desc");
+			CMCS.CarTransport.Queue.Frms.BaseInfo.Autotruck.FrmAutotruck_Select frm = new CarTransport.Queue.Frms.BaseInfo.Autotruck.FrmAutotruck_Select("and CarType!='" + eCarType.入厂煤.ToString() + "' order by CreationTime desc");
 			if (frm.ShowDialog() == DialogResult.OK)
 			{
 				if (this.InductorCoil1)
@@ -2115,8 +2115,8 @@ namespace CMCS.CarTransport.Weighter.Frms
 					//打印磅单 
 					if (this.AutoPrint && this.CurrentGoodsTransport.SuttleWeight > 0)
 					{
-						//异步打印
-						new Task(() => { PrintWeightReport.GetInstance(new PrintDocument()).PrintGoodsTransport(this.CurrentGoodsTransport); }).Start();
+						WagonPrinter print = new WagonPrinter(this.printDocument1);
+						print.Print(null, this.CurrentGoodsTransport);
 					}
 
 					return true;

@@ -23,7 +23,7 @@ namespace CMCS.DumblyConcealer.Tasks.Intelogistics.Entities
         public string 车牌号 { get; set; }
 
         public string 门禁编号 { get; set; }
-        public string 化验表编号 { get; set; }
+        public string 化验编号 { get; set; }
         public DateTime 重车时间 { get; set; }
         public DateTime 轻车时间 { get; set; }
         public string 物料编号 { get; set; }

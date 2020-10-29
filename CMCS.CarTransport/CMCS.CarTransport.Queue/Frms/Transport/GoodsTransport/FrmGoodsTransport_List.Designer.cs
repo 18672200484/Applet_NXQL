@@ -57,6 +57,7 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.GoodsTransport
 			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.panel1 = new System.Windows.Forms.Panel();
+			this.cmbCarType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
 			this.btnReportExport = new DevComponents.DotNetBar.ButtonX();
 			this.btnDelSupplier_BuyFuel = new DevComponents.DotNetBar.ButtonX();
 			this.btnbtnSelectSupply_Goods = new DevComponents.DotNetBar.ButtonX();
@@ -73,7 +74,6 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.GoodsTransport
 			this.dtInputStart = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
 			this.txtCarNumber_Ser = new DevComponents.DotNetBar.Controls.TextBoxX();
 			this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
-			this.cmbCarType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
 			this.panel2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
 			this.splitContainer2.Panel1.SuspendLayout();
@@ -124,11 +124,11 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.GoodsTransport
 			gridColumn3.NullString = "删除";
 			gridColumn3.Width = 32;
 			gridColumn4.CellStyles.Default.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Underline);
-			gridColumn4.DefaultNewRowCellValue = "抓拍";
+			gridColumn4.DefaultNewRowCellValue = "打印";
 			gridColumn4.HeaderText = "";
 			gridColumn4.InfoImageAlignment = DevComponents.DotNetBar.SuperGrid.Style.Alignment.MiddleCenter;
-			gridColumn4.Name = "clmPic";
-			gridColumn4.NullString = "抓拍";
+			gridColumn4.Name = "clmPrint";
+			gridColumn4.NullString = "打印";
 			gridColumn4.Width = 32;
 			gridColumn5.AutoSizeMode = DevComponents.DotNetBar.SuperGrid.ColumnAutoSizeMode.AllCells;
 			gridColumn5.CellStyles.Default.Alignment = DevComponents.DotNetBar.SuperGrid.Style.Alignment.MiddleCenter;
@@ -447,6 +447,23 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.GoodsTransport
 			this.panel1.Size = new System.Drawing.Size(1520, 40);
 			this.panel1.TabIndex = 12;
 			// 
+			// cmbCarType
+			// 
+			this.cmbCarType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.cmbCarType.DisplayMember = "Text";
+			this.cmbCarType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+			this.cmbCarType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cmbCarType.Font = new System.Drawing.Font("Segoe UI", 11.25F);
+			this.cmbCarType.ForeColor = System.Drawing.Color.White;
+			this.cmbCarType.FormattingEnabled = true;
+			this.cmbCarType.ItemHeight = 21;
+			this.cmbCarType.Location = new System.Drawing.Point(125, 7);
+			this.cmbCarType.Name = "cmbCarType";
+			this.cmbCarType.Size = new System.Drawing.Size(100, 27);
+			this.cmbCarType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.cmbCarType.TabIndex = 282;
+			this.cmbCarType.WatermarkText = "车辆类型";
+			// 
 			// btnReportExport
 			// 
 			this.btnReportExport.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
@@ -739,23 +756,6 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.GoodsTransport
 			this.txtCarNumber_Ser.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			this.txtCarNumber_Ser.WatermarkImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
 			this.txtCarNumber_Ser.WatermarkText = "请输入车牌号...";
-			// 
-			// cmbCarType
-			// 
-			this.cmbCarType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.cmbCarType.DisplayMember = "Text";
-			this.cmbCarType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-			this.cmbCarType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.cmbCarType.Font = new System.Drawing.Font("Segoe UI", 11.25F);
-			this.cmbCarType.ForeColor = System.Drawing.Color.White;
-			this.cmbCarType.FormattingEnabled = true;
-			this.cmbCarType.ItemHeight = 21;
-			this.cmbCarType.Location = new System.Drawing.Point(125, 7);
-			this.cmbCarType.Name = "cmbCarType";
-			this.cmbCarType.Size = new System.Drawing.Size(100, 27);
-			this.cmbCarType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.cmbCarType.TabIndex = 282;
-			this.cmbCarType.WatermarkText = "车辆类型";
 			// 
 			// FrmGoodsTransport_List
 			// 

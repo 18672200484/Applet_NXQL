@@ -82,11 +82,13 @@ namespace CMCS.CarTransport.Queue.Frms.BaseInfo.SupplyReceive
 			gridColumn1.Name = "clmShow";
 			gridColumn1.NullString = "查看";
 			gridColumn1.Width = 32;
+			gridColumn2.CellStyles.Default.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Underline);
 			gridColumn2.DefaultNewRowCellValue = "修改";
 			gridColumn2.HeaderText = "";
 			gridColumn2.Name = "clmEdit";
 			gridColumn2.NullString = "修改";
 			gridColumn2.Width = 32;
+			gridColumn3.CellStyles.Default.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Underline);
 			gridColumn3.DefaultNewRowCellValue = "删除";
 			gridColumn3.HeaderText = "";
 			gridColumn3.Name = "clmDelete";

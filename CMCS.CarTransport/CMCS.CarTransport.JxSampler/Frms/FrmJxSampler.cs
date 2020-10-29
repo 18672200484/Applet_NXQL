@@ -974,13 +974,13 @@ namespace CMCS.CarTransport.JxSampler.Frms
 							{
 								if ((this.CurrentAutotruck.CarriageLength > 11000 && !this.InfraredSensor1))
 								{
-									UpdateLedShow("停车不到位", "请前移");
-									this.voiceSpeaker.Speak("停车不到位 请往前开");
+									UpdateLedShow("停车不到位", "请到位置B");
+									this.voiceSpeaker.Speak("停车不到位 请行驶到位置B");
 								}
 								else if ((this.CurrentAutotruck.CarriageLength <= 11000 && !this.InfraredSensor2))
 								{
-									UpdateLedShow("停车不到位", "请后移");
-									this.voiceSpeaker.Speak("停车不到位 请往后开");
+									UpdateLedShow("停车不到位", "请到位置A");
+									this.voiceSpeaker.Speak("停车不到位 请行驶到位置A");
 								}
 							}
 							timer1.Interval = 4000;
