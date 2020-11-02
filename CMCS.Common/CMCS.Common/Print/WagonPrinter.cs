@@ -166,7 +166,7 @@ namespace CMCS.Common.Print
 				// 行间距 24 
 				float TopValue = 53;
 				string printValue = "";
-				g.DrawString("国电投青铝发电有限公司过磅单", TitleFont, Brushes.Black, 30, TopValue);
+				g.DrawString(PrintAppConfig.GetInstance().TitleContent, TitleFont, Brushes.Black, 30, TopValue);
 				TopValue += 34;
 
 				g.DrawString("打印时间：" + DateTime.Now.ToString("yyyy-MM-dd HH:mm"), ContentFont, Brushes.Black, 30, TopValue);
@@ -198,13 +198,13 @@ namespace CMCS.Common.Print
 				g.DrawString(string.Format("一次称重：{0} 吨", GrossWeight), ContentFont, Brushes.Black, 30, TopValue);
 				TopValue += 24;
 
-				g.DrawString("一次时间：" + this._BuyFuelTransport.GrossTime.ToString("yyyy-MM-dd HH:mm"), ContentFont, Brushes.Black, 30, TopValue);
+				g.DrawString("一次时间：" + this._GoodsTransport.FirstTime.ToString("yyyy-MM-dd HH:mm"), ContentFont, Brushes.Black, 30, TopValue);
 				TopValue += 24;
 
 				g.DrawString(string.Format("二次称重：{0} 吨", TareWeight), ContentFont, Brushes.Black, 30, TopValue);
 				TopValue += 24;
 
-				g.DrawString("二次时间：" + this._BuyFuelTransport.TareTime.ToString("yyyy-MM-dd HH:mm"), ContentFont, Brushes.Black, 30, TopValue);
+				g.DrawString("二次时间：" + this._GoodsTransport.SecondTime.ToString("yyyy-MM-dd HH:mm"), ContentFont, Brushes.Black, 30, TopValue);
 				TopValue += 24;
 
 				g.DrawString(string.Format("净    重：{0} 吨", SuttleWeight), ContentFont, Brushes.Black, 30, TopValue);

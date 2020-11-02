@@ -1671,13 +1671,16 @@ namespace CMCS.CarTransport.Weighter.Frms
 					//∆Ù”√æª÷ÿ≥¨≤Ó
 					if (this.IsTicketDiff && this.CurrentBuyFuelTransport.TicketWeight > 0)
 					{
-						isDiff = Math.Abs(this.CurrentBuyFuelTransport.GrossWeight - Weight - this.CurrentBuyFuelTransport.TicketWeight) - this.TicketDiff > 0;
+						//isDiff = Math.Abs(this.CurrentBuyFuelTransport.GrossWeight - Weight - this.CurrentBuyFuelTransport.TicketWeight) - this.TicketDiff > 0;
+						isDiff = (this.CurrentBuyFuelTransport.TicketWeight - (this.CurrentBuyFuelTransport.GrossWeight - this.CurrentBuyFuelTransport.TareWeight)) / this.CurrentBuyFuelTransport.TicketWeight >= 0.008m;
 						diffValue = Math.Abs(this.CurrentBuyFuelTransport.GrossWeight - Weight - this.CurrentBuyFuelTransport.TicketWeight);
 
 						if (isDiff)
 						{
-							UpdateLedShow(this.CurrentAutotruck.CarNumber + "æª÷ÿ≥¨≤Ó£∫" + diffValue + "∂÷");
-							this.voiceSpeaker.Speak(this.CurrentAutotruck.CarNumber + "æª÷ÿ≥¨≤Ó£∫" + diffValue + "∂÷", 1, false);
+							//UpdateLedShow(this.CurrentAutotruck.CarNumber + "æª÷ÿ≥¨≤Ó£∫" + diffValue + "∂÷");
+							//this.voiceSpeaker.Speak(this.CurrentAutotruck.CarNumber + "æª÷ÿ≥¨≤Ó£∫" + diffValue + "∂÷", 1, false);
+							UpdateLedShow(this.CurrentAutotruck.CarNumber + "æª÷ÿ≥¨≤Ó");
+							this.voiceSpeaker.Speak(this.CurrentAutotruck.CarNumber + "æª÷ÿ≥¨≤Ó «Î¡™œµπ‹¿Ì‘±", 1, false);
 							return false;
 						}
 					}

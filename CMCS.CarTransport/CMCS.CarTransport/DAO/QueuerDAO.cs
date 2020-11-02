@@ -272,6 +272,18 @@ namespace CMCS.CarTransport.DAO
 		}
 
 		/// <summary>
+		/// 根据矿点获取设置的采样机
+		/// </summary>
+		/// <param name="mineName"></param>
+		/// <returns></returns>
+		public string GetSamplerByMineName(string mineName)
+		{
+			CmcsSetSampler entity = commonDAO.SelfDber.Entity<CmcsSetSampler>("where MineName=:MineName and StartTime<=sysdate and EndTime >sysdate order by EndTime desc", new { MineName = mineName });
+			if (entity != null) return entity.Sampler;
+			return string.Empty;
+		}
+
+		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="qchbm"></param>

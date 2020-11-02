@@ -1322,7 +1322,9 @@ namespace CMCS.CarTransport.Queue.Frms
 			//string sampler = string.Empty;
 			//string weighter = string.Empty;
 
-			////分配采样机
+			//分配采样机
+			string samplerMachineCode = queuerDAO.GetSamplerByMineName(this.SelectedMine_BuyFuel.Name);
+
 			//if (!queuerDAO.GetSamplerMachineCode(this.SamplerCodes, this.SampleWayCount, this.isSampleWayCount, ref sampler, ref message))
 			//{
 			//	MessageBoxEx.Show(message, "操作提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -1347,7 +1349,11 @@ namespace CMCS.CarTransport.Queue.Frms
 					btnSaveTransport_BuyFuel.Enabled = false;
 
 					UpdateLedShow(this.CurrentAutotruck.CarNumber + "排队成功");
-
+					if (!string.IsNullOrEmpty(samplerMachineCode))
+					{
+						UpdateLedShow("请前往" + samplerMachineCode);
+						voiceSpeaker.Speak(this.CurrentAutotruck.CarNumber + " 请前往" + samplerMachineCode, 2);
+					}
 					if (!this.AutoHandMode)
 						MessageBoxEx.Show("排队成功", "操作提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

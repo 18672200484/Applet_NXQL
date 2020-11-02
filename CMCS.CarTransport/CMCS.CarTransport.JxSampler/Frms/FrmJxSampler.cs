@@ -858,26 +858,37 @@ namespace CMCS.CarTransport.JxSampler.Frms
 										{
 											if (this.CurrentBuyFuelTransport.IsRefuse == 0)
 											{
-												// 判断路线设置
-												string nextPlace;
-												if (carTransportDAO.CheckNextTruckInFactoryWay(this.CurrentAutotruck.CarType, this.CurrentBuyFuelTransport.StepName, "采样", CommonAppConfig.GetInstance().AppIdentifier, out nextPlace))
+												//判断采样机
+												string samplerMachineCode = QueuerDAO.GetInstance().GetSamplerByMineName(this.CurrentBuyFuelTransport.MineName);
+												if (!string.IsNullOrEmpty(samplerMachineCode) && samplerMachineCode != this.SamplerMachineCode)
 												{
-													BackGateUp();
-
-													btnSendSamplingPlan.Enabled = true;
-
-													this.CurrentFlowFlag = eFlowFlag.等待驶入;
-													timer1.Interval = 1000;
-
-													UpdateLedShow(this.CurrentAutotruck.CarNumber, " 驶至采样区域");
-													this.voiceSpeaker.Speak(this.CurrentAutotruck.CarNumber + " 请行驶至采样区域", 1, false);
+													UpdateLedShow(this.CurrentAutotruck.CarNumber, " 驶至" + samplerMachineCode);
+													this.voiceSpeaker.Speak(this.CurrentAutotruck.CarNumber + " 请行驶至" + samplerMachineCode, 2, false);
+													this.CurrentImperfectCar = null;
 												}
 												else
 												{
-													UpdateLedShow("路线错误", "禁止通过");
-													this.voiceSpeaker.Speak("路线错误 禁止通过 " + (!string.IsNullOrEmpty(nextPlace) ? "请前往" + nextPlace : ""), 1, false);
-													this.CurrentImperfectCar = null;
-													timer1.Interval = 20000;
+													// 判断路线设置
+													string nextPlace;
+													if (carTransportDAO.CheckNextTruckInFactoryWay(this.CurrentAutotruck.CarType, this.CurrentBuyFuelTransport.StepName, "采样", CommonAppConfig.GetInstance().AppIdentifier, out nextPlace))
+													{
+														BackGateUp();
+
+														btnSendSamplingPlan.Enabled = true;
+
+														this.CurrentFlowFlag = eFlowFlag.等待驶入;
+														timer1.Interval = 1000;
+
+														UpdateLedShow(this.CurrentAutotruck.CarNumber, " 驶至采样区域");
+														this.voiceSpeaker.Speak(this.CurrentAutotruck.CarNumber + " 请行驶至采样区域", 1, false);
+													}
+													else
+													{
+														UpdateLedShow("路线错误", "禁止通过");
+														this.voiceSpeaker.Speak("路线错误 禁止通过 " + (!string.IsNullOrEmpty(nextPlace) ? "请前往" + nextPlace : ""), 1, false);
+														this.CurrentImperfectCar = null;
+														timer1.Interval = 20000;
+													}
 												}
 											}
 											else

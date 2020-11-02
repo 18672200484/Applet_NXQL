@@ -65,11 +65,12 @@ namespace CMCS.CarTransport.Queue.Frms.Sys
 			this.btnOpenFuelKindlLoad = new DevComponents.DotNetBar.ButtonItem();
 			this.btnOpenMineLoad = new DevComponents.DotNetBar.ButtonItem();
 			this.btnOpenGoodsTypeLoad = new DevComponents.DotNetBar.ButtonItem();
+			this.OpenSupplyReceive = new DevComponents.DotNetBar.ButtonItem();
 			this.btnOpenAppletConfigLoad = new DevComponents.DotNetBar.ButtonItem();
 			this.btnOpenCamareLoad = new DevComponents.DotNetBar.ButtonItem();
 			this.btnOpenProvinceAbbreviationLoad = new DevComponents.DotNetBar.ButtonItem();
 			this.timer_CurrentTime = new System.Windows.Forms.Timer(this.components);
-			this.OpenSupplyReceive = new DevComponents.DotNetBar.ButtonItem();
+			this.btnOpenSetSampler = new DevComponents.DotNetBar.ButtonItem();
 			this.tableLayoutPanel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.superTabControl1)).BeginInit();
 			this.superTabControl1.SuspendLayout();
@@ -396,7 +397,8 @@ namespace CMCS.CarTransport.Queue.Frms.Sys
             this.OpenSupplyReceive,
             this.btnOpenAppletConfigLoad,
             this.btnOpenCamareLoad,
-            this.btnOpenProvinceAbbreviationLoad});
+            this.btnOpenProvinceAbbreviationLoad,
+            this.btnOpenSetSampler});
 			this.btnOpenBaseInfo.TabIndex = 10;
 			this.btnOpenBaseInfo.Text = "基 础 信 息";
 			// 
@@ -464,6 +466,13 @@ namespace CMCS.CarTransport.Queue.Frms.Sys
 			this.btnOpenGoodsTypeLoad.Text = "物资管理";
 			this.btnOpenGoodsTypeLoad.Click += new System.EventHandler(this.btnOpenGoodsTypeLoad_Click);
 			// 
+			// OpenSupplyReceive
+			// 
+			this.OpenSupplyReceive.GlobalItem = false;
+			this.OpenSupplyReceive.Name = "OpenSupplyReceive";
+			this.OpenSupplyReceive.Text = "供货收货单位";
+			this.OpenSupplyReceive.Click += new System.EventHandler(this.OpenSupplyReceive_Click);
+			// 
 			// btnOpenAppletConfigLoad
 			// 
 			this.btnOpenAppletConfigLoad.GlobalItem = false;
@@ -495,12 +504,13 @@ namespace CMCS.CarTransport.Queue.Frms.Sys
 			this.timer_CurrentTime.Interval = 1000;
 			this.timer_CurrentTime.Tick += new System.EventHandler(this.timer_CurrentTime_Tick);
 			// 
-			// OpenSupplyReceive
+			// btnOpenSetSampler
 			// 
-			this.OpenSupplyReceive.GlobalItem = false;
-			this.OpenSupplyReceive.Name = "OpenSupplyReceive";
-			this.OpenSupplyReceive.Text = "供货收货单位";
-			this.OpenSupplyReceive.Click += new System.EventHandler(this.OpenSupplyReceive_Click);
+			this.btnOpenSetSampler.GlobalItem = false;
+			this.btnOpenSetSampler.Name = "btnOpenSetSampler";
+			this.btnOpenSetSampler.Tag = "CMCS.CarTransport.Queue.Frms.BaseInfo.SetSampler.FrmSetSampler_List";
+			this.btnOpenSetSampler.Text = "采样设置";
+			this.btnOpenSetSampler.Click += new System.EventHandler(this.btnOpenSetSampler_Click);
 			// 
 			// FrmMainFrame
 			// 
@@ -567,6 +577,7 @@ namespace CMCS.CarTransport.Queue.Frms.Sys
         private DevComponents.DotNetBar.ButtonItem btnOpenModifyLog;
         private DevComponents.DotNetBar.ButtonItem btnOpenProvinceAbbreviationLoad;
 		private DevComponents.DotNetBar.ButtonItem OpenSupplyReceive;
+		private DevComponents.DotNetBar.ButtonItem btnOpenSetSampler;
 	}
 }
 

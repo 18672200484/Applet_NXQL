@@ -446,6 +446,24 @@ namespace CMCS.CarTransport.Queue.Frms.Sys
 				FrmMainFrame.superTabControlManager.ChangeToTab(uniqueKey);
 		}
 
+		/// <summary>
+		/// 采样设置
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void btnOpenSetSampler_Click(object sender, EventArgs e)
+		{
+			string uniqueKey = CMCS.CarTransport.Queue.Frms.BaseInfo.SetSampler.FrmSetSampler_List.UniqueKey;
+
+			if (FrmMainFrame.superTabControlManager.GetTab(uniqueKey) == null)
+			{
+				CMCS.CarTransport.Queue.Frms.BaseInfo.SetSampler.FrmSetSampler_List frm = new CMCS.CarTransport.Queue.Frms.BaseInfo.SetSampler.FrmSetSampler_List();
+				FrmMainFrame.superTabControlManager.CreateTab(frm.Text, uniqueKey, frm, true, true);
+			}
+			else
+				FrmMainFrame.superTabControlManager.ChangeToTab(uniqueKey);
+		}
+
 		#region 系统管理
 
 		private void btnOpenUserInfo_Click(object sender, EventArgs e)
