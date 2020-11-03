@@ -76,7 +76,7 @@ namespace CMCS.CarTransport.Queue.Frms.BaseInfo.SetSampler
 
 		private void btnSearch_Click(object sender, EventArgs e)
 		{
-			this.SqlWhere = " where 1=1";
+			this.SqlWhere = " where IsDeleted=0";
 			if (dtpStartTime.Value != DateTime.MinValue) this.SqlWhere += " and CreationTime >=:StartTime";
 			if (dtpEndTime.Value != DateTime.MinValue) this.SqlWhere += " and CreationTime <=:EndTime";
 			if (!string.IsNullOrEmpty(txtContent.Text)) this.SqlWhere += " and MineName like '%" + txtContent.Text + "%'";
@@ -198,7 +198,9 @@ namespace CMCS.CarTransport.Queue.Frms.BaseInfo.SetSampler
 				case "clmDelete":
 					if ((MessageBoxEx.Show("确定要删除该记录？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes))
 					{
-						CommonDAO.GetInstance().SelfDber.Delete<CmcsSetSampler>(entity.Id);
+						entity.IsDeleted = 1;
+						entity.DeletionTime = DateTime.Now;
+						CommonDAO.GetInstance().SelfDber.Update<CmcsSetSampler>(entity);
 						BindData();
 					}
 					break;

@@ -114,7 +114,7 @@
 			this.label1.BackColor = System.Drawing.Color.Black;
 			this.label1.Font = new System.Drawing.Font("宋体", 18F);
 			this.label1.ForeColor = System.Drawing.Color.Red;
-			this.label1.Location = new System.Drawing.Point(186, 2);
+			this.label1.Location = new System.Drawing.Point(186, 5);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(322, 24);
 			this.label1.TabIndex = 2;
@@ -159,7 +159,7 @@
 			this.lblCurrentTime.BackColor = System.Drawing.Color.Black;
 			this.lblCurrentTime.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
 			this.lblCurrentTime.ForeColor = System.Drawing.Color.Red;
-			this.lblCurrentTime.Location = new System.Drawing.Point(245, -1);
+			this.lblCurrentTime.Location = new System.Drawing.Point(243, -1);
 			this.lblCurrentTime.Name = "lblCurrentTime";
 			this.lblCurrentTime.Size = new System.Drawing.Size(206, 19);
 			this.lblCurrentTime.TabIndex = 3;
@@ -184,7 +184,7 @@
 			this.label13.BackColor = System.Drawing.Color.Black;
 			this.label13.Font = new System.Drawing.Font("宋体", 14.5F);
 			this.label13.ForeColor = System.Drawing.Color.Red;
-			this.label13.Location = new System.Drawing.Point(160, 48);
+			this.label13.Location = new System.Drawing.Point(167, 48);
 			this.label13.Margin = new System.Windows.Forms.Padding(0);
 			this.label13.Name = "label13";
 			this.label13.Size = new System.Drawing.Size(49, 20);
@@ -197,7 +197,7 @@
 			this.label14.BackColor = System.Drawing.Color.Black;
 			this.label14.Font = new System.Drawing.Font("宋体", 14.5F);
 			this.label14.ForeColor = System.Drawing.Color.Red;
-			this.label14.Location = new System.Drawing.Point(3, 48);
+			this.label14.Location = new System.Drawing.Point(9, 48);
 			this.label14.Margin = new System.Windows.Forms.Padding(0);
 			this.label14.Name = "label14";
 			this.label14.Size = new System.Drawing.Size(159, 20);
@@ -210,7 +210,7 @@
 			this.label9.BackColor = System.Drawing.Color.Black;
 			this.label9.Font = new System.Drawing.Font("宋体", 14.5F);
 			this.label9.ForeColor = System.Drawing.Color.Red;
-			this.label9.Location = new System.Drawing.Point(659, 23);
+			this.label9.Location = new System.Drawing.Point(634, 23);
 			this.label9.Margin = new System.Windows.Forms.Padding(0);
 			this.label9.Name = "label9";
 			this.label9.Size = new System.Drawing.Size(49, 20);
@@ -223,7 +223,7 @@
 			this.label10.BackColor = System.Drawing.Color.Black;
 			this.label10.Font = new System.Drawing.Font("宋体", 14.5F);
 			this.label10.ForeColor = System.Drawing.Color.Red;
-			this.label10.Location = new System.Drawing.Point(503, 23);
+			this.label10.Location = new System.Drawing.Point(478, 23);
 			this.label10.Margin = new System.Windows.Forms.Padding(0);
 			this.label10.Name = "label10";
 			this.label10.Size = new System.Drawing.Size(159, 20);
@@ -262,7 +262,7 @@
 			this.label2.BackColor = System.Drawing.Color.Black;
 			this.label2.Font = new System.Drawing.Font("宋体", 14.5F);
 			this.label2.ForeColor = System.Drawing.Color.Red;
-			this.label2.Location = new System.Drawing.Point(160, 23);
+			this.label2.Location = new System.Drawing.Point(166, 23);
 			this.label2.Margin = new System.Windows.Forms.Padding(0);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(49, 20);
@@ -275,7 +275,7 @@
 			this.label4.BackColor = System.Drawing.Color.Black;
 			this.label4.Font = new System.Drawing.Font("宋体", 16F, System.Drawing.FontStyle.Bold);
 			this.label4.ForeColor = System.Drawing.Color.Red;
-			this.label4.Location = new System.Drawing.Point(5, -2);
+			this.label4.Location = new System.Drawing.Point(9, -2);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(148, 22);
 			this.label4.TabIndex = 5;
@@ -287,7 +287,7 @@
 			this.label3.BackColor = System.Drawing.Color.Black;
 			this.label3.Font = new System.Drawing.Font("宋体", 14.5F);
 			this.label3.ForeColor = System.Drawing.Color.Red;
-			this.label3.Location = new System.Drawing.Point(4, 23);
+			this.label3.Location = new System.Drawing.Point(9, 23);
 			this.label3.Margin = new System.Windows.Forms.Padding(0);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(159, 20);
@@ -315,7 +315,7 @@
 			this.label6.BackColor = System.Drawing.Color.Black;
 			this.label6.Font = new System.Drawing.Font("宋体", 14.5F);
 			this.label6.ForeColor = System.Drawing.Color.Red;
-			this.label6.Location = new System.Drawing.Point(641, -1);
+			this.label6.Location = new System.Drawing.Point(616, -1);
 			this.label6.Margin = new System.Windows.Forms.Padding(0);
 			this.label6.Name = "label6";
 			this.label6.Size = new System.Drawing.Size(49, 20);
@@ -328,7 +328,7 @@
 			this.label17.BackColor = System.Drawing.Color.Black;
 			this.label17.Font = new System.Drawing.Font("宋体", 14.5F);
 			this.label17.ForeColor = System.Drawing.Color.Red;
-			this.label17.Location = new System.Drawing.Point(507, -1);
+			this.label17.Location = new System.Drawing.Point(482, -1);
 			this.label17.Margin = new System.Windows.Forms.Padding(0);
 			this.label17.Name = "label17";
 			this.label17.Size = new System.Drawing.Size(139, 20);
@@ -367,7 +367,7 @@
 			this.label20.BackColor = System.Drawing.Color.Black;
 			this.label20.Font = new System.Drawing.Font("宋体", 14.5F);
 			this.label20.ForeColor = System.Drawing.Color.Red;
-			this.label20.Location = new System.Drawing.Point(141, -1);
+			this.label20.Location = new System.Drawing.Point(146, -1);
 			this.label20.Margin = new System.Windows.Forms.Padding(0);
 			this.label20.Name = "label20";
 			this.label20.Size = new System.Drawing.Size(49, 20);
@@ -380,7 +380,7 @@
 			this.label21.BackColor = System.Drawing.Color.Black;
 			this.label21.Font = new System.Drawing.Font("宋体", 14.5F);
 			this.label21.ForeColor = System.Drawing.Color.Red;
-			this.label21.Location = new System.Drawing.Point(6, -1);
+			this.label21.Location = new System.Drawing.Point(9, -1);
 			this.label21.Margin = new System.Windows.Forms.Padding(0);
 			this.label21.Name = "label21";
 			this.label21.Size = new System.Drawing.Size(139, 20);
@@ -393,11 +393,11 @@
 			this.label5.BackColor = System.Drawing.Color.Black;
 			this.label5.Font = new System.Drawing.Font("宋体", 16F, System.Drawing.FontStyle.Bold);
 			this.label5.ForeColor = System.Drawing.Color.Red;
-			this.label5.Location = new System.Drawing.Point(4, 23);
+			this.label5.Location = new System.Drawing.Point(9, 23);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(148, 22);
 			this.label5.TabIndex = 7;
-			this.label5.Text = "厂内车辆信息";
+			this.label5.Text = "分矿车辆信息";
 			// 
 			// panelOut
 			// 
@@ -422,7 +422,7 @@
 			// 
 			this.panelIn.Location = new System.Drawing.Point(-3, 0);
 			this.panelIn.Name = "panelIn";
-			this.panelIn.Size = new System.Drawing.Size(720, 156);
+			this.panelIn.Size = new System.Drawing.Size(720, 185);
 			this.panelIn.TabIndex = 0;
 			// 
 			// timer1

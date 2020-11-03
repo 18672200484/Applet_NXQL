@@ -55,14 +55,13 @@ namespace CMCS.CarTransport.Queue.Frms.BaseInfo.SetSampler
 
 		private void FrmAppletLog_Oper_Load(object sender, EventArgs e)
 		{
-			BindSampler();
 
 			if (this.noSampler != null)
 			{
 				this.CmcsMine = CommonDAO.GetInstance().SelfDber.Get<CmcsMine>(noSampler.MineId);
 				dtpStartTime.Value = noSampler.StartTime;
 				dtpEndTime.Value = noSampler.EndTime;
-				cmbSampler.Text = noSampler.Sampler;
+				BindSampler(noSampler.Sampler);
 			}
 
 			if (this.EditMode == eEditMode.查看)
@@ -72,12 +71,23 @@ namespace CMCS.CarTransport.Queue.Frms.BaseInfo.SetSampler
 			}
 		}
 
-		private void BindSampler()
+		private void BindSampler(string sampler)
 		{
-			cmbSampler.Items.Add(new DataItem("#1机械采样机"));
-			cmbSampler.Items.Add(new DataItem("#2机械采样机"));
-			cmbSampler.Items.Add(new DataItem("#3机械采样机"));
-			cmbSampler.SelectedIndex = 0;
+			chkSampler1.Checked = sampler.Contains(chkSampler1.Text);
+			chkSampler2.Checked = sampler.Contains(chkSampler2.Text);
+			chkSampler3.Checked = sampler.Contains(chkSampler3.Text);
+		}
+
+		private string GetSelectedSampler()
+		{
+			string sampler = string.Empty;
+			if (chkSampler1.Checked)
+				sampler += chkSampler1.Text + "|";
+			if (chkSampler2.Checked)
+				sampler += chkSampler2.Text + "|";
+			if (chkSampler3.Checked)
+				sampler += chkSampler3.Text + "|";
+			return sampler.TrimEnd('|');
 		}
 
 		private void BtnMine_Click(object sender, EventArgs e)
@@ -107,7 +117,7 @@ namespace CMCS.CarTransport.Queue.Frms.BaseInfo.SetSampler
 				MessageBoxEx.Show("请选择结束时间", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
 			}
-			if (string.IsNullOrEmpty(this.cmbSampler.Text))
+			if (string.IsNullOrEmpty(GetSelectedSampler()))
 			{
 				MessageBoxEx.Show("请选择采样机", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
@@ -118,7 +128,7 @@ namespace CMCS.CarTransport.Queue.Frms.BaseInfo.SetSampler
 				noSampler.MineName = this.CmcsMine.Name;
 				noSampler.StartTime = this.dtpStartTime.Value;
 				noSampler.EndTime = this.dtpEndTime.Value;
-				noSampler.Sampler = ((DataItem)this.cmbSampler.SelectedItem).Text;
+				noSampler.Sampler = GetSelectedSampler();
 				//Dbers.GetInstance().SelfDber.Execute(string.Format("update cmcstbnosampler set mineid='{0}',minename='{1}',starttime='{2}',endtime='{3}' where id='{4}'", noSampler.MineId, noSampler.MineName, noSampler.StartTime, noSampler.EndTime, noSampler.Id));
 				Dbers.GetInstance().SelfDber.Update(noSampler);
 			}
@@ -129,7 +139,7 @@ namespace CMCS.CarTransport.Queue.Frms.BaseInfo.SetSampler
 				noSampler.MineName = this.CmcsMine.Name;
 				noSampler.StartTime = this.dtpStartTime.Value;
 				noSampler.EndTime = this.dtpEndTime.Value;
-				noSampler.Sampler = ((DataItem)this.cmbSampler.SelectedItem).Text;
+				noSampler.Sampler = GetSelectedSampler();
 				CommonDAO.GetInstance().SelfDber.Insert(noSampler);
 			}
 			this.DialogResult = DialogResult.OK;

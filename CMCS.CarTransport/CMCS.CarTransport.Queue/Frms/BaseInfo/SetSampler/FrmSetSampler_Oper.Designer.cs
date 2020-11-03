@@ -30,6 +30,7 @@ namespace CMCS.CarTransport.Queue.Frms.BaseInfo.SetSampler
         {
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.panelEx2 = new DevComponents.DotNetBar.PanelEx();
+			this.labelX2 = new DevComponents.DotNetBar.LabelX();
 			this.labelX1 = new DevComponents.DotNetBar.LabelX();
 			this.dtpStartTime = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
 			this.dtpEndTime = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
@@ -39,8 +40,9 @@ namespace CMCS.CarTransport.Queue.Frms.BaseInfo.SetSampler
 			this.panelEx1 = new DevComponents.DotNetBar.PanelEx();
 			this.btnSubmit = new DevComponents.DotNetBar.ButtonX();
 			this.btnCancel = new DevComponents.DotNetBar.ButtonX();
-			this.labelX2 = new DevComponents.DotNetBar.LabelX();
-			this.cmbSampler = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+			this.chkSampler1 = new DevComponents.DotNetBar.Controls.CheckBoxX();
+			this.chkSampler2 = new DevComponents.DotNetBar.Controls.CheckBoxX();
+			this.chkSampler3 = new DevComponents.DotNetBar.Controls.CheckBoxX();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.panelEx2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dtpStartTime)).BeginInit();
@@ -63,14 +65,16 @@ namespace CMCS.CarTransport.Queue.Frms.BaseInfo.SetSampler
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(472, 244);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(472, 283);
 			this.tableLayoutPanel1.TabIndex = 0;
 			// 
 			// panelEx2
 			// 
 			this.panelEx2.CanvasColor = System.Drawing.SystemColors.Control;
 			this.panelEx2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.panelEx2.Controls.Add(this.cmbSampler);
+			this.panelEx2.Controls.Add(this.chkSampler3);
+			this.panelEx2.Controls.Add(this.chkSampler2);
+			this.panelEx2.Controls.Add(this.chkSampler1);
 			this.panelEx2.Controls.Add(this.labelX2);
 			this.panelEx2.Controls.Add(this.labelX1);
 			this.panelEx2.Controls.Add(this.dtpStartTime);
@@ -82,13 +86,28 @@ namespace CMCS.CarTransport.Queue.Frms.BaseInfo.SetSampler
 			this.panelEx2.Location = new System.Drawing.Point(3, 3);
 			this.panelEx2.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
 			this.panelEx2.Name = "panelEx2";
-			this.panelEx2.Size = new System.Drawing.Size(466, 201);
+			this.panelEx2.Size = new System.Drawing.Size(466, 240);
 			this.panelEx2.Style.Alignment = System.Drawing.StringAlignment.Center;
 			this.panelEx2.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
 			this.panelEx2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
 			this.panelEx2.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
 			this.panelEx2.Style.GradientAngle = 90;
 			this.panelEx2.TabIndex = 1;
+			// 
+			// labelX2
+			// 
+			this.labelX2.AutoSize = true;
+			// 
+			// 
+			// 
+			this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.labelX2.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelX2.ForeColor = System.Drawing.Color.White;
+			this.labelX2.Location = new System.Drawing.Point(67, 145);
+			this.labelX2.Name = "labelX2";
+			this.labelX2.Size = new System.Drawing.Size(56, 24);
+			this.labelX2.TabIndex = 292;
+			this.labelX2.Text = "采样机";
 			// 
 			// labelX1
 			// 
@@ -265,7 +284,7 @@ namespace CMCS.CarTransport.Queue.Frms.BaseInfo.SetSampler
 			this.panelEx1.Controls.Add(this.btnSubmit);
 			this.panelEx1.Controls.Add(this.btnCancel);
 			this.panelEx1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panelEx1.Location = new System.Drawing.Point(3, 207);
+			this.panelEx1.Location = new System.Drawing.Point(3, 246);
 			this.panelEx1.Name = "panelEx1";
 			this.panelEx1.Size = new System.Drawing.Size(466, 34);
 			this.panelEx1.Style.Alignment = System.Drawing.StringAlignment.Center;
@@ -302,45 +321,57 @@ namespace CMCS.CarTransport.Queue.Frms.BaseInfo.SetSampler
 			this.btnCancel.Text = "取  消";
 			this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
 			// 
-			// labelX2
-			// 
-			this.labelX2.AutoSize = true;
+			// chkSampler1
 			// 
 			// 
 			// 
-			this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.labelX2.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.labelX2.ForeColor = System.Drawing.Color.White;
-			this.labelX2.Location = new System.Drawing.Point(67, 145);
-			this.labelX2.Name = "labelX2";
-			this.labelX2.Size = new System.Drawing.Size(56, 24);
-			this.labelX2.TabIndex = 292;
-			this.labelX2.Text = "采样机";
 			// 
-			// cmbSampler
+			this.chkSampler1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.chkSampler1.Font = new System.Drawing.Font("Segoe UI", 11.25F);
+			this.chkSampler1.Location = new System.Drawing.Point(127, 146);
+			this.chkSampler1.Name = "chkSampler1";
+			this.chkSampler1.Size = new System.Drawing.Size(180, 23);
+			this.chkSampler1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.chkSampler1.TabIndex = 294;
+			this.chkSampler1.Text = "#1机械采样机";
 			// 
-			this.cmbSampler.Anchor = System.Windows.Forms.AnchorStyles.Top;
-			this.cmbSampler.DisplayMember = "Text";
-			this.cmbSampler.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-			this.cmbSampler.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.cmbSampler.Font = new System.Drawing.Font("Segoe UI", 12F);
-			this.cmbSampler.ForeColor = System.Drawing.Color.White;
-			this.cmbSampler.FormattingEnabled = true;
-			this.cmbSampler.ItemHeight = 23;
-			this.cmbSampler.Location = new System.Drawing.Point(127, 140);
-			this.cmbSampler.Name = "cmbSampler";
-			this.cmbSampler.Size = new System.Drawing.Size(271, 29);
-			this.cmbSampler.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.cmbSampler.TabIndex = 293;
+			// chkSampler2
+			// 
+			// 
+			// 
+			// 
+			this.chkSampler2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.chkSampler2.Font = new System.Drawing.Font("Segoe UI", 11.25F);
+			this.chkSampler2.Location = new System.Drawing.Point(127, 175);
+			this.chkSampler2.Name = "chkSampler2";
+			this.chkSampler2.Size = new System.Drawing.Size(180, 23);
+			this.chkSampler2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.chkSampler2.TabIndex = 295;
+			this.chkSampler2.Text = "#2机械采样机";
+			// 
+			// chkSampler3
+			// 
+			// 
+			// 
+			// 
+			this.chkSampler3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.chkSampler3.Font = new System.Drawing.Font("Segoe UI", 11.25F);
+			this.chkSampler3.Location = new System.Drawing.Point(127, 204);
+			this.chkSampler3.Name = "chkSampler3";
+			this.chkSampler3.Size = new System.Drawing.Size(180, 23);
+			this.chkSampler3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.chkSampler3.TabIndex = 296;
+			this.chkSampler3.Text = "#3机械采样机";
 			// 
 			// FrmSetSampler_Oper
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(472, 244);
+			this.ClientSize = new System.Drawing.Size(472, 283);
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.ForeColor = System.Drawing.Color.White;
 			this.MaximizeBox = false;
 			this.Name = "FrmSetSampler_Oper";
 			this.ShowIcon = false;
@@ -371,6 +402,8 @@ namespace CMCS.CarTransport.Queue.Frms.BaseInfo.SetSampler
 		private DevComponents.Editors.DateTimeAdv.DateTimeInput dtpEndTime;
 		private DevComponents.DotNetBar.LabelX labelX1;
 		private DevComponents.DotNetBar.LabelX labelX2;
-		private DevComponents.DotNetBar.Controls.ComboBoxEx cmbSampler;
+		private DevComponents.DotNetBar.Controls.CheckBoxX chkSampler1;
+		private DevComponents.DotNetBar.Controls.CheckBoxX chkSampler3;
+		private DevComponents.DotNetBar.Controls.CheckBoxX chkSampler2;
 	}
 }

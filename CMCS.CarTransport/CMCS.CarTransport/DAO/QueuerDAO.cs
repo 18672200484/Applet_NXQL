@@ -278,7 +278,7 @@ namespace CMCS.CarTransport.DAO
 		/// <returns></returns>
 		public string GetSamplerByMineName(string mineName)
 		{
-			CmcsSetSampler entity = commonDAO.SelfDber.Entity<CmcsSetSampler>("where MineName=:MineName and StartTime<=sysdate and EndTime >sysdate order by EndTime desc", new { MineName = mineName });
+			CmcsSetSampler entity = commonDAO.SelfDber.Entity<CmcsSetSampler>("where IsDeleted=0 and MineName=:MineName and StartTime<=sysdate and EndTime >sysdate order by EndTime desc", new { MineName = mineName });
 			if (entity != null) return entity.Sampler;
 			return string.Empty;
 		}

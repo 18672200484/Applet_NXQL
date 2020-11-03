@@ -116,6 +116,7 @@ namespace CMCS.CarTransport.Queue.Frms.BaseInfo.SetSampler
 			gridColumn5.MinimumWidth = 150;
 			gridColumn5.Name = "";
 			gridColumn5.Width = 200;
+			gridColumn6.AutoSizeMode = DevComponents.DotNetBar.SuperGrid.ColumnAutoSizeMode.AllCells;
 			gridColumn6.CellStyles.Default.Alignment = DevComponents.DotNetBar.SuperGrid.Style.Alignment.MiddleCenter;
 			gridColumn6.DataPropertyName = "EndTime";
 			gridColumn6.FilterPopupMaxItems = 200;
@@ -123,6 +124,7 @@ namespace CMCS.CarTransport.Queue.Frms.BaseInfo.SetSampler
 			gridColumn6.InfoImageAlignment = DevComponents.DotNetBar.SuperGrid.Style.Alignment.MiddleCenter;
 			gridColumn6.Name = "";
 			gridColumn6.Width = 200;
+			gridColumn7.AutoSizeMode = DevComponents.DotNetBar.SuperGrid.ColumnAutoSizeMode.AllCells;
 			gridColumn7.DataPropertyName = "Sampler";
 			gridColumn7.HeaderText = "²ÉÑù»ú";
 			gridColumn7.Name = "";

@@ -860,10 +860,10 @@ namespace CMCS.CarTransport.JxSampler.Frms
 											{
 												//判断采样机
 												string samplerMachineCode = QueuerDAO.GetInstance().GetSamplerByMineName(this.CurrentBuyFuelTransport.MineName);
-												if (!string.IsNullOrEmpty(samplerMachineCode) && samplerMachineCode != this.SamplerMachineCode)
+												if (!string.IsNullOrEmpty(samplerMachineCode) && !samplerMachineCode.Contains(this.SamplerMachineCode))
 												{
-													UpdateLedShow(this.CurrentAutotruck.CarNumber, " 驶至" + samplerMachineCode);
-													this.voiceSpeaker.Speak(this.CurrentAutotruck.CarNumber + " 请行驶至" + samplerMachineCode, 2, false);
+													UpdateLedShow(this.CurrentAutotruck.CarNumber, " 驶至" + samplerMachineCode.Replace("|", "或"));
+													this.voiceSpeaker.Speak(this.CurrentAutotruck.CarNumber + " 请行驶至" + samplerMachineCode.Replace("|", "或"), 2, false);
 													this.CurrentImperfectCar = null;
 												}
 												else
