@@ -402,19 +402,20 @@ namespace CMCS.CarTransport.DAO
 		/// <param name="remark">备注</param>
 		/// <param name="place">地点</param>
 		/// <returns></returns>
-		public bool JoinQueueGoodsTransport(CmcsAutotruck autotruck, CmcsSupplyReceive supply, CmcsSupplyReceive receive, CmcsGoodsType goodsType, DateTime inFactoryTime, string remark, string place, ref CmcsGoodsTransport transport)
+		public bool JoinQueueGoodsTransport(CmcsAutotruck autotruck, CmcsSupplyReceive supply, CmcsGoodsType goodsType, string mineName, string upload, string fuelKindName, DateTime inFactoryTime, string remark, string place, ref CmcsGoodsTransport transport)
 		{
 			transport = new CmcsGoodsTransport
 			{
 				SerialNumber = carTransportDAO.CreateNewTransportSerialNumber(eCarType.其他物资, inFactoryTime),
 				AutotruckId = autotruck.Id,
 				CarNumber = autotruck.CarNumber,
-				SupplyUnitId = supply.Id,
-				SupplyUnitName = supply.UnitName,
-				ReceiveUnitId = receive.Id,
-				ReceiveUnitName = receive.UnitName,
-				GoodsTypeId = goodsType.Id,
-				GoodsTypeName = goodsType.GoodsName,
+				SupplyUnitId = supply != null ? supply.Id : "",
+				SupplyUnitName = supply != null ? supply.UnitName : "",
+				GoodsTypeId = goodsType != null ? goodsType.Id : "",
+				GoodsTypeName = goodsType != null ? goodsType.GoodsName : "",
+				FromMC = mineName,
+				ToMC = upload,
+				FuelKindName = fuelKindName,
 				InFactoryTime = inFactoryTime,
 				IsFinish = 0,
 				IsUse = 1,

@@ -133,7 +133,13 @@ namespace CMCS.Common.Print
 				g.DrawString(string.Format("净    重：{0} 吨", SuttleWeight), ContentFont, Brushes.White, 30, TopValue);
 				TopValue += 24;
 
-				g.DrawString(string.Format("签    字："), ContentFont, Brushes.White, 30, TopValue);
+				g.DrawString(string.Format("计量员签字："), ContentFont, Brushes.White, 30, TopValue);
+				TopValue += 34;
+
+				g.DrawString(string.Format("监磅员签字："), ContentFont, Brushes.White, 30, TopValue);
+				TopValue += 34;
+
+				g.DrawString(string.Format("司机签字："), ContentFont, Brushes.White, 30, TopValue);
 				TopValue += 34;
 				g.DrawString("", ContentFont, Brushes.Black, 30, TopValue);
 				#endregion
@@ -154,7 +160,7 @@ namespace CMCS.Common.Print
 				// 行间距 24 
 				float TopValue = 53;
 				string printValue = "";
-				g.DrawString("国电投青铝发电有限公司过磅单", TitleFont, Brushes.Black, 30, TopValue);
+				g.DrawString(PrintAppConfig.GetInstance().TitleContent, TitleFont, Brushes.Black, 30, TopValue);
 				TopValue += 34;
 
 				g.DrawString("打印时间：" + DateTime.Now.ToString("yyyy-MM-dd HH:mm"), ContentFont, Brushes.White, 30, TopValue);
@@ -166,7 +172,7 @@ namespace CMCS.Common.Print
 				g.DrawString("车 牌 号：" + CarNumber, ContentFont, Brushes.White, 30, TopValue);
 				TopValue += 24;
 
-				printValue = "供货单位：" + MineName;
+				printValue = "单    位：" + MineName;
 				if (printValue.Length > 18)
 				{
 					g.DrawString(printValue.Substring(0, 18), ContentFont, Brushes.White, 30, TopValue);
@@ -198,7 +204,13 @@ namespace CMCS.Common.Print
 				g.DrawString(string.Format("净    重：{0} 吨", SuttleWeight), ContentFont, Brushes.White, 30, TopValue);
 				TopValue += 24;
 
-				g.DrawString(string.Format("签    字："), ContentFont, Brushes.White, 30, TopValue);
+				g.DrawString(string.Format("计量员签字："), ContentFont, Brushes.White, 30, TopValue);
+				TopValue += 34;
+
+				g.DrawString(string.Format("监磅员签字："), ContentFont, Brushes.White, 30, TopValue);
+				TopValue += 34;
+
+				g.DrawString(string.Format("司机签字："), ContentFont, Brushes.White, 30, TopValue);
 				TopValue += 34;
 				g.DrawString("", ContentFont, Brushes.Black, 30, TopValue);
 				#endregion

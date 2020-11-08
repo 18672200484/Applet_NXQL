@@ -375,6 +375,7 @@ namespace CMCS.CarTransport.Queue.Frms.BaseInfo.SupplyReceive
 			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.Name = "FrmSupplyReceive_List";
+			this.Tag = "CMCS.CarTransport.Queue.Frms.BaseInfo.SupplyReceive.FrmSupplyReceive_List";
 			this.Text = "供货、收货单位";
 			this.Load += new System.EventHandler(this.FrmSupplyReceive_List_Load);
 			this.panel2.ResumeLayout(false);

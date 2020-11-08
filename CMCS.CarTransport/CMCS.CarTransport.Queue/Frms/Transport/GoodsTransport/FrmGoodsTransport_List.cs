@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using CMCS.CarTransport.DAO;
+using CMCS.CarTransport.Queue.Core;
 using CMCS.CarTransport.Queue.Enums;
 using CMCS.CarTransport.Queue.Frms.BaseInfo.Supplier;
 using CMCS.CarTransport.Queue.Frms.Transport.TransportPicture;
@@ -182,6 +183,17 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.GoodsTransport
 
 		private void btnReportExport_Click(object sender, EventArgs e)
 		{
+			if (cmbCarType.Text == eCarType.其他物资.ToString())
+				ExportGoods();
+			else
+				ExportZYM();
+		}
+
+		/// <summary>
+		/// 导出其他物资
+		/// </summary>
+		private void ExportGoods()
+		{
 			try
 			{
 				FileStream file = new FileStream("计量明细模板.xls", FileMode.Open, FileAccess.Read);
@@ -236,6 +248,65 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.GoodsTransport
 			}
 		}
 
+		/// <summary>
+		/// 导出转运煤
+		/// </summary>
+		private void ExportZYM()
+		{
+			try
+			{
+				FileStream file = new FileStream("转运煤明细模板.xls", FileMode.Open, FileAccess.Read);
+				HSSFWorkbook hssfworkbook = new HSSFWorkbook(file);
+				HSSFSheet sheetl = (HSSFSheet)hssfworkbook.GetSheet("计量明细");
+
+				if (CurrExportData.Count == 0)
+				{
+					MessageBox.Show("请先查询数据");
+					return;
+				}
+
+				if (folderBrowserDialog.ShowDialog() != DialogResult.OK)
+					return;
+
+				for (int i = 0; i < CurrExportData.Count; i++)
+				{
+					CmcsGoodsTransport entity = CurrExportData[i];
+
+					Mysheet1(sheetl, i + 1, 0, entity.SerialNumber.ToString());
+					Mysheet1(sheetl, i + 1, 1, entity.CarNumber);
+					Mysheet1(sheetl, i + 1, 2, entity.FuelKindName);
+					Mysheet1(sheetl, i + 1, 3, entity.FromMC);
+					Mysheet1(sheetl, i + 1, 4, entity.ToMC);
+					Mysheet1(sheetl, i + 1, 5, entity.FirstWeight.ToString());
+					Mysheet1(sheetl, i + 1, 6, entity.SecondWeight.ToString());
+					Mysheet1(sheetl, i + 1, 7, entity.SuttleWeight.ToString());
+					Mysheet1(sheetl, i + 1, 8, entity.SecondTime.Year < 2000 ? "" : entity.SecondTime.ToString("yyyy-MM-dd HH:mm:ss"));
+				}
+
+				#region 合计
+				Mysheet1(sheetl, CurrExportData.Count + 1, 0, "合计");
+				Mysheet1(sheetl, CurrExportData.Count + 1, 1, CurrExportData.Count + "车");
+				Mysheet1(sheetl, CurrExportData.Count + 1, 5, Math.Round(CurrExportData.Sum(a => a.FirstWeight), 2).ToString());
+				Mysheet1(sheetl, CurrExportData.Count + 1, 6, Math.Round(CurrExportData.Sum(a => a.SecondWeight), 2).ToString());
+				Mysheet1(sheetl, CurrExportData.Count + 1, 7, Math.Round(CurrExportData.Sum(a => a.SuttleWeight), 2).ToString());
+				#endregion
+
+				sheetl.ForceFormulaRecalculation = true;
+				string fileName = DateTime.Now.ToString("yyyyMMddHHmmss") + "转运煤明细.xls";
+				GC.Collect();
+
+				FileStream fs = File.OpenWrite(folderBrowserDialog.SelectedPath + "\\" + fileName);
+				hssfworkbook.Write(fs);   //向打开的这个xls文件中写入表并保存。  
+				fs.Close();
+				MessageBox.Show("导出成功");
+
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+			}
+		}
+
 		public void Mysheet1(HSSFSheet sheet1, int x, int y, String Value)
 		{
 			if (sheet1.GetRow(x) == null)
@@ -267,7 +338,7 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.GoodsTransport
 		/// </summary>
 		private void BindCarType()
 		{
-			cmbCarType.Items.Add("全部");
+			//cmbCarType.Items.Add("全部");
 			cmbCarType.Items.Add(eCarType.其他物资.ToString());
 			cmbCarType.Items.Add(eCarType.转煤车辆.ToString());
 			cmbCarType.SelectedIndex = 0;
@@ -447,13 +518,31 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.GoodsTransport
 
 				// 填充有效状态
 				gridRow.Cells["clmIsUse"].Value = (entity.IsUse == 1 ? "是" : "否");
-
-
 			}
 		}
 
+
 		#endregion
 
+		private void cmbCarType_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (cmbCarType.Text == eCarType.其他物资.ToString())
+			{
+				superGridControl1.PrimaryGrid.Columns["SupplyUnitName"].Visible = true;
 
+				superGridControl1.PrimaryGrid.Columns["FuelKindName"].Visible = false;
+				superGridControl1.PrimaryGrid.Columns["FromMC"].Visible = false;
+				superGridControl1.PrimaryGrid.Columns["ToMC"].Visible = false;
+			}
+			else
+			{
+				superGridControl1.PrimaryGrid.Columns["FuelKindName"].Visible = true;
+				superGridControl1.PrimaryGrid.Columns["FromMC"].Visible = true;
+				superGridControl1.PrimaryGrid.Columns["ToMC"].Visible = true;
+
+				superGridControl1.PrimaryGrid.Columns["SupplyUnitName"].Visible = false;
+			}
+			btnSearch_Click(null, null);
+		}
 	}
 }

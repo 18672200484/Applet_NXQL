@@ -160,6 +160,20 @@ namespace CMCS.Common.Entities.CarTransport
 		/// 所处流程的步骤  入厂、重车、轻车、出厂
 		/// </summary>
 		public virtual string StepName { get { return _StepName; } set { _StepName = value; } }
+		
+		/// <summary>
+		/// 煤种
+		/// </summary>
+		public virtual string FuelKindName { get; set; }
 
+		/// <summary>
+		/// 来自煤场
+		/// </summary>
+		public virtual string FromMC { get; set; }
+
+		/// <summary>
+		/// 转运煤场
+		/// </summary>
+		public virtual string ToMC { get; set; }
 	}
 }

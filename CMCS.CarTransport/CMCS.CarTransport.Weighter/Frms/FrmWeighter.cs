@@ -26,6 +26,7 @@ using CMCS.Common.Print;
 using CMCS.Common.Utilities;
 using CMCS.Common.Views;
 using DevComponents.DotNetBar;
+using DevComponents.DotNetBar.Controls;
 using DevComponents.DotNetBar.SuperGrid;
 using HikVisionSDK.Core;
 using LED.YB_Bx5K1;
@@ -270,7 +271,6 @@ namespace CMCS.CarTransport.Weighter.Frms
 
 				btnbtnSelectSupply_Goods.Visible = !value;
 				btnSelectGoodsType_Goods.Visible = !value;
-				btnSelectReceive_Goods.Visible = !value;
 			}
 		}
 
@@ -482,6 +482,9 @@ namespace CMCS.CarTransport.Weighter.Frms
 
 		private void FrmWeighter_Load(object sender, EventArgs e)
 		{
+			BindMine_GoodsType(cmbMineName_GoodsType);
+			BindMine_GoodsType(cmbUpload_GoodsType);
+			BindFuel_GoodsType(cmbFuelName_GoodsTye);
 		}
 
 		private void FrmWeighter_Shown(object sender, EventArgs e)
@@ -1566,6 +1569,62 @@ namespace CMCS.CarTransport.Weighter.Frms
 		}
 		#endregion
 
+		#region 绑定下拉框数据
+		/// <summary>
+		/// 绑定转煤车矿点
+		/// </summary>
+		/// <param name="cmb"></param>
+		public void BindMine_GoodsType(ComboBoxEx cmb)
+		{
+			cmb.Items.Clear();
+
+			cmb.DisplayMember = "Text";
+			cmb.ValueMember = "Value";
+			cmb.Items.Add(new DataItem(""));
+			cmb.Items.Add(new DataItem("东煤场"));
+			cmb.Items.Add(new DataItem("西煤场"));
+			cmb.Items.Add(new DataItem("中煤场"));
+			cmb.Items.Add(new DataItem("汽车卸煤沟"));
+			cmb.Items.Add(new DataItem("底下煤斗"));
+
+			cmb.SelectedIndex = 0;
+		}
+
+		/// <summary>
+		/// 绑定转煤车煤种
+		/// </summary>
+		/// <param name="cmb"></param>
+		public void BindFuel_GoodsType(ComboBoxEx cmb)
+		{
+			cmb.Items.Clear();
+
+			cmb.DisplayMember = "Text";
+			cmb.ValueMember = "Value";
+			cmb.Items.Add(new DataItem(""));
+			cmb.Items.Add(new DataItem("原煤"));
+			cmb.Items.Add(new DataItem("混煤"));
+			cmb.Items.Add(new DataItem("低硫煤"));
+			cmb.Items.Add(new DataItem("煤泥"));
+			cmb.Items.Add(new DataItem("底下煤斗"));
+
+			cmb.SelectedIndex = 0;
+		}
+
+		/// <summary>
+		/// 选中下拉框选项
+		/// </summary>
+		/// <param name="cmb"></param>
+		/// <param name="text"></param>
+		private void SelectedComboBoxItem(ComboBoxEx cmb, string value)
+		{
+			foreach (DataItem dataItem in cmb.Items)
+			{
+				if (dataItem.Value == value) cmb.SelectedItem = dataItem;
+			}
+		}
+
+		#endregion
+
 		#region 入厂煤业务
 
 		bool timer_BuyFuel_Cancel = true;
@@ -1999,8 +2058,10 @@ namespace CMCS.CarTransport.Weighter.Frms
 					commonDAO.SetSignalDataValue(CommonAppConfig.GetInstance().AppIdentifier, eSignalDataName.当前运输记录Id.ToString(), value.Id);
 
 					txtSupplyUnitName_Goods.Text = value.SupplyUnitName;
-					txtReceiveUnitName_Goods.Text = value.ReceiveUnitName;
 					txtGoodsTypeName_Goods.Text = value.GoodsTypeName;
+					SelectedComboBoxItem(cmbMineName_GoodsType, value.FromMC);
+					SelectedComboBoxItem(cmbFuelName_GoodsTye, value.FuelKindName);
+					SelectedComboBoxItem(cmbUpload_GoodsType, value.ToMC);
 
 					txtFirstWeight_Goods.Text = value.FirstWeight.ToString("F2");
 					txtSecondWeight_Goods.Text = value.SecondWeight.ToString("F2");
@@ -2011,8 +2072,10 @@ namespace CMCS.CarTransport.Weighter.Frms
 					commonDAO.SetSignalDataValue(CommonAppConfig.GetInstance().AppIdentifier, eSignalDataName.当前运输记录Id.ToString(), string.Empty);
 
 					txtSupplyUnitName_Goods.ResetText();
-					txtReceiveUnitName_Goods.ResetText();
 					txtGoodsTypeName_Goods.ResetText();
+					SelectedComboBoxItem(cmbMineName_GoodsType, "");
+					SelectedComboBoxItem(cmbFuelName_GoodsTye, "");
+					SelectedComboBoxItem(cmbUpload_GoodsType, "");
 
 					txtFirstWeight_Goods.ResetText();
 					txtSecondWeight_Goods.ResetText();
@@ -2065,27 +2128,24 @@ namespace CMCS.CarTransport.Weighter.Frms
 					MessageBoxEx.Show("请选择车辆", "操作提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 					return false;
 				}
-				if (this.SelectedSupplyUnit_Goods == null)
-				{
-					MessageBoxEx.Show("请选择供货单位", "操作提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-					return false;
-				}
-				if (this.SelectedReceiveUnit_Goods == null)
-				{
-					MessageBoxEx.Show("请选择收货单位", "操作提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-					return false;
-				}
-				if (this.SelectedGoodsType_Goods == null)
-				{
-					MessageBoxEx.Show("请选择物资类型", "操作提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-					return false;
-				}
+
+				//if (this.SelectedSupplyUnit_Goods == null)
+				//{
+				//	MessageBoxEx.Show("请选择供货单位", "操作提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				//	return false;
+				//}
+
+				//if (this.SelectedGoodsType_Goods == null)
+				//{
+				//	MessageBoxEx.Show("请选择物资类型", "操作提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				//	return false;
+				//}
 
 				try
 				{
 					CmcsGoodsTransport goodstransport = new CmcsGoodsTransport();
 					// 生成排队记录
-					QueuerDAO.GetInstance().JoinQueueGoodsTransport(this.CurrentAutotruck, this.SelectedSupplyUnit_Goods, this.SelectedReceiveUnit_Goods, this.SelectedGoodsType_Goods, DateTime.Now, "", CommonAppConfig.GetInstance().AppIdentifier, ref goodstransport);
+					QueuerDAO.GetInstance().JoinQueueGoodsTransport(this.CurrentAutotruck, this.SelectedSupplyUnit_Goods, this.SelectedGoodsType_Goods, ((DataItem)cmbMineName_GoodsType.SelectedItem).Value, ((DataItem)cmbUpload_GoodsType.SelectedItem).Value, ((DataItem)cmbFuelName_GoodsTye.SelectedItem).Value, DateTime.Now, "", CommonAppConfig.GetInstance().AppIdentifier, ref goodstransport);
 					this.CurrentGoodsTransport = goodstransport;
 				}
 				catch (Exception ex)
@@ -2210,7 +2270,6 @@ namespace CMCS.CarTransport.Weighter.Frms
 						btnSelectAutotruck_Goods.Visible = true;
 						btnbtnSelectSupply_Goods.Visible = true;
 						btnSelectGoodsType_Goods.Visible = true;
-						btnSelectReceive_Goods.Visible = true;
 
 						this.CurrentFlowFlag = eFlowFlag.等待上磅;
 						#endregion
@@ -2277,7 +2336,7 @@ namespace CMCS.CarTransport.Weighter.Frms
 
 				// 当前地磅重量小于最小称重且所有地感、对射无信号时重置
 				if (Hardwarer.Wber.Weight < this.WbMinWeight && !HasCarOnEnterWay() && !HasCarOnLeaveWay() && this.CurrentFlowFlag != eFlowFlag.等待车辆
-					&& this.CurrentImperfectCar != null && passCarQueuer.Count == 0) ResetGoods();
+					&& this.CurrentImperfectCar == null) ResetGoods();
 			}
 			catch (Exception ex)
 			{
@@ -2320,20 +2379,6 @@ namespace CMCS.CarTransport.Weighter.Frms
 		}
 
 		/// <summary>
-		/// 选择收货单位
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void btnSelectReceive_Goods_Click(object sender, EventArgs e)
-		{
-			FrmSupplyReceive_Select frm = new FrmSupplyReceive_Select("where IsValid=1 order by UnitName asc");
-			if (frm.ShowDialog() == DialogResult.OK)
-			{
-				this.SelectedReceiveUnit_Goods = frm.Output;
-			}
-		}
-
-		/// <summary>
 		/// 选择物资类型
 		/// </summary>
 		/// <param name="sender"></param>
@@ -2365,28 +2410,6 @@ namespace CMCS.CarTransport.Weighter.Frms
 				else
 				{
 					txtSupplyUnitName_Goods.ResetText();
-				}
-			}
-		}
-
-		private CmcsSupplyReceive selectedReceiveUnit_Goods;
-		/// <summary>
-		/// 选择的收货单位
-		/// </summary>
-		public CmcsSupplyReceive SelectedReceiveUnit_Goods
-		{
-			get { return selectedReceiveUnit_Goods; }
-			set
-			{
-				selectedReceiveUnit_Goods = value;
-
-				if (value != null)
-				{
-					txtReceiveUnitName_Goods.Text = value.UnitName;
-				}
-				else
-				{
-					txtReceiveUnitName_Goods.ResetText();
 				}
 			}
 		}
