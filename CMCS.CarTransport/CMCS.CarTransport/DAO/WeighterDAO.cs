@@ -197,7 +197,7 @@ namespace CMCS.CarTransport.DAO
 		/// <returns></returns>
 		public List<CmcsGoodsTransport> GetUnFinishGoodsTransport()
 		{
-			return SelfDber.Entities<CmcsGoodsTransport>("where SuttleWeight=0 and IsUse=1 and Id in (select TransportId from " + EntityReflectionUtil.GetTableName<CmcsUnFinishTransport>() + " where CarType=:CarType) order by InFactoryTime desc", new { CarType = eCarType.其他物资.ToString() });
+			return SelfDber.Entities<CmcsGoodsTransport>("where SuttleWeight=0 and IsUse=1 order by InFactoryTime desc");
 		}
 
 		/// <summary>
@@ -214,18 +214,18 @@ namespace CMCS.CarTransport.DAO
 
 			if (transport.FirstWeight == 0)
 			{
-				transport.StepName = eTruckInFactoryStep.重车.ToString();
+				transport.StepName = eTruckInFactoryStep.第一次称重.ToString();
 				transport.FirstWeight = weight;
 				transport.FirstPlace = place;
 				transport.FirstTime = dt;
 			}
 			else if (transport.SecondWeight == 0)
 			{
-				transport.StepName = eTruckInFactoryStep.轻车.ToString();
+				transport.StepName = eTruckInFactoryStep.第二次称重.ToString();
 				transport.SecondWeight = weight;
 				transport.SecondPlace = place;
 				transport.SecondTime = dt;
-				transport.SuttleWeight = Math.Abs(transport.FirstWeight - transport.SecondWeight);
+				transport.SuttleWeight = Math.Abs(transport.FirstWeight - transport.SecondWeight) - transport.DeductWeight;
 
 				// 回皮即完结
 				transport.IsFinish = 1;

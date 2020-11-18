@@ -69,8 +69,9 @@ namespace CMCS.CarTransport.Queue.Frms.Sys
 			this.btnOpenAppletConfigLoad = new DevComponents.DotNetBar.ButtonItem();
 			this.btnOpenCamareLoad = new DevComponents.DotNetBar.ButtonItem();
 			this.btnOpenProvinceAbbreviationLoad = new DevComponents.DotNetBar.ButtonItem();
-			this.timer_CurrentTime = new System.Windows.Forms.Timer(this.components);
 			this.btnOpenSetSampler = new DevComponents.DotNetBar.ButtonItem();
+			this.timer_CurrentTime = new System.Windows.Forms.Timer(this.components);
+			this.lblRegisDate = new System.Windows.Forms.Label();
 			this.tableLayoutPanel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.superTabControl1)).BeginInit();
 			this.superTabControl1.SuspendLayout();
@@ -203,6 +204,7 @@ namespace CMCS.CarTransport.Queue.Frms.Sys
 			// 
 			this.panelEx2.CanvasColor = System.Drawing.SystemColors.Control;
 			this.panelEx2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.panelEx2.Controls.Add(this.lblRegisDate);
 			this.panelEx2.Controls.Add(this.buttonX1);
 			this.panelEx2.Controls.Add(this.btnDebugConsole);
 			this.panelEx2.Controls.Add(this.lblCurrentTime);
@@ -470,6 +472,7 @@ namespace CMCS.CarTransport.Queue.Frms.Sys
 			// 
 			this.OpenSupplyReceive.GlobalItem = false;
 			this.OpenSupplyReceive.Name = "OpenSupplyReceive";
+			this.OpenSupplyReceive.Tag = "CMCS.CarTransport.Queue.Frms.BaseInfo.SupplyReceive.FrmSupplyReceive_List";
 			this.OpenSupplyReceive.Text = "供货收货单位";
 			this.OpenSupplyReceive.Click += new System.EventHandler(this.OpenSupplyReceive_Click);
 			// 
@@ -498,12 +501,6 @@ namespace CMCS.CarTransport.Queue.Frms.Sys
 			this.btnOpenProvinceAbbreviationLoad.Text = "省份简称管理";
 			this.btnOpenProvinceAbbreviationLoad.Click += new System.EventHandler(this.btnOpenProvinceAbbreviationLoad_Click);
 			// 
-			// timer_CurrentTime
-			// 
-			this.timer_CurrentTime.Enabled = true;
-			this.timer_CurrentTime.Interval = 1000;
-			this.timer_CurrentTime.Tick += new System.EventHandler(this.timer_CurrentTime_Tick);
-			// 
 			// btnOpenSetSampler
 			// 
 			this.btnOpenSetSampler.GlobalItem = false;
@@ -511,6 +508,28 @@ namespace CMCS.CarTransport.Queue.Frms.Sys
 			this.btnOpenSetSampler.Tag = "CMCS.CarTransport.Queue.Frms.BaseInfo.SetSampler.FrmSetSampler_List";
 			this.btnOpenSetSampler.Text = "采样设置";
 			this.btnOpenSetSampler.Click += new System.EventHandler(this.btnOpenSetSampler_Click);
+			// 
+			// timer_CurrentTime
+			// 
+			this.timer_CurrentTime.Enabled = true;
+			this.timer_CurrentTime.Interval = 1000;
+			this.timer_CurrentTime.Tick += new System.EventHandler(this.timer_CurrentTime_Tick);
+			// 
+			// lblRegisDate
+			// 
+			this.lblRegisDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.lblRegisDate.AutoSize = true;
+			this.lblRegisDate.BackColor = System.Drawing.Color.Transparent;
+			this.lblRegisDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.lblRegisDate.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblRegisDate.ForeColor = System.Drawing.Color.Red;
+			this.lblRegisDate.Location = new System.Drawing.Point(969, 11);
+			this.lblRegisDate.Name = "lblRegisDate";
+			this.lblRegisDate.Size = new System.Drawing.Size(196, 30);
+			this.lblRegisDate.TabIndex = 22;
+			this.lblRegisDate.Text = "本软件还有30天到期";
+			this.lblRegisDate.Visible = false;
 			// 
 			// FrmMainFrame
 			// 
@@ -578,6 +597,7 @@ namespace CMCS.CarTransport.Queue.Frms.Sys
         private DevComponents.DotNetBar.ButtonItem btnOpenProvinceAbbreviationLoad;
 		private DevComponents.DotNetBar.ButtonItem OpenSupplyReceive;
 		private DevComponents.DotNetBar.ButtonItem btnOpenSetSampler;
+		private System.Windows.Forms.Label lblRegisDate;
 	}
 }
 

@@ -54,6 +54,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\BasisPlatform.dll</HintPath>
     </Reference>
+    <Reference Include="Cmcs_SafeUtil, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Cmcs_SafeUtil.dll</HintPath>
+    </Reference>
     <Reference Include="DevComponents.DotNetBar.SuperGrid, Version=10.5.0.3, Culture=neutral, PublicKeyToken=c39c3242a43eee2b, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\CMCS.Resources\DotNetBar\DevComponents.DotNetBar.SuperGrid.dll</HintPath>
@@ -389,6 +393,12 @@
     <Compile Include="Frms\Transport\BuyFuelTransport\FrmBuyFuelTransportDeduct_Oper.Designer.cs">
       <DependentUpon>FrmBuyFuelTransportDeduct_Oper.cs</DependentUpon>
     </Compile>
+    <Compile Include="Frms\Transport\GoodsTransport\FrmBuyFuelTransportDeduct_Oper.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frms\Transport\GoodsTransport\FrmBuyFuelTransportDeduct_Oper.Designer.cs">
+      <DependentUpon>FrmBuyFuelTransportDeduct_Oper.cs</DependentUpon>
+    </Compile>
     <Compile Include="Frms\Transport\GoodsTransport\FrmGoodsTransport_List.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -588,6 +598,9 @@
       <DependentUpon>FrmBuyFuelTransport_Oper.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Frms\Transport\BuyFuelTransport\FrmBuyFuelTransportDeduct_Oper.resx">
+      <DependentUpon>FrmBuyFuelTransportDeduct_Oper.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frms\Transport\GoodsTransport\FrmBuyFuelTransportDeduct_Oper.resx">
       <DependentUpon>FrmBuyFuelTransportDeduct_Oper.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Frms\Transport\GoodsTransport\FrmGoodsTransport_List.resx">

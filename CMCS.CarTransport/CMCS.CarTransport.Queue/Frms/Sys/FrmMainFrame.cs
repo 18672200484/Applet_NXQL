@@ -15,9 +15,10 @@ namespace CMCS.CarTransport.Queue.Frms.Sys
 	public partial class FrmMainFrame : MetroForm
 	{
 		CommonDAO commonDAO = CommonDAO.GetInstance();
-
+		Cmcs_SafeUtil.SafeUtil safeUtil = new Cmcs_SafeUtil.SafeUtil();
 		public static SuperTabControlManager superTabControlManager;
-
+		static int OverCount = 0;
+		static bool IsOver = false;
 		public FrmMainFrame()
 		{
 			InitializeComponent();
@@ -25,6 +26,7 @@ namespace CMCS.CarTransport.Queue.Frms.Sys
 
 		private void Form1_Load(object sender, EventArgs e)
 		{
+			lblRegisDate.Visible = false;
 			lblVersion.Text = new AU.Updater().Version;
 			this.Text = CommonAppConfig.GetInstance().AppIdentifier;
 
@@ -58,6 +60,8 @@ namespace CMCS.CarTransport.Queue.Frms.Sys
 			FrmMainFrame.superTabControlManager = new SuperTabControlManager(this.superTabControl1);
 
 			OpenQueuer();
+			safeUtil.CheckRegister();
+			lblRegisDate.ForeColor = System.Drawing.Color.Red;
 		}
 
 		private void Form1_Shown(object sender, EventArgs e)
@@ -97,6 +101,25 @@ namespace CMCS.CarTransport.Queue.Frms.Sys
 		private void timer_CurrentTime_Tick(object sender, EventArgs e)
 		{
 			lblCurrentTime.Text = DateTime.Now.ToString("yyyy年MM月dd日 HH:mm:ss");
+			if (safeUtil.RegisterDate.Date <= DateTime.Now.AddDays(30).Date)
+			{
+				lblRegisDate.Visible = true;
+				lblRegisDate.Text = string.Format("本软件还有{0}天到期", (safeUtil.RegisterDate.Date - DateTime.Now.Date).TotalDays);
+			}
+			if (!IsOver && safeUtil.RegisterDate.Date <= DateTime.Now.Date)
+			{
+				IsOver = true;
+				OverCount = 30;
+			}
+			if (IsOver)
+			{
+				lblRegisDate.Text = string.Format("软件已到期 {0}秒后退出", OverCount);
+				OverCount--;
+				if (OverCount == 0)
+				{
+					Application.Exit();
+				}
+			}
 		}
 
 		#region 打开/切换可视主界面

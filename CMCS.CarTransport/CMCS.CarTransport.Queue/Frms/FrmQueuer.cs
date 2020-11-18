@@ -773,6 +773,7 @@ namespace CMCS.CarTransport.Queue.Frms
 		}
 
 		#endregion
+
 		#region 绑定下拉框数据
 		/// <summary>
 		/// 绑定转煤车矿点
@@ -789,7 +790,7 @@ namespace CMCS.CarTransport.Queue.Frms
 			cmb.Items.Add(new DataItem("西煤场"));
 			cmb.Items.Add(new DataItem("中煤场"));
 			cmb.Items.Add(new DataItem("汽车卸煤沟"));
-			cmb.Items.Add(new DataItem("底下煤斗"));
+			cmb.Items.Add(new DataItem("地下煤斗"));
 
 			cmb.SelectedIndex = 0;
 		}
@@ -809,7 +810,7 @@ namespace CMCS.CarTransport.Queue.Frms
 			cmb.Items.Add(new DataItem("混煤"));
 			cmb.Items.Add(new DataItem("低硫煤"));
 			cmb.Items.Add(new DataItem("煤泥"));
-			cmb.Items.Add(new DataItem("底下煤斗"));
+			cmb.Items.Add(new DataItem("高硫煤"));
 
 			cmb.SelectedIndex = 0;
 		}
@@ -828,6 +829,7 @@ namespace CMCS.CarTransport.Queue.Frms
 		}
 
 		#endregion
+
 		#region 公共业务
 
 		/// <summary>

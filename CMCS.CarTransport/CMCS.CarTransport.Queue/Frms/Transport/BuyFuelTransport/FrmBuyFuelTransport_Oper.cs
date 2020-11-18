@@ -118,6 +118,10 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
 
 		List<CmcsBuyFuelTransportDeduct> cmcsbuyfueltransportdeducts;
 
+		/// <summary>
+		/// 是否有修改权限
+		/// </summary>
+		public bool HasEdit { get; set; }
 		#endregion
 
 		public FrmBuyFuelTransport_Oper(string pId, eEditMode editMode)
@@ -135,6 +139,7 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
 		/// <param name="e"></param>
 		private void FrmBuyFuelTransport_Oper_Load(object sender, EventArgs e)
 		{
+			HasEdit = GlobalVars.LoginUser.UserName == GlobalVars.AdminAccount;
 			//绑定煤种信息
 			cmbFuelName_BuyFuel.DisplayMember = "Name";
 			cmbFuelName_BuyFuel.ValueMember = "Id";
@@ -181,6 +186,14 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
 				btnSubmit.Enabled = false;
 				HelperUtil.ControlReadOnly(panelEx2, true);
 			}
+			else if (this.EditMode == eEditMode.修改)
+			{
+				if (HasEdit)
+					HelperUtil.ControlReadOnly(panelEx2, false);
+				else
+					HelperUtil.ControlReadOnly(panelEx2, true);
+			}
+			btnAddDeduct.Enabled = GlobalVars.LoginUser.IsDeductUser == 1;
 		}
 
 		/// <summary>

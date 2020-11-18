@@ -83,7 +83,7 @@ namespace CMCS.CarTransport.DAO
 				inNetTransport.StepName = eTruckInFactoryStep.采样.ToString();
 				SelfDber.Update(inNetTransport);
 			}
-			return SelfDber.Update(transport) > 0;
+			return Dbers.GetInstance().SelfDber.Update(transport) > 0;
 		}
 
 		#endregion

@@ -112,6 +112,7 @@ namespace CMCS.DumblyConcealer.Tasks.Intelogistics
 					entity.TicketWeight = item.矿发净重;
 					entity.SealNumber = item.封签号;
 					entity.CreationTime = item.创建时间;
+					entity.StartTime = item.创建时间;
 					entity.StepName = "在途";
 					entity.IsFinish = 0;
 					entity.SyncFlag = 0;

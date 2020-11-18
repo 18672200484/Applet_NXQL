@@ -13,7 +13,7 @@ using CMCS.Common.Entities.CarTransport;
 using DevComponents.DotNetBar;
 using CMCS.CarTransport.Queue.Enums;
 
-namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
+namespace CMCS.CarTransport.Queue.Frms.Transport.GoodsTransport
 {
 	public partial class FrmBuyFuelTransportDeduct_Oper : DevComponents.DotNetBar.Metro.MetroForm
 	{
@@ -46,11 +46,7 @@ namespace CMCS.CarTransport.Queue.Frms.Transport.BuyFuelTransport
 		/// <param name="e"></param>
 		private void FrmBuyFuelTransportDeduct_Oper_Load(object sender, EventArgs e)
 		{
-			cmb_DeductType.Items.Add("¿Ûí·");
-			cmb_DeductType.Items.Add("¿ÛË®");
-			cmb_DeductType.Items.Add("¿ÛÔÓ");
 			cmb_DeductType.Items.Add("Î¥ÕÂ");
-			cmb_DeductType.Items.Add("ÆäËû");
 			cmb_DeductType.SelectedIndex = 0;
 
 			if (this.EditMode == eEditMode.ÐÞ¸Ä)

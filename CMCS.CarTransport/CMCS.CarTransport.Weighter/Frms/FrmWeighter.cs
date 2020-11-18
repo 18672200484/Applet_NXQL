@@ -1585,7 +1585,7 @@ namespace CMCS.CarTransport.Weighter.Frms
 			cmb.Items.Add(new DataItem("西煤场"));
 			cmb.Items.Add(new DataItem("中煤场"));
 			cmb.Items.Add(new DataItem("汽车卸煤沟"));
-			cmb.Items.Add(new DataItem("底下煤斗"));
+			cmb.Items.Add(new DataItem("地下煤斗"));
 
 			cmb.SelectedIndex = 0;
 		}
@@ -1605,7 +1605,7 @@ namespace CMCS.CarTransport.Weighter.Frms
 			cmb.Items.Add(new DataItem("混煤"));
 			cmb.Items.Add(new DataItem("低硫煤"));
 			cmb.Items.Add(new DataItem("煤泥"));
-			cmb.Items.Add(new DataItem("底下煤斗"));
+			cmb.Items.Add(new DataItem("高硫煤"));
 
 			cmb.SelectedIndex = 0;
 		}
@@ -2280,7 +2280,7 @@ namespace CMCS.CarTransport.Weighter.Frms
 						// 当地磅仪表重量大于最小称重且来车方向的地感与对射均无信号，则判定车已经完全上磅
 						if (Hardwarer.Wber.Weight >= this.WbMinWeight && !HasCarOnEnterWay())
 						{
-							BackGateDown();
+							//BackGateDown();
 
 							this.CurrentFlowFlag = eFlowFlag.等待稳定;
 						}

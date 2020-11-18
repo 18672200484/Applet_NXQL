@@ -53,6 +53,11 @@ namespace CMCS.Common.Entities.CarTransport
 		[Description("重量二")]
 		public virtual Decimal SecondWeight { get { return _SecondWeight; } set { _SecondWeight = value; } }
 
+		/// <summary>
+		/// 扣吨
+		/// </summary>
+		public virtual Decimal DeductWeight { get; set; }
+
 		private Decimal _SuttleWeight;
 		/// <summary>
 		/// 净重(吨)
@@ -160,7 +165,7 @@ namespace CMCS.Common.Entities.CarTransport
 		/// 所处流程的步骤  入厂、重车、轻车、出厂
 		/// </summary>
 		public virtual string StepName { get { return _StepName; } set { _StepName = value; } }
-		
+
 		/// <summary>
 		/// 煤种
 		/// </summary>
