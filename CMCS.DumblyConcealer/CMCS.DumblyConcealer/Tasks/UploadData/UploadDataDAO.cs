@@ -258,14 +258,26 @@ namespace CMCS.DumblyConcealer.Tasks.UploadData
 				{
 					foreach (var pk in entity.PropertySetDetails.Where(a => a.DesPrimaryKey != null && a.DesPrimaryKey.ToLower() == "true"))
 					{
-						strChaXun += string.Format("and {0}='{1}' ", pk.Destination, item[pk.Source] == DBNull.Value ? "" : item[pk.Source].ToString());
+						if (!string.IsNullOrWhiteSpace(pk.DesType) && pk.DesType.ToLower() == "datetime")
+						{
+							pk.Format = "yyyy-MM-dd hh24:mi:ss";
+							strChaXun += string.Format("and {0}=to_date('{1}','{2}') ", pk.Destination, item[pk.Source] == DBNull.Value ? "" : item[pk.Source].ToString(), pk.Format);
+						}
+						else
+							strChaXun += string.Format("and {0}='{1}' ", pk.Destination, item[pk.Source] == DBNull.Value ? "" : item[pk.Source].ToString());
 					}
 				}
 				else
 				{
 					foreach (var pk in entity.PropertySetDetails)
 					{
-						strChaXun += string.Format("and {0}='{1}' ", pk.Destination, item[pk.Source] == DBNull.Value ? "" : item[pk.Source].ToString());
+						if (!string.IsNullOrWhiteSpace(pk.DesType) && pk.DesType.ToLower() == "datetime")
+						{
+							pk.Format = "yyyy-MM-dd hh24:mi:ss";
+							strChaXun += string.Format("and {0}=to_date('{1}','{2}') ", pk.Destination, item[pk.Source] == DBNull.Value ? "" : item[pk.Source].ToString(), pk.Format);
+						}
+						else
+							strChaXun += string.Format("and {0}='{1}' ", pk.Destination, item[pk.Source] == DBNull.Value ? "" : item[pk.Source].ToString());
 					}
 				}
 
@@ -307,7 +319,33 @@ namespace CMCS.DumblyConcealer.Tasks.UploadData
 					//if (entity.Description == "编码接口表")
 					//    updateSql = updateSql.Trim(',') + string.Format(" where id='{0}'", dtHaveData.Rows[0]["TRUCKENTERID"].ToString());
 					//else
-					updateSql = updateSql.Trim(',') + string.Format(" where {0}='{1}'", entity.PropertySetDetails.First().Destination, dtHaveData.Rows[0][entity.PropertySetDetails.First().Destination].ToString());
+
+					updateSql = updateSql.Trim(',');
+					string updateWhere = "";
+					if (ishavepk)
+					{
+						int index = 0;
+						foreach (var pk in entity.PropertySetDetails.Where(a => a.DesPrimaryKey != null && a.DesPrimaryKey.ToLower() == "true"))
+						{
+							if (!string.IsNullOrWhiteSpace(pk.DesType) && pk.DesType.ToLower() == "datetime")
+							{
+								pk.Format = "yyyy-MM-dd hh24:mi:ss";
+								updateWhere += string.Format("{3} {0}=to_date('{1}','{2}') ", pk.Destination, item[pk.Source] == DBNull.Value ? "" : item[pk.Source].ToString(), pk.Format, (index == 0 ? "" : "and"));
+							}
+							else
+								updateWhere += string.Format("{2} {0}='{1}' ", pk.Destination, item[pk.Source] == DBNull.Value ? "" : item[pk.Source].ToString(), (index == 0 ? "" : "and"));
+							index++;
+						}
+
+						if (!string.IsNullOrWhiteSpace(updateWhere))
+							updateWhere = " where " + updateWhere;
+					}
+
+					if (string.IsNullOrWhiteSpace(updateWhere))
+						updateWhere = string.Format(" where {0}='{1}'", entity.PropertySetDetails.First().Destination, dtHaveData.Rows[0][entity.PropertySetDetails.First().Destination].ToString());
+
+					updateSql = updateSql + " " + updateWhere;
+					//updateSql = updateSql.Trim(',') + string.Format(" where {0}='{1}'", entity.PropertySetDetails.First().Destination, dtHaveData.Rows[0][entity.PropertySetDetails.First().Destination].ToString());
 					if (thirdDber.Execute(updateSql) > 0)
 						output(string.Format("接口取数【{0}】已同步，操作：更新", entity.Description), eOutputType.Normal);
 				}
