@@ -391,7 +391,8 @@ namespace CMCS.CarTransport.JxSampler.Frms
 
 		private void FrmCarSampler_Load(object sender, EventArgs e)
 		{
-
+			if (GlobalVars.LoginUser.UserName != GlobalVars.AdminAccount)
+				dbtxtSuoFen.Enabled = false;
 		}
 
 		private void FrmCarSampler_Shown(object sender, EventArgs e)
