@@ -935,6 +935,7 @@ namespace CMCS.CarTransport.JxSampler.Frms
 			this.dbtxtSuoFen.Size = new System.Drawing.Size(92, 27);
 			this.dbtxtSuoFen.TabIndex = 334;
 			this.dbtxtSuoFen.Value = 3D;
+			this.dbtxtSuoFen.ValueChanged += new System.EventHandler(this.dbtxtSuoFen_ValueChanged);
 			// 
 			// labelX16
 			// 

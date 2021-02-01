@@ -391,6 +391,7 @@ namespace CMCS.CarTransport.JxSampler.Frms
 
 		private void FrmCarSampler_Load(object sender, EventArgs e)
 		{
+			dbtxtSuoFen.Value = commonDAO.GetAppletConfigDouble("缩分间隔");
 			if (GlobalVars.LoginUser.UserName != GlobalVars.AdminAccount)
 				dbtxtSuoFen.Enabled = false;
 		}
@@ -1384,6 +1385,15 @@ namespace CMCS.CarTransport.JxSampler.Frms
 			if (Enum.TryParse(systemStatus, out result)) SamplerSystemStatus = result;
 		}
 
+		/// <summary>
+		/// 修改缩分间隔
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void dbtxtSuoFen_ValueChanged(object sender, EventArgs e)
+		{
+			commonDAO.SetAppletConfig(CommonAppConfig.GetInstance().AppIdentifier, "缩分间隔", dbtxtSuoFen.Value.ToString());
+		}
 		#endregion
 
 	}
