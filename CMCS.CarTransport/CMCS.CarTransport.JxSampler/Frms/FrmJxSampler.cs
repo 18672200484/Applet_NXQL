@@ -392,7 +392,7 @@ namespace CMCS.CarTransport.JxSampler.Frms
 		private void FrmCarSampler_Load(object sender, EventArgs e)
 		{
 			dbtxtSuoFen.Value = commonDAO.GetAppletConfigDouble("Ëõ·Ö¼ä¸ô");
-			if (GlobalVars.LoginUser.UserName != GlobalVars.AdminAccount)
+			if (GlobalVars.LoginUser.IsSupper == 0)
 				dbtxtSuoFen.Enabled = false;
 		}
 
