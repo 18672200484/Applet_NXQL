@@ -385,30 +385,33 @@ namespace CMCS.DumblyConcealer.Tasks.UploadData
 					#region 煤矿
 					if (item["DONGZ"].ToString() == "增加")
 					{
-						//先查有没有，没有就新增，有就更新
-						DataTable dtTemp = SelfDber.ExecuteDataTable(string.Format("select * from fultbmine where name='{0}' or CompanyCode='{1}'", item["NEWNAME"], item["NEWCODE"]));
-						if (dtTemp != null && dtTemp.Rows.Count > 0)
-						{
-							if (dtTemp.Rows.Count > 1)
-							{
-								output(string.Format("矿点：名称【{0}】，编码【{1}】，查询到多条记录，更新失败！请在系统中检查数据合理性！", item["NEWNAME"], item["NEWCODE"]), eOutputType.Error);
-								continue;
-							}
-							else
-								sql = string.Format("update fultbmine set name='{0}',CompanyCode='{1}',SYNCTIME=sysdate where name='{2}' and CompanyCode='{3}'", item["NEWNAME"], item["NEWCODE"], item["OLDNAME"], item["OLDCODE"]);
+						//增加的不管，增加的在基础信息里面有，直接同步过来就行
+						continue;
 
-						}
-						else //新增
-						{
-							sql = string.Format(@"insert into fultbmine (ID, CREATIONTIME, CREATORUSERID, ISDELETED, CODE, SORT, NAME, ISSTOP, DATAFROM, PARENTID, SYNCFLAG, COMPANYCODE, SHORTNAME, DATAFLAG, SYNCTIME)
-values ('{0}', sysdate, 1, 0, '{1}', 1, '{2}', 0, '集团接口', '-1', 0, '{1}', '{2}', 0, sysdate)", Guid.NewGuid().ToString(), item["NEWCODE"], item["NEWNAME"]);
-							Log4Neter.Info(sql);
-						}
+//						//先查有没有，没有就新增，有就更新
+//						DataTable dtTemp = SelfDber.ExecuteDataTable(string.Format("select * from fultbmine where name='{0}' or CompanyCode='{1}'", item["NEWNAME"], item["NEWCODE"]));
+//						if (dtTemp != null && dtTemp.Rows.Count > 0)
+//						{
+//							if (dtTemp.Rows.Count > 1)
+//							{
+//								output(string.Format("矿点：名称【{0}】，编码【{1}】，查询到多条记录，更新失败！请在系统中检查数据合理性！", item["NEWNAME"], item["NEWCODE"]), eOutputType.Error);
+//								continue;
+//							}
+//							else
+//								sql = string.Format("update fultbmine set name='{0}',CompanyCode='{1}',SYNCTIME=sysdate where name='{2}' and CompanyCode='{3}'", item["NEWNAME"], item["NEWCODE"], item["OLDNAME"], item["OLDCODE"]);
+
+//						}
+//						else //新增
+//						{
+//							sql = string.Format(@"insert into fultbmine (ID, CREATIONTIME, CREATORUSERID, ISDELETED, CODE, SORT, NAME, ISSTOP, DATAFROM, PARENTID, SYNCFLAG, COMPANYCODE, SHORTNAME, DATAFLAG, SYNCTIME)
+//values ('{0}', sysdate, 1, 0, '{1}', 1, '{2}', 0, '集团接口', '-1', 0, '{1}', '{2}', 0, sysdate)", Guid.NewGuid().ToString(), item["NEWCODE"], item["NEWNAME"]);
+//							Log4Neter.Info(sql);
+//						}
 					}
 					else if (item["DONGZ"].ToString() == "更新")
-						sql = string.Format("update fultbmine set name='{0}',CompanyCode='{1}',SYNCTIME=sysdate where name='{2}' and CompanyCode='{3}'", item["NEWNAME"], item["NEWCODE"], item["OLDNAME"], item["OLDCODE"]);
+						sql = string.Format("update fultbmine set shortname='{0}',CompanyCode='{1}',SYNCTIME=sysdate where shortname='{2}' and CompanyCode='{3}'", item["NEWNAME"], item["NEWCODE"], item["OLDNAME"], item["OLDCODE"]);
 					else if (item["DONGZ"].ToString() == "删除")
-						sql = string.Format("update fultbmine set isstop=1,SYNCTIME=sysdate where name='{0}' and CompanyCode='{1}'", item["OLDNAME"], item["OLDCODE"]);
+						sql = string.Format("update fultbmine set isstop=1,SYNCTIME=sysdate where shortname='{0}' and CompanyCode='{1}'", item["OLDNAME"], item["OLDCODE"]);
 					#endregion
 				}
 				else if (item["LEIX"].ToString() == "运输单位")
@@ -416,27 +419,30 @@ values ('{0}', sysdate, 1, 0, '{1}', 1, '{2}', 0, '集团接口', '-1', 0, '{1}'
 					#region 运输单位
 					if (item["DONGZ"].ToString() == "增加")
 					{
-						//先查有没有，没有就新增，有就更新
-						DataTable dtTemp = SelfDber.ExecuteDataTable(string.Format("select * from fultbtransportcompany where name='{0}' or code='{1}'", item["NEWNAME"], item["NEWCODE"]));
-						if (dtTemp != null && dtTemp.Rows.Count > 0)
-						{
-							if (dtTemp.Rows.Count > 1)
-							{
-								output(string.Format("运输单位：名称【{0}】，编码【{1}】，查询到多条记录，更新失败！请在系统中检查数据合理性！", item["OLDNAME"], item["OLDCODE"]), eOutputType.Error);
-								continue;
-							}
-							else
-								sql = string.Format("update fultbtransportcompany set name='{0}',code='{1}',SYNCTIME=sysdate where name='{2}' and code='{3}'", item["NEWNAME"], item["NEWCODE"], item["OLDNAME"], item["OLDCODE"]);
+						//增加的不管，增加的在基础信息里面有，直接同步过来就行
+						continue;
 
-						}
-						else //新增
-							sql = string.Format(@"insert into fultbtransportcompany (ID, CREATIONTIME, CREATORUSERID, ISDELETED, CODE, NAME, ISSTOP, DATAFROM, SYNCFLAG, SYNCTIME)
-values ('{0}', sysdate, 1, 0, '{1}', '{2}', 0, '集团接口', 0, sysdate)", Guid.NewGuid().ToString(), item["NEWCODE"], item["NEWNAME"]);
+//						//先查有没有，没有就新增，有就更新
+//						DataTable dtTemp = SelfDber.ExecuteDataTable(string.Format("select * from fultbtransportcompany where name='{0}' or code='{1}'", item["NEWNAME"], item["NEWCODE"]));
+//						if (dtTemp != null && dtTemp.Rows.Count > 0)
+//						{
+//							if (dtTemp.Rows.Count > 1)
+//							{
+//								output(string.Format("运输单位：名称【{0}】，编码【{1}】，查询到多条记录，更新失败！请在系统中检查数据合理性！", item["OLDNAME"], item["OLDCODE"]), eOutputType.Error);
+//								continue;
+//							}
+//							else
+//								sql = string.Format("update fultbtransportcompany set name='{0}',code='{1}',SYNCTIME=sysdate where name='{2}' and code='{3}'", item["NEWNAME"], item["NEWCODE"], item["OLDNAME"], item["OLDCODE"]);
+
+//						}
+//						else //新增
+//							sql = string.Format(@"insert into fultbtransportcompany (ID, CREATIONTIME, CREATORUSERID, ISDELETED, CODE, NAME, ISSTOP, DATAFROM, SYNCFLAG, SYNCTIME)
+//values ('{0}', sysdate, 1, 0, '{1}', '{2}', 0, '集团接口', 0, sysdate)", Guid.NewGuid().ToString(), item["NEWCODE"], item["NEWNAME"]);
 					}
 					else if (item["DONGZ"].ToString() == "更新")
-						sql = string.Format("update fultbtransportcompany set name='{0}',code='{1}',SYNCTIME=sysdate where name='{2}' and code='{3}'", item["NEWNAME"], item["NEWCODE"], item["OLDNAME"], item["OLDCODE"]);
+						sql = string.Format("update fultbtransportcompany set shortname='{0}',code='{1}',SYNCTIME=sysdate where shortname='{2}' and code='{3}'", item["NEWNAME"], item["NEWCODE"], item["OLDNAME"], item["OLDCODE"]);
 					else if (item["DONGZ"].ToString() == "删除")
-						sql = string.Format("update fultbtransportcompany set isstop=1,SYNCTIME=sysdate where name='{0}' and code='{1}'", item["OLDNAME"], item["OLDCODE"]);
+						sql = string.Format("update fultbtransportcompany set isstop=1,SYNCTIME=sysdate where shortname='{0}' and code='{1}'", item["OLDNAME"], item["OLDCODE"]);
 					#endregion
 				}
 				else if (item["LEIX"].ToString() == "煤种")
@@ -444,22 +450,26 @@ values ('{0}', sysdate, 1, 0, '{1}', '{2}', 0, '集团接口', 0, sysdate)", Gui
 					#region 煤种
 					if (item["DONGZ"].ToString() == "增加")
 					{
-						//先查有没有，没有就新增，有就更新
-						DataTable dtTemp = SelfDber.ExecuteDataTable(string.Format("select * from fultbfuelkind where name='{0}' or CompanyCode='{1}'", item["NEWNAME"], item["NEWCODE"]));
-						if (dtTemp != null && dtTemp.Rows.Count > 0)
-						{
-							if (dtTemp.Rows.Count > 1)
-							{
-								output(string.Format("煤种：名称【{0}】，编码【{1}】，查询到多条记录，更新失败！请在系统中检查数据合理性！", item["OLDNAME"], item["OLDCODE"]), eOutputType.Error);
-								continue;
-							}
-							else
-								sql = string.Format("update fultbfuelkind set name='{0}',CompanyCode='{1}',SYNCTIME=sysdate where name='{2}' and CompanyCode='{3}'", item["NEWNAME"], item["NEWCODE"], item["OLDNAME"], item["OLDCODE"]);
+						//增加的不管，增加的在基础信息里面有，直接同步过来就行
+						continue;
 
-						}
-						else //新增
-							sql = string.Format(@"insert into fultbfuelkind (ID, CREATIONTIME, CREATORUSERID, ISDELETED, CODE, SORT, NAME, ISSTOP, DATAFROM, PARENTID, SYNCFLAG, COMPANYCODE, SHORTNAME, DATAFLAG, SYNCTIME)
-values ('{0}', sysdate, 1, 0, '{1}', 1, '{2}', 0, '集团接口', '-1', 0, '{1}', '{2}', 0, sysdate)", Guid.NewGuid().ToString(), item["NEWCODE"], item["NEWNAME"]);
+
+//						//先查有没有，没有就新增，有就更新
+//						DataTable dtTemp = SelfDber.ExecuteDataTable(string.Format("select * from fultbfuelkind where name='{0}' or CompanyCode='{1}'", item["NEWNAME"], item["NEWCODE"]));
+//						if (dtTemp != null && dtTemp.Rows.Count > 0)
+//						{
+//							if (dtTemp.Rows.Count > 1)
+//							{
+//								output(string.Format("煤种：名称【{0}】，编码【{1}】，查询到多条记录，更新失败！请在系统中检查数据合理性！", item["OLDNAME"], item["OLDCODE"]), eOutputType.Error);
+//								continue;
+//							}
+//							else
+//								sql = string.Format("update fultbfuelkind set name='{0}',CompanyCode='{1}',SYNCTIME=sysdate where name='{2}' and CompanyCode='{3}'", item["NEWNAME"], item["NEWCODE"], item["OLDNAME"], item["OLDCODE"]);
+
+//						}
+//						else //新增
+//							sql = string.Format(@"insert into fultbfuelkind (ID, CREATIONTIME, CREATORUSERID, ISDELETED, CODE, SORT, NAME, ISSTOP, DATAFROM, PARENTID, SYNCFLAG, COMPANYCODE, SHORTNAME, DATAFLAG, SYNCTIME)
+//values ('{0}', sysdate, 1, 0, '{1}', 1, '{2}', 0, '集团接口', '-1', 0, '{1}', '{2}', 0, sysdate)", Guid.NewGuid().ToString(), item["NEWCODE"], item["NEWNAME"]);
 					}
 					else if (item["DONGZ"].ToString() == "更新")
 						sql = string.Format("update fultbfuelkind set name='{0}',CompanyCode='{1}',SYNCTIME=sysdate where name='{2}' and CompanyCode='{3}'", item["NEWNAME"], item["NEWCODE"], item["OLDNAME"], item["OLDCODE"]);

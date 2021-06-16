@@ -4,66 +4,43 @@
         <name>CMCS.DapperDber</name>
     </assembly>
     <members>
-        <member name="T:CMCS.DapperDber.Attrs.DapperBindAttribute">
+        <member name="T:CMCS.DapperDber.Dbs.SQLiteDb.SQLiteSqlBuilder">
             <summary>
-            数据表关联特性
+            SQLite 语句生成
             </summary>
         </member>
-        <member name="M:CMCS.DapperDber.Attrs.DapperBindAttribute.#ctor(System.String)">
+        <member name="T:CMCS.DapperDber.Dbs.SqlBuilder">
             <summary>
-            DapperBindAttribute
-            </summary>
-            <param name="tableName"></param>
-            <param name="bindType"></param>
-        </member>
-        <member name="P:CMCS.DapperDber.Attrs.DapperBindAttribute.TableName">
-            <summary>
-            数据表名
+            SqlBuilder
             </summary>
         </member>
-        <member name="T:CMCS.DapperDber.Attrs.DapperIgnoreAttribute">
+        <member name="T:CMCS.DapperDber.Dbs.ISqlBuilder">
             <summary>
-            忽略字段特性
+            ISqlBuilder
             </summary>
         </member>
-        <member name="T:CMCS.DapperDber.Attrs.DapperAutoPrimaryKeyAttribute">
+        <member name="M:CMCS.DapperDber.Dbs.ISqlBuilder.Select``1">
             <summary>
-            自增长主键字段特性
+            生成不带条件的 SELECT 语句
             </summary>
-        </member>
-        <member name="T:CMCS.DapperDber.Attrs.DapperPrimaryKeyAttribute">
-            <summary>
-            主键字段特性
-            </summary>
-        </member>
-        <member name="T:CMCS.DapperDber.Dbs.AccessDb.AccessDapperDber">
-            <summary>
-            Access 数据库访问对象
-            </summary>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.AccessDb.AccessDapperDber.#ctor(System.String)">
-            <summary>
-            AccessDapperDber
-            </summary>
-            <param name="connectionString">连接字符串</param>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.AccessDb.AccessDapperDber.CreateConnection">
-            <summary>
-            创建一个 DbConnection 对象
-            </summary>
+            <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
-        <member name="T:CMCS.DapperDber.Dbs.AccessDb.AccessSqlBuilder">
+        <member name="M:CMCS.DapperDber.Dbs.ISqlBuilder.Count``1">
             <summary>
-            Access 语句生成
+            生成查询数量的 SELECT 语句
             </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
         </member>
-        <member name="M:CMCS.DapperDber.Dbs.AccessDb.AccessSqlBuilder.#ctor">
+        <member name="M:CMCS.DapperDber.Dbs.ISqlBuilder.PrimaryKeyCondition``1">
             <summary>
-            AccessSqlBuilder
+            生成根据主键查询的 WHERE 语句
             </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
         </member>
-        <member name="M:CMCS.DapperDber.Dbs.AccessDb.AccessSqlBuilder.SelectTop``1(System.Int32,System.String)">
+        <member name="M:CMCS.DapperDber.Dbs.ISqlBuilder.SelectTop``1(System.Int32,System.String)">
             <summary>
             生成 TOP 查询的 SELECT 语句
             </summary>
@@ -72,7 +49,7 @@
             <param name="condition">查询条件</param>
             <returns></returns>
         </member>
-        <member name="M:CMCS.DapperDber.Dbs.AccessDb.AccessSqlBuilder.SelectPager``1(System.String,System.Int32,System.Int32)">
+        <member name="M:CMCS.DapperDber.Dbs.ISqlBuilder.SelectPager``1(System.String,System.Int32,System.Int32)">
             <summary>
             生成分页查询的 SELECT 语句
             </summary>
@@ -82,32 +59,217 @@
             <param name="pageIndex">页索引</param>
             <returns></returns>
         </member>
+        <member name="M:CMCS.DapperDber.Dbs.ISqlBuilder.Insert``1">
+            <summary>
+            生成 INSERT 语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.ISqlBuilder.Update``1">
+            <summary>
+            生成 UPDATE 语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.ISqlBuilder.Delete``1">
+            <summary>
+            生成 DELETE 语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.SqlBuilder.#ctor(System.String)">
+            <summary>
+            SqlBuilder
+            </summary>
+            <param name="paramPrefix">参数前缀</param>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.SqlBuilder.Select``1">
+            <summary>
+            生成不带条件的 SELECT 语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.SqlBuilder.Count``1">
+            <summary>
+            生成查询数量的 SELECT 语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.SqlBuilder.PrimaryKeyCondition``1">
+            <summary>
+            生成根据主键查询的 WHERE 语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.SqlBuilder.SelectTop``1(System.Int32,System.String)">
+            <summary>
+            生成 TOP 查询的 SELECT 语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="top">条数</param>
+            <param name="condition">查询条件</param>
+            <returns></returns>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.SqlBuilder.SelectPager``1(System.String,System.Int32,System.Int32)">
+            <summary>
+            生成分页查询的 SELECT 语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="condition">条件语句</param>
+            <param name="pageSize">每页个数</param>
+            <param name="pageIndex">页索引</param>
+            <returns></returns>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.SqlBuilder.Insert``1">
+            <summary>
+            生成 INSERT 语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.SqlBuilder.Update``1">
+            <summary>
+            生成 UPDATE 语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.SqlBuilder.Delete``1">
+            <summary>
+            生成 DELETE 语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="P:CMCS.DapperDber.Dbs.SqlBuilder.ParamPrefix">
+            <summary>
+            参数前缀
+            </summary>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.SQLiteDb.SQLiteSqlBuilder.#ctor">
+            <summary>
+            SQLiteSqlBuilder
+            </summary>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.SQLiteDb.SQLiteSqlBuilder.SelectTop``1(System.Int32,System.String)">
+            <summary>
+            生成 TOP 查询的 SELECT 语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="top">条数</param>
+            <param name="condition">查询条件</param>
+            <returns></returns>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.SQLiteDb.SQLiteSqlBuilder.SelectPager``1(System.String,System.Int32,System.Int32)">
+            <summary>
+            生成分页查询的 SELECT 语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="condition">条件语句</param>
+            <param name="pageSize">每页个数</param>
+            <param name="pageIndex">页索引</param>
+            <returns></returns>
+        </member>
+        <member name="T:CMCS.DapperDber.Dbs.OracleDb.OracleDapperDber">
+            <summary>
+            Oracle 数据库访问对象
+            </summary>
+        </member>
         <member name="T:CMCS.DapperDber.Dbs.BaseDber">
             <summary>
             BaseDber
             </summary>
         </member>
-        <member name="P:CMCS.DapperDber.Dbs.BaseDber.ConnectionString">
+        <member name="T:CMCS.DapperDber.Dbs.IDapperDber">
             <summary>
-            数据库连接字符
+            IDapperDber
             </summary>
         </member>
-        <member name="P:CMCS.DapperDber.Dbs.BaseDber.SqlBuilder">
+        <member name="M:CMCS.DapperDber.Dbs.IDapperDber.Get``1(System.String)">
             <summary>
-            SQL语句对象
+            根据主键 Id 获取单个实体
             </summary>
+            <typeparam name="T"></typeparam>
+            <param name="id">主键</param>
+            <returns></returns>
         </member>
-        <member name="T:CMCS.DapperDber.Dbs.BaseDber.SqlWatchEventHandler">
+        <member name="M:CMCS.DapperDber.Dbs.IDapperDber.Entities``1(System.String,System.Object)">
             <summary>
-            SqlWatchEventHandler
+            根据查询条件获取实体集
             </summary>
-            <param name="type"></param>
-            <param name="sql"></param>
+            <typeparam name="T"></typeparam>
+            <param name="condition">条件语句</param>
+            <param name="param">查询参数</param>
+            <returns></returns>
         </member>
-        <member name="E:CMCS.DapperDber.Dbs.BaseDber.SqlWatch">
+        <member name="M:CMCS.DapperDber.Dbs.IDapperDber.TopEntities``1(System.Int32,System.String,System.Object)">
             <summary>
-            监听执行的SQL语句
+            根据查询条件获取指定个数实体
             </summary>
+            <typeparam name="T"></typeparam>
+            <param name="top">指定个数</param>
+            <param name="condition">条件语句</param>
+            <param name="param">查询参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.IDapperDber.ExecutePager``1(System.Int32,System.Int32,System.String,System.Object)">
+            <summary>
+            根据查询条件获取分页数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="pageSize">每页条数</param>
+            <param name="pageIndex">页索引，从零开始</param>
+            <param name="condition">条件语句</param>
+            <param name="param">查询参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.IDapperDber.Insert``1(``0)">
+            <summary>
+            插入实体
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="t">实体</param>
+            <returns></returns>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.IDapperDber.Update``1(``0)">
+            <summary>
+            修改实体
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="t">实体</param>
+            <returns></returns>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.IDapperDber.Delete``1(System.String)">
+            <summary>
+            根据主键删除数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="id">实体</param>
+            <returns></returns>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.IDapperDber.DeleteBySQL``1(System.String,System.Object)">
+            <summary>
+            根据条件删除数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="condition">查询条件</param>
+            <param name="param"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.IDapperDber.Count``1(System.String,System.Object)">
+            <summary>
+            根据查询条件获取数量
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="condition">查询条件</param>
+            <param name="param">参数</param>
+            <returns></returns>
         </member>
         <member name="M:CMCS.DapperDber.Dbs.BaseDber.#ctor(System.String,System.Data.Common.DbDataAdapter,CMCS.DapperDber.Dbs.ISqlBuilder)">
             <summary>
@@ -274,161 +436,27 @@
             <param name="param">参数</param>
             <returns></returns>
         </member>
-        <member name="T:CMCS.DapperDber.Dbs.IDapperDber">
+        <member name="P:CMCS.DapperDber.Dbs.BaseDber.ConnectionString">
             <summary>
-            IDapperDber
+            数据库连接字符
             </summary>
         </member>
-        <member name="M:CMCS.DapperDber.Dbs.IDapperDber.Get``1(System.String)">
+        <member name="P:CMCS.DapperDber.Dbs.BaseDber.SqlBuilder">
             <summary>
-            根据主键 Id 获取单个实体
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="id">主键</param>
-            <returns></returns>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.IDapperDber.Entities``1(System.String,System.Object)">
-            <summary>
-            根据查询条件获取实体集
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="condition">条件语句</param>
-            <param name="param">查询参数</param>
-            <returns></returns>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.IDapperDber.TopEntities``1(System.Int32,System.String,System.Object)">
-            <summary>
-            根据查询条件获取指定个数实体
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="top">指定个数</param>
-            <param name="condition">条件语句</param>
-            <param name="param">查询参数</param>
-            <returns></returns>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.IDapperDber.ExecutePager``1(System.Int32,System.Int32,System.String,System.Object)">
-            <summary>
-            根据查询条件获取分页数据
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="pageSize">每页条数</param>
-            <param name="pageIndex">页索引，从零开始</param>
-            <param name="condition">条件语句</param>
-            <param name="param">查询参数</param>
-            <returns></returns>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.IDapperDber.Insert``1(``0)">
-            <summary>
-            插入实体
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="t">实体</param>
-            <returns></returns>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.IDapperDber.Update``1(``0)">
-            <summary>
-            修改实体
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="t">实体</param>
-            <returns></returns>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.IDapperDber.Delete``1(System.String)">
-            <summary>
-            根据主键删除数据
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="id">实体</param>
-            <returns></returns>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.IDapperDber.DeleteBySQL``1(System.String,System.Object)">
-            <summary>
-            根据条件删除数据
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="condition">查询条件</param>
-            <param name="param"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.IDapperDber.Count``1(System.String,System.Object)">
-            <summary>
-            根据查询条件获取数量
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="condition">查询条件</param>
-            <param name="param">参数</param>
-            <returns></returns>
-        </member>
-        <member name="T:CMCS.DapperDber.Dbs.ISqlBuilder">
-            <summary>
-            ISqlBuilder
+            SQL语句对象
             </summary>
         </member>
-        <member name="M:CMCS.DapperDber.Dbs.ISqlBuilder.Select``1">
+        <member name="E:CMCS.DapperDber.Dbs.BaseDber.SqlWatch">
             <summary>
-            生成不带条件的 SELECT 语句
+            监听执行的SQL语句
             </summary>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
         </member>
-        <member name="M:CMCS.DapperDber.Dbs.ISqlBuilder.Count``1">
+        <member name="T:CMCS.DapperDber.Dbs.BaseDber.SqlWatchEventHandler">
             <summary>
-            生成查询数量的 SELECT 语句
+            SqlWatchEventHandler
             </summary>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.ISqlBuilder.PrimaryKeyCondition``1">
-            <summary>
-            生成根据主键查询的 WHERE 语句
-            </summary>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.ISqlBuilder.SelectTop``1(System.Int32,System.String)">
-            <summary>
-            生成 TOP 查询的 SELECT 语句
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="top">条数</param>
-            <param name="condition">查询条件</param>
-            <returns></returns>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.ISqlBuilder.SelectPager``1(System.String,System.Int32,System.Int32)">
-            <summary>
-            生成分页查询的 SELECT 语句
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="condition">条件语句</param>
-            <param name="pageSize">每页个数</param>
-            <param name="pageIndex">页索引</param>
-            <returns></returns>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.ISqlBuilder.Insert``1">
-            <summary>
-            生成 INSERT 语句
-            </summary>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.ISqlBuilder.Update``1">
-            <summary>
-            生成 UPDATE 语句
-            </summary>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.ISqlBuilder.Delete``1">
-            <summary>
-            生成 DELETE 语句
-            </summary>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="T:CMCS.DapperDber.Dbs.OracleDb.OracleDapperDber">
-            <summary>
-            Oracle 数据库访问对象
-            </summary>
+            <param name="type"></param>
+            <param name="sql"></param>
         </member>
         <member name="M:CMCS.DapperDber.Dbs.OracleDb.OracleDapperDber.#ctor(System.String)">
             <summary>
@@ -442,17 +470,39 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:CMCS.DapperDber.Dbs.OracleDb.OracleSqlBuilder">
+        <member name="T:CMCS.DapperDber.Attrs.DapperPrimaryKeyAttribute">
             <summary>
-            Oracle 语句生成
+            主键字段特性
             </summary>
         </member>
-        <member name="M:CMCS.DapperDber.Dbs.OracleDb.OracleSqlBuilder.#ctor">
+        <member name="T:CMCS.DapperDber.Dbs.MySqlDb.MySqlDapperDber">
             <summary>
-            OracleSqlBuilder
+            MySql 数据库访问对象
             </summary>
         </member>
-        <member name="M:CMCS.DapperDber.Dbs.OracleDb.OracleSqlBuilder.SelectTop``1(System.Int32,System.String)">
+        <member name="M:CMCS.DapperDber.Dbs.MySqlDb.MySqlDapperDber.#ctor(System.String)">
+            <summary>
+            MySqlDapperDber
+            </summary>
+            <param name="connectionString">连接字符串</param>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.MySqlDb.MySqlDapperDber.CreateConnection">
+            <summary>
+            创建一个 DbConnection 对象
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:CMCS.DapperDber.Dbs.SqlServerDb.SqlServerSqlBuilder">
+            <summary>
+            SqlServer 语句生成
+            </summary>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.SqlServerDb.SqlServerSqlBuilder.#ctor">
+            <summary>
+            SqlServerSqlBuilder
+            </summary>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.SqlServerDb.SqlServerSqlBuilder.SelectTop``1(System.Int32,System.String)">
             <summary>
             生成 TOP 查询的 SELECT 语句
             </summary>
@@ -461,7 +511,7 @@
             <param name="condition">查询条件</param>
             <returns></returns>
         </member>
-        <member name="M:CMCS.DapperDber.Dbs.OracleDb.OracleSqlBuilder.SelectPager``1(System.String,System.Int32,System.Int32)">
+        <member name="M:CMCS.DapperDber.Dbs.SqlServerDb.SqlServerSqlBuilder.SelectPager``1(System.String,System.Int32,System.Int32)">
             <summary>
             生成分页查询的 SELECT 语句
             </summary>
@@ -471,82 +521,44 @@
             <param name="pageIndex">页索引</param>
             <returns></returns>
         </member>
-        <member name="T:CMCS.DapperDber.Dbs.SqlBuilder">
+        <member name="T:CMCS.DapperDber.Dbs.AccessDb.AccessDapperDber">
             <summary>
-            SqlBuilder
+            Access 数据库访问对象
             </summary>
         </member>
-        <member name="P:CMCS.DapperDber.Dbs.SqlBuilder.ParamPrefix">
+        <member name="M:CMCS.DapperDber.Dbs.AccessDb.AccessDapperDber.#ctor(System.String)">
             <summary>
-            参数前缀
+            AccessDapperDber
             </summary>
+            <param name="connectionString">连接字符串</param>
         </member>
-        <member name="M:CMCS.DapperDber.Dbs.SqlBuilder.#ctor(System.String)">
+        <member name="M:CMCS.DapperDber.Dbs.AccessDb.AccessDapperDber.CreateConnection">
             <summary>
-            SqlBuilder
+            创建一个 DbConnection 对象
             </summary>
-            <param name="paramPrefix">参数前缀</param>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.SqlBuilder.Select``1">
-            <summary>
-            生成不带条件的 SELECT 语句
-            </summary>
-            <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:CMCS.DapperDber.Dbs.SqlBuilder.Count``1">
+        <member name="T:CMCS.DapperDber.Attrs.DapperIgnoreAttribute">
             <summary>
-            生成查询数量的 SELECT 语句
+            忽略字段特性
             </summary>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
         </member>
-        <member name="M:CMCS.DapperDber.Dbs.SqlBuilder.PrimaryKeyCondition``1">
+        <member name="T:CMCS.DapperDber.Attrs.DapperBindAttribute">
             <summary>
-            生成根据主键查询的 WHERE 语句
+            数据表关联特性
             </summary>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
         </member>
-        <member name="M:CMCS.DapperDber.Dbs.SqlBuilder.SelectTop``1(System.Int32,System.String)">
+        <member name="M:CMCS.DapperDber.Attrs.DapperBindAttribute.#ctor(System.String)">
             <summary>
-            生成 TOP 查询的 SELECT 语句
+            DapperBindAttribute
             </summary>
-            <typeparam name="T"></typeparam>
-            <param name="top">条数</param>
-            <param name="condition">查询条件</param>
-            <returns></returns>
+            <param name="tableName"></param>
+            <param name="bindType"></param>
         </member>
-        <member name="M:CMCS.DapperDber.Dbs.SqlBuilder.SelectPager``1(System.String,System.Int32,System.Int32)">
+        <member name="P:CMCS.DapperDber.Attrs.DapperBindAttribute.TableName">
             <summary>
-            生成分页查询的 SELECT 语句
+            数据表名
             </summary>
-            <typeparam name="T"></typeparam>
-            <param name="condition">条件语句</param>
-            <param name="pageSize">每页个数</param>
-            <param name="pageIndex">页索引</param>
-            <returns></returns>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.SqlBuilder.Insert``1">
-            <summary>
-            生成 INSERT 语句
-            </summary>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.SqlBuilder.Update``1">
-            <summary>
-            生成 UPDATE 语句
-            </summary>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.SqlBuilder.Delete``1">
-            <summary>
-            生成 DELETE 语句
-            </summary>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
         </member>
         <member name="T:CMCS.DapperDber.Dbs.SQLiteDb.SQLiteDapperDber">
             <summary>
@@ -565,17 +577,29 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:CMCS.DapperDber.Dbs.SQLiteDb.SQLiteSqlBuilder">
+        <member name="T:CMCS.DapperDber.Util.DapperAttributeUtil">
             <summary>
-            SQLite 语句生成
+            DapperAttributeUtil
             </summary>
         </member>
-        <member name="M:CMCS.DapperDber.Dbs.SQLiteDb.SQLiteSqlBuilder.#ctor">
+        <member name="M:CMCS.DapperDber.Util.DapperAttributeUtil.GetAttribute``1(System.Type)">
             <summary>
-            SQLiteSqlBuilder
+            获取 Attribute
+            </summary>
+            <param name="attrType"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CMCS.DapperDber.Dbs.MySqlDb.MySqlSqlBuilder">
+            <summary>
+            MySql 语句生成
             </summary>
         </member>
-        <member name="M:CMCS.DapperDber.Dbs.SQLiteDb.SQLiteSqlBuilder.SelectTop``1(System.Int32,System.String)">
+        <member name="M:CMCS.DapperDber.Dbs.MySqlDb.MySqlSqlBuilder.#ctor">
+            <summary>
+            MySqlSqlBuilder
+            </summary>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.MySqlDb.MySqlSqlBuilder.SelectTop``1(System.Int32,System.String)">
             <summary>
             生成 TOP 查询的 SELECT 语句
             </summary>
@@ -584,7 +608,7 @@
             <param name="condition">查询条件</param>
             <returns></returns>
         </member>
-        <member name="M:CMCS.DapperDber.Dbs.SQLiteDb.SQLiteSqlBuilder.SelectPager``1(System.String,System.Int32,System.Int32)">
+        <member name="M:CMCS.DapperDber.Dbs.MySqlDb.MySqlSqlBuilder.SelectPager``1(System.String,System.Int32,System.Int32)">
             <summary>
             生成分页查询的 SELECT 语句
             </summary>
@@ -634,17 +658,17 @@
             <typeparam name="T"></typeparam>
             <param name="t"></param>
         </member>
-        <member name="T:CMCS.DapperDber.Dbs.SqlServerDb.SqlServerSqlBuilder">
+        <member name="T:CMCS.DapperDber.Dbs.OracleDb.OracleSqlBuilder">
             <summary>
-            SqlServer 语句生成
+            Oracle 语句生成
             </summary>
         </member>
-        <member name="M:CMCS.DapperDber.Dbs.SqlServerDb.SqlServerSqlBuilder.#ctor">
+        <member name="M:CMCS.DapperDber.Dbs.OracleDb.OracleSqlBuilder.#ctor">
             <summary>
-            SqlServerSqlBuilder
+            OracleSqlBuilder
             </summary>
         </member>
-        <member name="M:CMCS.DapperDber.Dbs.SqlServerDb.SqlServerSqlBuilder.SelectTop``1(System.Int32,System.String)">
+        <member name="M:CMCS.DapperDber.Dbs.OracleDb.OracleSqlBuilder.SelectTop``1(System.Int32,System.String)">
             <summary>
             生成 TOP 查询的 SELECT 语句
             </summary>
@@ -653,7 +677,7 @@
             <param name="condition">查询条件</param>
             <returns></returns>
         </member>
-        <member name="M:CMCS.DapperDber.Dbs.SqlServerDb.SqlServerSqlBuilder.SelectPager``1(System.String,System.Int32,System.Int32)">
+        <member name="M:CMCS.DapperDber.Dbs.OracleDb.OracleSqlBuilder.SelectPager``1(System.String,System.Int32,System.Int32)">
             <summary>
             生成分页查询的 SELECT 语句
             </summary>
@@ -661,64 +685,6 @@
             <param name="condition">条件语句</param>
             <param name="pageSize">每页个数</param>
             <param name="pageIndex">页索引</param>
-            <returns></returns>
-        </member>
-        <member name="T:CMCS.DapperDber.Dbs.MySqlDb.MySqlDapperDber">
-            <summary>
-            MySql 数据库访问对象
-            </summary>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.MySqlDb.MySqlDapperDber.#ctor(System.String)">
-            <summary>
-            MySqlDapperDber
-            </summary>
-            <param name="connectionString">连接字符串</param>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.MySqlDb.MySqlDapperDber.CreateConnection">
-            <summary>
-            创建一个 DbConnection 对象
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:CMCS.DapperDber.Dbs.MySqlDb.MySqlSqlBuilder">
-            <summary>
-            MySql 语句生成
-            </summary>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.MySqlDb.MySqlSqlBuilder.#ctor">
-            <summary>
-            MySqlSqlBuilder
-            </summary>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.MySqlDb.MySqlSqlBuilder.SelectTop``1(System.Int32,System.String)">
-            <summary>
-            生成 TOP 查询的 SELECT 语句
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="top">条数</param>
-            <param name="condition">查询条件</param>
-            <returns></returns>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.MySqlDb.MySqlSqlBuilder.SelectPager``1(System.String,System.Int32,System.Int32)">
-            <summary>
-            生成分页查询的 SELECT 语句
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="condition">条件语句</param>
-            <param name="pageSize">每页个数</param>
-            <param name="pageIndex">页索引</param>
-            <returns></returns>
-        </member>
-        <member name="T:CMCS.DapperDber.Util.DapperAttributeUtil">
-            <summary>
-            DapperAttributeUtil
-            </summary>
-        </member>
-        <member name="M:CMCS.DapperDber.Util.DapperAttributeUtil.GetAttribute``1(System.Type)">
-            <summary>
-            获取 Attribute
-            </summary>
-            <param name="attrType"></param>
             <returns></returns>
         </member>
         <member name="T:CMCS.DapperDber.Util.EntityReflectionUtil">
@@ -786,6 +752,11 @@
             Represents the key aspects of a sql operation
             </summary>
         </member>
+        <member name="M:CommandDefinition.#ctor(System.String,System.Object,System.Data.IDbTransaction,System.Nullable{System.Int32},System.Nullable{System.Data.CommandType},CommandFlags)">
+            <summary>
+            Initialize the command definition
+            </summary>
+        </member>
         <member name="P:CommandDefinition.CommandText">
             <summary>
             The command (sql or a stored-procedure name) to execute
@@ -831,187 +802,14 @@
             Can async queries be pipelined?
             </summary>
         </member>
-        <member name="M:CommandDefinition.#ctor(System.String,System.Object,System.Data.IDbTransaction,System.Nullable{System.Int32},System.Nullable{System.Data.CommandType},CommandFlags)">
-            <summary>
-            Initialize the command definition
-            </summary>
-        </member>
         <member name="T:SqlMapper">
             <summary>
             Dapper, a light weight object mapper for ADO.NET
             </summary>
         </member>
-        <member name="T:SqlMapper.IDynamicParameters">
+        <member name="F:SqlMapper.DataTableTypeNameKey">
             <summary>
-            Implement this interface to pass an arbitrary db specific set of parameters to Dapper
-            </summary>
-        </member>
-        <member name="M:SqlMapper.IDynamicParameters.AddParameters(System.Data.IDbCommand,SqlMapper.Identity)">
-            <summary>
-            Add all the parameters needed to the command just before it executes
-            </summary>
-            <param name="command">The raw command prior to execution</param>
-            <param name="identity">Information about the query</param>
-        </member>
-        <member name="T:SqlMapper.IParameterLookup">
-            <summary>
-            Extends IDynamicParameters providing by-name lookup of parameter values
-            </summary>
-        </member>
-        <member name="P:SqlMapper.IParameterLookup.Item(System.String)">
-            <summary>
-            Get the value of the specified parameter (return null if not found)
-            </summary>
-        </member>
-        <member name="T:SqlMapper.IParameterCallbacks">
-            <summary>
-            Extends IDynamicParameters with facilities for executing callbacks after commands have completed
-            </summary>
-        </member>
-        <member name="M:SqlMapper.IParameterCallbacks.OnCompleted">
-            <summary>
-            Invoked when the command has executed
-            </summary>
-        </member>
-        <member name="T:SqlMapper.ICustomQueryParameter">
-            <summary>
-            Implement this interface to pass an arbitrary db specific parameter to Dapper
-            </summary>
-        </member>
-        <member name="M:SqlMapper.ICustomQueryParameter.AddParameter(System.Data.IDbCommand,System.String)">
-            <summary>
-            Add the parameter needed to the command before it executes
-            </summary>
-            <param name="command">The raw command prior to execution</param>
-            <param name="name">Parameter name</param>
-        </member>
-        <member name="T:SqlMapper.ITypeHandler">
-            <summary>
-            Implement this interface to perform custom type-based parameter handling and value parsing
-            </summary>
-        </member>
-        <member name="M:SqlMapper.ITypeHandler.SetValue(System.Data.IDbDataParameter,System.Object)">
-            <summary>
-            Assign the value of a parameter before a command executes
-            </summary>
-            <param name="parameter">The parameter to configure</param>
-            <param name="value">Parameter value</param>
-        </member>
-        <member name="M:SqlMapper.ITypeHandler.Parse(System.Type,System.Object)">
-            <summary>
-            Parse a database value back to a typed value
-            </summary>
-            <param name="value">The value from the database</param>
-            <param name="destinationType">The type to parse to</param>
-            <returns>The typed value</returns>
-        </member>
-        <member name="T:SqlMapper.UdtTypeHandler">
-            <summary>
-            A type handler for data-types that are supported by the underlying provider, but which need
-            a well-known UdtTypeName to be specified
-            </summary>
-        </member>
-        <member name="M:SqlMapper.UdtTypeHandler.#ctor(System.String)">
-            <summary>
-            Creates a new instance of UdtTypeHandler with the specified UdtTypeName
-            </summary>
-        </member>
-        <member name="T:SqlMapper.TypeHandler`1">
-            <summary>
-            Base-class for simple type-handlers
-            </summary>
-        </member>
-        <member name="M:SqlMapper.TypeHandler`1.SetValue(System.Data.IDbDataParameter,`0)">
-            <summary>
-            Assign the value of a parameter before a command executes
-            </summary>
-            <param name="parameter">The parameter to configure</param>
-            <param name="value">Parameter value</param>
-        </member>
-        <member name="M:SqlMapper.TypeHandler`1.Parse(System.Object)">
-            <summary>
-            Parse a database value back to a typed value
-            </summary>
-            <param name="value">The value from the database</param>
-            <returns>The typed value</returns>
-        </member>
-        <member name="T:SqlMapper.ITypeMap">
-            <summary>
-            Implement this interface to change default mapping of reader columns to type members
-            </summary>
-        </member>
-        <member name="M:SqlMapper.ITypeMap.FindConstructor(System.String[],System.Type[])">
-            <summary>
-            Finds best constructor
-            </summary>
-            <param name="names">DataReader column names</param>
-            <param name="types">DataReader column types</param>
-            <returns>Matching constructor or default one</returns>
-        </member>
-        <member name="M:SqlMapper.ITypeMap.FindExplicitConstructor">
-            <summary>
-            Returns a constructor which should *always* be used.
-            
-            Parameters will be default values, nulls for reference types and zero'd for value types.
-            
-            Use this class to force object creation away from parameterless constructors you don't control.
-            </summary>
-        </member>
-        <member name="M:SqlMapper.ITypeMap.GetConstructorParameter(System.Reflection.ConstructorInfo,System.String)">
-            <summary>
-            Gets mapping for constructor parameter
-            </summary>
-            <param name="constructor">Constructor to resolve</param>
-            <param name="columnName">DataReader column name</param>
-            <returns>Mapping implementation</returns>
-        </member>
-        <member name="M:SqlMapper.ITypeMap.GetMember(System.String)">
-            <summary>
-            Gets member mapping for column
-            </summary>
-            <param name="columnName">DataReader column name</param>
-            <returns>Mapping implementation</returns>
-        </member>
-        <member name="T:SqlMapper.IMemberMap">
-            <summary>
-            Implements this interface to provide custom member mapping
-            </summary>
-        </member>
-        <member name="P:SqlMapper.IMemberMap.ColumnName">
-            <summary>
-            Source DataReader column name
-            </summary>
-        </member>
-        <member name="P:SqlMapper.IMemberMap.MemberType">
-            <summary>
-             Target member type
-            </summary>
-        </member>
-        <member name="P:SqlMapper.IMemberMap.Property">
-            <summary>
-            Target property
-            </summary>
-        </member>
-        <member name="P:SqlMapper.IMemberMap.Field">
-            <summary>
-            Target field
-            </summary>
-        </member>
-        <member name="P:SqlMapper.IMemberMap.Parameter">
-            <summary>
-            Target constructor parameter
-            </summary>
-        </member>
-        <member name="T:SqlMapper.Link`2">
-            <summary>
-            This is a micro-cache; suitable when the number of terms is controllable (a few hundred, for example),
-            and strictly append-only; you cannot change existing values. All key matches are on **REFERENCE**
-            equality. The type is fully thread-safe.
-            </summary>
-        </member>
-        <member name="E:SqlMapper.QueryCachePurged">
-            <summary>
-            Called if the query cache is purged via PurgeQueryCache
+            Key used to indicate the type name associated with a DataTable
             </summary>
         </member>
         <member name="M:SqlMapper.PurgeQueryCache">
@@ -1063,92 +861,10 @@
             Configure the specified type to be processed by a custom handler
             </summary>
         </member>
-        <member name="T:SqlMapper.TypeHandlerCache`1">
-            <summary>
-            Not intended for direct usage
-            </summary>
-        </member>
-        <member name="M:SqlMapper.TypeHandlerCache`1.Parse(System.Object)">
-            <summary>
-            Not intended for direct usage
-            </summary>
-        </member>
-        <member name="M:SqlMapper.TypeHandlerCache`1.SetValue(System.Data.IDbDataParameter,System.Object)">
-            <summary>
-            Not intended for direct usage
-            </summary>
-        </member>
         <member name="M:SqlMapper.GetDbType(System.Object)">
             <summary>
             Get the DbType that maps to a given value
             </summary>
-        </member>
-        <member name="T:SqlMapper.Identity">
-            <summary>
-            Identity of a cached query in Dapper, used for extensibility
-            </summary>
-        </member>
-        <member name="M:SqlMapper.Identity.ForDynamicParameters(System.Type)">
-            <summary>
-            Create an identity for use with DynamicParameters, internal use only
-            </summary>
-            <param name="type"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SqlMapper.Identity.Equals(System.Object)">
-            <summary>
-            
-            </summary>
-            <param name="obj"></param>
-            <returns></returns>
-        </member>
-        <member name="F:SqlMapper.Identity.sql">
-            <summary>
-            The sql
-            </summary>
-        </member>
-        <member name="F:SqlMapper.Identity.commandType">
-            <summary>
-            The command type 
-            </summary>
-        </member>
-        <member name="F:SqlMapper.Identity.hashCode">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:SqlMapper.Identity.gridIndex">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:SqlMapper.Identity.type">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:SqlMapper.Identity.connectionString">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:SqlMapper.Identity.parametersType">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:SqlMapper.Identity.GetHashCode">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:SqlMapper.Identity.Equals(SqlMapper.Identity)">
-            <summary>
-            Compare 2 Identity objects
-            </summary>
-            <param name="other"></param>
-            <returns></returns>
         </member>
         <member name="M:SqlMapper.AsList``1(System.Collections.Generic.IEnumerable{``0})">
             <summary>
@@ -1437,21 +1153,6 @@
             Internal use only
             </summary>
         </member>
-        <member name="T:SqlMapper.LiteralToken">
-            <summary>
-            Represents a placeholder for a value that should be replaced as a literal value in the resulting sql
-            </summary>
-        </member>
-        <member name="P:SqlMapper.LiteralToken.Token">
-            <summary>
-            The text in the original command that should be replaced
-            </summary>
-        </member>
-        <member name="P:SqlMapper.LiteralToken.Member">
-            <summary>
-            The name of the member referred to by the token
-            </summary>
-        </member>
         <member name="M:SqlMapper.ReplaceLiterals(SqlMapper.IParameterLookup,System.Data.IDbCommand)">
             <summary>
             Replace all literal tokens with their text form
@@ -1496,9 +1197,24 @@
             Throws a data exception, only used internally
             </summary>
         </member>
-        <member name="F:SqlMapper.DataTableTypeNameKey">
+        <member name="M:SqlMapper.AsTableValuedParameter(System.Data.DataTable,System.String)">
             <summary>
-            Key used to indicate the type name associated with a DataTable
+            Used to pass a DataTable as a TableValuedParameter
+            </summary>
+        </member>
+        <member name="M:SqlMapper.SetTypeName(System.Data.DataTable,System.String)">
+            <summary>
+            Associate a DataTable with a type name
+            </summary>
+        </member>
+        <member name="M:SqlMapper.GetTypeName(System.Data.DataTable)">
+            <summary>
+            Fetch the type name associated with a DataTable
+            </summary>
+        </member>
+        <member name="E:SqlMapper.QueryCachePurged">
+            <summary>
+            Called if the query cache is purged via PurgeQueryCache
             </summary>
         </member>
         <member name="P:SqlMapper.ConnectionStringComparer">
@@ -1507,6 +1223,271 @@
             Providing a custom implementation can be useful for allowing multi-tenancy databases with identical
             schema to share strategies. Note that usual equivalence rules apply: any equivalent connection strings
             <b>MUST</b> yield the same hash-code.
+            </summary>
+        </member>
+        <member name="T:SqlMapper.IDynamicParameters">
+            <summary>
+            Implement this interface to pass an arbitrary db specific set of parameters to Dapper
+            </summary>
+        </member>
+        <member name="M:SqlMapper.IDynamicParameters.AddParameters(System.Data.IDbCommand,SqlMapper.Identity)">
+            <summary>
+            Add all the parameters needed to the command just before it executes
+            </summary>
+            <param name="command">The raw command prior to execution</param>
+            <param name="identity">Information about the query</param>
+        </member>
+        <member name="T:SqlMapper.IParameterLookup">
+            <summary>
+            Extends IDynamicParameters providing by-name lookup of parameter values
+            </summary>
+        </member>
+        <member name="P:SqlMapper.IParameterLookup.Item(System.String)">
+            <summary>
+            Get the value of the specified parameter (return null if not found)
+            </summary>
+        </member>
+        <member name="T:SqlMapper.IParameterCallbacks">
+            <summary>
+            Extends IDynamicParameters with facilities for executing callbacks after commands have completed
+            </summary>
+        </member>
+        <member name="M:SqlMapper.IParameterCallbacks.OnCompleted">
+            <summary>
+            Invoked when the command has executed
+            </summary>
+        </member>
+        <member name="T:SqlMapper.ICustomQueryParameter">
+            <summary>
+            Implement this interface to pass an arbitrary db specific parameter to Dapper
+            </summary>
+        </member>
+        <member name="M:SqlMapper.ICustomQueryParameter.AddParameter(System.Data.IDbCommand,System.String)">
+            <summary>
+            Add the parameter needed to the command before it executes
+            </summary>
+            <param name="command">The raw command prior to execution</param>
+            <param name="name">Parameter name</param>
+        </member>
+        <member name="T:SqlMapper.ITypeHandler">
+            <summary>
+            Implement this interface to perform custom type-based parameter handling and value parsing
+            </summary>
+        </member>
+        <member name="M:SqlMapper.ITypeHandler.SetValue(System.Data.IDbDataParameter,System.Object)">
+            <summary>
+            Assign the value of a parameter before a command executes
+            </summary>
+            <param name="parameter">The parameter to configure</param>
+            <param name="value">Parameter value</param>
+        </member>
+        <member name="M:SqlMapper.ITypeHandler.Parse(System.Type,System.Object)">
+            <summary>
+            Parse a database value back to a typed value
+            </summary>
+            <param name="value">The value from the database</param>
+            <param name="destinationType">The type to parse to</param>
+            <returns>The typed value</returns>
+        </member>
+        <member name="T:SqlMapper.UdtTypeHandler">
+            <summary>
+            A type handler for data-types that are supported by the underlying provider, but which need
+            a well-known UdtTypeName to be specified
+            </summary>
+        </member>
+        <member name="M:SqlMapper.UdtTypeHandler.#ctor(System.String)">
+            <summary>
+            Creates a new instance of UdtTypeHandler with the specified UdtTypeName
+            </summary>
+        </member>
+        <member name="T:SqlMapper.TypeHandler`1">
+            <summary>
+            Base-class for simple type-handlers
+            </summary>
+        </member>
+        <member name="M:SqlMapper.TypeHandler`1.SetValue(System.Data.IDbDataParameter,`0)">
+            <summary>
+            Assign the value of a parameter before a command executes
+            </summary>
+            <param name="parameter">The parameter to configure</param>
+            <param name="value">Parameter value</param>
+        </member>
+        <member name="M:SqlMapper.TypeHandler`1.Parse(System.Object)">
+            <summary>
+            Parse a database value back to a typed value
+            </summary>
+            <param name="value">The value from the database</param>
+            <returns>The typed value</returns>
+        </member>
+        <member name="T:SqlMapper.ITypeMap">
+            <summary>
+            Implement this interface to change default mapping of reader columns to type members
+            </summary>
+        </member>
+        <member name="M:SqlMapper.ITypeMap.FindConstructor(System.String[],System.Type[])">
+            <summary>
+            Finds best constructor
+            </summary>
+            <param name="names">DataReader column names</param>
+            <param name="types">DataReader column types</param>
+            <returns>Matching constructor or default one</returns>
+        </member>
+        <member name="M:SqlMapper.ITypeMap.FindExplicitConstructor">
+            <summary>
+            Returns a constructor which should *always* be used.
+            
+            Parameters will be default values, nulls for reference types and zero'd for value types.
+            
+            Use this class to force object creation away from parameterless constructors you don't control.
+            </summary>
+        </member>
+        <member name="M:SqlMapper.ITypeMap.GetConstructorParameter(System.Reflection.ConstructorInfo,System.String)">
+            <summary>
+            Gets mapping for constructor parameter
+            </summary>
+            <param name="constructor">Constructor to resolve</param>
+            <param name="columnName">DataReader column name</param>
+            <returns>Mapping implementation</returns>
+        </member>
+        <member name="M:SqlMapper.ITypeMap.GetMember(System.String)">
+            <summary>
+            Gets member mapping for column
+            </summary>
+            <param name="columnName">DataReader column name</param>
+            <returns>Mapping implementation</returns>
+        </member>
+        <member name="T:SqlMapper.IMemberMap">
+            <summary>
+            Implements this interface to provide custom member mapping
+            </summary>
+        </member>
+        <member name="P:SqlMapper.IMemberMap.ColumnName">
+            <summary>
+            Source DataReader column name
+            </summary>
+        </member>
+        <member name="P:SqlMapper.IMemberMap.MemberType">
+            <summary>
+             Target member type
+            </summary>
+        </member>
+        <member name="P:SqlMapper.IMemberMap.Property">
+            <summary>
+            Target property
+            </summary>
+        </member>
+        <member name="P:SqlMapper.IMemberMap.Field">
+            <summary>
+            Target field
+            </summary>
+        </member>
+        <member name="P:SqlMapper.IMemberMap.Parameter">
+            <summary>
+            Target constructor parameter
+            </summary>
+        </member>
+        <member name="T:SqlMapper.Link`2">
+            <summary>
+            This is a micro-cache; suitable when the number of terms is controllable (a few hundred, for example),
+            and strictly append-only; you cannot change existing values. All key matches are on **REFERENCE**
+            equality. The type is fully thread-safe.
+            </summary>
+        </member>
+        <member name="T:SqlMapper.TypeHandlerCache`1">
+            <summary>
+            Not intended for direct usage
+            </summary>
+        </member>
+        <member name="M:SqlMapper.TypeHandlerCache`1.Parse(System.Object)">
+            <summary>
+            Not intended for direct usage
+            </summary>
+        </member>
+        <member name="M:SqlMapper.TypeHandlerCache`1.SetValue(System.Data.IDbDataParameter,System.Object)">
+            <summary>
+            Not intended for direct usage
+            </summary>
+        </member>
+        <member name="T:SqlMapper.Identity">
+            <summary>
+            Identity of a cached query in Dapper, used for extensibility
+            </summary>
+        </member>
+        <member name="M:SqlMapper.Identity.ForDynamicParameters(System.Type)">
+            <summary>
+            Create an identity for use with DynamicParameters, internal use only
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SqlMapper.Identity.Equals(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="F:SqlMapper.Identity.sql">
+            <summary>
+            The sql
+            </summary>
+        </member>
+        <member name="F:SqlMapper.Identity.commandType">
+            <summary>
+            The command type 
+            </summary>
+        </member>
+        <member name="F:SqlMapper.Identity.hashCode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:SqlMapper.Identity.gridIndex">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:SqlMapper.Identity.type">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:SqlMapper.Identity.connectionString">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:SqlMapper.Identity.parametersType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SqlMapper.Identity.GetHashCode">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SqlMapper.Identity.Equals(SqlMapper.Identity)">
+            <summary>
+            Compare 2 Identity objects
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SqlMapper.LiteralToken">
+            <summary>
+            Represents a placeholder for a value that should be replaced as a literal value in the resulting sql
+            </summary>
+        </member>
+        <member name="P:SqlMapper.LiteralToken.Token">
+            <summary>
+            The text in the original command that should be replaced
+            </summary>
+        </member>
+        <member name="P:SqlMapper.LiteralToken.Member">
+            <summary>
+            The name of the member referred to by the token
             </summary>
         </member>
         <member name="T:SqlMapper.GridReader">
@@ -1560,29 +1541,14 @@
             Read multiple objects from a single record set on the grid
             </summary>
         </member>
-        <member name="P:SqlMapper.GridReader.IsConsumed">
-            <summary>
-            Has the underlying reader been consumed?
-            </summary>
-        </member>
         <member name="M:SqlMapper.GridReader.Dispose">
             <summary>
             Dispose the grid, closing and disposing both the underlying reader and command.
             </summary>
         </member>
-        <member name="M:SqlMapper.AsTableValuedParameter(System.Data.DataTable,System.String)">
+        <member name="P:SqlMapper.GridReader.IsConsumed">
             <summary>
-            Used to pass a DataTable as a TableValuedParameter
-            </summary>
-        </member>
-        <member name="M:SqlMapper.SetTypeName(System.Data.DataTable,System.String)">
-            <summary>
-            Associate a DataTable with a type name
-            </summary>
-        </member>
-        <member name="M:SqlMapper.GetTypeName(System.Data.DataTable)">
-            <summary>
-            Fetch the type name associated with a DataTable
+            Has the underlying reader been consumed?
             </summary>
         </member>
         <member name="T:DynamicParameters">
@@ -1618,22 +1584,12 @@
             Add a parameter to this dynamic parameter list
             </summary>
         </member>
-        <member name="P:DynamicParameters.RemoveUnused">
-            <summary>
-            If true, the command-text is inspected and only values that are clearly used are included on the connection
-            </summary>
-        </member>
         <member name="M:DynamicParameters.AddParameters(System.Data.IDbCommand,SqlMapper.Identity)">
             <summary>
             Add all the parameters needed to the command just before it executes
             </summary>
             <param name="command">The raw command prior to execution</param>
             <param name="identity">Information about the query</param>
-        </member>
-        <member name="P:DynamicParameters.ParameterNames">
-            <summary>
-            All the names of the param in the bag, use Get to yank them out
-            </summary>
         </member>
         <member name="M:DynamicParameters.Get``1(System.String)">
             <summary>
@@ -1654,6 +1610,16 @@
             <param name="dbType"></param>
             <param name="size">The size to set on the parameter. Defaults to 0, or DbString.DefaultLength in case of strings.</param>
             <returns>The DynamicParameters instance</returns>
+        </member>
+        <member name="P:DynamicParameters.RemoveUnused">
+            <summary>
+            If true, the command-text is inspected and only values that are clearly used are included on the connection
+            </summary>
+        </member>
+        <member name="P:DynamicParameters.ParameterNames">
+            <summary>
+            All the names of the param in the bag, use Get to yank them out
+            </summary>
         </member>
         <member name="T:TableValuedParameter">
             <summary>
@@ -1687,6 +1653,13 @@
             Create a new DbString
             </summary>
         </member>
+        <member name="M:DbString.AddParameter(System.Data.IDbCommand,System.String)">
+            <summary>
+            Add the parameter to the command... internal use only
+            </summary>
+            <param name="command"></param>
+            <param name="name"></param>
+        </member>
         <member name="P:DbString.IsAnsi">
             <summary>
             Ansi vs Unicode 
@@ -1706,13 +1679,6 @@
             <summary>
             The value of the string
             </summary>
-        </member>
-        <member name="M:DbString.AddParameter(System.Data.IDbCommand,System.String)">
-            <summary>
-            Add the parameter to the command... internal use only
-            </summary>
-            <param name="command"></param>
-            <param name="name"></param>
         </member>
         <member name="T:FeatureSupport">
             <summary>
@@ -1884,6 +1850,40 @@
         <member name="T:ExplicitConstructorAttribute">
             <summary>
             Tell Dapper to use an explicit constructor, passing nulls or 0s for all parameters
+            </summary>
+        </member>
+        <member name="T:CMCS.DapperDber.Dbs.AccessDb.AccessSqlBuilder">
+            <summary>
+            Access 语句生成
+            </summary>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.AccessDb.AccessSqlBuilder.#ctor">
+            <summary>
+            AccessSqlBuilder
+            </summary>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.AccessDb.AccessSqlBuilder.SelectTop``1(System.Int32,System.String)">
+            <summary>
+            生成 TOP 查询的 SELECT 语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="top">条数</param>
+            <param name="condition">查询条件</param>
+            <returns></returns>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.AccessDb.AccessSqlBuilder.SelectPager``1(System.String,System.Int32,System.Int32)">
+            <summary>
+            生成分页查询的 SELECT 语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="condition">条件语句</param>
+            <param name="pageSize">每页个数</param>
+            <param name="pageIndex">页索引</param>
+            <returns></returns>
+        </member>
+        <member name="T:CMCS.DapperDber.Attrs.DapperAutoPrimaryKeyAttribute">
+            <summary>
+            自增长主键字段特性
             </summary>
         </member>
     </members>

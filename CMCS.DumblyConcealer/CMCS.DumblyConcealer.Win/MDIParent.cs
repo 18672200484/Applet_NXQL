@@ -76,7 +76,7 @@ namespace CMCS.DumblyConcealer.Win
 					surplus--;
 				}
 
-				//this.InvokeEx(() => { timer1.Enabled = true; });
+                this.InvokeEx(() => { timer1.Enabled = true; });
 
 			});
 		}

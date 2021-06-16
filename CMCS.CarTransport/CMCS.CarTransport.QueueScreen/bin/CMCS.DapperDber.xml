@@ -4,9 +4,181 @@
         <name>CMCS.DapperDber</name>
     </assembly>
     <members>
-        <member name="T:CMCS.DapperDber.Dbs.SqlServerDb.SqlServerDapperDber">
+        <member name="T:CMCS.DapperDber.Dbs.SQLiteDb.SQLiteSqlBuilder">
             <summary>
-            Sql Server 数据库访问对象
+            SQLite 语句生成
+            </summary>
+        </member>
+        <member name="T:CMCS.DapperDber.Dbs.SqlBuilder">
+            <summary>
+            SqlBuilder
+            </summary>
+        </member>
+        <member name="T:CMCS.DapperDber.Dbs.ISqlBuilder">
+            <summary>
+            ISqlBuilder
+            </summary>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.ISqlBuilder.Select``1">
+            <summary>
+            生成不带条件的 SELECT 语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.ISqlBuilder.Count``1">
+            <summary>
+            生成查询数量的 SELECT 语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.ISqlBuilder.PrimaryKeyCondition``1">
+            <summary>
+            生成根据主键查询的 WHERE 语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.ISqlBuilder.SelectTop``1(System.Int32,System.String)">
+            <summary>
+            生成 TOP 查询的 SELECT 语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="top">条数</param>
+            <param name="condition">查询条件</param>
+            <returns></returns>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.ISqlBuilder.SelectPager``1(System.String,System.Int32,System.Int32)">
+            <summary>
+            生成分页查询的 SELECT 语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="condition">条件语句</param>
+            <param name="pageSize">每页个数</param>
+            <param name="pageIndex">页索引</param>
+            <returns></returns>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.ISqlBuilder.Insert``1">
+            <summary>
+            生成 INSERT 语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.ISqlBuilder.Update``1">
+            <summary>
+            生成 UPDATE 语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.ISqlBuilder.Delete``1">
+            <summary>
+            生成 DELETE 语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.SqlBuilder.#ctor(System.String)">
+            <summary>
+            SqlBuilder
+            </summary>
+            <param name="paramPrefix">参数前缀</param>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.SqlBuilder.Select``1">
+            <summary>
+            生成不带条件的 SELECT 语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.SqlBuilder.Count``1">
+            <summary>
+            生成查询数量的 SELECT 语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.SqlBuilder.PrimaryKeyCondition``1">
+            <summary>
+            生成根据主键查询的 WHERE 语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.SqlBuilder.SelectTop``1(System.Int32,System.String)">
+            <summary>
+            生成 TOP 查询的 SELECT 语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="top">条数</param>
+            <param name="condition">查询条件</param>
+            <returns></returns>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.SqlBuilder.SelectPager``1(System.String,System.Int32,System.Int32)">
+            <summary>
+            生成分页查询的 SELECT 语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="condition">条件语句</param>
+            <param name="pageSize">每页个数</param>
+            <param name="pageIndex">页索引</param>
+            <returns></returns>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.SqlBuilder.Insert``1">
+            <summary>
+            生成 INSERT 语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.SqlBuilder.Update``1">
+            <summary>
+            生成 UPDATE 语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.SqlBuilder.Delete``1">
+            <summary>
+            生成 DELETE 语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="P:CMCS.DapperDber.Dbs.SqlBuilder.ParamPrefix">
+            <summary>
+            参数前缀
+            </summary>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.SQLiteDb.SQLiteSqlBuilder.#ctor">
+            <summary>
+            SQLiteSqlBuilder
+            </summary>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.SQLiteDb.SQLiteSqlBuilder.SelectTop``1(System.Int32,System.String)">
+            <summary>
+            生成 TOP 查询的 SELECT 语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="top">条数</param>
+            <param name="condition">查询条件</param>
+            <returns></returns>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.SQLiteDb.SQLiteSqlBuilder.SelectPager``1(System.String,System.Int32,System.Int32)">
+            <summary>
+            生成分页查询的 SELECT 语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="condition">条件语句</param>
+            <param name="pageSize">每页个数</param>
+            <param name="pageIndex">页索引</param>
+            <returns></returns>
+        </member>
+        <member name="T:CMCS.DapperDber.Dbs.OracleDb.OracleDapperDber">
+            <summary>
+            Oracle 数据库访问对象
             </summary>
         </member>
         <member name="T:CMCS.DapperDber.Dbs.BaseDber">
@@ -286,6 +458,171 @@
             <param name="type"></param>
             <param name="sql"></param>
         </member>
+        <member name="M:CMCS.DapperDber.Dbs.OracleDb.OracleDapperDber.#ctor(System.String)">
+            <summary>
+            OracleDapperDber
+            </summary>
+            <param name="connectionString">连接字符串</param>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.OracleDb.OracleDapperDber.CreateConnection">
+            <summary>
+            创建一个 DbConnection 对象
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:CMCS.DapperDber.Attrs.DapperPrimaryKeyAttribute">
+            <summary>
+            主键字段特性
+            </summary>
+        </member>
+        <member name="T:CMCS.DapperDber.Dbs.MySqlDb.MySqlDapperDber">
+            <summary>
+            MySql 数据库访问对象
+            </summary>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.MySqlDb.MySqlDapperDber.#ctor(System.String)">
+            <summary>
+            MySqlDapperDber
+            </summary>
+            <param name="connectionString">连接字符串</param>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.MySqlDb.MySqlDapperDber.CreateConnection">
+            <summary>
+            创建一个 DbConnection 对象
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:CMCS.DapperDber.Dbs.SqlServerDb.SqlServerSqlBuilder">
+            <summary>
+            SqlServer 语句生成
+            </summary>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.SqlServerDb.SqlServerSqlBuilder.#ctor">
+            <summary>
+            SqlServerSqlBuilder
+            </summary>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.SqlServerDb.SqlServerSqlBuilder.SelectTop``1(System.Int32,System.String)">
+            <summary>
+            生成 TOP 查询的 SELECT 语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="top">条数</param>
+            <param name="condition">查询条件</param>
+            <returns></returns>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.SqlServerDb.SqlServerSqlBuilder.SelectPager``1(System.String,System.Int32,System.Int32)">
+            <summary>
+            生成分页查询的 SELECT 语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="condition">条件语句</param>
+            <param name="pageSize">每页个数</param>
+            <param name="pageIndex">页索引</param>
+            <returns></returns>
+        </member>
+        <member name="T:CMCS.DapperDber.Dbs.AccessDb.AccessDapperDber">
+            <summary>
+            Access 数据库访问对象
+            </summary>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.AccessDb.AccessDapperDber.#ctor(System.String)">
+            <summary>
+            AccessDapperDber
+            </summary>
+            <param name="connectionString">连接字符串</param>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.AccessDb.AccessDapperDber.CreateConnection">
+            <summary>
+            创建一个 DbConnection 对象
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:CMCS.DapperDber.Attrs.DapperIgnoreAttribute">
+            <summary>
+            忽略字段特性
+            </summary>
+        </member>
+        <member name="T:CMCS.DapperDber.Attrs.DapperBindAttribute">
+            <summary>
+            数据表关联特性
+            </summary>
+        </member>
+        <member name="M:CMCS.DapperDber.Attrs.DapperBindAttribute.#ctor(System.String)">
+            <summary>
+            DapperBindAttribute
+            </summary>
+            <param name="tableName"></param>
+            <param name="bindType"></param>
+        </member>
+        <member name="P:CMCS.DapperDber.Attrs.DapperBindAttribute.TableName">
+            <summary>
+            数据表名
+            </summary>
+        </member>
+        <member name="T:CMCS.DapperDber.Dbs.SQLiteDb.SQLiteDapperDber">
+            <summary>
+            SQLite 数据库访问对象
+            </summary>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.SQLiteDb.SQLiteDapperDber.#ctor(System.String)">
+            <summary>
+            SQLiteDapperDber
+            </summary>
+            <param name="connectionString">连接字符串</param>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.SQLiteDb.SQLiteDapperDber.CreateConnection">
+            <summary>
+            创建一个 DbConnection 对象
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:CMCS.DapperDber.Util.DapperAttributeUtil">
+            <summary>
+            DapperAttributeUtil
+            </summary>
+        </member>
+        <member name="M:CMCS.DapperDber.Util.DapperAttributeUtil.GetAttribute``1(System.Type)">
+            <summary>
+            获取 Attribute
+            </summary>
+            <param name="attrType"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CMCS.DapperDber.Dbs.MySqlDb.MySqlSqlBuilder">
+            <summary>
+            MySql 语句生成
+            </summary>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.MySqlDb.MySqlSqlBuilder.#ctor">
+            <summary>
+            MySqlSqlBuilder
+            </summary>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.MySqlDb.MySqlSqlBuilder.SelectTop``1(System.Int32,System.String)">
+            <summary>
+            生成 TOP 查询的 SELECT 语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="top">条数</param>
+            <param name="condition">查询条件</param>
+            <returns></returns>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.MySqlDb.MySqlSqlBuilder.SelectPager``1(System.String,System.Int32,System.Int32)">
+            <summary>
+            生成分页查询的 SELECT 语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="condition">条件语句</param>
+            <param name="pageSize">每页个数</param>
+            <param name="pageIndex">页索引</param>
+            <returns></returns>
+        </member>
+        <member name="T:CMCS.DapperDber.Dbs.SqlServerDb.SqlServerDapperDber">
+            <summary>
+            Sql Server 数据库访问对象
+            </summary>
+        </member>
         <member name="M:CMCS.DapperDber.Dbs.SqlServerDb.SqlServerDapperDber.#ctor(System.String)">
             <summary>
             SqlServerDapperDber
@@ -321,208 +658,9 @@
             <typeparam name="T"></typeparam>
             <param name="t"></param>
         </member>
-        <member name="T:CMCS.DapperDber.Dbs.AccessDb.AccessDapperDber">
-            <summary>
-            Access 数据库访问对象
-            </summary>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.AccessDb.AccessDapperDber.#ctor(System.String)">
-            <summary>
-            AccessDapperDber
-            </summary>
-            <param name="connectionString">连接字符串</param>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.AccessDb.AccessDapperDber.CreateConnection">
-            <summary>
-            创建一个 DbConnection 对象
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:CMCS.DapperDber.Dbs.ISqlBuilder">
-            <summary>
-            ISqlBuilder
-            </summary>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.ISqlBuilder.Select``1">
-            <summary>
-            生成不带条件的 SELECT 语句
-            </summary>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.ISqlBuilder.Count``1">
-            <summary>
-            生成查询数量的 SELECT 语句
-            </summary>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.ISqlBuilder.PrimaryKeyCondition``1">
-            <summary>
-            生成根据主键查询的 WHERE 语句
-            </summary>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.ISqlBuilder.SelectTop``1(System.Int32,System.String)">
-            <summary>
-            生成 TOP 查询的 SELECT 语句
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="top">条数</param>
-            <param name="condition">查询条件</param>
-            <returns></returns>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.ISqlBuilder.SelectPager``1(System.String,System.Int32,System.Int32)">
-            <summary>
-            生成分页查询的 SELECT 语句
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="condition">条件语句</param>
-            <param name="pageSize">每页个数</param>
-            <param name="pageIndex">页索引</param>
-            <returns></returns>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.ISqlBuilder.Insert``1">
-            <summary>
-            生成 INSERT 语句
-            </summary>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.ISqlBuilder.Update``1">
-            <summary>
-            生成 UPDATE 语句
-            </summary>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.ISqlBuilder.Delete``1">
-            <summary>
-            生成 DELETE 语句
-            </summary>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="T:CMCS.DapperDber.Attrs.DapperIgnoreAttribute">
-            <summary>
-            忽略字段特性
-            </summary>
-        </member>
-        <member name="T:CMCS.DapperDber.Dbs.SQLiteDb.SQLiteDapperDber">
-            <summary>
-            SQLite 数据库访问对象
-            </summary>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.SQLiteDb.SQLiteDapperDber.#ctor(System.String)">
-            <summary>
-            SQLiteDapperDber
-            </summary>
-            <param name="connectionString">连接字符串</param>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.SQLiteDb.SQLiteDapperDber.CreateConnection">
-            <summary>
-            创建一个 DbConnection 对象
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:CMCS.DapperDber.Attrs.DapperBindAttribute">
-            <summary>
-            数据表关联特性
-            </summary>
-        </member>
-        <member name="M:CMCS.DapperDber.Attrs.DapperBindAttribute.#ctor(System.String)">
-            <summary>
-            DapperBindAttribute
-            </summary>
-            <param name="tableName"></param>
-            <param name="bindType"></param>
-        </member>
-        <member name="P:CMCS.DapperDber.Attrs.DapperBindAttribute.TableName">
-            <summary>
-            数据表名
-            </summary>
-        </member>
         <member name="T:CMCS.DapperDber.Dbs.OracleDb.OracleSqlBuilder">
             <summary>
             Oracle 语句生成
-            </summary>
-        </member>
-        <member name="T:CMCS.DapperDber.Dbs.SqlBuilder">
-            <summary>
-            SqlBuilder
-            </summary>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.SqlBuilder.#ctor(System.String)">
-            <summary>
-            SqlBuilder
-            </summary>
-            <param name="paramPrefix">参数前缀</param>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.SqlBuilder.Select``1">
-            <summary>
-            生成不带条件的 SELECT 语句
-            </summary>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.SqlBuilder.Count``1">
-            <summary>
-            生成查询数量的 SELECT 语句
-            </summary>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.SqlBuilder.PrimaryKeyCondition``1">
-            <summary>
-            生成根据主键查询的 WHERE 语句
-            </summary>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.SqlBuilder.SelectTop``1(System.Int32,System.String)">
-            <summary>
-            生成 TOP 查询的 SELECT 语句
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="top">条数</param>
-            <param name="condition">查询条件</param>
-            <returns></returns>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.SqlBuilder.SelectPager``1(System.String,System.Int32,System.Int32)">
-            <summary>
-            生成分页查询的 SELECT 语句
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="condition">条件语句</param>
-            <param name="pageSize">每页个数</param>
-            <param name="pageIndex">页索引</param>
-            <returns></returns>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.SqlBuilder.Insert``1">
-            <summary>
-            生成 INSERT 语句
-            </summary>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.SqlBuilder.Update``1">
-            <summary>
-            生成 UPDATE 语句
-            </summary>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.SqlBuilder.Delete``1">
-            <summary>
-            生成 DELETE 语句
-            </summary>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="P:CMCS.DapperDber.Dbs.SqlBuilder.ParamPrefix">
-            <summary>
-            参数前缀
             </summary>
         </member>
         <member name="M:CMCS.DapperDber.Dbs.OracleDb.OracleSqlBuilder.#ctor">
@@ -540,103 +678,6 @@
             <returns></returns>
         </member>
         <member name="M:CMCS.DapperDber.Dbs.OracleDb.OracleSqlBuilder.SelectPager``1(System.String,System.Int32,System.Int32)">
-            <summary>
-            生成分页查询的 SELECT 语句
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="condition">条件语句</param>
-            <param name="pageSize">每页个数</param>
-            <param name="pageIndex">页索引</param>
-            <returns></returns>
-        </member>
-        <member name="T:CMCS.DapperDber.Attrs.DapperAutoPrimaryKeyAttribute">
-            <summary>
-            自增长主键字段特性
-            </summary>
-        </member>
-        <member name="T:CMCS.DapperDber.Attrs.DapperPrimaryKeyAttribute">
-            <summary>
-            主键字段特性
-            </summary>
-        </member>
-        <member name="T:CMCS.DapperDber.Dbs.MySqlDb.MySqlSqlBuilder">
-            <summary>
-            MySql 语句生成
-            </summary>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.MySqlDb.MySqlSqlBuilder.#ctor">
-            <summary>
-            MySqlSqlBuilder
-            </summary>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.MySqlDb.MySqlSqlBuilder.SelectTop``1(System.Int32,System.String)">
-            <summary>
-            生成 TOP 查询的 SELECT 语句
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="top">条数</param>
-            <param name="condition">查询条件</param>
-            <returns></returns>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.MySqlDb.MySqlSqlBuilder.SelectPager``1(System.String,System.Int32,System.Int32)">
-            <summary>
-            生成分页查询的 SELECT 语句
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="condition">条件语句</param>
-            <param name="pageSize">每页个数</param>
-            <param name="pageIndex">页索引</param>
-            <returns></returns>
-        </member>
-        <member name="T:CMCS.DapperDber.Dbs.SqlServerDb.SqlServerSqlBuilder">
-            <summary>
-            SqlServer 语句生成
-            </summary>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.SqlServerDb.SqlServerSqlBuilder.#ctor">
-            <summary>
-            SqlServerSqlBuilder
-            </summary>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.SqlServerDb.SqlServerSqlBuilder.SelectTop``1(System.Int32,System.String)">
-            <summary>
-            生成 TOP 查询的 SELECT 语句
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="top">条数</param>
-            <param name="condition">查询条件</param>
-            <returns></returns>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.SqlServerDb.SqlServerSqlBuilder.SelectPager``1(System.String,System.Int32,System.Int32)">
-            <summary>
-            生成分页查询的 SELECT 语句
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="condition">条件语句</param>
-            <param name="pageSize">每页个数</param>
-            <param name="pageIndex">页索引</param>
-            <returns></returns>
-        </member>
-        <member name="T:CMCS.DapperDber.Dbs.AccessDb.AccessSqlBuilder">
-            <summary>
-            Access 语句生成
-            </summary>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.AccessDb.AccessSqlBuilder.#ctor">
-            <summary>
-            AccessSqlBuilder
-            </summary>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.AccessDb.AccessSqlBuilder.SelectTop``1(System.Int32,System.String)">
-            <summary>
-            生成 TOP 查询的 SELECT 语句
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="top">条数</param>
-            <param name="condition">查询条件</param>
-            <returns></returns>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.AccessDb.AccessSqlBuilder.SelectPager``1(System.String,System.Int32,System.Int32)">
             <summary>
             生成分页查询的 SELECT 语句
             </summary>
@@ -679,64 +720,6 @@
             获取实体对应的数据表主键字段名
             </summary>
             <typeparam name="T"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="T:CMCS.DapperDber.Dbs.SQLiteDb.SQLiteSqlBuilder">
-            <summary>
-            SQLite 语句生成
-            </summary>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.SQLiteDb.SQLiteSqlBuilder.#ctor">
-            <summary>
-            SQLiteSqlBuilder
-            </summary>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.SQLiteDb.SQLiteSqlBuilder.SelectTop``1(System.Int32,System.String)">
-            <summary>
-            生成 TOP 查询的 SELECT 语句
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="top">条数</param>
-            <param name="condition">查询条件</param>
-            <returns></returns>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.SQLiteDb.SQLiteSqlBuilder.SelectPager``1(System.String,System.Int32,System.Int32)">
-            <summary>
-            生成分页查询的 SELECT 语句
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="condition">条件语句</param>
-            <param name="pageSize">每页个数</param>
-            <param name="pageIndex">页索引</param>
-            <returns></returns>
-        </member>
-        <member name="T:CMCS.DapperDber.Util.DapperAttributeUtil">
-            <summary>
-            DapperAttributeUtil
-            </summary>
-        </member>
-        <member name="M:CMCS.DapperDber.Util.DapperAttributeUtil.GetAttribute``1(System.Type)">
-            <summary>
-            获取 Attribute
-            </summary>
-            <param name="attrType"></param>
-            <returns></returns>
-        </member>
-        <member name="T:CMCS.DapperDber.Dbs.OracleDb.OracleDapperDber">
-            <summary>
-            Oracle 数据库访问对象
-            </summary>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.OracleDb.OracleDapperDber.#ctor(System.String)">
-            <summary>
-            OracleDapperDber
-            </summary>
-            <param name="connectionString">连接字符串</param>
-        </member>
-        <member name="M:CMCS.DapperDber.Dbs.OracleDb.OracleDapperDber.CreateConnection">
-            <summary>
-            创建一个 DbConnection 对象
-            </summary>
             <returns></returns>
         </member>
         <member name="T:CommandFlags">
@@ -1869,22 +1852,39 @@
             Tell Dapper to use an explicit constructor, passing nulls or 0s for all parameters
             </summary>
         </member>
-        <member name="T:CMCS.DapperDber.Dbs.MySqlDb.MySqlDapperDber">
+        <member name="T:CMCS.DapperDber.Dbs.AccessDb.AccessSqlBuilder">
             <summary>
-            MySql 数据库访问对象
+            Access 语句生成
             </summary>
         </member>
-        <member name="M:CMCS.DapperDber.Dbs.MySqlDb.MySqlDapperDber.#ctor(System.String)">
+        <member name="M:CMCS.DapperDber.Dbs.AccessDb.AccessSqlBuilder.#ctor">
             <summary>
-            MySqlDapperDber
+            AccessSqlBuilder
             </summary>
-            <param name="connectionString">连接字符串</param>
         </member>
-        <member name="M:CMCS.DapperDber.Dbs.MySqlDb.MySqlDapperDber.CreateConnection">
+        <member name="M:CMCS.DapperDber.Dbs.AccessDb.AccessSqlBuilder.SelectTop``1(System.Int32,System.String)">
             <summary>
-            创建一个 DbConnection 对象
+            生成 TOP 查询的 SELECT 语句
             </summary>
+            <typeparam name="T"></typeparam>
+            <param name="top">条数</param>
+            <param name="condition">查询条件</param>
             <returns></returns>
+        </member>
+        <member name="M:CMCS.DapperDber.Dbs.AccessDb.AccessSqlBuilder.SelectPager``1(System.String,System.Int32,System.Int32)">
+            <summary>
+            生成分页查询的 SELECT 语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="condition">条件语句</param>
+            <param name="pageSize">每页个数</param>
+            <param name="pageIndex">页索引</param>
+            <returns></returns>
+        </member>
+        <member name="T:CMCS.DapperDber.Attrs.DapperAutoPrimaryKeyAttribute">
+            <summary>
+            自增长主键字段特性
+            </summary>
         </member>
     </members>
 </doc>

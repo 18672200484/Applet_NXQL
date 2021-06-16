@@ -409,7 +409,7 @@ namespace CMCS.DumblyConcealer.Tasks.CarJXSampler
 						//生成采样桶记录
 						CmcsRCSampleBarrel rCSampleBarrel = new CmcsRCSampleBarrel()
 						{
-							BarrelCode = entity.BarrelCode,
+                            BarrelCode = entity.SampleCode,
 							BarrellingTime = entity.UnloadTime,
 							BarrelNumber = entity.BarrelCode,
 							InFactoryBatchId = qCJXCYJSampleCmd.InFactoryBatchId,
