@@ -974,6 +974,7 @@ namespace CMCS.CarTransport.JxSampler.Frms
 			this.dbtxtPointCount.Size = new System.Drawing.Size(92, 27);
 			this.dbtxtPointCount.TabIndex = 332;
 			this.dbtxtPointCount.Value = 3D;
+			this.dbtxtPointCount.ValueChanged += new System.EventHandler(this.dbtxtPointCount_ValueChanged);
 			// 
 			// labelX14
 			// 
@@ -1742,7 +1743,6 @@ namespace CMCS.CarTransport.JxSampler.Frms
 			this.Controls.Add(this.buttonX2);
 			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.ForeColor = System.Drawing.Color.White;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.Name = "FrmJxSampler";
 			this.Text = " ²É Ñש ";

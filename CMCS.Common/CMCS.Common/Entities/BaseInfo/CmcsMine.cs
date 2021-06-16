@@ -48,5 +48,10 @@ namespace CMCS.Common.Entities.BaseInfo
 		/// 采购类型
 		/// </summary>
 		public string PurcHaseType { get; set; }
+
+		/// <summary>
+		/// 卸煤区域
+		/// </summary>
+		public string UnloadingArea { get; set; }
 	}
 }

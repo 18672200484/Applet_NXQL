@@ -1764,8 +1764,17 @@ namespace CMCS.CarTransport.Weighter.Frms
 					this.CurrentFlowFlag = eFlowFlag.等待离开;
 					if (this.CurrentBuyFuelTransport.SuttleWeight == 0)
 					{
-						UpdateLedShow("称重成功", "请下磅");
-						this.voiceSpeaker.Speak("称重成功 请下磅", 1, false);
+						CmcsMine mine = this.CurrentBuyFuelTransport.TheMine;
+						if (mine != null && !string.IsNullOrEmpty(mine.UnloadingArea))
+						{
+							UpdateLedShow("称重成功", mine.UnloadingArea + "卸煤");
+							this.voiceSpeaker.Speak("称重成功 请到" + mine.UnloadingArea + "卸煤", 1, false);
+						}
+						else
+						{
+							UpdateLedShow("称重成功", "请下磅");
+							this.voiceSpeaker.Speak("称重成功 请下磅", 1, false);
+						}
 					}
 					else if (this.CurrentBuyFuelTransport.SuttleWeight > 0)
 					{
@@ -1881,6 +1890,13 @@ namespace CMCS.CarTransport.Weighter.Frms
 										{
 											UpdateLedShow(this.CurrentAutotruck.CarNumber, "已称毛重 禁止重复计量");
 											this.voiceSpeaker.Speak("车牌号 " + this.CurrentAutotruck.CarNumber + " 已称毛重 禁止重复计量", 1, false);
+											this.CurrentFlowFlag = eFlowFlag.等待离开;
+											break;
+										}
+										else if (this.CurrentBuyFuelTransport.StepName == eTruckInFactoryStep.重车.ToString() && this.Direction == "轻车磅" && string.IsNullOrEmpty(this.CurrentBuyFuelTransport.UnLoadArea))
+										{
+											UpdateLedShow(this.CurrentAutotruck.CarNumber, "未卸煤 禁止回皮");
+											this.voiceSpeaker.Speak("车牌号 " + this.CurrentAutotruck.CarNumber + " 未卸煤 禁止回皮", 1, false);
 											this.CurrentFlowFlag = eFlowFlag.等待离开;
 											break;
 										}

@@ -392,8 +392,18 @@ namespace CMCS.CarTransport.JxSampler.Frms
 		private void FrmCarSampler_Load(object sender, EventArgs e)
 		{
 			dbtxtSuoFen.Value = commonDAO.GetAppletConfigDouble("缩分间隔");
-			if (GlobalVars.LoginUser.IsSupper == 0)
+			dbtxtPointCount.Value = commonDAO.GetAppletConfigDouble("采样点数");
+			//if (GlobalVars.LoginUser.IsSupper == 0)
+			//	dbtxtSuoFen.Enabled = false;
+			if (QueuerDAO.GetInstance().CheckPower("CMCS.CarTransport.JxSampler.SuoFen", "03", GlobalVars.LoginUser) || GlobalVars.LoginUser.IsSupper == 1)
+				dbtxtSuoFen.Enabled = true;
+			else
 				dbtxtSuoFen.Enabled = false;
+
+			if (QueuerDAO.GetInstance().CheckPower("CMCS.CarTransport.JxSampler.CYPoint", "03", GlobalVars.LoginUser) || GlobalVars.LoginUser.IsSupper == 1)
+				dbtxtPointCount.Enabled = true;
+			else
+				dbtxtPointCount.Enabled = false;
 		}
 
 		private void FrmCarSampler_Shown(object sender, EventArgs e)
@@ -1393,6 +1403,16 @@ namespace CMCS.CarTransport.JxSampler.Frms
 		private void dbtxtSuoFen_ValueChanged(object sender, EventArgs e)
 		{
 			commonDAO.SetAppletConfig(CommonAppConfig.GetInstance().AppIdentifier, "缩分间隔", dbtxtSuoFen.Value.ToString());
+		}
+
+		/// <summary>
+		/// 修改采样点数
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void dbtxtPointCount_ValueChanged(object sender, EventArgs e)
+		{
+			commonDAO.SetAppletConfig(CommonAppConfig.GetInstance().AppIdentifier, "采样点数", dbtxtPointCount.Value.ToString());
 		}
 		#endregion
 
